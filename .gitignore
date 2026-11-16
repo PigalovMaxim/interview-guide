@@ -1,0 +1,22 @@
+# Local agent tools and session logs
+/.agents/
+/_bmad/
+**/.memlog.md
+/_bmad-output/implementation-artifacts/review-diff-path.txt
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor, OS, and generated files
+/.idea/
+/.vscode/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+*.log

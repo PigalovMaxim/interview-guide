@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Interview Guide — результат разбора BMAD Forge</title>
+  <style>
+    :root{color-scheme:dark;--bg:#282c34;--panel:#21252b;--raised:#30353e;--text:#abb2bf;--heading:#d4d8e1;--muted:#a1a9b7;--border:#454c59;--blue:#8ab8da;--green:#a5bd94;--amber:#d8bc8b}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1120px;margin:auto;padding:54px 32px 60px}h1,h2,h3{color:var(--heading);line-height:1.22;margin:0 0 18px}h1{font-size:clamp(34px,5vw,58px);letter-spacing:-.045em}h2{font-size:26px;letter-spacing:-.025em}h3{font-size:19px}p{margin:0 0 16px}a{color:var(--blue);text-underline-offset:4px}strong{color:var(--heading)}header{display:grid;grid-template-columns:1fr 170px;gap:30px;align-items:center;padding-bottom:34px;border-bottom:1px solid var(--border)}.eyebrow{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}.lead{font-size:20px;max-width:780px}.meta,.small{font-size:14px;color:var(--muted)}.stamp{width:165px;height:165px;color:var(--green)}section{margin-top:40px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:26px}.metric,.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px}.metric b{display:block;color:var(--heading);font-size:34px;line-height:1.2;margin-bottom:6px}.metric span{font-size:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.wide{grid-column:1/-1}.chips{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.chip{padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--raised);font-size:14px;color:var(--heading)}ul,ol{margin:12px 0 0;padding-left:23px}li{margin:8px 0}.callout{border-left:3px solid var(--blue);padding:15px 20px;background:var(--panel);border-radius:0 10px 10px 0;margin:20px 0}.callout p:last-child,.card p:last-child{margin-bottom:0}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:16px}th,td{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--border)}th{color:var(--heading);font-weight:600;background:var(--panel)}td:first-child{color:var(--heading);width:24%}code{font-family:"Hack Nerd Font Mono",Consolas,monospace;font-size:.9em}.swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.swatch{font-size:13px}.swatch i{display:block;height:44px;border:1px solid #727987;border-radius:8px;margin-bottom:6px}.light-preview{background:#eae6df;color:#4b4e54;padding:22px;border-radius:10px;border:1px solid #cac5bd;margin-top:18px}.light-preview strong{color:#41454c}.light-preview p{margin:8px 0 0}.role{font-size:15px}.role strong{display:block;margin-bottom:6px}.status{display:inline-block;color:var(--green);border:1px solid #647b5a;padding:4px 10px;border-radius:6px;font-size:13px}.muted-label{color:var(--amber);font-size:14px}footer{margin-top:44px;border-top:1px solid var(--border);padding-top:24px;font-size:14px;color:var(--muted)}@media(max-width:720px){main{padding:30px 18px}header{grid-template-columns:1fr;gap:16px}.stamp{width:125px;height:125px}.grid{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}h2{font-size:23px}.card{padding:19px}th,td{padding:12px}td:first-child{width:35%}}@media print{body{background:#eae6df;color:#40444b}main{max-width:none;padding:20px}h1,h2,h3,strong{color:#30353e}.card,.metric,.callout,th{background:#e1ddd6;color:#40444b}.metric b,.chip,td:first-child{color:#30353e}.meta,.small,footer{color:#50555e}.card,section,header{break-inside:avoid}a{color:#3c5c79}.chips .chip{background:#e1ddd6}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <p class="eyebrow">BMAD Forge Idea · 13 ноября 2026</p>
+      <h1>Interview Guide</h1>
+      <p class="lead">Справочник для фронтенд-интервьюера, который помогает увидеть глубину понимания кандидата.</p>
+      <p class="meta">Результат: идея и границы первой версии определены. Этап: требования, без реализации приложения.</p>
+    </div>
+    <svg class="stamp" viewBox="0 0 180 180" role="img" aria-labelledby="seal-title">
+      <title id="seal-title">HARDENED — идея определена для дальнейшего планирования</title>
+      <path d="M90 7 104 14 120 13 130 25 146 30 151 46 165 57 164 74 173 90 164 106 165 123 151 134 146 150 130 155 120 167 104 166 90 173 76 166 60 167 50 155 34 150 29 134 15 123 16 106 7 90 16 74 15 57 29 46 34 30 50 25 60 13 76 14Z" fill="#303a30" stroke="currentColor" stroke-width="2"/>
+      <circle cx="90" cy="90" r="65" fill="none" stroke="currentColor" stroke-width="1.2"/>
+      <path d="m70 62 13 13 27-29" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="90" y="102" fill="currentColor" font-family="system-ui,sans-serif" font-size="17" font-weight="700" text-anchor="middle">HARDENED</text>
+      <text x="90" y="123" fill="currentColor" font-family="system-ui,sans-serif" font-size="10" letter-spacing="2" text-anchor="middle">BMAD FORGE</text>
+    </svg>
+  </header>
+
+  <div class="metrics" aria-label="Объём банка вопросов">
+    <div class="metric"><b>4</b><span>вкладки</span></div>
+    <div class="metric"><b>9</b><span>тематических разделов</span></div>
+    <div class="metric"><b>15</b><span>материалов на тему и вкладку</span></div>
+    <div class="metric"><b>540</b><span>вопросов и задач в плане</span></div>
+  </div>
+
+  <section aria-labelledby="purpose">
+    <h2 id="purpose">Что должен давать сайт</h2>
+    <p>Интервьюер выбирает уровень и тему, задаёт вопрос, слушает ответ и сверяется с разбором. Уточняющие вопросы помогают отличить воспроизведение знакомого ответа от понимания причин, ограничений и компромиссов. Оценка остаётся решением интервьюера.</p>
+    <div class="callout"><p><strong>Один текущий кандидат.</strong> Оценки доступны после переключения вкладок и перезагрузки страницы. Перед следующим интервью их можно очистить. История кандидатов не нужна.</p></div>
+    <p class="small">540 — согласованный плановый объём при рабочей группировке в девять тем. Сами вопросы, ответы и задачи ещё не составлены и не проверены.</p>
+  </section>
+
+  <section aria-labelledby="content">
+    <h2 id="content">Структура и сложность</h2>
+    <div class="chips" aria-label="Вкладки"><span class="chip">Junior</span><span class="chip">Middle</span><span class="chip">Senior</span><span class="chip">Сложные вопросы</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Часть банка</th><th>Принцип отбора</th></tr></thead>
+      <tbody>
+        <tr><td>Junior / Middle / Senior</td><td>Своя планка для каждого уровня. Внутри темы вопросы идут от более простого № 1 к более сложному № 15. Стартовый Senior существенно сложнее стартовых Middle и Junior.</td></tr>
+        <tr><td>Сложные вопросы</td><td>Углублённые инженерные кейсы, задачи, каверзные нюансы и неочевидное поведение. Вкладка не ограничена только ступенью выше Senior.</td></tr>
+        <tr><td>Темы</td><td>HTML, CSS, JavaScript, TypeScript, React, TanStack Query, Redux, архитектура/FSD, практические задачи.</td></tr>
+        <tr><td>Количество</td><td>15 самостоятельных материалов в каждой теме каждой вкладки. Вложенные уточняющие вопросы не увеличивают это число.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small" style="margin-top:14px">Рабочая группировка объединяет архитектуру и FSD. Для смешанной вкладки предлагается указывать целевой уровень у каждого материала. Это редакционное предложение, которое нужно уточнить при составлении банка.</p>
+  </section>
+
+  <section aria-labelledby="question">
+    <h2 id="question">Карточка вопроса</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Сначала — только вопрос</h3>
+        <p>Карточки при первом открытии свёрнуты. Раскрываются плавно; заголовок остаётся понятным ориентиром в списке.</p>
+        <p>15 вопросов — банк для выбора. Проходить все вопросы подряд в одном интервью не требуется.</p>
+      </article>
+      <article class="card">
+        <h3>Внутри — опора для оценки</h3>
+        <ol>
+          <li>Краткий ответ для быстрой сверки.</li>
+          <li>Подробное объяснение причин, нюансов и компромиссов.</li>
+          <li>Признаки базового, уверенного и глубокого понимания именно этого вопроса.</li>
+          <li>Два–три уточняющих вопроса.</li>
+        </ol>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="practice">
+    <h2 id="practice">Практические задачи</h2>
+    <p>Кандидат решает задачу во внешнем редакторе. Сайт даёт интервьюеру готовое условие, примеры и красиво оформленный стартовый код.</p>
+    <div class="grid">
+      <article class="card"><h3>Передать кандидату</h3><ul><li>Код с подсветкой синтаксиса и сохранением отступов.</li><li>Удобное копирование задания.</li><li>Горизонтальная прокрутка длинных строк кода.</li></ul><p class="small" style="margin-top:16px">Предложенное разделение действий: «Скопировать код» и «Скопировать задачу» — условие, примеры и стартовый код.</p></article>
+      <article class="card"><h3>Разбор для интервьюера</h3><ul><li>Решение раскрывается отдельно от условия.</li><li>Есть крайние случаи и оценка сложности решения.</li><li>Решение и подсказки не входят в копируемое задание.</li></ul></article>
+    </div>
+  </section>
+
+  <section aria-labelledby="ratings">
+    <h2 id="ratings">Оценки и очистка</h2>
+    <div class="chips"><span class="chip">Без оценки</span><span class="chip">Не ответил</span><span class="chip">Базово</span><span class="chip">Уверенно</span><span class="chip">Глубоко</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Действие</th><th>Ожидаемое поведение</th></tr></thead>
+      <tbody>
+        <tr><td>Поставить оценку</td><td>Оценка относится к конкретному вопросу; её можно изменить. «Без оценки» отличается от «не ответил».</td></tr>
+        <tr><td>Переключить тему или уровень</td><td>Оценки текущего интервью сохраняются.</td></tr>
+        <tr><td>Перезагрузить страницу</td><td>Оценки восстанавливаются из локального сохранения в этом браузере.</td></tr>
+        <tr><td>Очистить оценки</td><td>Кнопка в верхней панели запрашивает подтверждение, затем очищает оценки по всем темам и уровням. Выбор светлой/тёмной темы остаётся прежним.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small" style="margin-top:14px">Храним выставленные интервьюером оценки. Дословные ответы, аудиозапись, профили кандидатов, синхронизация между устройствами и архив интервью в эту версию не входят. Конкретная библиотека стора ещё не выбрана.</p>
+  </section>
+
+  <section aria-labelledby="visual">
+    <h2 id="visual">Мягкие темы и читаемость</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Тёмная · Atom One Dark</h3>
+        <p>Основа взята из текущей темы VS Code пользователя для проекта interview-guide.</p>
+        <div class="swatches">
+          <div class="swatch"><i style="background:#282c34"></i>Фон<br><code>#282C34</code></div>
+          <div class="swatch"><i style="background:#21252b"></i>Панели<br><code>#21252B</code></div>
+          <div class="swatch"><i style="background:#abb2bf"></i>Текст<br><code>#ABB2BF</code></div>
+        </div>
+        <p class="small">Источник: локальный <code>Code/User/settings.json</code>, настройка <code>workbench.colorTheme</code>, и палитра расширения Atom One Dark 2.3.0. Настройки редактора не менялись.</p>
+      </article>
+      <article class="card">
+        <h3>Светлая · приглушённая</h3>
+        <p>Согласовано направление: мягкая светлая палитра вместо чисто белого фона и чёрного текста.</p>
+        <div class="light-preview"><strong>Пример направления, не финальный макет</strong><p>Серо-бежевый фон и графитовый текст. Спокойные поверхности, читаемые формулировки и акценты без ярких заливок.</p></div>
+        <p class="small" style="margin-top:14px">Точные оттенки, типографику и плотность нужно проверить на макете с длинным ответом и кодом.</p>
+      </article>
+    </div>
+    <div class="callout"><p><strong>Общие требования:</strong> переключатель тем, спокойные акценты, плавное раскрытие и удобное чтение. Предлагается запоминать выбор темы и учитывать настройку уменьшения движения. Мягкость палитры не должна превращать текст в плохо различимые подписи.</p></div>
+  </section>
+
+  <section aria-labelledby="rejected">
+    <h2 id="rejected">Что изменили и исключили</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Вариант</th><th>Решение и причина</th></tr></thead>
+      <tbody>
+        <tr><td>10 вопросов на тему</td><td>Заменены на 15 по желанию пользователя: нужен более широкий выбор для проверки глубины знаний.</td></tr>
+        <tr><td>Только инженерные или только каверзные вопросы</td><td>Выбрано сочетание: оба формата помогают раскрыть разные стороны понимания.</td></tr>
+        <tr><td>Редактор и выполнение кода на сайте</td><td>Исключены: кандидат работает во внешнем редакторе; интервьюеру достаточно красивого кода и копирования.</td></tr>
+        <tr><td>История кандидатов</td><td>Исключена: достаточно одного текущего интервью с очисткой.</td></tr>
+        <tr><td>Резкие контрасты и яркие цвета</td><td>Не подходят пользовательскому предпочтению: обе темы должны быть мягкими и читаемыми.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="remaining">
+    <h2 id="remaining">Что ещё требует проверки</h2>
+    <div class="grid">
+      <article class="card"><h3>Качество 540 материалов</h3><p>Количество не гарантирует полезность. При подготовке контента нужно проверить корректность ответов, отсутствие пустых повторов, градацию и уместность уточнений. Для библиотек и архитектурных подходов следует явно учитывать версии и контекст.</p></article>
+      <article class="card"><h3>Оценка глубины</h3><p>Незнание одного редкого нюанса не должно автоматически определять уровень кандидата. Критерии должны описывать наблюдаемые объяснения и рассуждения. Автоматический итоговый грейд не согласован.</p></article>
+      <article class="card"><h3>Локальное сохранение</h3><p>Результаты принадлежат одному браузеру и текущему интервью. Очистка данных браузера может их удалить. Перед следующим кандидатом интервьюер использует «Очистить оценки».</p></article>
+      <article class="card"><h3>Макет и навигация</h3><p>Следующий этап уточнит расположение девяти тем, вид карточек и светлую палитру. Поиск, избранное и прочие расширения не считать согласованными функциями.</p></article>
+    </div>
+  </section>
+
+  <section aria-labelledby="voices">
+    <h2 id="voices">Ракурсы разбора</h2>
+    <p class="small">Роли, использованные ассистентом для проверки идеи; это не внешние интервью с участниками.</p>
+    <div class="grid">
+      <article class="card role"><strong>📊 Mary · аналитик BMAD</strong>Проверяла цель, логику уровней и то, какие признаки в ответе действительно помогают оценить понимание.</article>
+      <article class="card role"><strong>🎨 Sally · UX-дизайнер BMAD</strong>Проверяла раздельное раскрытие условия и решения, читаемость, палитру и удобство работы с карточками.</article>
+      <article class="card role"><strong>📋 John · PM BMAD</strong>Уточнял границы первой версии и различие между одним текущим интервью и историей кандидатов.</article>
+      <article class="card role"><strong>🧑‍💻 Смоделированные интервьюеры</strong>Алексей — глубина рассуждений вместо знания редких фактов; Ирина — передача задания без решения; Денис — чтение кода и длинных ответов; Ольга — различие оценок и разделение результатов кандидатов.</article>
+    </div>
+  </section>
+
+  <footer>
+    <p><span class="status">HARDENED · готово к спецификации</span></p>
+    <p>Короткая передача решений: <a href="forged-idea.md">forged-idea.md</a>. Ход сессии: <a href=".memlog.md">.memlog.md</a>.</p>
+    <p>BMAD Core / Method 6.12.4 · навык bmad-forge-idea · следующий возможный шаг — bmad-spec. Этот файл — отчёт о требованиях, а не реализованный сайт.</p>
+  </footer>
+</main>
+</body>
+</html>
