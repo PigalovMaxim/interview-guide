@@ -1,4 +1,6 @@
 window.InterviewContent = {
+  "revision": 3,
+  "ratingsStorageKey": "interview-guide.ratings.v3",
   "tabs": [
     {
       "key": "junior",
