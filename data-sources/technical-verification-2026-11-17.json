@@ -1,0 +1,431 @@
+{
+  "checkedAt": "2026-11-17",
+  "method": "Первичная документация получена публичными GET с ограниченным timeout; проверены относящиеся к вопросам разделы. Хеши фиксируют полученные документы, а не обещают неизменность внешних страниц.",
+  "notes": [
+    "Event Loop: checkpoint микрозадач и условная возможность rendering; Promise.race не отменяет операции.",
+    "React: useEffect не гарантирован строго после paint; memoization — оптимизация; hydration ожидает совпадающий первый render.",
+    "TypeScript: assertions и generics не валидируют runtime JSON; conditional types распределяются по голому параметру union.",
+    "HTML/CSS: inert не скрывает визуально; fetchpriority — подсказка; DSD зависит от способа парсинга; порядок important layers инвертирован.",
+    "Storage/CORS: отдельные origin/область вкладки; CORS не авторизация и не универсальная защита CSRF.",
+    "Сохранённые практические задачи не переизданы: исходные даты и поля оставлены как были.",
+    "SameSite сверено по HTTPWG RFC6265bis: разделы 4.1.2.7, 5.2, 5.6.7.1, 5.7 и 8.8. Strict/Lax/None, требование Secure для None, site/origin и ограничения защиты от CSRF/XSS."
+  ],
+  "references": [
+    {
+      "url": "https://react.dev/learn/sharing-state-between-components",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2dbb6b562dd655168d56cc7fccf994621b1280243e26e68995bc14cf946051fe"
+    },
+    {
+      "url": "https://angular.dev/guide/templates/two-way-binding",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "666b1fa68927166d99fcb0a9d8ed3514bc3f94842997ba03a0e3444b2519a7b2"
+    },
+    {
+      "url": "https://angular.dev/guide/di",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "1ab673842fa577b369c056d2b9de3ce7dc17402b29c4e15418e8944bae2f4ccc"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "fc87c8ffa49de2860d280a53f63368ce6444d043e0ced2135c264f1ef057ed69"
+    },
+    {
+      "url": "https://martinfowler.com/articles/micro-frontends.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0c6abe209feb944acc194f3db11b03d2fc78f640dd2762525825a3986d0dd7ff"
+    },
+    {
+      "url": "https://feature-sliced.design/docs/reference/layers",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "acc34c8a16161cdd8ada682f291329d233b5f6be086efdf0c0d26a079afe8302"
+    },
+    {
+      "url": "https://feature-sliced.design/docs/reference/public-api",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "3a20120c9bf71b6613664427730640263f12e7ee907fdc7ab1f595db2d7d9476"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-cascade-5/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2dfb058f789251518e8dd7a337577038009f252a985e355e584e9f8a1089a2c5"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-box-3/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "1e1a7d1be897b4731f38a9ac3aff556bb8baf9428baf87db1735a155b7f75b31"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-sizing-3/#box-sizing",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "22993bd86bc327b6c0ce0d2647e960974e6922c8af32604566e8343185371141"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-flexbox-1/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "b9f1cb9d5e357101b7465e8046f8e10b408f86b8c1a2c8edcb58a070bec683bb"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-grid-2/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "a64924ed6a1ea017359e8384b6490034960fcc8ab47ca479ebfc192d5e551e4c"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-position-3/#stacking",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "ec382bec37a81dfd146d306ec7db3007105ea98c94eeea457ba243fc633e384d"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-transforms-1/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "798fcfdcf9a7fef3614b1fdfa37f48eebf9ac3300196f2057b1d06df5c6b9fdc"
+    },
+    {
+      "url": "https://www.w3.org/TR/CSS2/box.html#collapsing-margins",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "75c009ff9ec1a1f12c665715cf4a213cbe9a87536e23128a9fb37a3642a7e6ba"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-values-4/#comp-func",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "f327c8866a41949e89944d14deeccc6458e67d2d6e99f531f27feb62ce0dba02"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-contain-2/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "b2ff48d69f1b06e9f058c6f147010173d91aa11fb2eedbe673f1c011cb421259"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-cascade-5/#layering",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2dfb058f789251518e8dd7a337577038009f252a985e355e584e9f8a1089a2c5"
+    },
+    {
+      "url": "https://drafts.csswg.org/css-conditional-5/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0edb46e69dcd14b5323262bc2a395f7695e1590e7a5272f8f18e025757b95fa9"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/sections.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "aef0d7ff8abff38a6494de8aafdf416a85cb1dbf6d36094704ce3a44be293b01"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/forms.html#the-label-element",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "5878f1b68b1e1b19ea6dfb93f0333b8eeceb11ea3666d07b9cb4b0acfa7cde48"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/images.html#alt",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "ab2b83dca5b2db3988f0bd2ce41de109c807943ec2bbbbd89cc7e9f28d3f1f4d"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/images.html#picture",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "ab2b83dca5b2db3988f0bd2ce41de109c807943ec2bbbbd89cc7e9f28d3f1f4d"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/images.html#srcset-attributes",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "ab2b83dca5b2db3988f0bd2ce41de109c807943ec2bbbbd89cc7e9f28d3f1f4d"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "286d9d051acdb192df6c88ebf30789ec8a0cdbfe393868e0ad99ae30d98605d7"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/interaction.html#inert-subtrees",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "87b0df58eb205cec521e451757b823a88179bb9f748a25e8d9b66ef6f6e2f84e"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/urls-and-fetching.html#fetch-priority-attributes",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0caa7c29c3412e678cf3052c0ebd4e63faafefb421afcc45cc782766f1fa58a3"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/images.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "ab2b83dca5b2db3988f0bd2ce41de109c807943ec2bbbbd89cc7e9f28d3f1f4d"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/scripting.html#attr-template-shadowrootmode",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2c58a6619ff8783ff66213ba6a6ef94837c0abc14fe4ee84e0993c5030203dcf"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/webappapis.html#event-loops",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "8624a322c59a4649d75828a3ae81b6c8e2089574a7684bb2b90377d84be33768"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-promise-objects",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-environment-records",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-ordinaryfunctioncreate",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-ecmascript-data-types-and-values",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-let-and-const-declarations",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-variable-statement",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://fetch.spec.whatwg.org/#http-cors-protocol",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "77f9b2c8b5846355bb50498e533a67f5698daa8218722f881ca820b4c2341f45"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-resolvethisbinding",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-ordinarycallbindthis",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://react.dev/learn/keeping-components-pure",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "8639e4c2aeafbc874136e83a63d893aeee6bda667ff0558f947724c7660a7161"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-array.prototype",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/webstorage.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "1428e6d754a88b3a19082d10ed9a49a53638fab2bb99b3a198969037825e6cd6"
+    },
+    {
+      "url": "https://httpwg.org/specs/rfc6265.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "b68f0378011235b8c2d230d0c95dee3aee7329586c74beaebdeb2b877056d6a6"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-map-objects",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-set-objects",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-promise.all",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-promise.any",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-promise.race",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://dom.spec.whatwg.org/#aborting-ongoing-activities",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "63b8b9b9347b501da306b844ed7b1a33578c4ba8ada8c5cb98d4b7f49d89361c"
+    },
+    {
+      "url": "https://fetch.spec.whatwg.org/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "77f9b2c8b5846355bb50498e533a67f5698daa8218722f881ca820b4c2341f45"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-asynciterator-interface",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://tc39.es/ecma262/#sec-asynciterable-interface",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "452f8abae92bc88c75903b26ad996252e1f753fa650c169aea53a2f0e9fc252a"
+    },
+    {
+      "url": "https://dom.spec.whatwg.org/",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "63b8b9b9347b501da306b844ed7b1a33578c4ba8ada8c5cb98d4b7f49d89361c"
+    },
+    {
+      "url": "https://dom.spec.whatwg.org/#dispatching-events",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "63b8b9b9347b501da306b844ed7b1a33578c4ba8ada8c5cb98d4b7f49d89361c"
+    },
+    {
+      "url": "https://react.dev/learn/render-and-commit",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "8d15208a31b75d3e41df07810415957db56b8f19d463096b160eee5a5712d920"
+    },
+    {
+      "url": "https://react.dev/learn/preserving-and-resetting-state",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "56ca76214df56c1da640430027ba43e82175a89a69518e9f06604fad1d2d0cfb"
+    },
+    {
+      "url": "https://react.dev/learn",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "da4831637f63ff55aa4969a0ee44781a51bd7216fe4448a41a5f870a40f950bb"
+    },
+    {
+      "url": "https://react.dev/learn/thinking-in-react",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "91902420513f8928d5bfa03cf1ac06a7fb3b8690450ab20cc9fefca73f0c5694"
+    },
+    {
+      "url": "https://react.dev/learn/you-might-not-need-an-effect",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "7d785fd5a4384ee90d651314a4188328874d2788a8ba44a49384672a9cba926a"
+    },
+    {
+      "url": "https://react.dev/reference/react/useCallback",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "f9d87342c8e93f9b836cafb565e670c17c0025239705d73802561776d19a22fb"
+    },
+    {
+      "url": "https://react.dev/reference/react/useMemo",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "9f19ab4d6e6eb90fc81bcbacb6aeb7ad1a677551d1728e364b11c275efa0c524"
+    },
+    {
+      "url": "https://react.dev/reference/react/useEffect",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "63c9806a96dd6fce3fd31231c5701e8ff95364adb9fb5e6bc56fb8f5e3a99724"
+    },
+    {
+      "url": "https://react.dev/reference/react/useLayoutEffect",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "06327a000fb0ab7602122453e36b4c4b1c38253fe4dd9389dd430431dc060b27"
+    },
+    {
+      "url": "https://react.dev/learn/rendering-lists",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "c1ba546afea9053f09106fc8b4fdf431159354117af1e5f36f43ba1ce726fc6c"
+    },
+    {
+      "url": "https://react.dev/reference/react-dom/components/input",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "bb53af727808c688a0173fe5dc2fa22552dd3ad4b7027b3fd41d33d4d8923e13"
+    },
+    {
+      "url": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0972142c6f8358f085e9a581ea698cbd1a1d8c38ad73d033d88c3214ab4e68cb"
+    },
+    {
+      "url": "https://react.dev/learn/reusing-logic-with-custom-hooks",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2149ee7bfa3c4ce876227b48fe9023915a6b824947b0b9e9938eff9dde3f65ef"
+    },
+    {
+      "url": "https://react.dev/reference/react-dom/client/hydrateRoot",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "32702461d7feb4045fc03cc77f7806ade0ec1fe4a1d6df8a45b34a3b7eb737c9"
+    },
+    {
+      "url": "https://redux.js.org/introduction/core-concepts",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "01f3039e2132794de6ef832023f25ee8d3748e1cbc7189bdc64c6692a9b463fd"
+    },
+    {
+      "url": "https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "32b9aea93008998d174ead8b60113fb5eda001498313bcd1ffdc3600bda9cfda"
+    },
+    {
+      "url": "https://redux.js.org/faq/general",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "d2ae28ce199e2c3ff589ad5e553129436612021d41eb018e9402b14e98998cc1"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/introduction/getting-started",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "9a5240c902b685099e2d2108c7ee53957e629d3154ba0b0d76965176d1982449"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/usage/immer-reducers",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "e93e848fd64d346defd4722c69bb86fa32f5d8a40ccfc93135d28ed662af2a1e"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "693c2991a4ebd69d23275a2f98113644da8bf3a19be850d60a6dd40a13a9e8f3"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "497861b28b6fcbb5d8cdc3d3a8f56642c5094b7167c8f51a32ad7ae9678b7719"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "23dacbe336e4dc5bf52e701e9ec3ede7e7cb678523f7c31f9777e6b52e06cd5c"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "523d6025768a87850421aff088b5f4df00898955bf50ebe4401c2fe27d37cea4"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "5023451d550acca1dced4c1dba1b89bd414f4630b741f7b8b0f7cf9425d5dfb0"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "523d6025768a87850421aff088b5f4df00898955bf50ebe4401c2fe27d37cea4"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "d5128d103d84f2f371ef4dd07fe9ab9c3eac8955fb544a42c61ac6eee04d5424"
+    },
+    {
+      "url": "https://httpwg.org/http-extensions/draft-ietf-httpbis-rfc6265bis.html#attribute-samesite",
+      "checkedAt": "2026-11-17",
+      "documentSha256": "1abfc2302b3e75a654fa4a94c8d5debb8a2dbc3cd94aabdd21bab8e7bda6d6c0"
+    }
+  ],
+  "preservation": {
+    "codingFileSha256": "30cf1f2be9b8574fb6809b474aa4748bf65a9f643cd3eea4278c7b568766de4c",
+    "comparison": "До разрешённой коррекции coding.js был побайтно равен исходному снимку. Единственное исключение: в solution.code v2:coding:calendar-date добавлена проверка typeof text === string; остальные поля и карточки сохранены. Хеши этого решения, карточки и файла обновлены; автотест нормализует CRLF в LF для переносимости checkout.",
+    "intentionalCorrection": {
+      "id": "v2:coding:calendar-date",
+      "field": "solution.code",
+      "previousFileSha256": "793bc995036f94ff435b297ff275ae5c38c48f8c0a7e1f93aee24e5975628b3d",
+      "fileSha256": "30cf1f2be9b8574fb6809b474aa4748bf65a9f643cd3eea4278c7b568766de4c",
+      "reason": "Контракт принимает только строку; boxed String и объекты с преобразованием должны вернуть false без coercion."
+    }
+  }
+}

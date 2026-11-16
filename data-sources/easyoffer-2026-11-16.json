@@ -1,0 +1,515 @@
+{
+  "provider": "EasyOffer",
+  "retrievedAt": "2026-11-16",
+  "complete": false,
+  "note": "Публичная выборка: по 20 позиций на уровень. Технический фильтр дополнительно очищен вручную от вопросов об опыте, мотивации, компании и зарплате.",
+  "levels": {
+    "senior": {
+      "url": "https://easyoffer.ru/frontend-developer/questions/senior?interviewType=tehnicheskoe",
+      "apiUrl": "https://easyoffer.ru/api/v1/professions/frontend-developer/questions/?grade_slugs=senior&interview_type=tehnicheskoe&page=1",
+      "count": 1578,
+      "userLimit": 20,
+      "totalPages": 1,
+      "results": [
+        {
+          "id": 30060,
+          "title": "Расскажи о своем опыте",
+          "slug": "rasskazhi-o-svoem-opyte",
+          "frequency": 0.9509,
+          "accepted": false,
+          "exclusionReason": "Личный опыт"
+        },
+        {
+          "id": 1952,
+          "title": "Какие у тебя есть вопросы",
+          "slug": "kakie-u-tebya-est-voprosyi",
+          "frequency": 0.8332,
+          "accepted": false,
+          "exclusionReason": "Вопросы кандидата"
+        },
+        {
+          "id": 13086,
+          "title": "Что такое Event Loop",
+          "slug": "chto-takoe-event-loop",
+          "frequency": 0.8332,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1,
+          "title": "Расскажи о себе",
+          "slug": "rasskazhi-o-sebe",
+          "frequency": 0.7744,
+          "accepted": false,
+          "exclusionReason": "Самопрезентация"
+        },
+        {
+          "id": 1255,
+          "title": "Что такое замыкание",
+          "slug": "chto-takoe-zamyikanie",
+          "frequency": 0.6568,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 14135,
+          "title": "Какие знаешь типы данных в JavaScript",
+          "slug": "kakie-znaesh-tipy-dannyh-v-javascript",
+          "frequency": 0.5979,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12863,
+          "title": "В чем разница между var, let и const",
+          "slug": "v-chem-raznica-mezhdu-var-let-i-const",
+          "frequency": 0.4803,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 309,
+          "title": "Как работает Event Loop",
+          "slug": "kak-rabotaet-event-loop",
+          "frequency": 0.4803,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 18157,
+          "title": "Какие финансовые ожидания",
+          "slug": "kakie-finansovye-ozhidaniya",
+          "frequency": 0.4215,
+          "accepted": false,
+          "exclusionReason": "Зарплатные ожидания"
+        },
+        {
+          "id": 202,
+          "title": "Почему решил сменить сферу деятельности",
+          "slug": "pochemu-reshil-smenit-sferu-deyatelnosti",
+          "frequency": 0.4215,
+          "accepted": false,
+          "exclusionReason": "Мотивация смены сферы"
+        },
+        {
+          "id": 12253,
+          "title": "Что такое Promise",
+          "slug": "chto-takoe-promise",
+          "frequency": 0.4215,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12629,
+          "title": "Что такое Virtual DOM",
+          "slug": "chto-takoe-virtual-dom",
+          "frequency": 0.4215,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 24627,
+          "title": "В чем разница между Map и Set",
+          "slug": "v-chem-raznica-mezhdu-map-i-set",
+          "frequency": 0.3626,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1415,
+          "title": "Что такое CORS",
+          "slug": "chto-takoe-cors",
+          "frequency": 0.3626,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12873,
+          "title": "Что такое React",
+          "slug": "chto-takoe-react",
+          "frequency": 0.3626,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 73,
+          "title": "В каком направлении хочешь развиваться",
+          "slug": "v-kakom-napravlenii-hochesh-razvivatsya",
+          "frequency": 0.3038,
+          "accepted": false,
+          "exclusionReason": "Карьерные планы"
+        },
+        {
+          "id": 14124,
+          "title": "В чем разница между cookie, localStorage и sessionStorage",
+          "slug": "v-chem-raznica-mezhdu-cookie-localstorage-i-sessio",
+          "frequency": 0.3038,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 7390,
+          "title": "Какой был состав команды на последнем месте работы",
+          "slug": "kakoj-byil-sostav-komandyi-na-poslednem-meste-rabo",
+          "frequency": 0.3038,
+          "accepted": false,
+          "exclusionReason": "Прошлое место работы"
+        },
+        {
+          "id": 925,
+          "title": "Что такое cookie",
+          "slug": "chto-takoe-cookie",
+          "frequency": 0.3038,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 8049,
+          "title": "Что такое Generics",
+          "slug": "chto-takoe-generics",
+          "frequency": 0.3038,
+          "accepted": true,
+          "exclusionReason": null
+        }
+      ]
+    },
+    "middle": {
+      "url": "https://easyoffer.ru/frontend-developer/questions/middle?interviewType=tehnicheskoe",
+      "apiUrl": "https://easyoffer.ru/api/v1/professions/frontend-developer/questions/?grade_slugs=middle&interview_type=tehnicheskoe&page=1",
+      "count": 4820,
+      "userLimit": 20,
+      "totalPages": 1,
+      "results": [
+        {
+          "id": 30060,
+          "title": "Расскажи о своем опыте",
+          "slug": "rasskazhi-o-svoem-opyte",
+          "frequency": 0.9964,
+          "accepted": false,
+          "exclusionReason": "Личный опыт"
+        },
+        {
+          "id": 1952,
+          "title": "Какие у тебя есть вопросы",
+          "slug": "kakie-u-tebya-est-voprosyi",
+          "frequency": 0.9564,
+          "accepted": false,
+          "exclusionReason": "Вопросы кандидата"
+        },
+        {
+          "id": 13086,
+          "title": "Что такое Event Loop",
+          "slug": "chto-takoe-event-loop",
+          "frequency": 0.9564,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1,
+          "title": "Расскажи о себе",
+          "slug": "rasskazhi-o-sebe",
+          "frequency": 0.943,
+          "accepted": false,
+          "exclusionReason": "Самопрезентация"
+        },
+        {
+          "id": 309,
+          "title": "Как работает Event Loop",
+          "slug": "kak-rabotaet-event-loop",
+          "frequency": 0.6364,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 14135,
+          "title": "Какие знаешь типы данных в JavaScript",
+          "slug": "kakie-znaesh-tipy-dannyh-v-javascript",
+          "frequency": 0.5697,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1255,
+          "title": "Что такое замыкание",
+          "slug": "chto-takoe-zamyikanie",
+          "frequency": 0.5697,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12253,
+          "title": "Что такое Promise",
+          "slug": "chto-takoe-promise",
+          "frequency": 0.5564,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1415,
+          "title": "Что такое CORS",
+          "slug": "chto-takoe-cors",
+          "frequency": 0.543,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12629,
+          "title": "Что такое Virtual DOM",
+          "slug": "chto-takoe-virtual-dom",
+          "frequency": 0.5297,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 13750,
+          "title": "Какие есть вопросы к компании",
+          "slug": "kakie-est-voprosy-k-kompanii",
+          "frequency": 0.4497,
+          "accepted": false,
+          "exclusionReason": "Вопросы к компании"
+        },
+        {
+          "id": 12863,
+          "title": "В чем разница между var, let и const",
+          "slug": "v-chem-raznica-mezhdu-var-let-i-const",
+          "frequency": 0.423,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 23134,
+          "title": "Что такое useCallback",
+          "slug": "chto-takoe-usecallback",
+          "frequency": 0.423,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 18771,
+          "title": "Зачем нужен хук useMemo",
+          "slug": "zachem-nuzhen-huk-usememo",
+          "frequency": 0.3964,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 8049,
+          "title": "Что такое Generics",
+          "slug": "chto-takoe-generics",
+          "frequency": 0.383,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 13502,
+          "title": "В чем разница между useEffect и useLayoutEffect",
+          "slug": "v-chem-raznica-mezhdu-useeffect-i-uselayouteffect",
+          "frequency": 0.3697,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 202,
+          "title": "Почему решил сменить сферу деятельности",
+          "slug": "pochemu-reshil-smenit-sferu-deyatelnosti",
+          "frequency": 0.3564,
+          "accepted": false,
+          "exclusionReason": "Мотивация смены сферы"
+        },
+        {
+          "id": 24393,
+          "title": "В чем разница между типом и интерфейсом в TypeScript",
+          "slug": "v-chem-raznica-mezhdu-tipom-i-interfejsom-v-typesc",
+          "frequency": 0.343,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12704,
+          "title": "Работал ли с TypeScript",
+          "slug": "rabotal-li-s-typescript",
+          "frequency": 0.3297,
+          "accepted": false,
+          "exclusionReason": "Опыт работы с технологией"
+        },
+        {
+          "id": 14124,
+          "title": "В чем разница между cookie, localStorage и sessionStorage",
+          "slug": "v-chem-raznica-mezhdu-cookie-localstorage-i-sessio",
+          "frequency": 0.303,
+          "accepted": true,
+          "exclusionReason": null
+        }
+      ]
+    },
+    "junior": {
+      "url": "https://easyoffer.ru/frontend-developer/questions/junior?interviewType=tehnicheskoe",
+      "apiUrl": "https://easyoffer.ru/api/v1/professions/frontend-developer/questions/?grade_slugs=junior&interview_type=tehnicheskoe&page=1",
+      "count": 4030,
+      "userLimit": 20,
+      "totalPages": 1,
+      "results": [
+        {
+          "id": 1,
+          "title": "Расскажи о себе",
+          "slug": "rasskazhi-o-sebe",
+          "frequency": 0.997,
+          "accepted": false,
+          "exclusionReason": "Самопрезентация"
+        },
+        {
+          "id": 30060,
+          "title": "Расскажи о своем опыте",
+          "slug": "rasskazhi-o-svoem-opyte",
+          "frequency": 0.516,
+          "accepted": false,
+          "exclusionReason": "Личный опыт"
+        },
+        {
+          "id": 13086,
+          "title": "Что такое Event Loop",
+          "slug": "chto-takoe-event-loop",
+          "frequency": 0.5034,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12253,
+          "title": "Что такое Promise",
+          "slug": "chto-takoe-promise",
+          "frequency": 0.4527,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1255,
+          "title": "Что такое замыкание",
+          "slug": "chto-takoe-zamyikanie",
+          "frequency": 0.4527,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12629,
+          "title": "Что такое Virtual DOM",
+          "slug": "chto-takoe-virtual-dom",
+          "frequency": 0.4021,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 14135,
+          "title": "Какие знаешь типы данных в JavaScript",
+          "slug": "kakie-znaesh-tipy-dannyh-v-javascript",
+          "frequency": 0.3515,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12873,
+          "title": "Что такое React",
+          "slug": "chto-takoe-react",
+          "frequency": 0.3262,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12863,
+          "title": "В чем разница между var, let и const",
+          "slug": "v-chem-raznica-mezhdu-var-let-i-const",
+          "frequency": 0.3135,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12370,
+          "title": "Какие плюсы и минусы React",
+          "slug": "kakie-plyusy-i-minusy-react",
+          "frequency": 0.2755,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 8049,
+          "title": "Что такое Generics",
+          "slug": "chto-takoe-generics",
+          "frequency": 0.2629,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 24393,
+          "title": "В чем разница между типом и интерфейсом в TypeScript",
+          "slug": "v-chem-raznica-mezhdu-tipom-i-interfejsom-v-typesc",
+          "frequency": 0.2502,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 309,
+          "title": "Как работает Event Loop",
+          "slug": "kak-rabotaet-event-loop",
+          "frequency": 0.2502,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 1415,
+          "title": "Что такое CORS",
+          "slug": "chto-takoe-cors",
+          "frequency": 0.2502,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 29648,
+          "title": "Для чего нужен React",
+          "slug": "dlya-chego-nuzhen-react",
+          "frequency": 0.2375,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 18883,
+          "title": "Что такое this",
+          "slug": "chto-takoe-this",
+          "frequency": 0.2375,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 24064,
+          "title": "Что такое TypeScript",
+          "slug": "chto-takoe-typescript",
+          "frequency": 0.2375,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 12889,
+          "title": "Что такое Redux",
+          "slug": "chto-takoe-redux",
+          "frequency": 0.2122,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 2661,
+          "title": "Что такое чистая функция",
+          "slug": "chto-takoe-chistaya-funktsiya",
+          "frequency": 0.2122,
+          "accepted": true,
+          "exclusionReason": null
+        },
+        {
+          "id": 20690,
+          "title": "Какие знаешь методы массива",
+          "slug": "kakie-znaesh-metody-massiva",
+          "frequency": 0.1996,
+          "accepted": true,
+          "exclusionReason": null
+        }
+      ]
+    }
+  }
+}

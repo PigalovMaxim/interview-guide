@@ -1,0 +1,242 @@
+[
+  {
+    "id": "v2:coding:progress-value",
+    "check": "assert.equal(progressValue(125),100); assert.equal(progressValue(\"40\"),0); for(const x of [NaN,Infinity,-Infinity,null,{},undefined]) assert.equal(progressValue(x),0); assert.equal(progressValue(-2),0); assert.equal(progressValue(12.5),12.5);"
+  },
+  {
+    "id": "v2:coding:avatar-initials",
+    "check": "assert.equal(avatarInitials(\"  Ada  Lovelace \"),\"AL\"); assert.equal(avatarInitials(\"ada\"),\"A\"); assert.equal(avatarInitials(\" \t \"),\"\"); assert.equal(avatarInitials(\"a b c\"),\"AC\"); assert.equal(avatarInitials(\"😀 moon\"),\"😀M\");"
+  },
+  {
+    "id": "v2:coding:byte-label",
+    "check": "assert.equal(byteLabel(0),\"0 B\"); assert.equal(byteLabel(1023),\"1023 B\"); assert.equal(byteLabel(1024),\"1.0 KiB\"); assert.equal(byteLabel(1536),\"1.5 KiB\"); assert.equal(byteLabel(1048576),\"1024.0 KiB\");"
+  },
+  {
+    "id": "v2:coding:toggle-choice",
+    "check": "const input=Object.freeze([\"red\",\"blue\"]); assert.deepEqual(toggleChoice(input,\"red\"),[\"blue\"]); assert.deepEqual(toggleChoice(input,\"green\"),[\"red\",\"blue\",\"green\"]); assert.deepEqual(toggleChoice([],\"red\"),[\"red\"]); assert.deepEqual(toggleChoice([\"x\"],\"x\"),[]); assert.notEqual(toggleChoice(input,\"red\"),input);"
+  },
+  {
+    "id": "v2:coding:page-summary",
+    "check": "assert.deepEqual(pageSummary(23,9,10),{page:3,from:21,to:23}); assert.deepEqual(pageSummary(0,5,10),{page:1,from:0,to:0}); assert.deepEqual(pageSummary(20,2,10),{page:2,from:11,to:20}); assert.deepEqual(pageSummary(1,1,10),{page:1,from:1,to:1});"
+  },
+  {
+    "id": "v2:coding:email-hint",
+    "check": "assert.equal(emailHint(\"anna@example.test\"),\"a***@example.test\"); assert.equal(emailHint(\"A@Mail.Example\"),\"A***@Mail.Example\"); assert.equal(emailHint(\"x@a.b.c\"),\"x***@a.b.c\");"
+  },
+  {
+    "id": "v2:coding:checked-names",
+    "check": "assert.deepEqual(checkedNames([{name:\"a\",checked:true},{name:\"b\",checked:\"true\"}]),[\"a\"]); assert.deepEqual(checkedNames([{name:\"a\",checked:true},{name:\"a\",checked:true},{name:\"b\",checked:1},{name:\"c\",checked:\"false\"}]),[\"a\",\"a\"]); assert.deepEqual(checkedNames([]),[]);"
+  },
+  {
+    "id": "v2:coding:remaining-codepoints",
+    "check": "assert.equal(remainingCodePoints(\"A😀\",3),1);assert.equal(remainingCodePoints(\"abcd\",2),0);assert.equal(remainingCodePoints(\"\",0),0);assert.equal(remainingCodePoints(\"e\\u0301\",3),1);assert.equal(remainingCodePoints(\"a\\nb\",4),1);"
+  },
+  {
+    "id": "v2:coding:save-label",
+    "check": "assert.equal(saveLabel({blocked:true,saving:true,dirty:true}),\"Недоступно\"); assert.equal(saveLabel({blocked:false,saving:true,dirty:true}),\"Сохраняем\"); assert.equal(saveLabel({blocked:false,saving:false,dirty:true}),\"Сохранить\"); assert.equal(saveLabel({blocked:false,saving:false,dirty:false}),\"Сохранено\");"
+  },
+  {
+    "id": "v2:coding:file-parts",
+    "check": "assert.deepEqual(fileParts(\"archive.tar.gz\"),{base:\"archive.tar\",extension:\"gz\"}); for(const name of [\".env\",\"name\",\"name.\"])assert.deepEqual(fileParts(name),{base:name,extension:\"\"}); assert.deepEqual(fileParts(\".env.local\"),{base:\".env\",extension:\"local\"});"
+  },
+  {
+    "id": "v2:coding:phone-input",
+    "check": "assert.equal(normalizePhone(\"+7 999-123-45-67\"),\"+79991234567\"); assert.equal(normalizePhone(\"123x4567\"),null); assert.equal(normalizePhone(\"1234567\"),\"1234567\"); assert.equal(normalizePhone(\"123456\"),null); assert.equal(normalizePhone(\"1234567890123456\"),null); assert.equal(normalizePhone(\"123+4567\"),null); assert.equal(normalizePhone(\"123\t4567\"),null);"
+  },
+  {
+    "id": "v2:coding:locale-choice",
+    "check": "assert.equal(chooseLocale(\"EN-gb\",[\"ru\",\"en\"],\"ru\"),\"en\"); assert.equal(chooseLocale(\"EN-gb\",[\"en\",\"en-GB\"],\"ru\"),\"en-GB\"); assert.equal(chooseLocale(\"pt\",[\"pt-BR\",\"pt-PT\"],\"ru\"),\"ru\"); assert.equal(chooseLocale(\"fr\",[],\"ru\"),\"ru\");"
+  },
+  {
+    "id": "v2:coding:required-errors",
+    "check": "assert.deepEqual(requiredErrors({name:\" Ada \",city:\" \"},[\"name\",\"city\",\"email\"]),[\"city\",\"email\"]);assert.deepEqual(requiredErrors({},[\"toString\"]),[\"toString\"]);assert.deepEqual(requiredErrors({a:\"\\t\\n\"},[\"a\"]),[\"a\"]);assert.deepEqual(requiredErrors({},[]),[]);"
+  },
+  {
+    "id": "v2:coding:csv-cell",
+    "check": "assert.equal(csvCell(\"a,b\"),'\"a,b\"');assert.equal(csvCell(\"plain\"),\"plain\");assert.equal(csvCell(\"\"),\"\");assert.equal(csvCell('a\"b'),'\"a\"\"b\"');assert.equal(csvCell(\"a\\nb\"),'\"a\\nb\"');assert.equal(csvCell(\"a\\rb\"),'\"a\\rb\"');"
+  },
+  {
+    "id": "v2:coding:unread-badge",
+    "check": "assert.equal(unreadBadge(0),\"\"); assert.equal(unreadBadge(1),\"1\"); assert.equal(unreadBadge(99),\"99\"); assert.equal(unreadBadge(100),\"99+\"); assert.equal(unreadBadge(9999),\"99+\");"
+  },
+  {
+    "id": "v2:coding:filters-url",
+    "check": "assert.equal(filtersQuery(new Map([[\"tag\",[\"a b\",\"x\"]],[\"q\",[\"R&D\"]]])),\"q=R%26D&tag=a+b&tag=x\"); assert.equal(filtersQuery(new Map()),\"\"); assert.equal(filtersQuery(new Map([[\"z\",[]],[\"a\",[\"\",\"x\",\"x\"]]])),\"a=&a=x&a=x\");"
+  },
+  {
+    "id": "v2:coding:saved-preferences",
+    "check": "const r=restorePreferences({size:10,dark:false},{size:\"20\",dark:true,extra:1});assert.equal(Object.getPrototypeOf(r),null);assert.deepEqual({...r},{size:10,dark:true});assert.equal(restorePreferences({n:2},{n:NaN}).n,2);assert.equal(restorePreferences({n:2},{n:0}).n,0);const d=JSON.parse('{\"__proto__\":\"safe\"}');assert.equal(restorePreferences(d,{}).__proto__,\"safe\");assert.equal(restorePreferences({x:1},Object.create({x:4})).x,1);"
+  },
+  {
+    "id": "v2:coding:price-adjustment",
+    "check": "assert.equal(discountedUnits(101,5000),51); assert.equal(discountedUnits(100,10000),0); assert.equal(discountedUnits(0,5),0); assert.equal(discountedUnits(Number.MAX_SAFE_INTEGER,0),Number.MAX_SAFE_INTEGER); assert.equal(discountedUnits(1,5001),0);"
+  },
+  {
+    "id": "v2:coding:cursor-slice",
+    "check": "const a=[{id:\"a\"},{id:\"b\"},{id:\"c\"}]; assert.deepEqual(cursorSlice(a,null,2),{items:a.slice(0,2),next:\"b\"}); assert.deepEqual(cursorSlice(a,\"b\",2),{items:[a[2]],next:null}); assert.deepEqual(cursorSlice(a,\"c\",2),{items:[],next:null}); assert.deepEqual(cursorSlice([],null,2),{items:[],next:null}); assert.throws(()=>cursorSlice(a,\"x\",2),RangeError);"
+  },
+  {
+    "id": "v2:coding:breadcrumbs",
+    "check": "const nodes=[{id:\"a\",parentId:null,title:\"Home\"},{id:\"b\",parentId:\"a\",title:\"Docs\"}]; assert.deepEqual(breadcrumbs(nodes,\"b\"),[\"Home\",\"Docs\"]); assert.equal(breadcrumbs(nodes,\"x\"),null); assert.equal(breadcrumbs([{id:\"a\",parentId:\"a\",title:\"x\"}],\"a\"),null); assert.equal(breadcrumbs([{id:\"a\",parentId:\"x\",title:\"x\"}],\"a\"),null); assert.deepEqual(breadcrumbs([...nodes,{id:\"bad\",parentId:\"bad\",title:\"!\"}],\"b\"),[\"Home\",\"Docs\"]);"
+  },
+  {
+    "id": "v2:coding:calendar-date",
+    "check": "for(const s of [\"2024-02-29\",\"2000-02-29\",\"0001-01-01\",\"9999-12-31\"])assert.equal(validCalendarDate(s),true,s); for(const s of [\"1900-02-29\",\"2023-02-29\",\"0000-01-01\",\"2024-04-31\",\"2024-00-10\",\"2024-01-00\",\" 2024-01-01\",\"2024-1-01\"])assert.equal(validCalendarDate(s),false,s); for(const value of [undefined,null,true,1,123n,Symbol(\"date\"),[],[\"2024-02-29\"],{},new String(\"2024-02-29\"),{toString(){return \"2024-02-29\";}},{toString(){throw new Error(\"must not coerce\");}},Object.create(null)])assert.equal(validCalendarDate(value),false);"
+  },
+  {
+    "id": "v2:coding:literal-highlights",
+    "check": "assert.deepEqual(highlightRanges(\"a.a A.A\",\"a.a\"),[[0,3],[4,7]]); assert.deepEqual(highlightRanges(\"aaaa\",\"aa\"),[[0,2],[2,4]]); assert.deepEqual(highlightRanges(\".*x\",\".*\"),[[0,2]]); assert.deepEqual(highlightRanges(\"abc\",\"\"),[]); assert.deepEqual(highlightRanges(\"abc\",\"z\"),[]);"
+  },
+  {
+    "id": "v2:coding:field-delta",
+    "check": "assert.deepEqual(fieldDelta({a:1,b:2},{a:1,c:undefined}),{set:[[\"c\",undefined]],remove:[\"b\"]}); assert.deepEqual(fieldDelta({x:NaN},{x:NaN}),{set:[],remove:[]}); assert.equal(fieldDelta({x:0},{x:-0}).set.length,1); assert.deepEqual(fieldDelta({x:undefined},{}),{set:[],remove:[\"x\"]});"
+  },
+  {
+    "id": "v2:coding:internal-return",
+    "check": "const origin=\"https://app.test\"; assert.equal(internalReturn(\"/docs?q=a#top\",origin),\"/docs?q=a#top\"); for(const v of [\"//evil.test/\",\"https://app.test.evil/\",\"javascript:alert(1)\",\"https://u:p@app.test/\",\"https://[\"])assert.equal(internalReturn(v,origin),null,v); assert.equal(internalReturn(\"https://app.test/a/../b\",origin),\"/b\");"
+  },
+  {
+    "id": "v2:coding:column-widths",
+    "check": "assert.deepEqual(distributeWidths([10,20,10],45),[12,22,11]); assert.deepEqual(distributeWidths([1,2],3),[1,2]); assert.deepEqual(distributeWidths([0,0,0],2),[1,1,0]); assert.deepEqual(distributeWidths([5],9),[9]);"
+  },
+  {
+    "id": "v2:coding:table-order",
+    "check": "const rows=Object.freeze([{id:\"x\",value:null},{id:\"a\",value:2},{id:\"b\",value:1},{id:\"c\",value:2},{id:\"y\",value:null}]); assert.deepEqual(orderRows(rows,\"desc\").map(x=>x.id),[\"a\",\"c\",\"b\",\"x\",\"y\"]); assert.deepEqual(orderRows(rows,\"asc\").map(x=>x.id),[\"b\",\"a\",\"c\",\"x\",\"y\"]); assert.deepEqual(orderRows([],\"asc\"),[]);"
+  },
+  {
+    "id": "v2:coding:hotkey-parser",
+    "check": "assert.equal(normalizeHotkey(\"shift + ctrl + k\"),\"Ctrl+Shift+K\"); assert.equal(normalizeHotkey(\"a\"),\"A\"); for(const s of [\"ctrl+ctrl+k\",\"ctrl++k\",\"super+k\",\"k+ctrl\",\"\"])assert.equal(normalizeHotkey(s),null,s);"
+  },
+  {
+    "id": "v2:coding:flat-field-errors",
+    "check": "assert.deepEqual(collectFieldErrors([{rowId:\"r\",errors:{name:[\"required\",\"short\"],age:[]}}]),[{rowId:\"r\",field:\"name\",message:\"required\"},{rowId:\"r\",field:\"name\",message:\"short\"}]); assert.deepEqual(collectFieldErrors([]),[]); assert.deepEqual(collectFieldErrors([{rowId:\"a.b\",errors:{\"c.d\":[\"\"]}}]),[{rowId:\"a.b\",field:\"c.d\",message:\"\"}]);"
+  },
+  {
+    "id": "v2:coding:rule-tree",
+    "check": "assert.equal(evaluateRule({all:[{flag:\"edit\"},{not:{flag:\"blocked\"}}]},{edit:true}),true); assert.equal(evaluateRule({all:[]},{}),true); assert.equal(evaluateRule({any:[]},{}),false); assert.equal(evaluateRule({flag:\"toString\"},{}),false); assert.equal(evaluateRule({not:{not:{flag:\"x\"}}},{x:false}),false);"
+  },
+  {
+    "id": "v2:coding:ordered-insert",
+    "check": "assert.deepEqual(insertBeforeIds([\"a\",\"c\"],[\"a\",\"b\"],\"c\"),[\"a\",\"b\",\"c\"]); assert.deepEqual(insertBeforeIds([], [\"x\"],null),[\"x\"]); assert.deepEqual(insertBeforeIds([\"a\"],[],\"a\"),[\"a\"]); assert.throws(()=>insertBeforeIds([\"a\"],[\"b\"],\"x\"),RangeError);"
+  },
+  {
+    "id": "v2:coding:versioned-batch",
+    "check": "const old=new Map([[\"a\",Object.freeze({version:2,value:\"A\"})],[\"b\",Object.freeze({version:3,value:\"B\"})]]); const bad=editCells(old,[{id:\"a\",expectedVersion:2,value:\"X\"},{id:\"b\",expectedVersion:1,value:\"Y\"}]); assert.equal(bad.ok,false); assert.equal(bad.cells,old); assert.equal(old.get(\"a\").value,\"A\"); const good=editCells(old,[{id:\"a\",expectedVersion:2,value:\"X\"}]); assert.equal(good.ok,true); assert.deepEqual(good.cells.get(\"a\"),{version:3,value:\"X\"}); assert.equal(good.cells.get(\"b\"),old.get(\"b\")); assert.equal(editCells(old,[]).ok,true);"
+  },
+  {
+    "id": "v2:coding:upload-machine",
+    "check": "const initial=Object.freeze({attempt:0,status:\"idle\",progress:0}); let s=uploadStep(initial,{type:\"start\",attempt:2}); s=uploadStep(s,{type:\"progress\",attempt:2,value:70}); assert.equal(uploadStep(s,{type:\"success\",attempt:1}),s); assert.equal(uploadStep(s,{type:\"start\",attempt:2}),s); assert.equal(uploadStep(s,{type:\"progress\",attempt:2,value:20}),s); const done=uploadStep(s,{type:\"success\",attempt:2}); assert.deepEqual(done,{attempt:2,status:\"done\",progress:100}); assert.equal(uploadStep(done,{type:\"failure\",attempt:2}),done); assert.deepEqual(uploadStep(done,{type:\"start\",attempt:3}),{attempt:3,status:\"uploading\",progress:0});"
+  },
+  {
+    "id": "v2:coding:cleanup-stack",
+    "check": "const stack=createCleanupStack(), log=[], error={reason:\"B\"}; stack.add(()=>log.push(\"A\")); stack.add(()=>{log.push(\"B\");throw error;}); stack.add(()=>{log.push(\"C\");stack.dispose();}); const errors=stack.dispose(); assert.deepEqual(log,[\"C\",\"B\",\"A\"]); assert.deepEqual(errors,[error]); assert.equal(stack.dispose(),errors); assert.deepEqual(log,[\"C\",\"B\",\"A\"]); assert.throws(()=>stack.add(()=>{}),/Disposed/);"
+  },
+  {
+    "id": "v2:coding:keyed-serial",
+    "check": "const run=createKeyedSerial(), log=[]; let release; const gate=new Promise(r=>release=r); const first=run(\"a\",async()=>{log.push(\"a1\");await gate;throw new Error(\"bad\");}); const rejected=assert.rejects(first,/bad/); const second=run(\"a\",()=>{log.push(\"a2\");return 2;}); const other=run(\"b\",()=>{log.push(\"b\");return 3;}); assert.equal(await other,3); assert.deepEqual(log,[\"a1\",\"b\"]); release(); await rejected; assert.equal(await second,2); assert.deepEqual(log,[\"a1\",\"b\",\"a2\"]); assert.equal(await run(\"a\",()=>4),4);"
+  },
+  {
+    "id": "v2:coding:fenced-lease",
+    "check": "let time=0; const lease=createLease(()=>time); const a=lease.acquire(10); assert.equal(a,1); assert.equal(lease.acquire(2),null); time=10; assert.equal(lease.renew(a,10),false); const b=lease.acquire(5); assert.equal(b,2); assert.equal(lease.release(a),false); time=12; assert.equal(lease.renew(b,10),true); time=21; assert.equal(lease.acquire(1),null); assert.equal(lease.release(b),true); assert.equal(lease.acquire(1),3);"
+  },
+  {
+    "id": "v2:coding:token-budget",
+    "check": "let t=0; const take=createTokenBudget(2,1,()=>t); assert.equal(take(2),true); assert.equal(take(1),false); t=.5; assert.equal(take(.5),true); t=1; assert.equal(take(1),false); t=1.5; assert.equal(take(1),true); t=100; assert.equal(take(2),true); assert.equal(take(1),false); assert.throws(()=>take(NaN),RangeError);"
+  },
+  {
+    "id": "v2:coding:shared-resource",
+    "check": "let made=0; const dead=[]; const pool=createResources(key=>({key,serial:++made}),x=>dead.push(x.serial)); const a=pool.acquire(\"x\"),b=pool.acquire(\"x\"); assert.equal(a.resource,b.resource); a.release();a.release();assert.deepEqual(dead,[]);b.release();assert.deepEqual(dead,[1]);const c=pool.acquire(\"x\");assert.equal(c.resource.serial,2); const bad=createResources(()=>{throw new Error(\"x\");},()=>{});assert.throws(()=>bad.acquire(\"x\"),/x/);assert.throws(()=>bad.acquire(\"x\"),/x/);"
+  },
+  {
+    "id": "v2:coding:json-lines",
+    "check": "const p=createJsonLines(20);assert.deepEqual(p.push('{\"a\":'),[]);assert.deepEqual(p.push('1}\\n2'),[{a:1}]);assert.deepEqual(p.finish(),[2]);assert.throws(()=>p.finish(),/Closed/);const q=createJsonLines(3);assert.deepEqual(q.push(\" \\n\"),[]);assert.throws(()=>q.push(\"1234\"),RangeError);assert.throws(()=>q.push(\"1\"),/Closed/);const r=createJsonLines(20);assert.throws(()=>r.push(\"bad\\n\"),SyntaxError);assert.throws(()=>r.finish(),/Closed/);"
+  },
+  {
+    "id": "v2:coding:state-migrations",
+    "check": "const original={version:1,data:{n:1}};const m=new Map([[1,d=>{d.n++;return d;}],[2,d=>({...d,ok:true})]]);assert.deepEqual(migrateSnapshot(original,3,m),{version:3,data:{n:2,ok:true}});assert.deepEqual(original,{version:1,data:{n:1}});assert.throws(()=>migrateSnapshot(original,4,m),RangeError);assert.throws(()=>migrateSnapshot(original,2,new Map([[1,d=>{d.n=99;throw new Error(\"fail\");}]])),/fail/);assert.equal(original.data.n,1);assert.notEqual(migrateSnapshot(original,1,m).data,original.data);"
+  },
+  {
+    "id": "v2:coding:path-route",
+    "check": "assert.deepEqual({...matchRoute(\"/users/:id\",\"/users/a%20b\")},{id:\"a b\"}); for(const s of [\"/users/a%2Fb\",\"/users/a%5Cb\",\"/users/%ZZ\",\"/users/\",\"/users/a/b\"])assert.equal(matchRoute(\"/users/:id\",s),null,s);assert.deepEqual({...matchRoute(\"/\",\"/\")},{});const x=matchRoute(\"/:__proto__\",\"/safe\");assert.equal(Object.getPrototypeOf(x),null);assert.equal(x.__proto__,\"safe\");"
+  },
+  {
+    "id": "v2:coding:page-collector",
+    "check": "const p=createPageCollector();p.append({after:null,items:[{id:\"a\"}],next:\"p2\"});assert.throws(()=>p.append({after:\"p2\",items:[{id:\"b\"},{id:\"a\"}],next:\"p3\"}),/Duplicate/);assert.deepEqual(p.snapshot().map(x=>x.id),[\"a\"]);assert.throws(()=>p.append({after:\"p2\",items:[],next:\"p2\"}),/cycle/);p.append({after:\"p2\",items:[{id:\"b\"}],next:null});const snap=p.snapshot();snap.pop();assert.deepEqual(p.snapshot().map(x=>x.id),[\"a\",\"b\"]);assert.throws(()=>p.append({after:null,items:[],next:null}),/Cursor/);"
+  },
+  {
+    "id": "v2:coding:access-decision",
+    "check": "const rules=[{role:\"editor\",action:\"write\",resource:\"*\",effect:\"allow\"},{role:\"blocked\",action:\"write\",resource:\"doc\",effect:\"deny\"}];assert.deepEqual(decideAccess(rules,[\"editor\",\"blocked\"],\"write\",\"doc\"),{allowed:false,rule:1});assert.deepEqual(decideAccess(rules,[\"editor\"],\"write\",\"doc\"),{allowed:true,rule:0});assert.deepEqual(decideAccess(rules,[],\"write\",\"doc\"),{allowed:false,rule:null});assert.deepEqual(decideAccess(rules,[\"blocked\"],\"write\",\"other\"),{allowed:false,rule:null});"
+  },
+  {
+    "id": "v2:coding:optimistic-rebase",
+    "check": "const x=createOptimisticValue(10);x.add({id:\"a\",type:\"add\",value:2});x.add({id:\"b\",type:\"set\",value:5});x.add({id:\"c\",type:\"add\",value:3});assert.equal(x.value(),8);x.acknowledge(12,[\"a\",\"unknown\"]);assert.equal(x.value(),8);x.acknowledge(5,[\"b\"]);assert.equal(x.value(),8);assert.throws(()=>x.add({id:\"c\",type:\"add\",value:1}),/Duplicate/);x.acknowledge(8,[\"c\"]);assert.equal(x.value(),8);"
+  },
+  {
+    "id": "v2:coding:tree-relocation",
+    "check": "const nodes=new Map([[\"a\",{parentId:null}],[\"b\",{parentId:\"a\"}],[\"c\",{parentId:\"b\"}]]);assert.throws(()=>relocateNode(nodes,\"a\",\"c\"),/Cycle/);assert.throws(()=>relocateNode(nodes,\"b\",\"b\"),/Cycle/);assert.throws(()=>relocateNode(nodes,\"b\",\"x\"),RangeError);const moved=relocateNode(nodes,\"c\",null);assert.equal(moved.get(\"c\").parentId,null);assert.equal(nodes.get(\"c\").parentId,\"b\");assert.equal(moved.get(\"a\"),nodes.get(\"a\"));"
+  },
+  {
+    "id": "v2:coding:revision-gate",
+    "check": "const g=createRevisionGate(\"a\");g.edit(\"b\");const a=g.beginSave();g.edit(\"a\");const b=g.beginSave();assert.equal(Object.isFrozen(a),true);assert.equal(g.complete({revision:99,text:\"x\"}),false);assert.equal(g.complete(b),true);assert.equal(g.complete(a),true);assert.equal(g.complete(a),false);assert.deepEqual(g.status(),{revision:2,savedRevision:2,dirty:false});g.edit(\"c\");assert.equal(g.status().dirty,true);"
+  },
+  {
+    "id": "v2:coding:unsigned-varint",
+    "check": "assert.deepEqual(readVarUint(Uint8Array.of(172,2,99)),{value:300,read:2});assert.deepEqual(readVarUint(Uint8Array.of(0)),{value:0,read:1});for(const b of [[],[128],[128,0],[255,255,255,255,255,255,255,127]])assert.throws(()=>readVarUint(Uint8Array.from(b)),RangeError);assert.equal(readVarUint(Uint8Array.of(255,255,255,255,255,255,255,15)).value,Number.MAX_SAFE_INTEGER);"
+  },
+  {
+    "id": "v2:coding:binary-frames",
+    "check": "const d=createFrameDecoder(10);assert.deepEqual(d.push(Uint8Array.of(0)),[]);const input=Uint8Array.of(2,7);assert.deepEqual(d.push(input),[]);input[1]=99;const out=d.push(Uint8Array.of(8,0,0));assert.deepEqual(out.map(x=>Array.from(x)),[[7,8],[]]);d.finish();assert.throws(()=>d.push(new Uint8Array()),/Closed/);const bad=createFrameDecoder(1);assert.throws(()=>bad.push(Uint8Array.of(0,2)),RangeError);const tail=createFrameDecoder(4);tail.push(Uint8Array.of(0));assert.throws(()=>tail.finish(),RangeError);"
+  },
+  {
+    "id": "v2:coding:bit-window",
+    "check": "assert.equal(readBits(Uint8Array.of(176),1,3),3);assert.equal(readBits(Uint8Array.of(15,240),4,8),255);assert.equal(readBits(Uint8Array.of(255,255,255,255),0,32),4294967295);assert.equal(readBits(Uint8Array.of(0),8,0),0);assert.throws(()=>readBits(Uint8Array.of(0),7,2),RangeError);assert.throws(()=>readBits(Uint8Array.of(0),.5,1),RangeError);"
+  },
+  {
+    "id": "v2:coding:decimal-rounding",
+    "check": "assert.equal(roundDecimal(\"-001.235\",2),\"-1.24\");assert.equal(roundDecimal(\"9.995\",2),\"10.00\");assert.equal(roundDecimal(\"-0.004\",2),\"0.00\");assert.equal(roundDecimal(\"-2.5\",0),\"-3\");assert.equal(roundDecimal(\"999999999999999999.999\",2),\"1000000000000000000.00\");assert.equal(roundDecimal(\"1\",3),\"1.000\");"
+  },
+  {
+    "id": "v2:coding:pointer-tokens",
+    "check": "assert.deepEqual(pointerTokens(\"/a~1b/~0key/\"),[\"a/b\",\"~key\",\"\"]);assert.deepEqual(pointerTokens(\"/~01\"),[\"~1\"]);assert.deepEqual(pointerTokens(\"\"),[]);assert.deepEqual(pointerTokens(\"/\"),[\"\"]);for(const x of [\"a\",\"#/a\",\"/~\",\"/~2\"])assert.throws(()=>pointerTokens(x),SyntaxError);"
+  },
+  {
+    "id": "v2:coding:descriptor-copy",
+    "check": "let calls=0;const symbol=Symbol(\"x\"),nested={a:1};const source={nested,[symbol]:3};Object.defineProperty(source,\"x\",{get(){calls++;return 7;},enumerable:false,configurable:false});const result=copyDescriptors(source);assert.equal(calls,0);assert.equal(Object.getPrototypeOf(result),null);assert.equal(result[symbol],3);assert.equal(result.nested,nested);assert.deepEqual(Object.getOwnPropertyDescriptor(result,\"x\"),Object.getOwnPropertyDescriptor(source,\"x\"));assert.equal(result.x,7);assert.equal(calls,1);"
+  },
+  {
+    "id": "v2:coding:deadline-wrapper",
+    "check": "let fire,clears=0,signal,rejectOperation;const scheduler={set(fn){fire=fn;return 1;},clear(id){assert.equal(id,1);clears++;}};const p=withDeadline(s=>{signal=s;return new Promise((_,r)=>rejectOperation=r);},5,scheduler);const failed=assert.rejects(p,/Timeout/);await Promise.resolve();fire();await failed;assert.equal(signal.aborted,true);rejectOperation(new Error(\"late\"));await Promise.resolve();await Promise.resolve();assert.equal(clears,1);clears=0;assert.equal(await withDeadline(()=>7,5,scheduler),7);fire();assert.equal(clears,1);clears=0;await assert.rejects(withDeadline(()=>{throw new Error(\"sync\");},5,scheduler),/sync/);assert.equal(clears,1);"
+  },
+  {
+    "id": "v2:coding:abort-group",
+    "check": "const parent=new AbortController(),g=createAbortGroup(parent.signal),a=g.fork(),b=g.fork();b.close();let nested;a.signal.addEventListener(\"abort\",()=>nested=g.fork());const reason={x:1};parent.abort(reason);assert.equal(a.signal.reason,reason);assert.equal(b.signal.aborted,false);assert.equal(nested.signal.reason,reason);assert.equal(g.fork().signal.reason,reason);g.close();const p2=new AbortController();p2.abort(\"done\");assert.equal(createAbortGroup(p2.signal).fork().signal.reason,\"done\");const g2=createAbortGroup(new AbortController().signal);g2.close();assert.equal(g2.fork().signal.reason.message,\"Group closed\");"
+  },
+  {
+    "id": "v2:coding:utf8-pieces",
+    "check": "assert.equal(decodeUtf8Pieces([Uint8Array.of(208),Uint8Array.of(175)]),\"Я\");assert.equal(decodeUtf8Pieces([]),\"\");assert.equal(decodeUtf8Pieces([Uint8Array.of(239,187),Uint8Array.of(191,65)]),\"A\");assert.throws(()=>decodeUtf8Pieces([Uint8Array.of(208)]),{name:\"TypeError\"});assert.throws(()=>decodeUtf8Pieces([Uint8Array.of(255)]),{name:\"TypeError\"});"
+  },
+  {
+    "id": "v2:coding:canonical-query",
+    "check": "assert.equal(canonicalQuery([[\"b\",\"a b\"],[\"a\",\"!\"]]),\"a=%21&b=a%20b\");assert.equal(canonicalQuery([[\"x\",\"2\"],[\"x\",\"1\"],[\"x\",\"1\"]]),\"x=1&x=1&x=2\");assert.equal(canonicalQuery([[\"é\",\"\"],[\"z\",\"~\"]]),\"%C3%A9=&z=~\");assert.equal(canonicalQuery([]),\"\");"
+  },
+  {
+    "id": "v2:coding:fair-interleave",
+    "check": "assert.deepEqual([...interleave([[1,2,3],[\"a\"],[]])],[1,\"a\",2,3]);let closed=0;function* source(){try{yield 1;yield 2;}finally{closed++;}}const iterator=interleave([source(),source()]);assert.equal(iterator.next().value,1);iterator.return();assert.equal(closed,1);let cleaned=0;const bad={[Symbol.iterator](){return {next(){throw new Error(\"next\");},return(){cleaned++;return {done:true};}};}};assert.throws(()=>interleave([bad]).next(),/next/);assert.equal(cleaned,1);"
+  },
+  {
+    "id": "v2:coding:inverse-order",
+    "check": "assert.deepEqual(inverseOrder([2,0,1]),[1,2,0]);assert.deepEqual(inverseOrder([]),[]);for(const p of [[0,0],[1],[NaN],[.5],new Array(2)])assert.throws(()=>inverseOrder(p),RangeError);const sparse=new Array(1);Object.setPrototypeOf(sparse,{0:0});assert.throws(()=>inverseOrder(sparse),RangeError);"
+  },
+  {
+    "id": "v2:coding:language-weights",
+    "check": "assert.deepEqual(languagePreferences(\"fr;q=0.5, EN, *;q=0\"),[{tag:\"en\",q:1},{tag:\"fr\",q:.5}]);assert.deepEqual(languagePreferences(\"a;q=1.1,b;q=0.5oops,c;q=0.1234,d;q=1.000\"),[{tag:\"d\",q:1}]);assert.deepEqual(languagePreferences(\"en,en,fr\"),[{tag:\"en\",q:1},{tag:\"en\",q:1},{tag:\"fr\",q:1}]);assert.deepEqual(languagePreferences(\"\"),[]);"
+  },
+  {
+    "id": "v2:coding:delivery-receipts",
+    "check": "let time=0;const q=createDeliveryQueue([{id:\"a\",value:1},{id:\"b\",value:2}],()=>time);const a=q.take(10),b=q.take(10);assert.equal(q.take(1),null);assert.equal(q.size(),2);time=10;assert.equal(q.ack(a.receipt),false);const again=q.take(5);assert.equal(again.id,\"a\");assert.notEqual(again.receipt,a.receipt);assert.equal(q.nack(again.receipt),true);const third=q.take(5);assert.equal(q.ack(again.receipt),false);assert.equal(q.ack(third.receipt),true);assert.equal(q.size(),1);assert.equal(q.take(1).id,\"b\");"
+  },
+  {
+    "id": "v2:coding:reusable-barrier",
+    "check": "const b=createBarrier(2);const a=b.wait(),c=b.wait();assert.deepEqual(await Promise.all([a,c]),[0,1]);const d=b.wait(),reason={stop:true};const failure=assert.rejects(d,error=>error===reason);b.break(reason);await failure;assert.deepEqual(await Promise.all([b.wait(),b.wait()]),[0,1]);b.break(\"nothing\");assert.equal(await createBarrier(1).wait(),0);"
+  }
+]

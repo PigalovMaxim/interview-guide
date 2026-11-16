@@ -16,6 +16,7 @@
 @media(max-width:760px){.candidate-question{padding:18px 16px}.question-wording{font-size:16px}}
 .question-guidance{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 16px}
 .question-wording{max-width:75ch}
+.bank-revision{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:.3px;margin:0 0 12px}
 .level-guidance{padding:14px 18px;margin:0 0 20px;border-left:3px solid var(--accent);background:var(--panel);font-size:14px;line-height:1.8;border-radius:0 6px 6px 0}
 .assessment-guidance,.follow-up-guidance{font-size:13px;color:var(--muted);line-height:1.8;max-width:85ch}
 .follow-ups{display:grid;gap:14px;margin-top:16px}
@@ -73,3 +74,12 @@
 @media(max-width:760px){.screen-nav{order:3;width:100%;margin:0}.screen-nav a{flex:1;text-align:center}.global-notices:not(:empty){margin:18px 20px 0}.results-grid{grid-template-columns:minmax(0,1fr)}.result-card{grid-template-columns:minmax(150px,.9fr) minmax(0,1.1fr);padding:21px;column-gap:20px}.legend-button{font-size:12px;padding:7px 8px}.legend-value{font-size:11px}.result-heading h2{font-size:24px}.result-total{font-size:12px}}
 @media(max-width:500px){.result-card{display:block;padding:19px 16px}.result-heading{margin-bottom:15px}.result-chart{max-width:250px;margin:0 auto 18px}.legend-heading{margin-bottom:8px}.topic-details{margin-top:20px}.result-heading h2{font-size:22px}.rating-counts{gap:6px}.rating-counts dt{font-size:10px}.results-guidance{font-size:12px}.global-notices:not(:empty){margin:16px 14px 0}}
 @media(forced-colors:active){.screen-nav a[aria-current=page],.legend-button.selected{outline:2px solid Highlight}.topic-swatch{background:Canvas;border-color:CanvasText}.pie-slice{fill:Canvas;stroke:CanvasText}.pie-slice.selected{fill:Highlight;stroke:CanvasText}}
+
+/* Происхождение вопросов и пустые подборки редакции 3. */
+.question-source, .editorial-note, .source-scope { font-size: .84rem; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+.question-source a { color: var(--accent); text-underline-offset: .2em; }
+.editorial-note { border-left: 2px solid currentColor; padding-left: 1rem; }
+.source-scope { max-width: 85ch; margin: -8px 0 22px; }
+.empty-state { padding: 36px 28px; border: 1px dashed var(--border); border-radius: 12px; }
+.empty-state h3 { margin: 0 0 12px; }
+.empty-state p { max-width: 65ch; line-height: 1.7; margin: 0; }

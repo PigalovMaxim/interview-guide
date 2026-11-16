@@ -1,13 +1,14 @@
-/* Одно интервью. Ключи совместимы с уже сохранёнными оценками. */
+/* Новая редакция банка хранит своё интервью, не изменяя прежние оценки. */
 (function () {
   'use strict';
-  const ratingsKey = 'interview-guide.ratings';
+  const ratingsKey = window.InterviewContent.ratingsStorageKey;
+  const legacyRatingsKeys = ['interview-guide.ratings', 'interview-guide.ratings.v2'];
   const themeKey = 'interview-guide.theme';
   const ids = new Set(window.InterviewContent.materials.map(item => item.id));
   const ratings = new Set(['no_answer', 'basic', 'confident', 'deep']);
   const listeners = new Set();
   const touched = new Set();
-  const state = { ratingsById: {}, theme: 'dark', ratingsNotice: '', themeNotice: '' };
+  const state = { ratingsById: {}, theme: 'dark', ratingsNotice: '', themeNotice: '', legacyNotice: '' };
   let protectedData = false;
   let readFailed = false;
   const memoryMessage = 'Не удалось сохранить оценки. После перезагрузки они могут потеряться.';
@@ -34,6 +35,11 @@
     state.ratingsNotice = saved.notice;
     protectedData = saved.protected;
   } catch { readFailed = true; state.ratingsNotice = memoryMessage; }
+  try {
+    if (legacyRatingsKeys.some(key => window.localStorage.getItem(key) !== null)) {
+      state.legacyNotice = 'Это новый банк вопросов. Данные прежнего интервью сохранены отдельно; его оценки не перенесены на новые задания.';
+    }
+  } catch { /* Доступность текущего интервью проверяется независимо выше. */ }
   try {
     const theme = window.localStorage.getItem(themeKey);
     if (theme === 'light' || theme === 'dark') state.theme = theme;

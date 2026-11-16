@@ -1,0 +1,4385 @@
+{
+  "commit": "e23005fb813e9805d3540bcd23f026999d3aa62c",
+  "cards": [
+    {
+      "id": "architecture-fsd:module",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Зачем делить приложение на модули?",
+      "question": "Разделите код каталога на модули и объясните, какие изменения локализует каждая граница."
+    },
+    {
+      "id": "architecture-fsd:dependency",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Что означает направление зависимости?",
+      "question": "В примере тарифы предлагается связать со страницей заказа. Проследите граф и оцените новую зависимость."
+    },
+    {
+      "id": "architecture-fsd:separation",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Почему UI и работа с API часто разделяются?",
+      "question": "Компонент получает API-данные, считает скидку и рисует форму. Предложите проверяемые границы ответственности."
+    },
+    {
+      "id": "architecture-fsd:fsd-layers",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Какие слои используются в FSD?",
+      "question": "Распределите инициализацию, страницу, действие пользователя и базовую кнопку по слоям FSD."
+    },
+    {
+      "id": "architecture-fsd:fsd-slice",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Что такое slice в FSD?",
+      "question": "По структуре add-to-cart и sign-in объясните различие slice и segment."
+    },
+    {
+      "id": "architecture-fsd:public-api",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Для чего модулю public API?",
+      "question": "Потребитель импортирует внутреннюю функцию чужого slice. Предложите устойчивую границу API."
+    },
+    {
+      "id": "architecture-fsd:shared",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Что помещать в Shared?",
+      "question": "Разместите HTTP-клиент, базовую кнопку и правило скидки. Обоснуйте границу Shared."
+    },
+    {
+      "id": "architecture-fsd:entity",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Что считать Entity?",
+      "question": "Для каталога предложите entity-модуль товара и объясните связь модели с представлениями."
+    },
+    {
+      "id": "architecture-fsd:feature",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Что выражает Feature?",
+      "question": "Выделите добавление товара в корзину и отделите действие от данных товара и страницы."
+    },
+    {
+      "id": "architecture-fsd:widget",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Когда нужен Widget?",
+      "question": "Оцените выделение самостоятельного блока профиля в widget и определите его публичный контракт."
+    },
+    {
+      "id": "architecture-fsd:page",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Что остаётся в Page?",
+      "question": "Маршрут собирает каталог и локальные фильтры. Определите ответственность страницы."
+    },
+    {
+      "id": "architecture-fsd:app-layer",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "За что отвечает App?",
+      "question": "Разместите провайдеры, маршрутизацию и запуск сервисов. Объясните направление зависимостей."
+    },
+    {
+      "id": "architecture-fsd:segments",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Зачем внутри slice разделять ui, model и api?",
+      "question": "В slice есть UI, запросы и переходы модели. Предложите segments и их назначение."
+    },
+    {
+      "id": "architecture-fsd:reuse",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Когда стоит выделять общий компонент?",
+      "question": "Два сценария содержат похожий код. Определите критерии объединения и сохранения независимости."
+    },
+    {
+      "id": "architecture-fsd:architecture-test",
+      "topic": "architecture-fsd",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Как проверить правило импортов?",
+      "question": "Предложите автоматическую проверку разрешённых импортов и циклов."
+    },
+    {
+      "id": "architecture-fsd:same-layer",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Почему обычные FSD slices одного слоя не импортируют друг друга?",
+      "question": "Две соседние features импортируют друг друга. Предложите владельца взаимодействия."
+    },
+    {
+      "id": "architecture-fsd:dto-model",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Где преобразовывать серверный DTO в модель UI?",
+      "question": "Ответ API неудобен для UI. Спроектируйте преобразование DTO и ответственность за него."
+    },
+    {
+      "id": "architecture-fsd:dependency-inversion",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как инверсия зависимостей помогает тестируемости?",
+      "question": "Доменное правило вызывает конкретный HTTP-клиент. Предложите инверсию зависимости."
+    },
+    {
+      "id": "architecture-fsd:form-boundary",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Где разместить форму редактирования профиля?",
+      "question": "Форма редактирует серверную сущность. Определите владельца черновика и подтверждённых данных."
+    },
+    {
+      "id": "architecture-fsd:route-state",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Какие фильтры стоит хранить в URL?",
+      "question": "Каталогу нужны разделяемые ссылкой фильтры. Выберите состояние URL и восстановление навигации."
+    },
+    {
+      "id": "architecture-fsd:business-rule",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Куда поместить правило доступности действия?",
+      "question": "Правило скидки повторяется в компонентах. Определите владельца инварианта и интерфейс UI."
+    },
+    {
+      "id": "architecture-fsd:barrel-cycle",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Почему index.ts может создавать неожиданные циклы?",
+      "question": "Проследите граф index.ts из примера и устраните цикл без раскрытия лишних деталей."
+    },
+    {
+      "id": "architecture-fsd:cross-reference",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Для чего FSD entities используют @x API?",
+      "question": "Оцените @x-контракт product/order из примера: необходимость связи и минимальную поверхность."
+    },
+    {
+      "id": "architecture-fsd:testing-boundaries",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Как выбрать уровень теста для модуля?",
+      "question": "Выберите уровни тестирования чистого правила, API-адаптера и формы по рискам."
+    },
+    {
+      "id": "architecture-fsd:configuration",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Где хранить окружение и конфигурацию?",
+      "question": "Настройки среды читаются повсюду. Предложите единую проверяемую границу конфигурации."
+    },
+    {
+      "id": "architecture-fsd:error-layers",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "На каком уровне преобразовывать ошибки?",
+      "question": "Распределите распознавание технического сбоя, доменный смысл и пользовательское действие по слоям."
+    },
+    {
+      "id": "architecture-fsd:dependency-budget",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Как контролировать рост связности проекта?",
+      "question": "Команда быстро добавляет межмодульные связи. Предложите ограничения, владельцев и критерии полезности."
+    },
+    {
+      "id": "architecture-fsd:local-global",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Как решить, выносить ли состояние из компонента?",
+      "question": "Выберите место состояния формы и общего выбора по сроку жизни и совместному доступу."
+    },
+    {
+      "id": "architecture-fsd:legacy-adapter",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Как подключить новый модуль к legacy API?",
+      "question": "Новый модуль использует старый API. Спроектируйте адаптер legacy-контракта."
+    },
+    {
+      "id": "architecture-fsd:feature-toggle",
+      "topic": "architecture-fsd",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Как безопасно использовать feature flags?",
+      "question": "Спроектируйте временный флаг: владельца, состояния, fallback и план удаления."
+    },
+    {
+      "id": "architecture-fsd:architecture-choice",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как выбрать архитектуру нового продукта при неопределённых требованиях?",
+      "question": "Выберите минимальные границы растущего продукта и условия пересмотра решения. Команда небольшая, требования ещё меняются; стоимость сопровождения границ должна быть оправдана."
+    },
+    {
+      "id": "architecture-fsd:bounded-context",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как разделять крупную предметную область?",
+      "question": "В двух областях по-разному трактуют заказ. Определите границы моделей и взаимодействие. Обе области выпускаются независимо и имеют разные правила допустимых состояний заказа."
+    },
+    {
+      "id": "architecture-fsd:frontend-monolith",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Когда модульный монолит лучше микрофронтендов?",
+      "question": "Сравните модульный монолит и микрофронтенды при общем релизе и едином UX. Нет требования независимого runtime, но команды хотят уменьшить конфликты изменений."
+    },
+    {
+      "id": "architecture-fsd:migration-strangler",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как постепенно заменить большой legacy frontend?",
+      "question": "Спланируйте замену legacy-экрана через работающий вертикальный сценарий. Переписать продукт сразу нельзя, а старый путь должен работать до переключения пользователей."
+    },
+    {
+      "id": "architecture-fsd:cross-team-api",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как согласовать публичные API модулей нескольких команд?",
+      "question": "Спроектируйте межкомандный API с владельцем, consumer-проверками и deprecation. Обновления потребителей не синхронны; удаление старой версии должно быть проверяемым."
+    },
+    {
+      "id": "architecture-fsd:resilience-front",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Как проектировать frontend для частичного отказа backend?",
+      "question": "Часть сервисов недоступна. Определите независимые области UI и деградацию сценария. Основная операция должна оставаться доступной при отказе необязательного сервиса."
+    },
+    {
+      "id": "architecture-fsd:security-boundaries",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Где в frontend проходят границы доверия?",
+      "question": "Найдите границы доверия URL, storage, сообщений и внешних данных; определите проверки. Один и тот же ввод попадает в разные контексты отображения и сохранения."
+    },
+    {
+      "id": "architecture-fsd:architecture-evidence",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как понять, что архитектура действительно улучшилась?",
+      "question": "Предложите эксперимент, показывающий влияние архитектуры на безопасные изменения. Команда не может позволить полную перестройку без данных о пользе пилота."
+    },
+    {
+      "id": "architecture-fsd:domain-frontend",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Когда frontend нуждается в доменном слое?",
+      "question": "Оцените доменную модель для клиента со сложными переходами и несколькими представлениями. Правила должны одинаково работать в нескольких UI-сценариях без зависимости от React."
+    },
+    {
+      "id": "architecture-fsd:offline-architecture",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Какие решения нужны offline-first продукту?",
+      "question": "Спроектируйте offline-редактирование с локальными данными, синхронизацией и статусом операции. Пользователь может менять данные несколько часов без связи и закрывать приложение."
+    },
+    {
+      "id": "architecture-fsd:observability-system",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как заложить наблюдаемость в архитектуру frontend?",
+      "question": "Спроектируйте наблюдаемость пользовательского сценария и связь с серверными операциями. Нужна диагностика частичных отказов без записи персонального содержимого форм."
+    },
+    {
+      "id": "architecture-fsd:decision-record",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Что делает ADR полезным спустя год?",
+      "question": "Запишите решение с контекстом, альтернативами, последствиями и условиями пересмотра. Решение принято при временном ограничении ресурсов; будущая команда должна понять, когда его пересмотреть."
+    },
+    {
+      "id": "architecture-fsd:product-variance",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как спроектировать несколько продуктовых вариантов без леса if?",
+      "question": "Варианты продукта различаются поведением. Предложите композицию с ясными границами вариантов. Варианты поставляются разным клиентам, но не все комбинации поведения допустимы."
+    },
+    {
+      "id": "architecture-fsd:architecture-enforcement",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Какие ограничения архитектуры проверять автоматически?",
+      "question": "Определите автоматические правила импортов, публичных входов и циклов. Legacy-нарушения уже существуют; правила должны предотвращать новые и позволять поэтапное исправление."
+    },
+    {
+      "id": "architecture-fsd:evolution-plan",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как планировать архитектурное изменение без остановки продукта?",
+      "question": "Разбейте миграцию на совместимые шаги с критериями завершения и восстановлением. Релизы продолжаются, а каждый шаг должен оставлять рабочий продукт и понятную границу отката."
+    },
+    {
+      "id": "architecture-fsd:fsd-not-ui",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему слои FSD не равны визуальной вложенности?",
+      "question": "Команда копирует DOM-вложенность в FSD. Оцените подход и предложите смысловые границы."
+    },
+    {
+      "id": "architecture-fsd:shared-business",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему вынос общей бизнес-функции в Shared может ухудшить архитектуру?",
+      "question": "В Shared накопились доменные правила. Предложите возвращение ответственности владельцам."
+    },
+    {
+      "id": "architecture-fsd:barrel-treeshake",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Гарантирует ли public index.ts маленький bundle?",
+      "question": "Все экспорты идут через index.ts. Оцените утверждение о гарантированном tree-shaking."
+    },
+    {
+      "id": "architecture-fsd:entity-cycle",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Две entities импортируют друг друга: как разорвать цикл?",
+      "question": "Две entities образуют цикл. Определите владельца связи и варианты развязки."
+    },
+    {
+      "id": "architecture-fsd:feature-overuse",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Почему 'всё в features' делает проект менее понятным?",
+      "question": "Каждый переключатель стал feature. Оцените стоимость и критерии укрупнения."
+    },
+    {
+      "id": "architecture-fsd:config-code",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Когда конфигурация превращается в плохо типизированный язык программирования?",
+      "question": "Конфигурация содержит условия и вычисления. Определите необходимость модели поведения."
+    },
+    {
+      "id": "architecture-fsd:microfrontend-state",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Как согласовать состояние между микрофронтендами без общего store?",
+      "question": "Микрофронтенды делят данные пользователя. Спроектируйте владельца и минимальный протокол."
+    },
+    {
+      "id": "architecture-fsd:backend-types",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему общий тип backend/frontend не всегда единая модель?",
+      "question": "Backend-типы предлагают использовать во всём UI. Оцените границы транспорта и инвариантов."
+    },
+    {
+      "id": "architecture-fsd:optimistic-architecture",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Кто должен владеть optimistic update, если сущность видна в нескольких модулях?",
+      "question": "Экраны оптимистично меняют одну сущность. Определите единого владельца согласования."
+    },
+    {
+      "id": "architecture-fsd:frontend-transaction",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Можно ли обеспечить транзакцию нескольких backend-вызовов только frontend-кодом?",
+      "question": "Операция делает два запроса. Оцените атомарность и частичный отказ."
+    },
+    {
+      "id": "architecture-fsd:capability-boundary",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Как безопасно встраивать сторонний модуль с расширениями?",
+      "question": "В приложение встраивается плагин. Определите возможности и реальную изоляцию по доверию."
+    },
+    {
+      "id": "architecture-fsd:schema-evolution",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Как менять persisted клиентский формат без потери данных?",
+      "question": "Формат сохранения меняется. Спроектируйте версию, миграцию и обработку неизвестного формата."
+    },
+    {
+      "id": "architecture-fsd:architecture-reversal",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Как понять, что выбранную абстракцию пора удалить?",
+      "question": "Абстракция усложняет изменения. Предложите критерии удаления и безопасный переход."
+    },
+    {
+      "id": "architecture-fsd:org-boundaries",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Должна ли структура frontend точно повторять команды?",
+      "question": "Модули предлагают разделить по оргструктуре. Оцените ownership и связность продукта."
+    },
+    {
+      "id": "architecture-fsd:architecture-proof",
+      "topic": "architecture-fsd",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Можно ли доказать качество архитектуры прохождением lint-правил?",
+      "question": "Линтер импортов зелёный. Объясните границы доказательства и проверку пригодности архитектуры."
+    },
+    {
+      "id": "coding:sum-finite",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Сумма конечных чисел",
+      "question": "Из формы пришёл массив со смешанными значениями: числами, строками и результатами неудачных вычислений. Напишите sumFinite(values), которая складывает только конечные значения типа number. Вход не меняйте; для пустого массива верните ноль.",
+      "taskDigest": "09fb23700442f0cb3c5f474a839a89cfe5de8cf7051121d00733dd90d1f14305"
+    },
+    {
+      "id": "coding:stable-unique",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Уникальные значения с сохранением порядка",
+      "question": "В списке значений встретились повторы, но порядок первого появления важен. Напишите unique(values), возвращающую новый массив с одним экземпляром каждого примитивного значения. Задаём равенство явно: два NaN считаются одинаковыми, а 0 и -0 не различаются; это правило называется SameValueZero. Исходный массив не меняйте.",
+      "taskDigest": "234f688dd91b033c6d67e0d10ed7ba0c6f7959a2182fc12ca1cd9b8c37a78231"
+    },
+    {
+      "id": "coding:count-codepoints",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Частоты кодовых точек",
+      "question": "Нужно посчитать частоту символов строки, которая может содержать emoji. Напишите frequencies(text), возвращающую Map: ключ — кодовая точка Unicode, значение — число появлений. Составные emoji и буквы с комбинируемыми знаками объединять в видимые символы здесь не нужно.",
+      "taskDigest": "193a8bc6b621d71175a04e7d073c5b113b3317a9a841c1252a3119c971e81d32"
+    },
+    {
+      "id": "coding:chunk-array",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Разбиение массива на чанки",
+      "question": "Для постраничного отображения нужно разделить массив на группы. Напишите chunk(values, size), возвращающую новые массивы не больше size элементов каждый. Последняя группа может быть короче; нецелый или неположительный size должен вызвать RangeError.",
+      "taskDigest": "2b5b10424bef094ab452689c55f1c4b1f9a2f95bde9ccbc66676bd4bc56e5dae"
+    },
+    {
+      "id": "coding:range-inclusive",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Целочисленный диапазон",
+      "question": "Нужен список целых чисел между двумя границами. Реализуйте range(start, end), включающую обе границы. При start больше end верните []; дробные значения и числа вне безопасного целочисленного диапазона Number должны вызвать RangeError.",
+      "taskDigest": "572ec297c495b3c55764dd256e57f216921d53c16bf6e03ba6574817687be894"
+    },
+    {
+      "id": "coding:palindrome-normalized",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Палиндром букв и цифр ASCII",
+      "question": "Напишите isPalindrome(text), проверяющую, читается ли строка одинаково с обеих сторон после очистки. Учитывайте только исходные латинские буквы ASCII и цифры, игнорируя регистр. Остальные символы удалите; пустая нормализованная строка считается палиндромом.",
+      "taskDigest": "4ed5a2fdd63763e4ecf1021b928e77630fd71dfdb761b2b3ea9e8c70d057ea4d"
+    },
+    {
+      "id": "coding:group-by-id",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Группировка по полю",
+      "question": "Есть записи, которые нужно сгруппировать по значению одного поля. Напишите groupBy(items, key), возвращающую Map с массивом исходных объектов для каждого ключа. Порядок в группе сохраняется; запись без поля входит в группу undefined, входные объекты не меняются.",
+      "taskDigest": "d6cef760b5436941f30b3a368019569e9b8a1497dc9bbeac42ff89c3fb4ee03f"
+    },
+    {
+      "id": "coding:flatten-one",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Плоский массив на один уровень",
+      "question": "Массив содержит обычные элементы и вложенные массивы. Напишите flattenOne(items), раскрывающую ровно один уровень вложенности. Более глубокие массивы и объекты остаются как есть, порядок сохраняется; рассматриваем плотный вход без пропущенных индексов.",
+      "taskDigest": "ad977820f997f12be003acaabec93ca39f57feacc564a1be90c9d3a5f0f5a94c"
+    },
+    {
+      "id": "coding:pick-own",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Выбор собственных полей",
+      "question": "Нужно получить объект только с выбранными полями записи. Напишите pick(obj, keys), копирующую существующие собственные поля; отсутствующие и унаследованные через прототип поля исключите. Результат должен быть объектом без прототипа; глубокого копирования значений не требуется.",
+      "taskDigest": "f51e77932dff255450dd46ebe4fa52cf9e2005c4d94bd44346905d2b5b68727f"
+    },
+    {
+      "id": "coding:max-record",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Запись с максимальным баллом",
+      "question": "Из списка результатов нужно выбрать запись с наибольшим баллом. Напишите maxScore(items), возвращающую исходный объект с максимальным конечным числовым score. Некорректные баллы пропустите; при равном максимуме берите первый объект, при отсутствии подходящих записей верните null.",
+      "taskDigest": "75e9330772737ef09e312841ab67260f0eeac8ec3cf6275c3a4ce5649ad83c40"
+    },
+    {
+      "id": "coding:remove-by-id",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Удаление записи без мутации",
+      "question": "В состоянии интерфейса хранится список объектов; нужно убрать записи с выбранным id. Напишите removeById(items, id), возвращающую новый массив без всех строгих совпадений. Порядок и ссылки остальных объектов должны сохраниться, исходный массив не меняем.",
+      "taskDigest": "54fb5e3f5ea55fb5023859b292d5917c797d20a6f9197b9ee43899101457e485"
+    },
+    {
+      "id": "coding:zip-shortest",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Объединение массивов парами",
+      "question": "Есть два массива, и нужно сопоставить элементы с одинаковыми позициями. Напишите zip(left, right), возвращающую пары [элемент слева, элемент справа]. Остановитесь на длине более короткого массива; непарные значения в результат не входят, вход не меняется.",
+      "taskDigest": "5937e6c39ab8ee0b3de84cd8bc275f8529fc6229bc20972816afb1692db84026"
+    },
+    {
+      "id": "coding:safe-path",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Чтение по массиву ключей",
+      "question": "Нужно прочитать вложенное значение по массиву имён полей. Напишите getPath(obj, path, fallback), проходящую только по собственным ключам. При отсутствующем шаге или null/undefined в середине верните fallback, но существующее конечное поле со значением undefined должно вернуть именно undefined.",
+      "taskDigest": "499359b6b9df37eff5bf3f32dd9d6c5ed2113aab223dfbd215a9fba15dea327c"
+    },
+    {
+      "id": "coding:intersection-stable",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Уникальное пересечение",
+      "question": "Нужно найти общие значения двух списков. Напишите intersection(left, right), возвращающую каждый общий примитив один раз в порядке первого появления в левом массиве. Задаём равенство явно: NaN совпадает с NaN, а 0 и -0 считаются одним значением; это правило SameValueZero. Повторные общие значения в результат не добавляйте.",
+      "taskDigest": "84f19fb761c6228443d16daf419fc70a8c3ad123046fa891a573cd2673768a58"
+    },
+    {
+      "id": "coding:compact-runs",
+      "topic": "coding",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Сжатие последовательных повторов",
+      "question": "Нужно сжать только соседние повторения последовательности. Напишите runs(items), превращающую непрерывную серию одинаковых примитивов в [значение, количество]. Одинаковые значения в разных участках не объединяйте. Равенство задаётся Object.is: NaN равен NaN, а 0 и -0 различаются.",
+      "taskDigest": "06bda58d899432375e489dff3270f6e649fc31c6e89b1360620f55d7768ef0ab"
+    },
+    {
+      "id": "coding:two-sum",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Два индекса с заданной суммой",
+      "question": "В массиве нужно найти две разные позиции, значения на которых дают заданную сумму. Напишите twoSum(values, target), возвращающую [i, j] при i меньше j или null, если пары нет. Вход и target ограничены безопасными целыми Number; дробные и небезопасные значения должны вызвать RangeError.",
+      "taskDigest": "2876916f35206d03bdb84da6ee86b2a1b5140f900cb0bb255721b99b5b6b4558"
+    },
+    {
+      "id": "coding:binary-first",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Первое вхождение бинарным поиском",
+      "question": "Дан числовой массив, уже отсортированный по неубыванию; одинаковые значения допустимы. Напишите firstIndex(values, target), которая возвращает позицию самого первого вхождения target или -1. Нужен бинарный поиск, а не последовательный просмотр всего массива.",
+      "taskDigest": "71c072bcf0ee5ae391d5543e218472f7e3a0da5e145473b3879cc2d9b0dddbae"
+    },
+    {
+      "id": "coding:merge-intervals",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Объединение пересекающихся интервалов",
+      "question": "Нужно объединить занятые промежутки времени. На входе закрытые интервалы [start, end] с корректными границами, но без гарантии сортировки. Напишите mergeIntervals(intervals), возвращающую непересекающиеся объединённые интервалы; касание в одной точке тоже считается основанием для объединения. Входные массивы менять нельзя.",
+      "taskDigest": "e38c748c3f8530dc1dd9e2d113a3b6330f5fb442825c79654db5097fcacac621"
+    },
+    {
+      "id": "coding:balanced-brackets",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Сбалансированные скобки",
+      "question": "Напишите balanced(text), проверяющую правильность круглых, квадратных и фигурных скобок. Остальные символы строки игнорируются, но порядок и тип закрытия должны совпадать с вложенностью. Например, \"([x])\" допустима, а \"([)]\" — нет, хотя число открывающих и закрывающих скобок одинаково.",
+      "taskDigest": "eb0a3f6576d614aa1667f66432e06c681c318750b7e2f574de51c7ff53f2b4a6"
+    },
+    {
+      "id": "coding:longest-unique",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Длина подстроки без повторов",
+      "question": "В строке нужно найти самый длинный непрерывный участок без повторяющихся символов. Реализуйте longestUnique(text), возвращающую длину такого участка в кодовых точках Unicode. Подстрока должна быть непрерывной, а не произвольным набором позиций; объединять графемные кластеры здесь не требуется.",
+      "taskDigest": "9685325d03428cae472171e7194b74c3ad2f15448b6e3eb224e5a31bd3ee2c75"
+    },
+    {
+      "id": "coding:rotate-right",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Циклический сдвиг массива",
+      "question": "Нужно циклически сдвинуть массив, не меняя исходные данные. Напишите rotate(items, k), которая переносит элементы вправо на целое k; отрицательное значение задаёт сдвиг влево. Элементы, вышедшие за один край, появляются с другого; величина сдвига может превосходить длину массива.",
+      "taskDigest": "05ed5d05f9e53c8a5d7c78b3231f2bebdb56c107a505e8cee3078401d62d8051"
+    },
+    {
+      "id": "coding:deep-array-flatten",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Итеративное раскрытие вложенных массивов",
+      "question": "Дан массив, внутри которого могут находиться массивы любой глубины и обычные значения. Напишите flattenDeep(items), возвращающую плоский массив в исходном порядке. Вход плотный и без циклов; глубина может быть настолько большой, что обычная рекурсивная функция переполнит стек вызовов.",
+      "taskDigest": "0738da13aac7c52f439c13e85a670882581d15fb9b960e66fe8ba01ca9bd6cb7"
+    },
+    {
+      "id": "coding:tree-depth",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Максимальная глубина дерева",
+      "question": "В дереве каждый узел представлен объектом с массивом children. Напишите treeDepth(root), возвращающую число узлов в самой длинной ветке от корня до листа. Для null результат равен нулю; циклов нет. Предложите обход, который остаётся применимым при большой глубине дерева.",
+      "taskDigest": "ddd820ff1f61023e2bbb34debc921ce06916227ba259164c64133c74a3eab1ab"
+    },
+    {
+      "id": "coding:anagram-groups",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Группы анаграмм",
+      "question": "Есть список слов из строчных латинских букв ASCII. Напишите anagrams(words), объединяющую в группы слова, которые состоят из одинаковых букв с одинаковым числом повторений. Порядок групп определяется первым появлением слова группы, а порядок слов внутри группы должен остаться исходным.",
+      "taskDigest": "8675eeee0415bd4540d39469a83fa416272deb8d2450a1d2fbeb898a51778002"
+    },
+    {
+      "id": "coding:prefix-sums",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Запросы сумм на отрезках",
+      "question": "Один массив используется для большого числа запросов суммы на разных отрезках. Напишите rangeSum(values), возвращающую функцию query(left, right) для полуинтервала: left входит, right не входит. После подготовки каждый запрос должен занимать постоянное время. Используйте проверяемую безопасную целочисленную арифметику Number и явно отклоняйте переполнение и неверные границы.",
+      "taskDigest": "15b2d178b27e61d191518d4c4df7cf3ad0e427e3844339c3d3b06e46bfa223f2"
+    },
+    {
+      "id": "coding:partition-stable",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Стабильное разделение по предикату",
+      "question": "Нужно разделить список на прошедшие и не прошедшие условие элементы. Реализуйте partition(items, predicate), возвращающую [passed, failed] с сохранением порядка в обеих группах. Predicate получает значение и индекс и должен быть вызван ровно один раз для каждого элемента.",
+      "taskDigest": "1f23ad69e4862004433a6c84b9c11d7363c420a9e3c0800962e6bb2b53bf4ed0"
+    },
+    {
+      "id": "coding:move-item",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Перемещение элемента",
+      "question": "Для перетаскивания строки нужно переставить один элемент массива. Напишите move(items, from, to), возвращающую новый массив, где выбранный элемент занимает итоговую позицию to. Оба индекса должны быть целыми и находиться в пределах исходного массива, иначе RangeError; исходные данные не меняйте.",
+      "taskDigest": "22064a970a66b66b55faab3fb44e0fc707a337fa3b6e8fab4ef60b498d2d3913"
+    },
+    {
+      "id": "coding:dedupe-last",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Последняя запись каждого ID",
+      "question": "В списке обновлений один id может появляться несколько раз. Напишите lastById(items), оставляющую для каждого id только последнюю запись. Итоговый порядок должен соответствовать позициям последних появлений, а не первым встречам id; объекты и входной массив не меняются.",
+      "taskDigest": "45618e1887d8df4b39c446e70bab3d817a160257fe6a47021acf195a607f9d6d"
+    },
+    {
+      "id": "coding:parse-query",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Разбор повторяющихся URL-параметров",
+      "question": "В адресной строке один параметр может повторяться несколько раз. Напишите parseQuery(text), возвращающую Map, где каждому строковому имени соответствует массив всех его значений в порядке появления. Нужно стандартное декодирование URL-параметров: percent-encoding и плюс как пробел, а не самодельный split без учёта формата.",
+      "taskDigest": "72a94cd173b75fc4d7b46dc92b40e20dfde4d0f5ef73633956127cc6d7ff457b"
+    },
+    {
+      "id": "coding:compose-functions",
+      "topic": "coding",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Композиция функций справа налево",
+      "question": "Нужна функция для объединения нескольких преобразований одного значения. Напишите compose(...functions), создающую унарную функцию, применяющую переданные функции справа налево. Пустой набор должен вернуть входное значение без изменений; сохранять this не требуется.",
+      "taskDigest": "483802dff0602c1e52564b1edf6071321caaa41cd29e8008a2a38954ff602910"
+    },
+    {
+      "id": "coding:topological-order",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Порядок запуска зависимых модулей",
+      "question": "Есть модули, часть которых можно запускать только после других. Передаются имена nodes и зависимости edges: пара [before, after] означает, что before должен идти раньше after. Напишите topological(nodes, edges), возвращающую любой допустимый порядок всех модулей; если зависимости образуют цикл, выбросите Error.",
+      "taskDigest": "84621da1d106d37738873967440950e7c4c55b2ebec6c1949b8ab64c9a040b78"
+    },
+    {
+      "id": "coding:lru-cache",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "LRU-кеш фиксированной ёмкости",
+      "question": "Нужен кеш ограниченной ёмкости с операциями get и set. Реализуйте makeLRU(capacity): успешное чтение и запись делают ключ последним использованным, а при переполнении удаляется ключ, к которому дольше всего не обращались. Отсутствующий ключ возвращает undefined; capacity должен быть положительным целым.",
+      "taskDigest": "ada0d652f417e5369c3dfeedb88476b1f91b249509d9c8f2e086d67a55a4475a"
+    },
+    {
+      "id": "coding:async-pool",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Пул асинхронных задач",
+      "question": "Есть массив функций, запускающих асинхронные операции, например загрузку файлов. Напишите pool(jobs, concurrency), чтобы одновременно работало не больше concurrency операций, а итоговый Promise вернул результаты в порядке исходных функций. При обнаружении ошибки общий Promise отклоняется; новые операции больше не запускаются, уже начатые не отменяются.",
+      "taskDigest": "cf0497f9bb744f0cfb72e0121b6899d47e7260b8800c0b8b4888c89b621685ef"
+    },
+    {
+      "id": "coding:memoize-inflight",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Дедупликация выполняющегося запроса",
+      "question": "Два компонента могут почти одновременно запросить одинаковые данные через load(key). Напишите dedupe(load), возвращающую обёртку: пока операция с ключом выполняется, все вызовы с тем же ключом получают один и тот же Promise. После успешного или ошибочного завершения запись удаляется, поэтому следующий вызов снова запускает load.",
+      "taskDigest": "5d8fcdc3876b6b74de373c40cd9ad588fd64cff328dee2c73459dd5e2cddec9a"
+    },
+    {
+      "id": "coding:ttl-cache",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "TTL-кеш с внедряемыми часами",
+      "question": "Нужен кеш, у каждой записи которого есть срок действия. Реализуйте makeTTL(now) с методами set и get; now — переданная функция текущего времени в миллисекундах. Время жизни TTL должно быть конечным и неотрицательным; запись уже просрочена в момент now() >= expiresAt. Чтение не продлевает срок, а undefined может быть сохранённым значением.",
+      "taskDigest": "5ef6484feb615566ac866921db302c14f35a95a23f6fef752d2b394d31bbffbf"
+    },
+    {
+      "id": "coding:event-emitter",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Подписки со снимком слушателей",
+      "question": "Нужно организовать подписки на события без привязки к DOM. Реализуйте makeEmitter() с on(event, fn), возвращающим безопасную повторную отписку, и emit(event, value). Каждая подписка отдельна, даже если передана одна и та же функция; текущая рассылка использует набор слушателей, выбранный в её начале. Ошибка слушателя прерывает рассылку и выходит наружу.",
+      "taskDigest": "4d19324690eb224012d2cbfc9941ae02315ff791c3ef827f12ef7c9ad194965b"
+    },
+    {
+      "id": "coding:shortest-path",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Кратчайший путь в невзвешенном графе",
+      "question": "Дан невзвешенный граф: Map сопоставляет строковому имени узла массив его соседей. Напишите shortestPath(graph, start, goal), возвращающую путь с минимальным количеством рёбер либо null, если цель недостижима. Отсутствующий в Map узел считается узлом без исходящих соседей; во входе могут быть циклы.",
+      "taskDigest": "07e63f1b912d26547cd3f786e8f273ff8a725686db259106754d0299e12968d1"
+    },
+    {
+      "id": "coding:union-find",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Объединение компонент связности",
+      "question": "Нужно быстро объединять группы элементов и проверять, находятся ли два элемента в одной группе. Реализуйте makeDisjointSet(n) для индексов от нуля до n-1 с union(a, b) и connected(a, b); аргументы считаются корректными. В реализации требуются сжатие путей и объединение меньшей группы с большей.",
+      "taskDigest": "e179ec456126c56a98a0ff6b283cd4b4146291e4397be28d6cc77d300527f287"
+    },
+    {
+      "id": "coding:edit-distance",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Редакционное расстояние",
+      "question": "Сравниваются две строки из ASCII-символов. Напишите distance(a, b), возвращающую минимальное число операций, превращающих первую строку во вторую. Разрешены вставка, удаление и замена одного символа, каждая стоимостью один; перестановка соседних символов отдельной операцией не считается.",
+      "taskDigest": "aa961a0ca704bcfebcef8c9fa19a5c9b86bdf0ef9c42426de3c0596c6dd1743d"
+    },
+    {
+      "id": "coding:canonical-json",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Каноническая сериализация JSON-дерева",
+      "question": "Два объекта с одинаковыми JSON-данными могут иметь разный порядок создания полей. Напишите canonical(value), возвращающую одинаковую строку для таких значений: ключи объектов сортируются лексикографически, порядок массивов сохраняется. Вход — ациклическое JSON-дерево с конечными числами, без undefined, функций и специальных объектов.",
+      "taskDigest": "dededd4414f1aa90b916d9eaf529b0714f03c6e5338141928d01467f6f9c2ab3"
+    },
+    {
+      "id": "coding:max-overlap",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Максимум одновременных интервалов",
+      "question": "Нужно определить максимальное число одновременно активных интервалов. Напишите maxOverlap(intervals) для полуоткрытых промежутков [start, end): начало включено, конец исключён. Границы корректны, а интервалы нулевой длины не считаются активными; касание конца одного и начала другого не создаёт дополнительного пересечения.",
+      "taskDigest": "6a01af61e81328d5ce910df4a1fc5ae7f97241ea341e76bb1c3f9d8ddb152a7d"
+    },
+    {
+      "id": "coding:immutable-set-path",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Иммутабельное изменение существующего пути",
+      "question": "В состоянии приложения нужно заменить одно вложенное значение, сохранив неизменность исходного дерева. Напишите setPath(root, path, value): новые контейнеры создаются только вдоль существующего пути, остальные ветви должны сохранить прежние ссылки. Поддерживаются обычные объекты и массивы с собственными перечислимыми строковыми полями; точные ограничения ключей приведены ниже.",
+      "taskDigest": "a67461f8ce9c62a8d1f048a0c86eaeca1d8264efc3034f202b0fab6d28c29821"
+    },
+    {
+      "id": "coding:heap-top-k",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "K наибольших значений потока",
+      "question": "Числа приходят из потока, который нельзя целиком сохранить в памяти. Напишите topK(values, k), возвращающую k наибольших конечных значений по убыванию с сохранением повторов. K должно быть целым и неотрицательным; если данных меньше k, верните имеющиеся, а при k=0 — пустой массив.",
+      "taskDigest": "7fcf3e9e3259a649d70db799fece42e77e749955ff9d00207f52b34e16ac87a0"
+    },
+    {
+      "id": "coding:trie-prefix",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Индекс префиксного поиска",
+      "question": "Для списка уникальных строчных ASCII-слов нужен многократный поиск подсказок по началу слова. Напишите prefixIndex(words), возвращающую функцию поиска по префиксу. Результат содержит все подходящие слова в порядке исходного списка; пустой префикс возвращает все слова. Изменение массива результата не должно повреждать индекс.",
+      "taskDigest": "0a45a5b296bc80f9848eaf50027c35df273024d990859c52b58fddb33e6956d6"
+    },
+    {
+      "id": "coding:dependency-layers",
+      "topic": "coding",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Параллельные уровни DAG",
+      "question": "Есть задачи с зависимостями, и нужно сгруппировать их для параллельного запуска. Напишите layers(nodes, edges): каждый результат-уровень содержит задачи, которые можно начать одновременно после завершения всех предыдущих уровней. Пара [before, after] задаёт направление зависимости; при цикле функция должна выбросить Error.",
+      "taskDigest": "9d867b5ca4c82c3509a8a86183b219f3a44474bc2acb637016f0ea5e8e7e99cd"
+    },
+    {
+      "id": "coding:clone-cyclic",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Копия графа с циклами и общими ссылками",
+      "question": "Нужно скопировать структуру, в которой объекты могут ссылаться сами на себя и использовать одного общего потомка. Реализуйте cloneGraph(root) для обычных объектов и плотных массивов с собственными перечислимыми строковыми полями данных. Новые контейнеры должны быть отдельными от исходных, но циклы и общие ссылки внутри копии сохраняются; классы, функции и getters не рассматриваем.",
+      "taskDigest": "1901ff9a18cdcc735c8e60347cb0660faa18298a03350779154b4195fc0d7a3d"
+    },
+    {
+      "id": "coding:graph-equality",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Равенство графов с учётом aliasing",
+      "question": "Нужно сравнивать не только значения вложенных полей, но и структуру общих ссылок. Реализуйте graphEqual(left, right) для графов обычных объектов без массивов: циклы допустимы, учитываются только собственные перечислимые строковые поля, примитивы сравниваются через Object.is. Два поля, указывающие на один объект слева, должны соответствовать одному общему объекту справа.",
+      "taskDigest": "a7f2bea570c23ff8e127a0f31627c5695e58e970ebfd75b33a3c123321d2bfb3"
+    },
+    {
+      "id": "coding:settle-thenables",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Сбор всех исходов thenable-значений",
+      "question": "Нужно дождаться всех переданных значений и получить результат каждого, даже если часть операций завершилась ошибкой. Напишите settle(iterable), принимающую обычные значения, Promise и thenable — объекты с методом then. Верните Promise массива объектов со status и value либо reason в исходном порядке; ошибку самого получения элементов iterable нужно вынести как общий отказ. Promise.allSettled использовать нельзя.",
+      "taskDigest": "ea736846d530f652f3be177cf932464a91af8bc55fff8be01ea4c9135c5ffab4"
+    },
+    {
+      "id": "coding:retry-policy",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Повтор операции с проверяемой политикой",
+      "question": "Нужна обёртка повторного выполнения операции с явной политикой ошибок. Напишите retry(operation, attempts, shouldRetry, wait): operation получает номер попытки с единицы; повтор разрешён только политикой shouldRetry, а перед повтором нужно дождаться wait. После успеха верните значение, при исчерпании попыток или запрете повтора передайте ошибку наружу.",
+      "taskDigest": "ba38b037eb5cc19dc9d7477c5813ee675951f42fd822cf553c659e9897c58da8"
+    },
+    {
+      "id": "coding:debounce-control",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Debounce с cancel и flush",
+      "question": "Нужна функция, откладывающая обработку частых событий до паузы после последнего вызова. Реализуйте debounce(fn, delay) с trailing-поведением: используются последние аргументы и this. Добавьте cancel для отмены ожидания и flush для немедленного выполнения ожидающего вызова с возвратом его результата; если вызова нет, flush возвращает undefined.",
+      "taskDigest": "8dec293f89aa4d9ba650f4142c342053ed7c2247836379930f0734ffd35d93c5"
+    },
+    {
+      "id": "coding:latest-result",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Применение только последнего async-результата",
+      "question": "Пользователь быстро меняет поисковую строку: запрос A начат первым, запрос B — вторым, но ответы могут прийти в любом порядке. Реализуйте latestOnly(load, apply), возвращающую функцию загрузки. Применять через apply можно только успех последнего начатого вызова; каждый вызов возвращает {accepted,value}, ошибки передаются наружу, сами старые операции не отменяются.",
+      "taskDigest": "d78c1b62d966928d81bb6c56f04479eb64810f501c3da756c5b7d8cb17c1f631"
+    },
+    {
+      "id": "coding:async-iterator-map",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Ленивое преобразование async iterable",
+      "question": "Данные поступают постепенно через async iterable, например из потока страниц API. Напишите асинхронный генератор mapAsync(source, mapper), который последовательно ожидает mapper(value,index) и выдаёт преобразованные элементы, не накапливая весь поток. Если потребитель перестал читать раньше конца, исходный iterator должен корректно закрыться по стандартному протоколу.",
+      "taskDigest": "d21affe737fff3d755b9ed93f57d4fbbe586180ec4246f5a361300b46b84d791"
+    },
+    {
+      "id": "coding:parse-csv",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "CSV с кавычками и переводами строк",
+      "question": "Нужно разобрать CSV-текст, где запятая разделяет поля, а LF или CRLF — строки. Реализуйте parseCSV(text), поддерживающую поля в двойных кавычках: внутри могут быть запятые, переводы строк и кавычки, записанные удвоением. Кавычка разрешена только в начале поля; после закрытия допустим разделитель или конец строки. Пустой ввод возвращает [], последний перевод строки не создаёт лишнюю запись.",
+      "taskDigest": "91e08478eba690775e91cb2ece2998ea3aa49313900702ceb6596e4b51181e39"
+    },
+    {
+      "id": "coding:microtask-batch",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Объединение вызовов в microtask-пакет",
+      "question": "Много компонентов могут почти одновременно запросить небольшие операции. Напишите batchCalls(batch), возвращающую enqueue(value): каждый вызов получает собственный Promise, а значения, накопленные до отправки ближайшего microtask-пакета, передаются в batch одним массивом. Batch должен вернуть массив той же длины; общий отказ или неверный размер результата отклоняет все Promise этого пакета.",
+      "taskDigest": "8c6368fd62101a5d9303fdc5414b29236d1056a2c5c71c931f7493e0db45382d"
+    },
+    {
+      "id": "coding:expression-parser",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Парсер арифметического выражения",
+      "question": "Нужно вычислять небольшие арифметические выражения без eval. Напишите evaluate(text): разрешены неотрицательные целые числа, пробелы, операции +, -, *, / и скобки; унарных операторов нет. Учитывайте приоритет и левую ассоциативность; неверный синтаксис вызывает Error, деление на ноль — RangeError.",
+      "taskDigest": "fdbef25414808838e8ba712e9eef5eeb391a58d012c8b39264218fa4e2a1fdb4"
+    },
+    {
+      "id": "coding:semver-compare",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Сравнение версий с prerelease",
+      "question": "Нужно упорядочить валидные версии в формате SemVer, включая предварительные версии. Напишите compareVersion(left,right), возвращающую -1, 0 или 1. Числовые части могут быть больше безопасного диапазона Number; build metadata после плюса не влияет на сравнение, а prerelease ниже соответствующего release. Числовой prerelease-идентификатор ниже текстового.",
+      "taskDigest": "be5dad614d86214c8be7389f672e9936b35a473f5cebf322260193975b8ab0e5"
+    },
+    {
+      "id": "coding:sparse-map",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Map с сохранением дырок",
+      "question": "Напишите mapSparse(array, callback, thisArg), воспроизводящую оговорённую часть поведения обычного Array.prototype.map. Разреженный массив может иметь отсутствующие индексы: для них callback не вызывается, но унаследованные индексные свойства учитываются. Длина фиксируется до обхода, результаты создаются как собственные поля, а невызываемый callback должен сразу вызвать TypeError.",
+      "taskDigest": "7a43e41683da0335b7a42d73ecaa2f65979b0e9a002eef8e21f2d35a052d13b5"
+    },
+    {
+      "id": "coding:memoize-argument-trie",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Мемоизация по идентичности набора аргументов",
+      "question": "Нужно кешировать результат синхронной чистой функции по всей последовательности аргументов. Напишите memoizeArgs(fn), различающую число аргументов и объекты по идентичности: два разных объекта с одинаковыми полями — разные ключи. Для примитивов используйте SameValueZero: NaN совпадает с NaN, 0 и -0 совпадают. Значение undefined тоже кешируется, исключение — нет; значимого this у исходной функции нет.",
+      "taskDigest": "78427683d638c593ec4fe9c0abadc20cde23614a42396a5c1166655fcc796dd1"
+    },
+    {
+      "id": "coding:bounded-history",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "История undo/redo с ограничением",
+      "question": "Нужно добавить отмену и повтор изменений в редактор. Реализуйте history(initial, limit) с set, undo, redo и get: хранится текущее значение и не более limit прошлых состояний. Новый set очищает ветку redo, попытка выйти за границы ничего не меняет; значения считаются неизменяемыми после передачи в историю.",
+      "taskDigest": "eadb43939437174103c721cfd8510b3f3cef13f67ace831785ff253d5708f27b"
+    },
+    {
+      "id": "coding:lossless-tree-codec",
+      "topic": "coding",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Кодек специальных примитивов",
+      "question": "Обычный JSON не сохраняет некоторые значения JavaScript в исходном виде. Реализуйте treeCodec() с encode и decode для ациклических деревьев обычных объектов и массивов. После прохода туда и обратно нужно сохранить undefined, BigInt, NaN, Infinity, -0, длину и дырки массивов отдельно от явного undefined, а также их собственные перечислимые строковые поля. Getters, функции, прототипы и дескрипторы не входят в контракт; decode получает только результат вашего encode.",
+      "taskDigest": "b731509051397f8f788388e8d1a88246ea143adefcf2b9ee9572f4c5632fc94a"
+    },
+    {
+      "id": "css:box-model",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Из чего складывается размер блока?",
+      "question": "Для .box из примера рассчитайте ширину с padding и border. Как изменится результат при box-sizing:border-box? Объясните расчёт."
+    },
+    {
+      "id": "css:cascade-basic",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Почему одно CSS-правило побеждает другое?",
+      "question": "Два правила задают кнопке разный цвет. Покажите порядок поиска победителя и объясните, почему последнее правило может проиграть."
+    },
+    {
+      "id": "css:selectors",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Чем .card .title отличается от .card > .title?",
+      "question": "Для HTML-дерева ниже перечислите id ссылок, совпавших с .menu a и .menu > a. Объясните роль каждого комбинатора."
+    },
+    {
+      "id": "css:inheritance",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Все ли свойства наследуются?",
+      "question": "Предскажите color и margin у .child в примере с unset. Объясните, какие свойства наследуются и как это влияет на результат."
+    },
+    {
+      "id": "css:display",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Чем block отличается от inline?",
+      "question": "Разместите подпись и ссылку в строке, а следующий текст отдельным блоком. Объясните выбор display и действие размеров."
+    },
+    {
+      "id": "css:units",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Когда использовать rem, em и px?",
+      "question": "Вычислите font-size и padding у .badge из примера. Объясните базу em для каждого свойства и сравните с rem."
+    },
+    {
+      "id": "css:flex-start",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Как расположить элементы в ряд с промежутками?",
+      "question": "Сверстайте ряд кнопок с одинаковыми промежутками и переносом при нехватке места. Объясните оси выравнивания."
+    },
+    {
+      "id": "css:grid-start",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Как задать три равных столбца?",
+      "question": "Создайте три равные колонки карточек с промежутками, устойчивые к длинному тексту."
+    },
+    {
+      "id": "css:position",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "От чего считается absolute-позиционирование?",
+      "question": "Значок должен находиться в правом верхнем углу карточки. Предложите позиционирование и объясните, откуда считаются координаты."
+    },
+    {
+      "id": "css:overflow",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Как удержать длинный код внутри карточки?",
+      "question": "Длинная строка кода расширяет всю страницу. Исправьте поведение, сохранив возможность прочитать строку."
+    },
+    {
+      "id": "css:media-query",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Как адаптировать макет к узкому окну?",
+      "question": "Меню перестаёт помещаться на узком экране. Предложите адаптивную раскладку и способ выбрать точку переключения."
+    },
+    {
+      "id": "css:pseudo",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Чем псевдокласс отличается от псевдоэлемента?",
+      "question": "Оформите фокус кнопки и декоративный маркер перед подписью. Объясните выбранные селекторы."
+    },
+    {
+      "id": "css:center",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Как центрировать блок и его содержимое?",
+      "question": "Выровняйте карточку по центру контейнера, а её текст по левому краю. Объясните выбранные свойства."
+    },
+    {
+      "id": "css:transition",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Почему transition не анимирует display:none привычным способом?",
+      "question": "Панель должна плавно появляться и исчезать. Предложите CSS и объясните, почему одной смены display может быть недостаточно."
+    },
+    {
+      "id": "css:specific-error",
+      "topic": "css",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Почему width:100% вместе с padding создаёт переполнение?",
+      "question": "Поле .field из примера выходит за ширину родителя. Покажите расчёт и исправление, сохраняющее внутренние отступы."
+    },
+    {
+      "id": "css:flex-minimum",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Почему flex-элемент не сжимается вокруг длинной строки?",
+      "question": "Длинный заголовок мешает flex-карточке сжиматься. Найдите причину и предложите исправление без обрезки всей страницы."
+    },
+    {
+      "id": "css:flex-basis",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Чем flex-basis отличается от width?",
+      "question": "У двух flex-элементов одинаковый grow, но разные итоговые размеры. Объясните роль исходных размеров и свободного пространства."
+    },
+    {
+      "id": "css:grid-auto",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Чем auto-fit отличается от auto-fill?",
+      "question": "Каталог должен заполнять строку карточками минимальной ширины. Сравните auto-fit и auto-fill при двух карточках на широком экране."
+    },
+    {
+      "id": "css:stacking",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Почему огромный z-index не перекрывает соседний блок?",
+      "question": "Всплывающий блок с z-index:9999 оказался под соседним разделом. Найдите причину и исправьте структуру наложения."
+    },
+    {
+      "id": "css:margin-collapse",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Почему вертикальные margin не складываются?",
+      "question": "Вертикальные отступы соседних блоков складываются не так, как ожидали. Объясните пример и предложите управляемую раскладку."
+    },
+    {
+      "id": "css:bfc",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Зачем display:flow-root?",
+      "question": "После плавающего изображения фон контейнера заканчивается раньше содержимого. Объясните причину и предложите локальное исправление."
+    },
+    {
+      "id": "css:layers",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Как cascade layers помогают стилям библиотеки?",
+      "question": "В проекте смешаны библиотечные и продуктовые стили. Предложите порядок слоёв и объясните пример конфликта."
+    },
+    {
+      "id": "css:variables",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Как наследуются CSS custom properties?",
+      "question": "Тема задаёт --accent на контейнере, а вложенная кнопка использует var. Объясните область действия и поведение fallback."
+    },
+    {
+      "id": "css:container-query",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Когда container query лучше media query?",
+      "question": "Одна карточка используется в узкой панели и широком каталоге при одинаковом viewport. Предложите адаптацию."
+    },
+    {
+      "id": "css:logical-properties",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Для чего margin-inline и padding-block?",
+      "question": "Подготовьте карточку с начальным отступом для LTR и RTL. Объясните, какие свойства выбрать и какие оставить физическими."
+    },
+    {
+      "id": "css:sticky",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Почему position:sticky не прилипает к viewport?",
+      "question": "Заголовок с position:sticky не прилипает в прокручиваемой панели. Покажите порядок диагностики."
+    },
+    {
+      "id": "css:aspect-ratio",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Как aspect-ratio взаимодействует с width и height?",
+      "question": "Карточка должна резервировать место под изображение 16:9 до загрузки. Покажите CSS и поведение размеров."
+    },
+    {
+      "id": "css:font-loading",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Как уменьшить сдвиг текста при загрузке шрифта?",
+      "question": "После загрузки шрифта заголовки смещают страницу. Предложите измерение и исправление без скрытия текста на неопределённое время."
+    },
+    {
+      "id": "css:render-cost",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Почему анимация transform обычно дешевле width?",
+      "question": "Анимация ширины карточек тормозит. Предложите диагностику и альтернативу, объяснив различие визуального эффекта и раскладки."
+    },
+    {
+      "id": "css:accessible-css",
+      "topic": "css",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Как поддержать уменьшение движения и forced colors?",
+      "question": "Проверьте интерфейс с анимацией и полупрозрачными границами при пользовательских настройках доступности. Предложите адаптацию."
+    },
+    {
+      "id": "css:design-tokens",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как организовать темы крупной дизайн-системы?",
+      "question": "Спроектируйте токены двух тем для продукта с несколькими командами. Обоснуйте уровни и правила локальных исключений."
+    },
+    {
+      "id": "css:css-isolation",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как встроить чужой CSS без массовых коллизий?",
+      "question": "Встраиваемый модуль портит стили основной страницы. Предложите изоляцию с учётом темизации и стоимости миграции."
+    },
+    {
+      "id": "css:layout-investigation",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Как расследовать редкое горизонтальное переполнение?",
+      "question": "Горизонтальная прокрутка появляется только с одним длинным переводом. Составьте план поиска переполнения и устойчивого исправления."
+    },
+    {
+      "id": "css:responsive-strategy",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как спроектировать адаптацию без десятков breakpoints?",
+      "question": "Спроектируйте набор карточек для разных контейнеров, языков и масштабов текста без десятков фиксированных breakpoint."
+    },
+    {
+      "id": "css:style-performance",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как определить, что тормозит именно CSS?",
+      "question": "После смены темы интерфейс зависает. Спланируйте измерение и выбор оптимизации, отделив CSS от стоимости JS."
+    },
+    {
+      "id": "css:containment",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Когда применять contain и content-visibility?",
+      "question": "Длинная страница тяжело отрисовывается. Оцените containment и пропуск невидимых разделов с учётом поиска и доступности."
+    },
+    {
+      "id": "css:system-scale",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Как масштабировать CSS между несколькими командами?",
+      "question": "Несколько команд добавляют глобальные стили и регулярно ломают соседние разделы. Предложите правила владения и проверки изменений."
+    },
+    {
+      "id": "css:print-layout",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как адаптировать интерактивный отчёт для печати?",
+      "question": "Подготовьте сложный отчёт для печати на нескольких страницах. Определите раскладку, разрывы и проверку скрытых данных."
+    },
+    {
+      "id": "css:rtl-system",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как добавить RTL в существующий продукт?",
+      "question": "Спланируйте поддержку RTL в существующем интерфейсе с иконками, таблицами и диаграммами. Обоснуйте исключения из зеркалирования."
+    },
+    {
+      "id": "css:animation-contract",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Как определить правила движения в дизайн-системе?",
+      "question": "Определите контракт переходов для панели, которую пользователь может быстро открывать и закрывать. Учтите reduced motion."
+    },
+    {
+      "id": "css:cross-browser",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как выбирать новую CSS-возможность для production?",
+      "question": "Новая CSS-возможность улучшает раскладку, но поддерживается не во всей целевой матрице. Предложите выпуск и fallback."
+    },
+    {
+      "id": "css:large-grid",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как показать тысячи строк без потери UX?",
+      "question": "Таблица из тысяч строк медленно открывается. Сравните варианты уменьшения стоимости с учётом поиска, печати и доступности."
+    },
+    {
+      "id": "css:theme-contrast",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как проверить мягкую палитру без потери читаемости?",
+      "question": "В тёмной теме часть подписей исчезает на вложенных поверхностях. Предложите аудит токенов и состояний."
+    },
+    {
+      "id": "css:css-migration",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Как перевести legacy CSS на слои без регрессий?",
+      "question": "Перенесите старые стили в новую систему слоёв поэтапно, сохранив рабочие экраны. Определите риски и проверку."
+    },
+    {
+      "id": "css:component-boundaries",
+      "topic": "css",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как сохранить компонент адаптивным в неизвестном контейнере?",
+      "question": "Компонент каталога работает на странице, но ломается в боковой панели. Определите контракт размеров и переполнения."
+    },
+    {
+      "id": "css:where-specificity",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему :where(#app .item) легко переопределить?",
+      "question": "Предскажите цвет .item в примере и рассчитайте специфичность обоих правил. Объясните влияние :where."
+    },
+    {
+      "id": "css:percent-height",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему height:100% не даёт высоту родителя?",
+      "question": "У ребёнка height:100%, но родитель с auto не задаёт ожидаемую высоту. Объясните вычисление и устойчивую раскладку."
+    },
+    {
+      "id": "css:flex-zero",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему flex:1 и flex:1 1 0 могут отличаться?",
+      "question": "Сравните flex:1 и flex:1 1 0 в колонке с неопределённой высотой. Предложите минимальный пример для проверки."
+    },
+    {
+      "id": "css:opacity-child",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Почему opacity:.5 у родителя нельзя отменить opacity:1 у ребёнка?",
+      "question": "У родителя opacity:0.5, у потомка opacity:1, но потомок остаётся полупрозрачным. Объясните результат и исправьте только фон."
+    },
+    {
+      "id": "css:transform-fixed",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Почему fixed-баннер движется вместе с transformed-предком?",
+      "question": "После transform у контейнера fixed-панель перестала держаться за viewport. Объясните причину и варианты размещения."
+    },
+    {
+      "id": "css:grid-minmax",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Чем 1fr отличается от minmax(0,1fr)?",
+      "question": "Сетка 1fr 1fr расширяется из-за длинного слова. Объясните расчёт минимума и исправьте раскладку."
+    },
+    {
+      "id": "css:important-layers",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Почему important из раннего слоя сильнее позднего?",
+      "question": "Два слоя задают !important цвет. Предскажите победителя и объясните, как проверить конфликт без увеличения специфичности."
+    },
+    {
+      "id": "css:var-invalid",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему color:var(--x,red) не стал красным при --x:20px?",
+      "question": "Предскажите итоговый color у .child в примере с --x. Объясните, когда выбирается fallback var и что происходит при вычислении значения."
+    },
+    {
+      "id": "css:display-contents",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему display:contents требует осторожности?",
+      "question": "После display:contents исчез фон обёртки, но потомки остались. Объясните модель и оцените применение к интерактивной группе."
+    },
+    {
+      "id": "css:subgrid-case",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Как выровнять поля нескольких карточек по общим строкам?",
+      "question": "Заголовки, описания и кнопки карточек нужно выровнять между рядами без фиксированных высот. Предложите структуру и fallback."
+    },
+    {
+      "id": "css:has-recalc",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Когда :has() создаёт нежелательную зависимость стилей?",
+      "question": "После добавления :has к большому контейнеру частые обновления списка замедлились. Предложите измерение и более узкое правило."
+    },
+    {
+      "id": "css:viewport-mobile",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Почему 100vh перекрывает мобильную панель браузера?",
+      "question": "Экранная панель высотой 100vh перекрывается мобильной адресной строкой. Предложите выбор единиц и проверки."
+    },
+    {
+      "id": "css:percentage-gap",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Почему процентный gap ведёт себя неожиданно при auto-размере?",
+      "question": "Контейнер с процентным gap и автоматическим размером даёт неожиданный результат. Постройте минимальный пример и объясните зависимость."
+    },
+    {
+      "id": "css:focus-overflow",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Как сохранить focus ring внутри обрезающей карточки?",
+      "question": "Фокус кнопки обрезается контейнером с overflow:hidden. Исправьте ситуацию, сохранив визуальную маску и доступность."
+    },
+    {
+      "id": "css:layout-read-write",
+      "topic": "css",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Почему чтение offsetWidth после записи стиля тормозит цикл?",
+      "question": "Цикл меняет стили элементов и тут же читает их размеры; страница тормозит. Объясните измерение и перестройте работу."
+    },
+    {
+      "id": "html:document-structure",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Зачем документу doctype, head и body?",
+      "question": "Составьте HTML страницы новости: у неё есть заголовок вкладки и заголовок над статьёй. Объясните структуру и предскажите последствия удаления doctype."
+    },
+    {
+      "id": "html:semantic-elements",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Как выбрать между div, article и section?",
+      "question": "Разметьте страницу журнала с новостью, подборкой по теме и обёрткой двух колонок. Обоснуйте выбор элементов."
+    },
+    {
+      "id": "html:headings",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Как построить иерархию заголовков?",
+      "question": "Предложите заголовки для курса, его модулей и уроков. Название одного урока должно выглядеть крупнее названия модуля. Покажите разметку и оформление."
+    },
+    {
+      "id": "html:links-buttons",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Когда нужен a, а когда button?",
+      "question": "Разметьте «Открыть профиль» и «Удалить черновик», одинаковые по дизайну. Объясните поведение обоих элементов с клавиатуры."
+    },
+    {
+      "id": "html:image-alt",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Как написать alt для изображения?",
+      "question": "Назначьте текстовые альтернативы фотографии товара, декоративной полоске и логотипу-ссылке на главную. Объясните каждое решение."
+    },
+    {
+      "id": "html:lists",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Чем отличаются ul, ol и dl?",
+      "question": "Разметьте рецепт, метки статьи и словарь терминов. У второго шага рецепта есть подпункты; покажите их вложенность."
+    },
+    {
+      "id": "html:labels",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Как связать подпись с полем?",
+      "question": "Нажатие подписи «Почта» не переводит фокус в поле. Покажите исправление разметки и способ проверить его."
+    },
+    {
+      "id": "html:input-types",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Зачем выбирать type у input?",
+      "question": "Выберите поля для почты, количества товара и телефона в форме заказа. Объясните ввод на мобильном устройстве и границы браузерной проверки."
+    },
+    {
+      "id": "html:form-submit",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Что происходит при отправке формы?",
+      "question": "Форма отправляется, но одно заполненное поле отсутствует в запросе. Объясните путь отправки и покажите порядок диагностики."
+    },
+    {
+      "id": "html:boolean-attributes",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Почему disabled=\"false\" отключает поле?",
+      "question": "Поле с disabled=\"false\" недоступно. Предскажите результат удаления атрибута и объясните оба состояния."
+    },
+    {
+      "id": "html:tables",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Как разметить таблицу данных?",
+      "question": "Разметьте отчёт о продажах по сотрудникам и месяцам так, чтобы смысл числа был понятен при навигации по ячейкам."
+    },
+    {
+      "id": "html:language",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Для чего lang у html?",
+      "question": "В русской статье английская цитата звучит неверно при чтении экранной программой. Предложите исправление и проверку."
+    },
+    {
+      "id": "html:script-basics",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Где подключить скрипт, использующий DOM?",
+      "question": "Скрипт в head ищет кнопку в конце body и получает null. Предложите исправление подключения и объясните порядок событий."
+    },
+    {
+      "id": "html:validation-message",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Как показать понятную ошибку поля?",
+      "question": "Ошибка почты обозначена только красной рамкой. Покажите доступное сообщение, его связь с полем и момент появления."
+    },
+    {
+      "id": "html:accessible-dialog",
+      "topic": "html",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Что нужно модальному окну кроме затемнения?",
+      "question": "Спроектируйте поведение окна подтверждения удаления от открытия до отмены для пользователя клавиатуры."
+    },
+    {
+      "id": "html:content-model",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Почему нельзя вложить button в ссылку?",
+      "question": "Ссылка оборачивает карточку товара вместе с кнопкой «В избранное». Исправьте структуру и проверьте оба действия."
+    },
+    {
+      "id": "html:responsive-images",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Как браузер выбирает ресурс из srcset и sizes?",
+      "question": "Фотография занимает экран телефона и треть широкого экрана. Есть файлы 400, 800 и 1600 px. Составьте разметку выбора ресурса и объясните проверку на разных экранах."
+    },
+    {
+      "id": "html:picture-art",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как менять кадрирование для мобильного экрана?",
+      "question": "На телефоне нужен крупный портрет, на широком экране — общий план той же сцены. Предложите разметку и объясните выбор файла."
+    },
+    {
+      "id": "html:resource-order",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Чем отличаются async, defer и module?",
+      "question": "Подключите библиотеку, зависимый интерфейс и независимую аналитику. Обоснуйте порядок исполнения при произвольной скорости загрузки."
+    },
+    {
+      "id": "html:formdata",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Какие значения попадут в FormData(form)?",
+      "question": "Предскажите FormData формы с readonly, disabled, полем без name и двумя checkbox одного имени. Покажите чтение всех выбранных значений."
+    },
+    {
+      "id": "html:constraint-validation",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Как совместить встроенную и серверную валидацию?",
+      "question": "После серверной ошибки «Адрес занят» пользователь меняет почту, но отправка остаётся заблокирована. Найдите причину и предложите жизненный цикл проверки."
+    },
+    {
+      "id": "html:autofill",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Как помочь менеджеру паролей и автозаполнению?",
+      "question": "Спроектируйте вход, смену пароля и подтверждение кодом с удобным автозаполнением. Оцените предложение запретить вставку пароля."
+    },
+    {
+      "id": "html:details",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Когда подходит details/summary?",
+      "question": "Справку к полю нужно раскрывать по запросу. Выберите HTML-структуру и объясните клавиатурное поведение."
+    },
+    {
+      "id": "html:inert-hidden",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Чем отличаются hidden и inert?",
+      "question": "При открытии панели фон остаётся видимым, но не должен принимать действия. Сравните подходящие способы разметки и проверьте фокус."
+    },
+    {
+      "id": "html:focus-order",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Как построить порядок фокуса в сложной форме?",
+      "question": "Визуальный порядок полей формы не совпадает с Tab-порядком. Предложите исправление, устойчивое к адаптивной раскладке."
+    },
+    {
+      "id": "html:fieldset",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Как сгруппировать связанные radio-поля?",
+      "question": "Разметьте выбор одного способа доставки из трёх с общей подписью. Покажите поведение при выборе и отправке."
+    },
+    {
+      "id": "html:iframe-boundary",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Что учитывать при встраивании iframe?",
+      "question": "Нужно встроить сторонний виджет. Предложите разметку iframe и проверки доступности, разрешений и обмена данными."
+    },
+    {
+      "id": "html:native-popover",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Чем popover отличается от модального dialog?",
+      "question": "Выберите поведение для всплывающей справки рядом с кнопкой: остальная страница должна оставаться доступной. Обоснуйте HTML-механизм."
+    },
+    {
+      "id": "html:loading-image",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Как снизить сдвиги при загрузке изображений?",
+      "question": "При загрузке фотографий текст страницы прыгает. Предложите исправление и порядок загрузки изображений первого и последующих экранов."
+    },
+    {
+      "id": "html:safe-html",
+      "topic": "html",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Почему вставка пользовательской строки через innerHTML опасна?",
+      "question": "Комментарий пользователя вставляется через innerHTML. Опишите риск и безопасный путь отображения с учётом требования к форматированию."
+    },
+    {
+      "id": "html:ssr-parser",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "SSR-страница визуально верна, но гидратация ломается: с чего начать?",
+      "question": "После серверного рендера гидратация жалуется на дерево, хотя HTML выглядит правдоподобно. Предложите воспроизведение и поиск причины."
+    },
+    {
+      "id": "html:form-resilience",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как спроектировать форму, работающую до загрузки JavaScript?",
+      "question": "Регистрация должна работать при отказе JavaScript, а при его наличии — давать быстрый отклик. Спроектируйте отправку и восстановление после ошибки."
+    },
+    {
+      "id": "html:dialog-system",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Как проверить общую библиотеку модальных окон?",
+      "question": "Команда внедряет общую систему диалогов. Определите контракт и проверки для вложенных сценариев и клавиатурной работы."
+    },
+    {
+      "id": "html:accessible-table",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как сделать доступной таблицу со сложными заголовками?",
+      "question": "Отчёт содержит многоуровневые заголовки строк и столбцов. Предложите доступную структуру и стратегию проверки при ограниченном сроке."
+    },
+    {
+      "id": "html:web-component",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Какой контракт нужен публичному custom element?",
+      "question": "Спроектируйте публичный контракт пользовательского элемента, который может появиться до загрузки его JS. Объясните интеграцию и деградацию."
+    },
+    {
+      "id": "html:shadow-forms",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Как включить custom element в нативную форму?",
+      "question": "Пользовательское поле с Shadow DOM должно участвовать в отправке, сбросе и проверке формы. Предложите реализацию и резервный путь."
+    },
+    {
+      "id": "html:security-embed",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Сервис вставляет недоверенный виджет: как выбрать границу?",
+      "question": "Непроверенный партнёрский код нужно встроить в приложение с личными данными. Спроектируйте границу доверия и минимальный протокол взаимодействия."
+    },
+    {
+      "id": "html:resource-strategy",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как выбирать preload, preconnect и lazy-loading?",
+      "question": "После добавления preload ко всем ресурсам первая отрисовка ухудшилась. Предложите измерение и пересмотр стратегии при ограниченном сетевом канале."
+    },
+    {
+      "id": "html:html-trust",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как организовать безопасный rich-text pipeline?",
+      "question": "Редакторы и посетители могут добавлять форматированный текст. Спроектируйте обработку HTML от ввода до отображения и границы ответственности."
+    },
+    {
+      "id": "html:document-stream",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Что важно для корректности потокового SSR?",
+      "question": "SSR отдаёт страницу потоком, и редкая ошибка гидратации возникает при вставке поздних фрагментов. Предложите план диагностики."
+    },
+    {
+      "id": "html:keyboard-widget",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Когда оправдан кастомный виджет вместо нативного select?",
+      "question": "Для большого списка клиентов предлагают собственный combobox вместо select. Оцените необходимость и определите проверяемый контракт взаимодействия."
+    },
+    {
+      "id": "html:international-form",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как спроектировать международную форму адреса?",
+      "question": "Спроектируйте форму международной доставки, хранение и проверки имени, адреса и индекса. Обоснуйте обязательность каждого поля."
+    },
+    {
+      "id": "html:content-policy",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как согласовать семантику контента из CMS?",
+      "question": "Одну статью CMS показывают в нескольких шаблонах. Спроектируйте правила редакторских блоков и проверку перед публикацией."
+    },
+    {
+      "id": "html:offline-submit",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Как не потерять ввод при обрыве сети во время отправки?",
+      "question": "После отправки длинной заявки связь оборвалась; неизвестно, сохранил ли её сервер. Спроектируйте восстановление без потери текста и дублей."
+    },
+    {
+      "id": "html:semantic-migration",
+      "topic": "html",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как заменить div-интерфейс семантическим без регрессий?",
+      "question": "Спланируйте поэтапную замену кликабельных div ссылками и кнопками в старом приложении. Обоснуйте проверки и порядок выпуска."
+    },
+    {
+      "id": "html:duplicate-id",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Два поля имеют один id: что сломается?",
+      "question": "Два экземпляра формы имеют одинаковые id; подпись фокусирует чужое поле. Исправьте генерацию идентификаторов при SSR и на клиенте."
+    },
+    {
+      "id": "html:checkbox-default",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему checkbox без value отправляет on?",
+      "question": "Объясните, почему сервер получает on от выбранного checkbox и ничего от снятого. Предложите однозначный контракт, включая value=\"false\"."
+    },
+    {
+      "id": "html:button-outside",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Как отправить форму кнопкой вне неё?",
+      "question": "«Сохранить» находится вне формы в закреплённой панели. Сохраните нативную проверку и submit, показав разметку и программный запуск."
+    },
+    {
+      "id": "html:disabled-fieldset",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Все ли потомки disabled fieldset отключены?",
+      "question": "В отключённом fieldset внутри первого legend есть флажок включения группы. Предскажите его доступность и данные отправки."
+    },
+    {
+      "id": "html:template-clone",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Почему содержимое template не видно и не ищется как обычный потомок?",
+      "question": "Из template создают карточки, но кнопку не удаётся найти, а обработчик не запускается. Объясните создание рабочего экземпляра."
+    },
+    {
+      "id": "html:tbody-insert",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Почему querySelector('table > tr') не находит серверные строки?",
+      "question": "Строки таблицы видны, но table > tr не находит их после SSR. Объясните расхождение и устойчивое исправление."
+    },
+    {
+      "id": "html:aria-disabled",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Можно ли отключить ссылку через aria-disabled?",
+      "question": "Серая ссылка с aria-disabled=\"true\" продолжает скачивать отчёт. Определите необходимый контракт и реализацию для мыши и клавиатуры."
+    },
+    {
+      "id": "html:accessible-name",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему aria-label скрыл видимый текст кнопки от скринридера?",
+      "question": "Кнопка «Оплатить» объявляется как «Подтвердить заказ» из-за aria-label. Исправьте имя и дополнительное пояснение, сохранив голосовую активацию."
+    },
+    {
+      "id": "html:dialog-top-layer",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему z-index:999999 не перекрывает модальный dialog?",
+      "question": "Уведомление с огромным z-index остаётся под showModal-диалогом. Объясните причину и предложите доступное размещение сообщения."
+    },
+    {
+      "id": "html:shadow-event",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Почему event.target меняется при выходе из shadow DOM?",
+      "question": "Внешний обработчик компонента видит другой event.target, чем внутренняя кнопка Shadow DOM. Объясните событие и предложите публичный контракт."
+    },
+    {
+      "id": "html:submitter",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Две submit-кнопки: как определить выбранное действие?",
+      "question": "Форма имеет «Черновик» и «Опубликовать». Спроектируйте различение действий при клике, Enter и программной отправке с нативной проверкой."
+    },
+    {
+      "id": "html:image-cors-canvas",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Картинка видна, но чтение canvas запрещено: почему?",
+      "question": "Партнёрское изображение отображается и рисуется на canvas, но экспорт завершается ошибкой. Найдите условия отказа и порядок исправления."
+    },
+    {
+      "id": "html:iframe-sandbox-origin",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Почему allow-scripts вместе с allow-same-origin требует осторожности?",
+      "question": "Same-origin iframe имеет allow-scripts и allow-same-origin. Оцените достаточность изоляции непроверенного кода и предложите границу доверия."
+    },
+    {
+      "id": "html:dom-clobbering",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Как именованные элементы могут повлиять на старый глобальный код?",
+      "question": "После вставки пользовательской разметки window.config и form.submit перестали обозначать ожидаемые значения. Объясните воспроизведение и защиту."
+    },
+    {
+      "id": "html:html-parser-context",
+      "topic": "html",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Почему один HTML-фрагмент даёт разные деревья в div и table?",
+      "question": "Одинаковая строка даёт разные DOM-деревья при вставке в div и table. Предложите воспроизведение и устойчивый способ вставки недоверенного содержимого."
+    },
+    {
+      "id": "javascript:primitive-reference",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Чем примитив отличается от объекта?",
+      "question": "Предскажите вывод примера с числовыми переменными и объектом user. Объясните различие переназначения значения и изменения свойства."
+    },
+    {
+      "id": "javascript:let-const",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Чем let отличается от const?",
+      "question": "Объект объявлен через const. Покажите, какие изменения разрешены, а какие вызовут ошибку, и объясните область видимости."
+    },
+    {
+      "id": "javascript:strict-equality",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Когда === и == дают разные результаты?",
+      "question": "Предскажите три строки вывода примера. Объясните сравнения числа со строкой, null с undefined и двух объектов одинакового содержания через == и ===."
+    },
+    {
+      "id": "javascript:truthiness",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Какие значения считаются ложными в условии?",
+      "question": "Условие if(value) используется для проверки заполненности поля количества. Найдите потерянные случаи и предложите проверку."
+    },
+    {
+      "id": "javascript:functions",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Чем объявление функции отличается от стрелки?",
+      "question": "Метод объекта заменили стрелочной функцией, и обращение к this изменилось. Объясните результат на примере."
+    },
+    {
+      "id": "javascript:array-methods",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Как отличаются map, filter и forEach?",
+      "question": "Из списка товаров получите названия только доступных товаров, сохранив исходный список. Покажите подходящие операции."
+    },
+    {
+      "id": "javascript:object-access",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Чем obj.key отличается от obj[key]?",
+      "question": "Имя поля приходит строкой в переменной key. Покажите чтение и изменение соответствующего свойства объекта."
+    },
+    {
+      "id": "javascript:destructuring",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Что делает значение по умолчанию в деструктуризации?",
+      "question": "Предскажите a, b и c в примере деструктуризации. Объясните, в каких случаях используется значение по умолчанию."
+    },
+    {
+      "id": "javascript:scope",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Как функция находит внешнюю переменную?",
+      "question": "Функция читает имя, объявленное снаружи. Её вызывают из другой функции с одноимённой переменной. Предскажите результат."
+    },
+    {
+      "id": "javascript:closure-basic",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Что сохраняет замыкание счётчика?",
+      "question": "Предскажите последовательность a(), a(), b(), a() в примере. Объясните, какие вызовы разделяют состояние и почему оно сохраняется."
+    },
+    {
+      "id": "javascript:promise-basic",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Какие состояния есть у Promise?",
+      "question": "Промис получает resolve, затем reject. Предскажите наблюдаемый результат и объясните состояния."
+    },
+    {
+      "id": "javascript:async-await",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Что возвращает async-функция?",
+      "question": "Предскажите порядок и значения вывода примера. Что возвращает run(), когда выполняется код после await и блокируется ли окружающий синхронный код?"
+    },
+    {
+      "id": "javascript:event-basics",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Чем target отличается от currentTarget?",
+      "question": "Клик по иконке внутри кнопки обрабатывает контейнер. Сравните target и currentTarget и найдите нужную кнопку."
+    },
+    {
+      "id": "javascript:optional-access",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Когда использовать ?. и ?? вместе?",
+      "question": "Из необязательного профиля нужно получить город и подставить запасной текст. Покажите доступ, сохранив допустимую пустую строку."
+    },
+    {
+      "id": "javascript:mutation-copy",
+      "topic": "javascript",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Почему [...items] не защищает вложенный объект от изменения?",
+      "question": "Массив объектов скопировали spread и изменили поле первого объекта в копии. Предскажите исходный массив и исправьте обновление."
+    },
+    {
+      "id": "javascript:event-loop",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "В каком порядке выполнятся sync, promise.then и setTimeout?",
+      "question": "Предскажите порядок синхронного вывода, Promise.then и setTimeout(0). Объясните, какие очереди влияют на результат."
+    },
+    {
+      "id": "javascript:this-binding",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Как определить this при потере метода объекта?",
+      "question": "Метод сохранили в переменную и вызвали отдельно. Объясните потерю контекста и предложите надёжную передачу callback."
+    },
+    {
+      "id": "javascript:prototype",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как работает поиск свойства по прототипу?",
+      "question": "Предскажите вывод примера после item.count = 2. Сравните чтение item.count до и после присваивания и объясните состояние prototype."
+    },
+    {
+      "id": "javascript:promise-combinators",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Когда выбрать all, allSettled, race и any?",
+      "question": "Страница загружает обязательные данные и необязательные виджеты. Выберите способы ожидания и объясните ошибки и частичный успех."
+    },
+    {
+      "id": "javascript:fetch-status",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Почему fetch не попал в catch при HTTP 500?",
+      "question": "Запрос получил HTTP 500, но catch не сработал. Объясните путь обработки ответа и предложите контракт ошибок."
+    },
+    {
+      "id": "javascript:race-requests",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Как не показать устаревший ответ поиска?",
+      "question": "В поиске старый медленный запрос перезаписывает новый результат. Исправьте поток и обоснуйте поведение отмены."
+    },
+    {
+      "id": "javascript:iterables",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Чем iterable отличается от iterator?",
+      "question": "Объект должен работать в for...of. Покажите минимальный контракт и объясните завершение обхода."
+    },
+    {
+      "id": "javascript:map-set",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Когда Map лучше обычного объекта?",
+      "question": "Нужно хранить данные по объектам-ключам и уникальные выбранные элементы. Выберите коллекции и объясните сравнение ключей."
+    },
+    {
+      "id": "javascript:property-descriptors",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Что меняют enumerable, writable и configurable?",
+      "question": "Свойство читается, но не перечисляется и не меняется ожидаемым образом. Покажите диагностику дескриптора."
+    },
+    {
+      "id": "javascript:modules",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Как ES-модули передают экспортированные переменные?",
+      "question": "Модуль экспортирует изменяемое значение; импортёр читает его после обновления. Предскажите результат и объясните контракт импорта."
+    },
+    {
+      "id": "javascript:numbers",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Почему 0.1+0.2 не равно 0.3 точно?",
+      "question": "Денежный расчёт даёт 0.30000000000000004. Объясните причину и выберите представление с явными правилами округления."
+    },
+    {
+      "id": "javascript:unicode",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Почему строка с emoji имеет неожиданную length?",
+      "question": "Ограничение длины строки ошибается на эмодзи и комбинируемых символах. Объясните уровни подсчёта и предложите проверку."
+    },
+    {
+      "id": "javascript:memory-leak",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Как обработчик события может удерживать память?",
+      "question": "После удаления панели память продолжает расти. Объясните возможную роль обработчиков и покажите способ проверки."
+    },
+    {
+      "id": "javascript:debounce-throttle",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Чем debounce отличается от throttle?",
+      "question": "Поиск отправляет слишком много запросов, а обработчик прокрутки перегружает страницу. Выберите ограничение вызовов для каждого случая."
+    },
+    {
+      "id": "javascript:sort-comparator",
+      "topic": "javascript",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Как правильно сортировать числа без мутации входа?",
+      "question": "Получите возрастающую числовую сортировку, сохранив исходный массив. Объясните компаратор и вариант для старой среды."
+    },
+    {
+      "id": "javascript:async-pool",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как ограничить конкурентность загрузки сотен URL?",
+      "question": "Спроектируйте выполнение очереди задач с ограничением параллельности и результатами в исходном порядке."
+    },
+    {
+      "id": "javascript:cache-contract",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как спроектировать кеш асинхронной функции?",
+      "question": "Спроектируйте кеш запросов с TTL и дедупликацией при нескольких одновременных потребителях."
+    },
+    {
+      "id": "javascript:main-thread",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Интерфейс зависает на обработке данных: какой план?",
+      "question": "Большая обработка данных блокирует ввод. Предложите измерение, выбор разбиения работы и критерий переноса в worker."
+    },
+    {
+      "id": "javascript:untrusted-json",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как безопасно применить JSON-конфигурацию к приложению?",
+      "question": "Приложение принимает JSON-конфигурацию и сливает её с настройками. Определите проверку и безопасные границы."
+    },
+    {
+      "id": "javascript:retry-policy",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как повторять запросы при нестабильной сети?",
+      "question": "Спроектируйте повторы сетевой операции при массовом сбое сервиса, учитывая нагрузку и дублирование действий."
+    },
+    {
+      "id": "javascript:stream-backpressure",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Как обрабатывать большой поток без накопления в памяти?",
+      "question": "Большой поток данных приходит быстрее обработки. Спроектируйте потребление с ограниченной памятью и отменой."
+    },
+    {
+      "id": "javascript:api-cancellation",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Какой контракт отмены нужен публичной async API?",
+      "question": "Спроектируйте API операции с AbortSignal, учитывая отмену до запуска и во время ожидания."
+    },
+    {
+      "id": "javascript:module-boundaries",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как устранить циклическую зависимость модулей?",
+      "question": "Два модуля начали циклически импортировать друг друга после роста функций. Предложите изменение ответственности и поэтапную миграцию."
+    },
+    {
+      "id": "javascript:error-boundary-api",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как проектировать ошибки библиотеки для потребителей?",
+      "question": "Спроектируйте ошибки публичного API для UI, логирования и повторов, сохранив диагностическую причину."
+    },
+    {
+      "id": "javascript:deep-clone",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Как выбрать способ копирования сложного графа?",
+      "question": "Выберите способ копирования графа данных с датами, циклами и общими ссылками. Сначала сформулируйте требуемую семантику."
+    },
+    {
+      "id": "javascript:event-delegation-scale",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как безопасно делегировать события динамического списка?",
+      "question": "Динамический список имеет тысячи действий. Предложите делегирование, проверку цели и жизненный цикл подписки."
+    },
+    {
+      "id": "javascript:time-contract",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как проектировать расчёты времени между часовыми поясами?",
+      "question": "Спроектируйте данные для дня рождения и события с точным временем в разных часовых поясах."
+    },
+    {
+      "id": "javascript:performance-memory",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как доказать утечку после многократного открытия экрана?",
+      "question": "После нескольких открытий экрана heap вырос. Предложите эксперимент, отличающий кеширование от утечки."
+    },
+    {
+      "id": "javascript:serializable-state",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Какие данные безопасно передавать между worker, storage и сетью?",
+      "question": "Одно состояние нужно передавать в worker и сохранять в JSON. Определите общий DTO и проверки границ."
+    },
+    {
+      "id": "javascript:observable-order",
+      "topic": "javascript",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как тестировать асинхронную систему без хрупких задержек?",
+      "question": "Асинхронный тест иногда падает из-за порядка ответов. Постройте детерминированную проверку требуемых инвариантов."
+    },
+    {
+      "id": "javascript:microtask-starvation",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему рекурсивный queueMicrotask может заморозить страницу?",
+      "question": "Рекурсивная цепочка microtasks блокирует таймер и отрисовку. Объясните механизм и предложите уступку управления."
+    },
+    {
+      "id": "javascript:finally-result",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Может ли finally заменить результат promise?",
+      "question": "Объясните результат цепочки, где finally бросает ошибку после успешного promise. Сравните с обычным возвращаемым значением."
+    },
+    {
+      "id": "javascript:promise-executor",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему ошибка в async executor Promise может потеряться?",
+      "question": "В new Promise передали async executor, а ошибка после await не попала в ожидаемый catch. Объясните причину и перепишите контракт."
+    },
+    {
+      "id": "javascript:object-key-order",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "В каком порядке Object.keys возвращает ключи?",
+      "question": "Предскажите перечисление объекта со строковыми и индексоподобными ключами. Оцените пригодность объекта для порядка пользовательских записей."
+    },
+    {
+      "id": "javascript:array-holes",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Чем дырка массива отличается от undefined?",
+      "question": "Сравните массив с дыркой и массив с явным undefined при обходах и проверке свойств."
+    },
+    {
+      "id": "javascript:negative-zero",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Когда -0 и 0 различимы?",
+      "question": "Сравните 0 и -0 через ===, Object.is и деление. Объясните, когда различие может стать наблюдаемым."
+    },
+    {
+      "id": "javascript:proxy-invariants",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Почему Proxy не может вернуть любое значение из trap?",
+      "question": "Proxy возвращает значение, противоречащее защищённому свойству target, и вызывает TypeError. Объясните ограничение и воспроизведение."
+    },
+    {
+      "id": "javascript:weak-lifetime",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему WeakMap нельзя перечислить?",
+      "question": "Нужно кешировать данные по объектам, не удерживая их навсегда. Оцените WeakMap и требование перечислить все ключи."
+    },
+    {
+      "id": "javascript:thenable-assimilation",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему Promise.resolve не просто оборачивает thenable?",
+      "question": "Promise разрешается объектом с методом then. Объясните, какой результат получат подписчики и какие ошибки возможны."
+    },
+    {
+      "id": "javascript:generator-cleanup",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Выполнится ли finally генератора при break из for-of?",
+      "question": "Генератор открывает ресурс и освобождает его в finally. Что произойдёт при break из for...of и как проверить очистку?"
+    },
+    {
+      "id": "javascript:sort-mutation",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Почему comparator, меняющий сортируемый массив, ненадёжен?",
+      "question": "Компаратор sort меняет сортируемый массив. Оцените предсказуемость и предложите чистый вариант."
+    },
+    {
+      "id": "javascript:regexp-redos",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Как регулярное выражение может зависнуть на коротком вводе?",
+      "question": "Проверка пользовательской строки регулярным выражением зависает на длинном почти подходящем вводе. Предложите диагностику и защиту."
+    },
+    {
+      "id": "javascript:abort-race",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Как совместить timeout и пользовательскую отмену без утечек?",
+      "question": "Операция отменяется пользователем или таймаутом. Спроектируйте единое завершение и очистку ресурсов при любой гонке."
+    },
+    {
+      "id": "javascript:shared-memory",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Что меняется при SharedArrayBuffer и Atomics?",
+      "question": "Два worker меняют общий счётчик в SharedArrayBuffer. Объясните возможную потерю обновлений и синхронизацию."
+    },
+    {
+      "id": "javascript:prototype-pollution-case",
+      "topic": "javascript",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Почему рекурсивный merge конфигурации требует отдельной защиты?",
+      "question": "Утилита записывает пользовательский путь в объект настроек; после этого меняются несвязанные объекты. Объясните атаку и защиту."
+    },
+    {
+      "id": "react:component",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Что такое React-компонент?",
+      "question": "Покажите компонент карточки товара с названием и ценой из props. Объясните, как его результат связан с переданными данными."
+    },
+    {
+      "id": "react:jsx",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Чем JSX отличается от HTML-строки?",
+      "question": "В JSX нужно вывести имя пользователя и сумму двух значений. Покажите запись и объясните, что выполняется как JavaScript."
+    },
+    {
+      "id": "react:props",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Можно ли изменять props внутри компонента?",
+      "question": "Дочерний компонент меняет массив из props через push, и соседний компонент показывает неожиданный результат. Объясните проблему и исправьте обмен данными."
+    },
+    {
+      "id": "react:state",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Почему обычная переменная не заменяет useState?",
+      "question": "Счётчик изменяет обычную локальную переменную, но экран не обновляется. Покажите рабочий вариант и объясните следующий рендер."
+    },
+    {
+      "id": "react:updater",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Почему три setCount(count+1) могут дать только +1?",
+      "question": "В одном обработчике трижды вызывается setCount(count + 1). Предскажите результат и покажите вариант прибавления трёх единиц."
+    },
+    {
+      "id": "react:events",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Как передать обработчик нажатия?",
+      "question": "Компонент записывает onClick={save()} и отправляет форму при рендере. Объясните причину и исправьте передачу обработчика."
+    },
+    {
+      "id": "react:conditions",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Как условно показать содержимое?",
+      "question": "Список показывает сообщение при отсутствии элементов, а иначе сами элементы. Напишите условное отображение и проверьте случай длины 0."
+    },
+    {
+      "id": "react:list-keys",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Зачем key в списке компонентов?",
+      "question": "После сортировки списка локальные значения полей оказываются у других записей. Объясните, как выбрать key и проверить соответствие состояния данным."
+    },
+    {
+      "id": "react:controlled-input",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Чем контролируемый input отличается от неконтролируемого?",
+      "question": "Поле получает value из state, но вводимый текст не появляется. Покажите рабочую связь поля и состояния и сравните с uncontrolled-полем."
+    },
+    {
+      "id": "react:lifting-state",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Когда состояние нужно поднять к общему предку?",
+      "question": "Два компонента выбора валюты должны всегда показывать одно значение. Предложите владельца состояния и поток обновления."
+    },
+    {
+      "id": "react:effect-basic",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Для чего useEffect?",
+      "question": "Компонент должен подключаться к внешнему чату по roomId. Определите, какая работа относится к render, а какая к синхронизации."
+    },
+    {
+      "id": "react:effect-cleanup",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Зачем cleanup у подписки в useEffect?",
+      "question": "После нескольких открытий панели событие обрабатывается всё больше раз. Найдите возможную ошибку подписки и покажите полный жизненный цикл."
+    },
+    {
+      "id": "react:ref-basic",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Когда useRef лучше useState?",
+      "question": "Компоненту нужно хранить идентификатор таймера между рендерами. Выберите механизм и объясните, что происходит при изменении сохранённого значения."
+    },
+    {
+      "id": "react:hook-rules",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Почему hooks нельзя вызывать в обычном условии?",
+      "question": "UseState вызывается внутри if(enabled), и после переключения enabled состояние смешивается. Объясните причину и перестройте компонент."
+    },
+    {
+      "id": "react:immutable-update",
+      "topic": "react",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Как обновить один объект массива в state?",
+      "question": "Обновите цену одного товара в React-state массива объектов. Покажите новое значение состояния и объясните идентичность затронутых объектов."
+    },
+    {
+      "id": "react:state-identity",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Когда React сохраняет или сбрасывает state?",
+      "question": "Компонент счётчика остаётся в той же позиции дерева при смене props. Предскажите сохранение state, затем объясните эффект смены его типа или key."
+    },
+    {
+      "id": "react:effect-dependencies",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Как определить зависимости useEffect?",
+      "question": "Effect использует roomId и фильтр, но массив зависимостей пуст. Объясните поведение после смены props и исправьте синхронизацию."
+    },
+    {
+      "id": "react:stale-closure",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Почему interval видит старый count?",
+      "question": "Таймер показывает старый count после нескольких обновлений компонента. Объясните источник значения и предложите решение под требуемое поведение."
+    },
+    {
+      "id": "react:memo",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Что реально гарантирует React.memo?",
+      "question": "Дочерний компонент обёрнут в memo, но иногда рендерится повторно. Определите, что сравнивается и когда оптимизация полезна."
+    },
+    {
+      "id": "react:usememo-callback",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Чем useMemo отличается от useCallback?",
+      "question": "Родитель передаёт дорогой вычисленный список и callback. Объясните различие useMemo и useCallback и обоснуйте необходимость каждого."
+    },
+    {
+      "id": "react:context-renders",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Почему все потребители context обновились?",
+      "question": "Все потребители контекста обновляются при каждом рендере provider. Найдите возможную причину и предложите проверяемое изменение."
+    },
+    {
+      "id": "react:reducer",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Когда useReducer удобнее нескольких useState?",
+      "question": "Форма имеет несколько связанных переходов, разбросанных по setters. Предложите reducer и события для понятного обновления состояния."
+    },
+    {
+      "id": "react:layout-effect",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Когда нужен useLayoutEffect вместо useEffect?",
+      "question": "Всплывающая подсказка сначала появляется в неверном месте, затем перескакивает после измерения. Предложите исправление и объясните порядок работы."
+    },
+    {
+      "id": "react:strict-mode",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Почему StrictMode повторяет setup/cleanup в разработке?",
+      "question": "В разработке effect проходит дополнительный цикл подключения и очистки. Объясните назначение проверки и оцените корректность подписки."
+    },
+    {
+      "id": "react:fetch-effect",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Как безопасно загружать данные эффектом при смене id?",
+      "question": "Компонент загружает данные при смене id. Спроектируйте состояния загрузки, ошибок и принятия ответа при быстрых переключениях."
+    },
+    {
+      "id": "react:transition-basic",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Для чего startTransition?",
+      "question": "Ввод в поиск тормозит из-за тяжёлого обновления результатов. Предложите разделение обновлений и объясните, что даёт transition."
+    },
+    {
+      "id": "react:suspense-basic",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Что может активировать Suspense fallback?",
+      "question": "Компонент делает fetch в useEffect, но Suspense fallback не появляется. Объясните причину и необходимые условия интеграции."
+    },
+    {
+      "id": "react:error-boundary",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Какие ошибки ловит Error Boundary?",
+      "question": "Ошибка рендера дочернего виджета разрушает экран. Предложите границу обработки и объясните, какие ошибки она покрывает."
+    },
+    {
+      "id": "react:custom-hook",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Что выделять в custom hook?",
+      "question": "Несколько компонентов повторяют логику подписки и состояния. Спроектируйте custom hook с ясными входами, результатом и очисткой."
+    },
+    {
+      "id": "react:portal",
+      "topic": "react",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Что меняет createPortal?",
+      "question": "Модальное окно должно выйти из обрезающего DOM-контейнера. Предложите portal-размещение и объясните его отношение к React-дереву."
+    },
+    {
+      "id": "react:concurrent-purity",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как спроектировать компонент для прерываемого рендера?",
+      "question": "Счётчик аналитики увеличивается прямо в теле компонента. Оцените поведение при прерванных и повторных рендерах и исправьте побочный эффект. Аналитика должна отражать реальные действия пользователя, а не число попыток рендера."
+    },
+    {
+      "id": "react:hydration-strategy",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как расследовать hydration mismatch в production?",
+      "question": "SSR-страница выдаёт hydration mismatch. Предложите план воспроизведения и сравнения серверного и первого клиентского представления. Ошибка воспроизводится только на части пользовательских данных, и отключение SSR неприемлемо."
+    },
+    {
+      "id": "react:external-store",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Зачем useSyncExternalStore внешнему стору?",
+      "question": "React-компоненты читают внешний store и иногда видят несогласованные значения. Спроектируйте адаптер подписки и snapshot. Store используется также вне React; менять всех производителей данных сразу нельзя."
+    },
+    {
+      "id": "react:render-budget",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как выбрать оптимизацию медленного экрана?",
+      "question": "Экран медленно реагирует на ввод. Постройте план измерения, позволяющий отделить React-render от сети, вычислений и браузерной раскладки. Оптимизацию нужно обосновать на слабом устройстве без изменения поведения формы."
+    },
+    {
+      "id": "react:server-client",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как провести границу Server и Client Components?",
+      "question": "В приложении с Server Components нужно показать серверные данные и интерактивную форму. Обоснуйте границу модулей и передачу данных. Нужно уменьшить клиентский bundle, сохранив немедленный отклик ввода и безопасную работу с серверными секретами."
+    },
+    {
+      "id": "react:async-actions",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Как проектировать async Action с ошибками и pending?",
+      "question": "Спроектируйте сохранение формы через асинхронное действие: валидацию, ожидание, успех и восстановление после отказа. Повторное нажатие и сетевой отказ не должны терять введённые данные или создавать незаметные дубли."
+    },
+    {
+      "id": "react:optimistic-ui",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Как выбрать границу optimistic UI?",
+      "question": "Пользователь меняет название записи и должен видеть результат сразу. Определите оптимистичное состояние и согласование одной операции с сервером. Сервер может отказать или нормализовать название; во время ожидания пользователь продолжает работу."
+    },
+    {
+      "id": "react:state-ownership-system",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как разделить local, URL, server и global state?",
+      "question": "Приложение хранит фильтры, черновик формы и серверный каталог. Выберите владельца и срок жизни каждого вида состояния. Черновик должен пережить закрытие панели, а каталог используется несколькими маршрутами."
+    },
+    {
+      "id": "react:suspense-design",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как проектировать Suspense boundaries для сложной страницы?",
+      "question": "Страница содержит профиль, ленту и рекомендации с разной задержкой. Предложите границы Suspense и порядок появления полезного содержимого. Лента полезна сама по себе, а медленные рекомендации не должны задерживать её показ."
+    },
+    {
+      "id": "react:effect-architecture",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Как уменьшить каскад эффектов между зависимыми state?",
+      "question": "Несколько effects последовательно копируют и преобразуют state, вызывая лишние кадры. Предложите модель вычислений и переходов без цепочки синхронизаций. Сброс одного фильтра должен атомарно менять связанные параметры без промежуточного неверного запроса."
+    },
+    {
+      "id": "react:component-api",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как спроектировать устойчивый публичный компонент?",
+      "question": "Спроектируйте переиспользуемое поле выбора с управляемым и неуправляемым режимами, доступностью и расширением отображения. Компонент используют разные команды; управление фокусом и клавиатурой должно оставаться предсказуемым."
+    },
+    {
+      "id": "react:streaming-ssr",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как streaming SSR меняет доставку страницы?",
+      "question": "Данные страницы приходят с разной скоростью. Опишите потоковый SSR в поддержанном framework и критерии выбора границ выдачи. Первый полезный контент важнее полной страницы; отдельный медленный блок может отказать."
+    },
+    {
+      "id": "react:react-testing",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Что проверять в интеграционном тесте React-формы?",
+      "question": "Составьте проверки формы сохранения на уровне поведения пользователя, охватив успешный и ошибочный путь. Тесты должны выдерживать перестройку внутренней структуры компонентов и контролировать асинхронные ответы."
+    },
+    {
+      "id": "react:compiler-adoption",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Как внедрять React Compiler в существующий проект?",
+      "question": "Команда внедряет React Compiler в существующий проект. Предложите критерии совместимости, эксперимент и план оценки результата. Нет ресурса переписывать весь проект; нужен ограниченный пилот и критерий остановки."
+    },
+    {
+      "id": "react:multi-root",
+      "topic": "react",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как организовать несколько React roots на одной странице?",
+      "question": "На странице несколько независимых React-приложений. Определите их жизненные циклы, общие сервисы и границы взаимодействия. Виджеты могут независимо удаляться со страницы; общие глобальные подписки нельзя дублировать или терять."
+    },
+    {
+      "id": "react:key-reset-case",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему смена key исправила 'залипшую' форму?",
+      "question": "При смене key форма теряет введённый текст. Объясните механизм и выберите, когда такой сброс является правильным поведением."
+    },
+    {
+      "id": "react:function-state",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Как сохранить функцию в useState, не вызвав её как initializer?",
+      "question": "В state нужно сохранить функцию, но React вызывает её при инициализации или setter. Покажите корректную запись и объясните контракт."
+    },
+    {
+      "id": "react:objectis-state",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему setState тем же мутированным объектом не обновил UI?",
+      "question": "Объект state изменили на месте и передали ту же ссылку setter, но UI не обновился. Объясните сравнение и исправьте переход."
+    },
+    {
+      "id": "react:use-exception",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Почему use можно вызвать условно, а useState нельзя?",
+      "question": "В React 19 вызов use находится в условии. Оцените допустимость и объясните отличие его правил от обычных state hooks."
+    },
+    {
+      "id": "react:effect-event",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Как читать свежие значения в эффекте без ложных зависимостей?",
+      "question": "Effect переподключает чат при изменении данных, нужных только для уведомления. Оцените применение Effect Event в React 19.2+ и границу реактивной логики."
+    },
+    {
+      "id": "react:ref-cleanup",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Что нового важно для callback ref в React 19?",
+      "question": "Callback ref подключает внешний ресурс к DOM-узлу. Покажите контракт освобождения ресурса в React 19 при отключении узла."
+    },
+    {
+      "id": "react:ref-prop",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Нужен ли forwardRef каждой function component в React 19?",
+      "question": "Спроектируйте передачу ref через собственный функциональный компонент в React 19 и объясните роль forwardRef в этом сценарии."
+    },
+    {
+      "id": "react:useid-key",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему useId нельзя использовать как key данных списка?",
+      "question": "Для label/input и списка записей предложено одно средство генерации идентификаторов useId. Оцените применимость к обеим задачам."
+    },
+    {
+      "id": "react:transition-await",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему обновление после await иногда нужно снова обернуть в startTransition?",
+      "question": "В React 19 обновление после await внутри transition не получает ожидаемый приоритет. Объясните ограничение и покажите соответствующий паттерн."
+    },
+    {
+      "id": "react:deferred-network",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Уменьшает ли useDeferredValue число сетевых запросов?",
+      "question": "После useDeferredValue количество поисковых запросов не уменьшилось. Объясните, какое поведение этот hook действительно изменяет."
+    },
+    {
+      "id": "react:memo-children",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Почему memo-компонент рендерится при children={<Child/>}?",
+      "question": "Memo-компонент получает новый JSX в children при каждом рендере родителя. Объясните сравнение props и способ проверить пользу оптимизации."
+    },
+    {
+      "id": "react:context-duplicate",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Почему provider не влияет на consumer из другой копии пакета?",
+      "question": "Provider и consumer импортируют вроде бы один context, но значение не передаётся. Предложите диагностику сборки и идентичности модулей."
+    },
+    {
+      "id": "react:render-setstate",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Всегда ли setter при render запрещён?",
+      "question": "Компонент во время render вызывает setter родителя. Оцените нарушение и предложите явный поток обновления."
+    },
+    {
+      "id": "react:server-directive",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Означает ли 'use server', что компонент серверный?",
+      "question": "Разработчик ставит 'use server' в файл, ожидая превратить любой компонент в серверный. Объясните контракт директивы в поддержанном framework."
+    },
+    {
+      "id": "react:tearing-snapshot",
+      "topic": "react",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Что произойдёт, если getSnapshot всегда возвращает новый объект?",
+      "question": "GetSnapshot создаёт новый объект при каждом чтении и вызывает повторные обновления. Исправьте контракт внешнего store и объясните стабильность снимка."
+    },
+    {
+      "id": "redux:store",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Что хранит Redux store?",
+      "question": "Покажите в Redux-счётчике чтение значения, отправку изменения и подписку на результат."
+    },
+    {
+      "id": "redux:action",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Что такое action?",
+      "question": "Опишите добавление товара в корзину как action и обоснуйте состав payload."
+    },
+    {
+      "id": "redux:reducer",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Какую задачу выполняет reducer?",
+      "question": "Реализуйте чистый переход счётчика по action и объясните вычисление следующего состояния."
+    },
+    {
+      "id": "redux:dispatch",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Что происходит при dispatch обычного action?",
+      "question": "Проследите обычный синхронный action через dispatch, middleware, reducer и subscriber."
+    },
+    {
+      "id": "redux:slice",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Что генерирует createSlice?",
+      "question": "Создайте slice корзины и объясните полученные reducer и action creators."
+    },
+    {
+      "id": "redux:immer-basic",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Почему RTK reducer может писать state.count++?",
+      "question": "В createSlice используется push. Объясните иммутабельный результат и границу работы draft."
+    },
+    {
+      "id": "redux:configure-store",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Зачем configureStore вместо ручного createStore?",
+      "question": "Соберите store через configureStore и объясните назначение стандартных middleware и DevTools."
+    },
+    {
+      "id": "redux:selector-basic",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Для чего selector?",
+      "question": "Для экрана нужны количество и сумма корзины. Предложите чистые selectors."
+    },
+    {
+      "id": "redux:use-selector",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Как useSelector решает обновить компонент?",
+      "question": "Компонент получает новый объект из useSelector после каждого action. Объясните обновления и исправьте лишнюю работу."
+    },
+    {
+      "id": "redux:use-dispatch",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Зачем typed hooks для dispatch и selector?",
+      "question": "Покажите React-Redux hooks, типизированные по реальному store, включая thunk-dispatch."
+    },
+    {
+      "id": "redux:combine-reducers",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Как combineReducers распределяет state?",
+      "question": "Объедините cart и session. Покажите root state и вход каждого reducer."
+    },
+    {
+      "id": "redux:async-thunk-basic",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Для чего createAsyncThunk?",
+      "question": "Спроектируйте загрузку пользователя через createAsyncThunk и основные переходы slice."
+    },
+    {
+      "id": "redux:serializable-basic",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Почему в Redux не советуют хранить DOM-узел или Promise?",
+      "question": "Оцените хранение функции и DOM-узла в state для сохранения и воспроизведения."
+    },
+    {
+      "id": "redux:devtools-redux",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Как Redux DevTools помогает расследовать ошибку?",
+      "question": "После клика корзина неверна. Покажите расследование последовательности actions и diff state."
+    },
+    {
+      "id": "redux:reset-state",
+      "topic": "redux",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Как сбросить slice к начальному состоянию?",
+      "question": "Покажите сброс slice в initialState, объяснив замену значения и изменение draft."
+    },
+    {
+      "id": "redux:extra-reducers",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Когда использовать extraReducers?",
+      "question": "Slice реагирует на внешний action. Покажите настройку и границу ответственности."
+    },
+    {
+      "id": "redux:entity-adapter",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Что даёт createEntityAdapter?",
+      "question": "Коллекция часто меняется по id. Предложите форму state и операции createEntityAdapter."
+    },
+    {
+      "id": "redux:memo-selector",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как createSelector сокращает лишние вычисления?",
+      "question": "Дорогой selector пересчитывается после несвязанных actions. Постройте мемоизацию и объясните входы."
+    },
+    {
+      "id": "redux:thunk-return",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Почему await dispatch(thunk()) не всегда бросает при ошибке?",
+      "question": "Catch вокруг await dispatch(asyncThunk()) не ловит отказ. Объясните возвращаемый контракт."
+    },
+    {
+      "id": "redux:reject-value",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Когда нужен rejectWithValue?",
+      "question": "Передайте ожидаемые серверные ошибки полей через rejectWithValue и обработайте их типизированно."
+    },
+    {
+      "id": "redux:request-id-redux",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Как защитить slice от старого ответа thunk?",
+      "question": "Старый поиск перезаписывает новый. Защитите reducer от устаревших fulfilled и rejected."
+    },
+    {
+      "id": "redux:abort-thunk",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Как отменить createAsyncThunk?",
+      "question": "Компонент покинут во время thunk. Покажите отмену и связь signal с транспортом."
+    },
+    {
+      "id": "redux:listener-middleware",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Когда listener middleware лучше цепочки effects в компонентах?",
+      "question": "После доменного события нужен фоновый процесс независимо от UI. Предложите listener и очистку."
+    },
+    {
+      "id": "redux:middleware-order",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Почему порядок middleware важен?",
+      "question": "Два middleware вызывают next. Объясните порядок до/после next и результат dispatch."
+    },
+    {
+      "id": "redux:normalization",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Почему нормализация помогает обновлению сложных данных?",
+      "question": "Копии пользователя внутри заказов расходятся. Предложите нормализованное хранение и чтение."
+    },
+    {
+      "id": "redux:batching-redux",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Означает ли один React-render, что reducers запускались один раз?",
+      "question": "Два actions вызвали один React-render. Объясните число reducer-переходов и уровни batching."
+    },
+    {
+      "id": "redux:persistence-redux",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Как безопасно восстановить persisted state?",
+      "question": "Спроектируйте чтение сохранённого state с проверкой схемы, версии и обработкой неверного формата."
+    },
+    {
+      "id": "redux:rtk-query-basic",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Какую задачу решает RTK Query?",
+      "question": "Оцените перенос ручных thunks загрузки и кеширования каталога в RTK Query."
+    },
+    {
+      "id": "redux:tags",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Как tags управляют инвалидацией RTK Query?",
+      "question": "Спроектируйте providesTags и invalidatesTags для обновления товара и связанных запросов."
+    },
+    {
+      "id": "redux:store-test",
+      "topic": "redux",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Что проверять в тесте slice со thunk?",
+      "question": "Предложите тест async-сценария по наблюдаемым переходам state при успехе и отказе."
+    },
+    {
+      "id": "redux:global-ownership",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как выбрать, что хранить в Redux крупного продукта?",
+      "question": "Выберите место хранения меню, фильтра и сессии по владельцу и сроку жизни. Локальные открытия не должны переживать страницу, а сессия нужна нескольким маршрутам."
+    },
+    {
+      "id": "redux:event-model",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как спроектировать actions для нескольких доменов?",
+      "question": "Пользовательский шаг вызывает несколько setters. Предложите доменное событие и реакции slices. Один шаг меняет несколько slices и не должен создавать невозможное промежуточное состояние."
+    },
+    {
+      "id": "redux:dynamic-reducers",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Как организовать code splitting reducers?",
+      "question": "Лениво загружаемый модуль регистрирует reducer. Определите инициализацию и типовой контракт. Модули выпускаются независимо и могут повторно подключаться в течение одной сессии."
+    },
+    {
+      "id": "redux:ssr-redux",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Как изолировать Redux при SSR?",
+      "question": "Спроектируйте персональный SSR-store и безопасный preloaded state для клиента. Несколько пользователей обслуживаются параллельно одним серверным процессом."
+    },
+    {
+      "id": "redux:workflow-redux",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как реализовать длинный процесс с отменой и повтором?",
+      "question": "Опишите состояния оформления заказа и отделите оркестрацию эффектов от чистых переходов. Один шаг может отказать; повтор должен продолжать понятный процесс, сохраняя подтверждённые результаты."
+    },
+    {
+      "id": "redux:redux-performance",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Как расследовать медленные Redux-обновления?",
+      "question": "Массовое обновление таблицы тормозит. Измерьте reducers, selectors, уведомления и React-render. В таблице тысячи строк; нельзя ухудшать корректность selectors ради меньшего числа рендеров."
+    },
+    {
+      "id": "redux:state-versioning",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Как мигрировать persistent Redux-state?",
+      "question": "Измените формат persisted state с версией, миграцией и проверкой результата. Сохранения старых пользователей должны остаться восстанавливаемыми при поэтапном выпуске."
+    },
+    {
+      "id": "redux:rtk-query-optimism",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как выбрать optimistic или pessimistic update в RTK Query?",
+      "question": "Выберите optimistic patch, ожидание сервера или инвалидацию для изменения записи и обоснуйте компромиссы. Отказ сервера допустим, но временно неверное состояние не должно запускать необратимые действия."
+    },
+    {
+      "id": "redux:multi-store",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Когда несколько Redux stores оправданны?",
+      "question": "Оцените отдельные stores для двух независимых виджетов и определите их жизненные циклы. Виджеты монтируются и удаляются независимо, но используют общую авторизацию."
+    },
+    {
+      "id": "redux:middleware-contract",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Как написать middleware без нарушения dispatch-контракта?",
+      "question": "Публичный middleware перехватывает actions. Определите next, результат dispatch и гарантированные эффекты. Потребители уже ожидают promise от thunk-dispatch; расширение не должно молча менять это поведение."
+    },
+    {
+      "id": "redux:tenant-cache",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как не смешать RTK Query данные разных tenants?",
+      "question": "Спроектируйте RTK Query-кеш для переключения tenant без смешения персональных данных. Одинаковые id ресурсов встречаются в разных tenant, а интерфейс не перезагружается при смене."
+    },
+    {
+      "id": "redux:realtime-redux",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как обновлять state событиями WebSocket?",
+      "question": "Согласуйте HTTP-ответы и realtime-события в store, определив порядок и версии. Поток может прерываться; после reconnect нельзя молча продолжить с пропущенными изменениями."
+    },
+    {
+      "id": "redux:architecture-slices",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как делить slices, чтобы не повторять дерево компонентов?",
+      "question": "Store разделён по визуальным блокам. Предложите доменные границы связанных переходов. Одни данные используются несколькими экранами; перенос не должен разорвать связанные переходы."
+    },
+    {
+      "id": "redux:redux-observability",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Как логировать actions без утечки данных?",
+      "question": "Спроектируйте полезную диагностику Redux-actions и state с контролем раскрываемых данных. Логи доступны поддержке, но секреты и чувствительные поля не должны сохраняться в них."
+    },
+    {
+      "id": "redux:redux-migration",
+      "topic": "redux",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как перевести ручной Redux на RTK без смены поведения?",
+      "question": "Перенесите Redux-код на Toolkit, сохранив публичные события, selectors и поведение. Продуктовые релизы продолжаются; нужно проверять совместимость по каждому перенесённому сценарию."
+    },
+    {
+      "id": "redux:immer-return",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему state.items.push(x) в concise reducer может бросить ошибку Immer?",
+      "question": "Стрелочный reducer возвращает state.items.push(item). Объясните конфликт и исправьте запись."
+    },
+    {
+      "id": "redux:immer-primitive",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему state++ не обновляет primitive-state slice?",
+      "question": "Slice хранит число, а state++ не заменяет его ожидаемо. Покажите корректный переход."
+    },
+    {
+      "id": "redux:selector-new-array",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему selector с filter рендерит компонент после несвязанных actions?",
+      "question": "Selector фильтрует массив заново при каждом вызове. Объясните ссылки и подходящее кеширование."
+    },
+    {
+      "id": "redux:thunk-condition",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Чем condition отличается от abort у createAsyncThunk?",
+      "question": "Сравните condition до запуска thunk и abort начатой операции на конкретных сценариях."
+    },
+    {
+      "id": "redux:rtk-key-serialization",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Почему два вызова endpoint с разными объектами могут делить кеш?",
+      "question": "Новый объект аргументов передаётся на каждом рендере. Объясните идентичность RTK Query-запроса."
+    },
+    {
+      "id": "redux:adapter-shallow",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Делает ли updateOne глубокий merge вложенного объекта?",
+      "question": "UpdateOne получает часть вложенного address. Предскажите результат поверхностного обновления."
+    },
+    {
+      "id": "redux:immer-draft-log",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Почему console.log(state) в RTK reducer неудобен?",
+      "question": "Draft в консоли выглядит неожиданно при позднем просмотре. Объясните значение и диагностический снимок."
+    },
+    {
+      "id": "redux:dispatch-unsubscribe",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Можно ли подписчику dispatch нового action?",
+      "question": "Subscriber делает dispatch после каждого уведомления. Оцените допустимость и защиту от цикла."
+    },
+    {
+      "id": "redux:same-reference",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему мутация nested state ломает React Redux даже при новом root?",
+      "question": "Root state новый, но nested-объект мутирован. Объясните поведение потребителя nested-selector."
+    },
+    {
+      "id": "redux:serializable-ignore",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Когда игнорирование serializableCheck допустимо?",
+      "question": "Служебный action вызывает serializableCheck. Предложите узкое исключение и его границы."
+    },
+    {
+      "id": "redux:batch-subscriber",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Почему подписчик может не увидеть каждое промежуточное состояние при batching?",
+      "question": "Enhancer объединяет уведомления нескольких actions. Объясните отличие от reducer-переходов."
+    },
+    {
+      "id": "redux:rtk-lifecycle",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Чем onQueryStarted отличается от onCacheEntryAdded?",
+      "question": "Сравните onQueryStarted и onCacheEntryAdded для optimistic-операции и потоковой подписки."
+    },
+    {
+      "id": "redux:reducer-random",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Почему Date.now в reducer мешает воспроизводимости?",
+      "question": "Reducer использует Date.now и Math.random. Исправьте модель для воспроизводимого replay."
+    },
+    {
+      "id": "redux:store-reset-persist",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Почему reset Redux-state не гарантирует очистку после reload?",
+      "question": "После logout и reload возвращается старое состояние. Найдите несогласованность reset и persistence."
+    },
+    {
+      "id": "redux:listener-race",
+      "topic": "redux",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Как реализовать takeLatest через listener middleware?",
+      "question": "Listener поиска принимает старый ответ после нового. Спроектируйте отмену и проверку актуальности."
+    },
+    {
+      "id": "tanstack-query:server-state",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Какую задачу решает TanStack Query?",
+      "question": "Команда хранит ответы API вручную в локальном state. Определите, какую ответственность может взять TanStack Query."
+    },
+    {
+      "id": "tanstack-query:query-client",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Зачем QueryClientProvider?",
+      "question": "Покажите подключение TanStack Query к React и объясните расположение общего кеша."
+    },
+    {
+      "id": "tanstack-query:query-key",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Для чего queryKey?",
+      "question": "Каталог загружается по странице и фильтру. Спроектируйте идентичность запроса и разделение кеша."
+    },
+    {
+      "id": "tanstack-query:query-function",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Что обязана вернуть queryFn?",
+      "question": "Опишите queryFn загрузки пользователя: допустимый успех и ошибки транспорта/API."
+    },
+    {
+      "id": "tanstack-query:status-flags",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Чем isPending отличается от isFetching?",
+      "question": "Компонент имеет данные и isFetching. Объясните состояние и выберите индикатор."
+    },
+    {
+      "id": "tanstack-query:stale-time",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Что задаёт staleTime?",
+      "question": "Неизменный несколько минут справочник часто открывают повторно. Предложите staleTime и объясните влияние."
+    },
+    {
+      "id": "tanstack-query:gc-time",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Для чего gcTime?",
+      "question": "После ухода со страницы данные остаются в кеше. Объясните gcTime и отличие удаления от устаревания."
+    },
+    {
+      "id": "tanstack-query:enabled",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Как не запускать запрос без нужного id?",
+      "question": "Запрос требует ещё неизвестный id. Покажите условный запуск и состояние до появления id."
+    },
+    {
+      "id": "tanstack-query:mutation",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Чем useMutation отличается от useQuery?",
+      "question": "Форма создаёт заказ. Выберите query или mutation и опишите путь от клика до результата."
+    },
+    {
+      "id": "tanstack-query:invalidate-basic",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Что делает invalidateQueries?",
+      "question": "После изменения товара активный список показывает старые данные. Предложите обновление через инвалидацию."
+    },
+    {
+      "id": "tanstack-query:refetch-basic",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Когда нужен ручной refetch?",
+      "question": "Добавьте кнопку «Обновить» для текущего query и определите поведение во время запроса."
+    },
+    {
+      "id": "tanstack-query:error-ui",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Как показать ошибку без потери старых данных?",
+      "question": "Сравните первый отказ загрузки и ошибку фонового обновления уже видимых данных. Предложите UI."
+    },
+    {
+      "id": "tanstack-query:select-basic",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Для чего select у useQuery?",
+      "question": "Кеш содержит полный список, компоненту нужны имена. Покажите select и объясните владение результатом."
+    },
+    {
+      "id": "tanstack-query:devtools",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Чем полезны Query Devtools?",
+      "question": "Экран неожиданно повторяет запросы. Покажите поиск причины через Query Devtools."
+    },
+    {
+      "id": "tanstack-query:query-copy",
+      "topic": "tanstack-query",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Почему не стоит копировать query.data в useState без причины?",
+      "question": "Копирование query.data в useState через effect вызывает рассинхронизацию. Исправьте чтение данных."
+    },
+    {
+      "id": "tanstack-query:key-hashing",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Как Query сравнивает объектные части ключа?",
+      "question": "Ключи содержат объекты с одинаковыми полями в разном порядке. Оцените идентичность запросов."
+    },
+    {
+      "id": "tanstack-query:dependent-query",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Как связать запрос профиля и запрос его проектов?",
+      "question": "Для проектов сначала нужен id из запроса пользователя. Спроектируйте зависимость и состояния ожидания."
+    },
+    {
+      "id": "tanstack-query:parallel-query",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как загрузить динамический набор независимых запросов?",
+      "question": "Загрузите данные для переменного списка id параллельно, сохранив соответствие результатов."
+    },
+    {
+      "id": "tanstack-query:placeholder",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Чем placeholderData отличается от initialData?",
+      "question": "Сравните placeholderData и initialData для первого отображения: владение, кеш и свежесть."
+    },
+    {
+      "id": "tanstack-query:pagination",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Как сохранить предыдущую страницу при смене номера?",
+      "question": "При переходе страницы каталог пустеет. Предложите сохранение контекста на Query v5."
+    },
+    {
+      "id": "tanstack-query:infinite-query",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Как устроены данные useInfiniteQuery?",
+      "question": "Спроектируйте infinite query для курсорного API: страницы, параметры, следующая загрузка."
+    },
+    {
+      "id": "tanstack-query:cancel-query",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Как отменить сетевую работу queryFn?",
+      "question": "При уходе со страницы остановите ненужную загрузку. Покажите связь signal с транспортом."
+    },
+    {
+      "id": "tanstack-query:set-query-data",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Когда использовать setQueryData?",
+      "question": "Mutation вернула полную запись. Обновите её кеш без лишнего запроса и мутации старых данных."
+    },
+    {
+      "id": "tanstack-query:optimistic-basic",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Как устроен типичный optimistic update?",
+      "question": "Спроектируйте оптимистичное избранное для одной операции: ожидание, отказ, согласование."
+    },
+    {
+      "id": "tanstack-query:mutation-promises",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Зачем возвращать promise из onSuccess?",
+      "question": "После записи pending должен сохраняться до обновления списка. Покажите асинхронный callback."
+    },
+    {
+      "id": "tanstack-query:retry-query",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Как настроить retry с учётом ошибок?",
+      "question": "Запрос получает временные и постоянные ошибки. Предложите политику retry и обратную связь."
+    },
+    {
+      "id": "tanstack-query:structural-sharing",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Почему неизменившиеся части query.data сохраняют ссылки?",
+      "question": "Сервер вернул почти прежний JSON. Объясните structural sharing и влияние на ссылки."
+    },
+    {
+      "id": "tanstack-query:tracked-props",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Почему object-rest может ухудшить оптимизацию useQuery?",
+      "question": "Rest-деструктуризация результата useQuery сопровождается частыми обновлениями. Объясните tracked properties."
+    },
+    {
+      "id": "tanstack-query:prefetch",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Когда prefetchQuery лучше загрузки после перехода?",
+      "question": "Спроектируйте prefetch деталей после списка с учётом вероятности перехода и бюджета сети."
+    },
+    {
+      "id": "tanstack-query:network-mode",
+      "topic": "tanstack-query",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Как networkMode влияет на offline-поведение?",
+      "question": "Запрос находится в paused без сети. Объясните networkMode и отображение состояния."
+    },
+    {
+      "id": "tanstack-query:cache-isolation",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как избежать утечки пользовательских данных при SSR?",
+      "question": "SSR обслуживает персональные запросы. Спроектируйте жизненный цикл серверного QueryClient. Запросы обрабатываются одновременно в одном процессе, а данные не должны переходить между аккаунтами."
+    },
+    {
+      "id": "tanstack-query:invalidation-design",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как спроектировать ключи для большого продукта?",
+      "question": "Спроектируйте ключи и инвалидацию для списка, деталей и поиска одной сущности. Полная перезагрузка всех запросов слишком дорога; изменения должны появляться в активном сценарии вовремя."
+    },
+    {
+      "id": "tanstack-query:concurrent-optimism",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Как избежать отката свежего optimistic update старым snapshot?",
+      "question": "Две правки одной записи завершаются в обратном порядке, одна отказала. Сохраните успешную правку. Нельзя блокировать вторую правку до ответа первой или откатывать весь интерфейс к старому снимку."
+    },
+    {
+      "id": "tanstack-query:mutation-idempotency",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Что требуется для надёжного повтора mutation?",
+      "question": "Создание заказа завершилось timeout с неизвестным исходом. Спроектируйте безопасный повтор. Сервер мог сохранить заказ до разрыва связи, а повтор не должен создавать дубль."
+    },
+    {
+      "id": "tanstack-query:ssr-hydration",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как согласовать prefetch сервера и клиента?",
+      "question": "Передайте загруженные queries с сервера в браузер и определите политику первого обновления. Первый клиентский кадр должен совпасть с сервером без ненужного немедленного запроса."
+    },
+    {
+      "id": "tanstack-query:cache-ownership",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Нужно ли нормализовать весь server cache вручную?",
+      "question": "Сущность встречается в нескольких query-результатах. Определите владельца согласованности представлений. Детали и несколько фильтрованных списков могут быть активны одновременно."
+    },
+    {
+      "id": "tanstack-query:large-infinite",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Как контролировать память длинного infinite feed?",
+      "question": "Загружены сотни страниц infinite query. Ограничьте память, сохранив понятную навигацию. Пользователь ожидает возврата назад без неожиданного скачка и потери контекста."
+    },
+    {
+      "id": "tanstack-query:offline-mutations",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как спроектировать offline-очередь изменений?",
+      "question": "Спроектируйте сохранение действий offline и отправку после reconnect с обработкой конфликтов. Очередь переживает перезапуск приложения; порядок зависимых операций существенен."
+    },
+    {
+      "id": "tanstack-query:suspense-waterfall",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как избежать waterfall с suspense-запросами?",
+      "question": "Независимые Suspense-данные грузятся последовательно. Найдите waterfall и предложите параллельное получение. Данные независимы, но сетевой бюджет ограничен и нельзя заранее загрузить весь продукт."
+    },
+    {
+      "id": "tanstack-query:observability-query",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Какие метрики нужны data-layer?",
+      "question": "Определите измерения качества Query-слоя для пользовательского сценария: свежесть, ожидание, ошибки. Нельзя логировать персональные payload; нужны измерения влияния на реальный сценарий."
+    },
+    {
+      "id": "tanstack-query:auth-switch",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Как менять аккаунт без смешения кеша?",
+      "question": "Аккаунт меняется без reload. Определите порядок отмены и очистки персональных queries. Старые запросы могут завершиться уже после входа нового пользователя."
+    },
+    {
+      "id": "tanstack-query:realtime-query",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Как совместить WebSocket и query cache?",
+      "question": "Согласуйте websocket-события с query-кешем и фоновым refetch. События могут дублироваться и приходить после более нового HTTP-снимка."
+    },
+    {
+      "id": "tanstack-query:query-testing",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как тестировать сложные queries устойчиво?",
+      "question": "Спроектируйте изолированный тест query-экрана: успех, ошибка и фоновое обновление. Фоновые retries и общий кеш не должны делать тест зависимым от времени и порядка запуска."
+    },
+    {
+      "id": "tanstack-query:freshness-policy",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Как выбрать staleTime для разных ресурсов?",
+      "question": "Сравните политики свежести для профиля, котировок и справочника, обосновав допустимую устарелость. Сетевой бюджет ограничен; для каждого ресурса нужно обосновать цену устаревания."
+    },
+    {
+      "id": "tanstack-query:data-layer-migration",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как мигрировать ручной fetch на Query постепенно?",
+      "question": "Перенесите один сценарий с ручного fetch/store на Query с явным владельцем данных. Старые экраны остаются в работе до следующего релиза; нельзя иметь два независимых владельца записи."
+    },
+    {
+      "id": "tanstack-query:infinity-static",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Всегда ли staleTime:Infinity запрещает refetch?",
+      "question": "Query со staleTime:Infinity обновился после инвалидации. Объясните ожидаемое поведение."
+    },
+    {
+      "id": "tanstack-query:disabled-status",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему disabled query одновременно pending и idle?",
+      "question": "Disabled query без данных показывает pending и idle. Объясните сочетание и индикатор."
+    },
+    {
+      "id": "tanstack-query:undefined-data",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему queryFn с успешным undefined считается ошибочной?",
+      "question": "QueryFn возвращает undefined при законном отсутствии объекта. Исправьте контракт успеха."
+    },
+    {
+      "id": "tanstack-query:select-throw",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Почему select не подходит для обычной проверки сетевой ошибки?",
+      "question": "Select валидирует ответ и бросает ошибку. Оцените место проверки в используемой версии Query."
+    },
+    {
+      "id": "tanstack-query:observer-stale",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Могут ли два observers одного key иметь разный staleTime?",
+      "question": "Два observers одного ключа задают разный staleTime. Объясните общие данные и локальную политику."
+    },
+    {
+      "id": "tanstack-query:dedupe-window",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Дедуплицирует ли Query любые близкие по времени запросы?",
+      "question": "Два компонента одновременно запрашивают один ключ. Объясните объединение текущей работы."
+    },
+    {
+      "id": "tanstack-query:initial-stale",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Почему initialData сразу перезапрашивается?",
+      "question": "Query получил initialData и сразу начал запрос. Объясните возраст и свежесть начальных данных."
+    },
+    {
+      "id": "tanstack-query:consecutive-mutate",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему локальный onSuccess у mutate сработал не для каждого вызова?",
+      "question": "Mutate вызывается подряд с callbacks. Определите гарантии при последовательных вызовах и unmount."
+    },
+    {
+      "id": "tanstack-query:infinite-refetch",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Почему infinite query refetch может идти по страницам последовательно?",
+      "question": "Infinite query повторно получает несколько страниц. Объясните связь обновления и курсоров."
+    },
+    {
+      "id": "tanstack-query:optimistic-delete",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Как откатить удаление из отфильтрованных списков без порчи других изменений?",
+      "question": "Два удаления параллельны, первое отказало. Восстановите запись без отмены второго удаления."
+    },
+    {
+      "id": "tanstack-query:gc-long-timer",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Почему огромный gcTime не гарантирует вечное хранение?",
+      "question": "Команда считает огромный gcTime гарантией постоянного кеша. Оцените реальные ограничения."
+    },
+    {
+      "id": "tanstack-query:cancel-not-rollback",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Отменяет ли cancelQueries серверную транзакцию?",
+      "question": "Клиент отменил mutation, но сервер создал запись. Объясните границы отмены и состояние UI."
+    },
+    {
+      "id": "tanstack-query:persist-sensitive",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Что опасно сохранять в persistent query cache?",
+      "question": "Определите допустимые persistent query-данные, правила очистки и проверки сохранений."
+    },
+    {
+      "id": "tanstack-query:query-key-secret",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Почему токен авторизации не стоит включать прямо в queryKey?",
+      "question": "Токен авторизации включили в query key. Оцените наблюдаемость ключа и исправьте контракт."
+    },
+    {
+      "id": "tanstack-query:query-consistency",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Гарантирует ли свежий query cache согласованность нескольких endpoint?",
+      "question": "Связанные ресурсы читаются отдельными queries с одним staleTime. Оцените гарантируемую согласованность."
+    },
+    {
+      "id": "typescript:runtime-types",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 1,
+      "title": "Проверяет ли TypeScript данные во время выполнения?",
+      "question": "API вернул age строкой, хотя клиент объявил User с числовым age. Объясните, почему сборка прошла, и спроектируйте надёжную обработку ответа."
+    },
+    {
+      "id": "typescript:inference",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 2,
+      "title": "Когда нужна явная аннотация типа?",
+      "question": "Новая команда требует аннотацию типа у каждой переменной. Предложите правила для локальных вычислений и публичных функций на небольшом примере."
+    },
+    {
+      "id": "typescript:union-basic",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 3,
+      "title": "Как описать значение, которое бывает строкой или числом?",
+      "question": "Идентификатор приходит числом из старого API и строкой из нового. Спроектируйте formatId для обоих входов без any и объясните проверку перед строковыми операциями."
+    },
+    {
+      "id": "typescript:any-unknown",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 4,
+      "title": "Чем unknown безопаснее any?",
+      "question": "В приложении разбирается внешний JSON. Выберите тип ещё не проверенного результата и покажите безопасный путь к чтению поля name."
+    },
+    {
+      "id": "typescript:optional-fields",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 5,
+      "title": "Что означает необязательное поле объекта?",
+      "question": "Поле middleName может отсутствовать в профиле. Покажите тип и код формирования отображаемого имени при включённом strictNullChecks."
+    },
+    {
+      "id": "typescript:arrays-tuples",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 6,
+      "title": "Чем кортеж отличается от массива?",
+      "question": "Функция получает координаты из двух чисел и список тегов произвольной длины. Опишите типы и различия допустимых операций."
+    },
+    {
+      "id": "typescript:type-interface",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 7,
+      "title": "Когда использовать type и interface?",
+      "question": "Библиотека описывает объект пользователя и набор допустимых статусов. Выберите type или interface для каждого контракта и объясните выбор."
+    },
+    {
+      "id": "typescript:function-signature",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 8,
+      "title": "Как описать функцию с аргументом и результатом?",
+      "question": "Опишите тип функции поиска пользователя по id с необязательным ограничением времени. Покажите обработку отсутствующего параметра и результата."
+    },
+    {
+      "id": "typescript:literal-types",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 9,
+      "title": "Зачем использовать строковые литеральные типы?",
+      "question": "Компонент принимает один из статусов loading, ready, failed. Предложите тип и покажите, какие ошибки он обнаруживает при вызове."
+    },
+    {
+      "id": "typescript:null-checks",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 10,
+      "title": "Что меняет strictNullChecks?",
+      "question": "Поиск элемента может ничего не найти. Покажите обработку результата без non-null assertion и объясните роль strictNullChecks."
+    },
+    {
+      "id": "typescript:generics-basic",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 11,
+      "title": "Как сохранить связь входного и выходного типа функции?",
+      "question": "Реализуйте тип функции, возвращающей переданное значение без потери его типа. Объясните отличие от сигнатуры на any."
+    },
+    {
+      "id": "typescript:keyof",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 12,
+      "title": "Что возвращает keyof объектного типа?",
+      "question": "Спроектируйте get для объекта settings из примера так, чтобы ключ проверялся, а результат для retries оставался числом."
+    },
+    {
+      "id": "typescript:readonly-basic",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 13,
+      "title": "Что гарантирует readonly?",
+      "question": "Функция должна читать настройки, не изменяя их через свой параметр. Покажите тип и объясните границы его гарантии."
+    },
+    {
+      "id": "typescript:assertion",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 14,
+      "title": "Когда as не делает значение безопасным?",
+      "question": "Разработчик исправляет ошибку чтения JSON записью as User. Оцените исправление и предложите проверяемое доказательство типа."
+    },
+    {
+      "id": "typescript:discriminant-basic",
+      "topic": "typescript",
+      "tab": "junior",
+      "ordinal": 15,
+      "title": "Как типизировать результат успех/ошибка?",
+      "question": "Опишите результат загрузки с успехом и ошибкой так, чтобы данные нельзя было читать в ошибочной ветке без проверки."
+    },
+    {
+      "id": "typescript:exhaustiveness",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 1,
+      "title": "Как заставить компилятор заметить новую ветку union?",
+      "question": "В switch по состоянию добавили новый вариант, но один обработчик забыли обновить. Сделайте пропуск заметным при компиляции."
+    },
+    {
+      "id": "typescript:generic-constraint",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 2,
+      "title": "Для чего T extends объект с id?",
+      "question": "Функция принимает объект с id и возвращает тот же объект. Спроектируйте сигнатуру, сохраняющую дополнительные поля вызывающего кода."
+    },
+    {
+      "id": "typescript:mapped-types",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 3,
+      "title": "Как получить тип с теми же ключами и другими значениями?",
+      "question": "Из типа настроек нужно получить тип с теми же ключами и булевыми значениями. Постройте преобразование и объясните его действие."
+    },
+    {
+      "id": "typescript:conditional-types",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 4,
+      "title": "Как conditional type выбирает результат?",
+      "question": "Вычислите A и B в примере и объясните, от чего зависит выбор ветвей Label и WholeLabel."
+    },
+    {
+      "id": "typescript:infer",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 5,
+      "title": "Для чего infer в условном типе?",
+      "question": "Постройте тип извлечения результата функции из её сигнатуры. Объясните, что произойдёт с входом, который не является функцией."
+    },
+    {
+      "id": "typescript:satisfies",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 6,
+      "title": "Чем satisfies отличается от аннотации и as?",
+      "question": "Проверьте таблицу palette из примера тремя способами: аннотацией, as и satisfies. Сравните обнаруживаемые ошибки и тип чтения green."
+    },
+    {
+      "id": "typescript:overloads",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 7,
+      "title": "Когда перегрузки лучше union-параметра?",
+      "question": "API принимает строковый id или массив id и возвращает соответственно запись или массив записей. Предложите сигнатуры и объясните контракт реализации."
+    },
+    {
+      "id": "typescript:type-predicate",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 8,
+      "title": "Как пользовательский type guard может солгать?",
+      "question": "Функция isUser объявлена с результатом value is User, но проверяет только typeof value === 'object'. Оцените доказательство и исправьте его."
+    },
+    {
+      "id": "typescript:index-access",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 9,
+      "title": "Что меняет noUncheckedIndexedAccess?",
+      "question": "Обращение к отсутствующему элементу массива падает в runtime. Объясните влияние noUncheckedIndexedAccess и покажите корректную обработку чтения."
+    },
+    {
+      "id": "typescript:structural",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 10,
+      "title": "Почему объект с лишними полями обычно совместим с узким типом?",
+      "question": "Два независимо объявленных объектных типа имеют одинаковые поля. Объясните их совместимость на примере присваивания."
+    },
+    {
+      "id": "typescript:utilities",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 11,
+      "title": "Когда нужны Pick, Omit, Record и Partial?",
+      "question": "Для формы редактирования нужны только name и email из полной модели User. Постройте тип входа и объясните выбранные utility types."
+    },
+    {
+      "id": "typescript:template-types",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 12,
+      "title": "Как template literal types помогают именам событий?",
+      "question": "Из конечного набора имён событий нужно получить строковые имена обработчиков вида onClick. Предложите типовое преобразование."
+    },
+    {
+      "id": "typescript:variance-callback",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 13,
+      "title": "Почему callback с более узким параметром может быть опасен?",
+      "question": "Обработчик только для Dog передают функции, которая обещает вызывать его с любым Animal. Оцените совместимость при строгой проверке функций."
+    },
+    {
+      "id": "typescript:module-types",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 14,
+      "title": "Зачем import type?",
+      "question": "Модуль импортирует тип пользователя только для аннотаций. Покажите подходящий импорт и объясните его отношение к исполняемому коду."
+    },
+    {
+      "id": "typescript:branded-id",
+      "topic": "typescript",
+      "tab": "middle",
+      "ordinal": 15,
+      "title": "Как не перепутать UserId и OrderId, если оба строки?",
+      "question": "UserId и OrderId представлены строками и регулярно путаются. Предложите типовой контракт создания и использования идентификаторов."
+    },
+    {
+      "id": "typescript:api-boundary",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 1,
+      "title": "Как организовать типы на границе внешнего API?",
+      "question": "Спроектируйте путь от внешнего JSON до доменной модели заказа. Определите проверки, преобразования и обработку неверного ответа. Внешний контракт обновляется независимо, а неверные данные нельзя пропускать в расчёт оплаты."
+    },
+    {
+      "id": "typescript:state-machine",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 2,
+      "title": "Как типами исключить противоречивые состояния загрузки?",
+      "question": "Загрузка описана набором isLoading, error и optional data, допускающим противоречия. Предложите модель допустимых состояний и переходов. Нужно исключить показ старой ошибки вместе с новым успешным ответом."
+    },
+    {
+      "id": "typescript:public-generics",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 3,
+      "title": "Как оценить качество generic API библиотеки?",
+      "question": "Спроектируйте публичный generic API коллекции и покажите на consumer-вызовах, какие полезные связи он сохраняет и какие ошибки объясняет. Потребители не должны указывать типы вручную в обычном вызове."
+    },
+    {
+      "id": "typescript:recursive-types",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 4,
+      "title": "Когда рекурсивный тип становится проблемой?",
+      "question": "Рекурсивный тип для путей объекта резко замедлил проверку проекта. Предложите диагностику и ограничения публичного контракта. Глубокие модели нужны лишь одному модулю, а задержки IDE ощущает вся команда."
+    },
+    {
+      "id": "typescript:migration-strict",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 5,
+      "title": "Как включать strict в крупном legacy-проекте?",
+      "question": "Составьте план перехода большого проекта на strict, позволяющий поставлять изменения и измерять сокращение небезопасных участков. Релизы еженедельные; массовые assertions не считаются устранением ошибок."
+    },
+    {
+      "id": "typescript:declaration-design",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 6,
+      "title": "Что проверить перед публикацией .d.ts библиотеки?",
+      "question": "Пакет публикует JavaScript и декларации. Определите проверки соответствия типов runtime и доступности экспортов для внешнего потребителя. Пакет используется вне monorepo и должен собираться на минимальной заявленной версии TS."
+    },
+    {
+      "id": "typescript:error-model",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 7,
+      "title": "Как типизировать ожидаемые ошибки домена?",
+      "question": "Спроектируйте типы ожидаемых ошибок сохранения формы и их обработку в UI, отделив их от непредвиденных сбоев. UI должен показать ошибки полей и сохранить ввод; внутренние детали исключений не должны утекать пользователю."
+    },
+    {
+      "id": "typescript:typed-events",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 8,
+      "title": "Как связать имя события с payload без as у потребителя?",
+      "question": "Спроектируйте emitter, в котором имя события определяет допустимый payload. Покажите корректный и ошибочный вызов. Карту событий расширяют несколько команд; ошибочный payload должен обнаруживаться у отправителя."
+    },
+    {
+      "id": "typescript:compiler-upgrade",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 9,
+      "title": "Как безопасно обновлять major TypeScript?",
+      "question": "После обновления TypeScript появились ошибки в ранее собиравшемся коде. Предложите план диагностики и безопасного выпуска обновления. Обновление нужно выпустить поэтапно, не блокируя независимые продуктовые изменения."
+    },
+    {
+      "id": "typescript:project-references",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 10,
+      "title": "Когда полезны project references?",
+      "question": "Большой TypeScript-репозиторий медленно собирается. Оцените разбиение через project references, границы и критерии полезности. Команды работают независимо, но CI должен корректно пересобирать затронутых потребителей."
+    },
+    {
+      "id": "typescript:schema-source",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 11,
+      "title": "Что выбрать источником истины: типы или runtime-схему?",
+      "question": "Типы API и runtime-валидатор регулярно расходятся. Выберите источник контракта и покажите, как проверять его актуальность. Клиент и сервер выпускаются раздельно; миграция не должна требовать синхронного обновления."
+    },
+    {
+      "id": "typescript:nominal-boundary",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 12,
+      "title": "Когда номинальные типы оправданы в структурном языке?",
+      "question": "Две денежные величины одинаковой формы имеют разный смысл. Оцените номинальные ограничения, стоимость конструкторов и границы преобразования. Ошибочная подмена приводит к неверному расчёту, но внешние данные остаются обычными строками и числами."
+    },
+    {
+      "id": "typescript:type-performance",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 13,
+      "title": "Как расследовать медленный typecheck?",
+      "question": "IDE зависает на публичном типе библиотеки. Предложите измерение и способы упростить тип без потери существенных гарантий. Публичный API уже используется в сотнях consumer-вызовов, которые нельзя переписать за один релиз."
+    },
+    {
+      "id": "typescript:unsoundness-budget",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 14,
+      "title": "Какие ограничения надёжности TypeScript нужно учитывать архитектору?",
+      "question": "Критичный модуль успешно компилируется, но иногда получает неверные значения. Определите источники недоказанных предположений и способ их ограничить. Полностью переписать legacy-код нельзя; приоритет — операции с высокой ценой ошибки."
+    },
+    {
+      "id": "typescript:package-resolution",
+      "topic": "typescript",
+      "tab": "senior",
+      "ordinal": 15,
+      "title": "Как согласовать moduleResolution с runtime и bundler?",
+      "question": "Пакет собирается локально, но импорт не работает у потребителя Node ESM. Предложите диагностику разрешения модулей и исполняемых экспортов. Нельзя требовать от потребителя неофициальных aliases или доступа к исходникам пакета."
+    },
+    {
+      "id": "typescript:never-union",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 1,
+      "title": "Почему never исчезает из union?",
+      "question": "Вычислите A, B и C в примере. Объясните, какие значения допускает каждый результат и как never участвует в вычислениях."
+    },
+    {
+      "id": "typescript:distribution-trap",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 2,
+      "title": "Почему T extends U распределяется по union не всегда?",
+      "question": "Вычислите A, B и C в примере с Each и Whole. Объясните различия для объединения и never."
+    },
+    {
+      "id": "typescript:void-callback",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 3,
+      "title": "Почему функция, возвращающая число, подходит callback с void?",
+      "question": "Объясните, почему callback в примере может возвращать результат push при объявленном void и что вправе делать вызывающий код."
+    },
+    {
+      "id": "typescript:empty-object",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 4,
+      "title": "Почему тип {} не означает пустой объект?",
+      "question": "API принимает значение типа {}. Предскажите допустимость числа, строки, null и undefined при strictNullChecks и оцените название «пустой объект»."
+    },
+    {
+      "id": "typescript:excess-spread",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 5,
+      "title": "Почему лишнее поле прошло через промежуточную переменную?",
+      "question": "Предскажите проверку двух вызовов connect из примера. Объясните границы проверки лишних свойств."
+    },
+    {
+      "id": "typescript:optional-write",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 6,
+      "title": "Почему x?:string может не разрешить x=undefined?",
+      "question": "Объясните, как exactOptionalPropertyTypes влияет на запись undefined в необязательное поле. Покажите допустимые состояния объекта."
+    },
+    {
+      "id": "typescript:union-correlation",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 7,
+      "title": "Почему два связанных union-поля теряют связь после разделения?",
+      "question": "В примере show сравните сужение через result.kind и отдельно извлечённые переменные. Проверьте, какую связь между данными сохраняет используемая версия TypeScript."
+    },
+    {
+      "id": "typescript:keyof-union",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 8,
+      "title": "Почему keyof union даёт только общие ключи?",
+      "question": "Вычислите CommonKeys и результат AllKeys<A|B> из примера. Объясните разницу доступных ключей и типового перечисления всех вариантов."
+    },
+    {
+      "id": "typescript:intersection-conflict",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 9,
+      "title": "Что произойдёт при пересечении несовместимых полей?",
+      "question": "Попытка заменить строковый id числовым через пересечение показана в примере. Объясните результат и предложите тип, сохраняющий name."
+    },
+    {
+      "id": "typescript:const-generics",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 10,
+      "title": "Когда const type parameter помогает API?",
+      "question": "Определите тип routes в примере и сравните с функцией без const generic-параметра. Объясните, что именно сохраняет inference."
+    },
+    {
+      "id": "typescript:assertion-function",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 11,
+      "title": "Чем asserts condition отличается от predicate?",
+      "question": "Спроектируйте функцию проверки обязательного значения, после которой TypeScript разрешает безопасное чтение. Объясните её runtime-поведение при отказе."
+    },
+    {
+      "id": "typescript:generic-default",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 12,
+      "title": "Почему default generic не всегда равен inferred типу?",
+      "question": "Вычислите типы numeric и empty в примере createBox. Объясните, почему default string не обязательно определяет результат вызова."
+    },
+    {
+      "id": "typescript:readonly-alias",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 13,
+      "title": "Как readonly-объект может измениться без ошибки в месте чтения?",
+      "question": "Предскажите вывод примера с original и readonly view. Объясните, что гарантирует каждый путь доступа."
+    },
+    {
+      "id": "typescript:conditional-any",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 14,
+      "title": "Почему any даёт неожиданный результат условного типа?",
+      "question": "Вычислите A, B и C в примере Kind. Объясните различие any, unknown и never в условном типе."
+    },
+    {
+      "id": "typescript:declaration-compat",
+      "topic": "typescript",
+      "tab": "advanced",
+      "ordinal": 15,
+      "title": "Почему обновление только типов может стать breaking change?",
+      "question": "Библиотека меняет только декларации, сохранив JavaScript. Определите, какие изменения могут сломать потребителей и как проверить совместимость."
+    }
+  ]
+}

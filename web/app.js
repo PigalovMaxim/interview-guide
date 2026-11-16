@@ -8,7 +8,7 @@
   const clearButton = document.getElementById('clear-ratings');
   const copyRequests = new WeakMap();
   let activeTab = 'junior';
-  let activeTopic = 'html';
+  let activeTopic = 'javascript';
   let current = [];
 
   function escape(value) {
@@ -38,6 +38,7 @@
 
   function questionBody(item) {
     return '<section class="candidate-question"><h3>Спросите кандидата</h3><p class="question-guidance">Сначала дайте время на самостоятельный ответ.</p><p class="question-wording">' + escape(item.question || item.title) + '</p>' +
+      (item.source ? '<p class="question-source">Источник вопроса: <a href="' + escape(item.source.url) + '" target="_blank" rel="noreferrer">' + escape(item.source.provider) + ' ↗</a> · уровень источника: ' + escape(item.source.level) + ' · получен ' + escape(item.source.retrievedAt) + '</p>' : '') +
       (item.questionCode ? '<div class="question-code"><span class="section-label">Пример для обсуждения</span>' + codeBlock(item.questionCode, item.questionCodeLanguage) + '</div>' : '') +
       '</section>';
   }
@@ -48,6 +49,7 @@
     const sources = item.references.filter(url => /^https:\/\//.test(url)).map((url, index) =>
       '<li><a href="' + escape(url) + '" target="_blank" rel="noreferrer">' + escape(new URL(url).hostname) + ' · источник ' + (index + 1) + '<span aria-hidden="true"> ↗</span></a></li>').join('');
     return '<div class="analysis-content">' +
+      (item.editorial ? '<p class="editorial-note">Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.</p>' : '') +
       '<div class="answer"><span class="section-label">Краткий ответ</span><p>' + escape(item.shortAnswer) + '</p></div>' +
       '<section><h3>Как это работает</h3><p>' + escape(item.explanation) + '</p></section>' +
       (item.solution ? '<section><h3>Решение</h3>' + codeBlock(item.solution.code) + '</section>' : '') +
@@ -58,7 +60,7 @@
   }
 
   function taskBody(item) {
-    return '<div class="candidate-label"><span aria-hidden="true">↗</span> Для кандидата · внешний редактор</div>' + questionBody(item) + '<h3>Точные условия задачи</h3><p>' + escape(item.statement) + '</p>' +
+    return '<div class="candidate-label"><span aria-hidden="true">↗</span> Для кандидата · внешний редактор</div>' + questionBody(item) + (item.statement === item.question ? '' : '<h3>Точные условия задачи</h3><p>' + escape(item.statement) + '</p>') +
       '<section><h3>Пример</h3>' + item.examples.map(example => '<p class="example">' + escape(example) + '</p>').join('') + '</section>' +
       '<div class="code-heading"><h3>Стартовый код</h3><button class="text-button" data-action="copy-code">Скопировать код <span aria-hidden="true">⧉</span></button></div>' + codeBlock(item.starterCode) +
       '<button class="secondary-button" data-action="copy-task">Скопировать задачу <span aria-hidden="true">↗</span></button><p role="status" class="copy-status"></p><div class="copy-fallback"></div>' +
@@ -82,18 +84,18 @@
     document.getElementById('theme-toggle').setAttribute('aria-checked', String(state.theme === 'light'));
     document.getElementById('theme-icon').textContent = state.theme === 'dark' ? '☼' : '◐';
     document.getElementById('theme-label').textContent = state.theme === 'dark' ? 'Светлая тема' : 'Тёмная тема';
-    document.getElementById('interview-progress').textContent = 'Оценено ' + Object.keys(state.ratingsById).length + ' из 540 материалов';
+    document.getElementById('interview-progress').textContent = 'Оценено ' + Object.keys(state.ratingsById).length + ' из ' + materials.length + ' материалов';
     document.getElementById('list-progress').textContent = current.filter(item => state.ratingsById[item.id]).length + ' оценено';
     const notices = document.getElementById('notices');
     notices.replaceChildren();
-    for (const message of [state.ratingsNotice, state.themeNotice]) {
+    for (const message of [state.legacyNotice, state.ratingsNotice, state.themeNotice]) {
       if (!message) continue;
       const notice = document.createElement('p');
       notice.className = 'notice';
       notice.textContent = message;
       notices.append(notice);
     }
-    for (const article of list.children) {
+    for (const article of list.querySelectorAll('.material-card')) {
       const rating = state.ratingsById[article.dataset.materialId];
       const badge = article.querySelector('.rating-badge');
       badge.className = 'rating-badge ' + (rating || 'unrated');
@@ -127,7 +129,8 @@
       button.tabIndex = selected ? 0 : -1;
     }
     current = materials.filter(item => item.tab === activeTab && item.topic === activeTopic).sort((a, b) => a.ordinal - b.ordinal);
-    list.innerHTML = current.map(card).join('');
+    document.getElementById('list-count').textContent = current.length + ' материалов';
+    list.innerHTML = current.length ? current.map(card).join('') : '<div class="empty-state" role="status"><h3>Пока нет вопросов</h3><p>В доступной подборке выбранных источников нет вопросов для этой темы и уровня. Выберите другую тему или уровень.' + (activeTab === 'advanced' ? ' На вкладке «Сложные вопросы» доступны только практические задачи.' : '') + '</p></div>';
     renderState(store.getState());
   }
 
@@ -141,7 +144,7 @@
 
   async function copyTask(article, codeOnly) {
     const item = byId.get(article.dataset.materialId);
-    const text = codeOnly ? item.starterCode : [item.title, item.question, 'Точные условия:', item.statement, 'Примеры:', ...item.examples, 'Стартовый код:', item.starterCode].filter(Boolean).join('\n\n');
+    const text = codeOnly ? item.starterCode : [item.title, item.question, ...(item.statement === item.question ? [] : ['Точные условия:', item.statement]), 'Примеры:', ...item.examples, 'Стартовый код:', item.starterCode].filter(Boolean).join('\n\n');
     const request = (copyRequests.get(article) || 0) + 1;
     copyRequests.set(article, request);
     const status = article.querySelector('.copy-status');
@@ -229,6 +232,8 @@
     if (dialog.returnValue === 'clear') store.clear();
     clearButton.focus();
   });
+  document.getElementById('bank-count').textContent = materials.length;
+  document.getElementById('sidebar-count').textContent = materials.length + ' материалов · ' + tabs.length + ' вкладки';
   store.subscribe(renderState);
   renderList();
 }());
