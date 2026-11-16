@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const { tabs, topics, ratingLabels, materials } = window.InterviewContent;
+  const { tabs, topics, ratingLabels, materials, interviewMethod } = window.InterviewContent;
   const store = window.InterviewStore;
   const byId = new Map(materials.map(item => [item.id, item]));
   const list = document.getElementById('material-list');
@@ -37,10 +37,9 @@
   }
 
   function questionBody(item) {
-    const points = item.questionPoints || [];
-    return '<section class="candidate-question"><h3>Спросите кандидата</h3><p class="question-guidance">Формулировку можно зачитать целиком, а пункты ниже выбирать по ходу ответа.</p><p class="question-wording">' + escape(item.question || item.title) + '</p>' +
+    return '<section class="candidate-question"><h3>Спросите кандидата</h3><p class="question-guidance">Сначала дайте время на самостоятельный ответ.</p><p class="question-wording">' + escape(item.question || item.title) + '</p>' +
       (item.questionCode ? '<div class="question-code"><span class="section-label">Пример для обсуждения</span>' + codeBlock(item.questionCode, item.questionCodeLanguage) + '</div>' : '') +
-      (points.length ? '<p class="question-points-label">Попросите раскрыть следующие пункты:</p><ol class="question-points">' + points.map(point => '<li>' + escape(point) + '</li>').join('') + '</ol>' : '') + '</section>';
+      '</section>';
   }
 
   function analysis(item) {
@@ -53,8 +52,8 @@
       '<section><h3>Как это работает</h3><p>' + escape(item.explanation) + '</p></section>' +
       (item.solution ? '<section><h3>Решение</h3>' + codeBlock(item.solution.code) + '</section>' : '') +
       (item.edgeCases ? '<section><h3>Крайние случаи</h3><ul>' + item.edgeCases.map(edge => '<li>' + escape(edge) + '</li>').join('') + '</ul><p><strong>Сложность.</strong> ' + escape(item.complexity) + '</p></section>' : '') +
-      '<section><h3>На что обратить внимание</h3><dl class="criteria">' + criteria + '</dl></section>' +
-      '<section><h3>Уточняющие вопросы</h3><ol class="follow-ups">' + item.followUps.map(question => '<li>' + escape(question) + '</li>').join('') + '</ol></section>' +
+      '<section><h3>На что обратить внимание</h3><p class="assessment-guidance">' + escape(interviewMethod.assessment) + '</p><dl class="criteria">' + criteria + '</dl></section>' +
+      '<section><h3>Уточнение после ответа</h3><p class="follow-up-guidance">' + escape(interviewMethod.followUps) + '</p><div class="follow-ups">' + item.followUps.map(branch => '<section class="follow-up follow-up-' + escape(branch.kind) + '"><h4>' + (branch.kind === 'support' ? 'При затруднении' : 'При уверенном ответе · перенос') + '</h4><p class="follow-up-question">' + escape(branch.question) + '</p><p class="follow-up-expected"><strong>Признак понимания:</strong> ' + escape(branch.expected) + '</p></section>').join('') + '</div></section>' +
       '<details class="references"><summary>Контекст и первичные источники</summary><p>' + escape(item.context) + '</p><ul>' + sources + '</ul><p>Дата сверки: ' + escape(item.verifiedAt) + '. Инженерные кейсы допускают обоснованные альтернативы.</p></details></div>';
   }
 
@@ -113,6 +112,7 @@
     document.getElementById('topic-title').textContent = topic.label;
     document.getElementById('topic-description').textContent = topic.description;
     document.getElementById('topic-kicker').textContent = tab.description;
+    document.getElementById('level-guidance').textContent = tab.guidance;
     document.getElementById('material-panel').setAttribute('aria-labelledby', 'tab-' + activeTab);
     for (const button of document.querySelectorAll('[data-action="topic"]')) {
       const selected = button.dataset.topic === activeTopic;
@@ -141,7 +141,7 @@
 
   async function copyTask(article, codeOnly) {
     const item = byId.get(article.dataset.materialId);
-    const text = codeOnly ? item.starterCode : [item.title, item.question, ...(item.questionPoints || []).map((point, index) => (index + 1) + '. ' + point), 'Точные условия:', item.statement, 'Примеры:', ...item.examples, 'Стартовый код:', item.starterCode].filter(Boolean).join('\n\n');
+    const text = codeOnly ? item.starterCode : [item.title, item.question, 'Точные условия:', item.statement, 'Примеры:', ...item.examples, 'Стартовый код:', item.starterCode].filter(Boolean).join('\n\n');
     const request = (copyRequests.get(article) || 0) + 1;
     copyRequests.set(article, request);
     const status = article.querySelector('.copy-status');

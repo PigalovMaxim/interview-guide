@@ -12,12 +12,19 @@
 .candidate-question{padding:21px 24px;background:var(--panel);border:1px solid var(--border);border-radius:8px;margin:0 0 26px}
 .candidate-question h3{color:var(--accent);font-size:14px;margin:0 0 14px}
 .question-wording{font-size:17px;line-height:1.85;white-space:pre-line;color:var(--strong);margin:0 0 18px}
-.question-points-label{font-size:14px;margin:18px 0 8px;color:var(--muted)}
-.question-points{font-size:16px;line-height:1.85;margin:0;padding-left:22px}
-.question-points li+li{margin-top:10px}.question-code{margin-top:20px}.question-code pre{margin-bottom:0}
-@media(max-width:760px){.candidate-question{padding:18px 16px}.question-wording{font-size:16px}.question-points{padding-left:20px}}
+.question-code{margin-top:20px}.question-code pre{margin-bottom:0}
+@media(max-width:760px){.candidate-question{padding:18px 16px}.question-wording{font-size:16px}}
 .question-guidance{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 16px}
-.question-wording,.question-points{max-width:75ch}
+.question-wording{max-width:75ch}
+.level-guidance{padding:14px 18px;margin:0 0 20px;border-left:3px solid var(--accent);background:var(--panel);font-size:14px;line-height:1.8;border-radius:0 6px 6px 0}
+.assessment-guidance,.follow-up-guidance{font-size:13px;color:var(--muted);line-height:1.8;max-width:85ch}
+.follow-ups{display:grid;gap:14px;margin-top:16px}
+.follow-up{border:1px solid var(--border);border-radius:7px;padding:17px 19px;min-width:0;overflow-wrap:anywhere;background:var(--panel)}
+.follow-up h4{font-size:13px;font-weight:600;color:var(--accent);margin:0 0 10px}
+.follow-up-question{font-size:16px;margin-bottom:12px;max-width:75ch}
+.follow-up-expected{font-size:14px;margin:0;line-height:1.8;max-width:85ch}
+.follow-up-expected strong{font-weight:550;color:var(--strong)}
+@media(max-width:760px){.level-guidance{font-size:13px;padding:12px 14px}.follow-up{padding:14px}.follow-up-question{font-size:15px}}
 
 /* Оба экрана остаются в одном документе вместе с временными оценками. */
 [hidden]{display:none!important}
