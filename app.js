@@ -50,17 +50,15 @@
   function analysis(item) {
     const criteria = ['basic', 'confident', 'deep'].map((value, index) =>
       '<div><dt><span class="criterion-mark">' + '·'.repeat(index + 1) + '</span>' + ratingLabels[value] + '</dt><dd>' + escape(item.assessment[value]) + '</dd></div>').join('');
-    const sources = item.references.filter(url => /^https:\/\//.test(url)).map((url, index) =>
-      '<li><a href="' + escape(url) + '" target="_blank" rel="noreferrer">' + escape(new URL(url).hostname) + ' · источник ' + (index + 1) + '<span aria-hidden="true"> ↗</span></a></li>').join('');
     return '<div class="analysis-content">' +
       (item.source && item.editorial ? '<p class="editorial-note">Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.</p>' : '') +
       '<div class="answer"><span class="section-label">Краткий ответ</span><p>' + escape(item.shortAnswer) + '</p></div>' +
       '<section><h3>Как это работает</h3><p>' + escape(item.explanation) + '</p></section>' +
       (item.solution ? '<section><h3>Решение</h3>' + codeBlock(item.solution.code) + '</section>' : '') +
       (item.edgeCases ? '<section><h3>Крайние случаи</h3><ul>' + item.edgeCases.map(edge => '<li>' + escape(edge) + '</li>').join('') + '</ul><p><strong>Сложность.</strong> ' + escape(item.complexity) + '</p></section>' : '') +
-      '<section><h3>На что обратить внимание</h3><p class="assessment-guidance">' + escape(interviewMethod.assessment) + '</p><dl class="criteria">' + criteria + '</dl></section>' +
+      '<section><h3>На что обратить внимание</h3><dl class="criteria">' + criteria + '</dl></section>' +
       '<section><h3>Уточнение после ответа</h3><p class="follow-up-guidance">' + escape(interviewMethod.followUps) + '</p><div class="follow-ups">' + item.followUps.map(branch => '<section class="follow-up follow-up-' + escape(branch.kind) + '"><h4>' + (branch.kind === 'support' ? 'При затруднении' : 'При уверенном ответе · перенос') + '</h4><p class="follow-up-question">' + escape(branch.question) + '</p><p class="follow-up-expected"><strong>Признак понимания:</strong> ' + escape(branch.expected) + '</p></section>').join('') + '</div></section>' +
-      '<details class="references"><summary>Контекст и первичные источники</summary><p>' + escape(item.context) + '</p><ul>' + sources + '</ul><p>Дата сверки: ' + escape(item.verifiedAt) + '. Инженерные кейсы допускают обоснованные альтернативы.</p></details></div>';
+      '</div>';
   }
 
   function taskBody(item) {
@@ -209,6 +207,17 @@
       body.setAttribute('aria-hidden', String(!open));
       body.toggleAttribute('inert', !open);
       if (!open) hideAnalysis(article);
+      else {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const align = () => {
+          if (article.isConnected && button.getAttribute('aria-expanded') === 'true') {
+            article.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'instant' : 'smooth' });
+          }
+        };
+        const animations = body.getAnimations();
+        if (reducedMotion || !animations.length) align();
+        else void Promise.allSettled(animations.map(animation => animation.finished)).then(align);
+      }
     } else if (action === 'analysis') {
       const open = button.getAttribute('aria-expanded') !== 'true';
       button.setAttribute('aria-expanded', String(open));
