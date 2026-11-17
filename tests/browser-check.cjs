@@ -89,7 +89,7 @@ const server = http.createServer((request,response) => {
           assert.deepEqual(parsed['xl/worksheets/sheet1.xml'][0].slice(0,5),['Итоги интервью','Оценено',String(report.rated),'Всего','540']);
           assert.equal(parsed['xl/worksheets/sheet1.xml'][0][5],'Дата выгрузки');
           assert.ok(Number.isFinite(Date.parse(parsed['xl/worksheets/sheet1.xml'][0][6])));
-          assert.equal(parsed['xl/worksheets/sheet1.xml'][0][7],'Редакция 4');
+          assert.equal(parsed['xl/worksheets/sheet1.xml'][0][7],'Редакция 5');
           assert.deepEqual(parsed['xl/worksheets/sheet1.xml'][1],['Уровень','Тема','Оценено','Всего',...report.ratingLabels]);
           assert.deepEqual(parsed['xl/worksheets/sheet1.xml'].slice(2),report.levels.flatMap(level=>level.topics.map(topic=>
             [level.label,topic.label,topic.rated,topic.total,...topic.counts].map(String))));
@@ -120,7 +120,8 @@ const server = http.createServer((request,response) => {
     for(const script of ['/data/catalog.js',...content.topics.filter(topic=>topic.key!=='coding').map(topic=>`/data/${topic.key}.js`)]){
       assert.equal(initialScripts.get(script),String(content.revision),script);
     }
-    for(const script of ['/app.js','/results.js','/results-export.js'])assert.equal(initialScripts.get(script),'4-ui3',script);
+    assert.equal(initialScripts.get('/app.js'),String(content.revision));
+    for(const script of ['/results.js','/results-export.js'])assert.equal(initialScripts.get(script),'4-ui3',script);
     assert.equal(await page.locator('link[rel="stylesheet"]').getAttribute('href'),'styles.css?v=4-ui3');
     const archivedRatings=Object.fromEntries(previous.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     const archive=JSON.stringify({schemaVersion:1,ratingsById:archivedRatings});
@@ -130,10 +131,10 @@ const server = http.createServer((request,response) => {
     await page.reload();
     await page.waitForSelector('.material-card');
     assert.deepEqual(await page.evaluate(()=>window.InterviewStore.getState().ratingsById),{});
-    assert.match(await page.locator('#bank-revision').innerText(),/Редакция 4 · 480 вопросов \+ 60 практических задач/);
+    assert.match(await page.locator('#bank-revision').innerText(),/Редакция 5 · 480 вопросов \+ 60 практических задач/);
     assert.ok(await page.locator('#notices').innerText());
     const originalCards=content.materials.filter(card=>card.source||card.kind==='task');
-    assert.equal(originalCards.length,145);
+    assert.equal(originalCards.length,156);
     const currentRatings=Object.fromEntries(originalCards.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     await page.evaluate(({key,ratings})=>localStorage.setItem(key,JSON.stringify({schemaVersion:1,ratingsById:ratings})),{key:content.ratingsStorageKey,ratings:currentRatings});
     await page.reload();
@@ -220,6 +221,7 @@ const server = http.createServer((request,response) => {
             assert.equal(actual.sourceURL,item.source.url,item.id);
             assert.ok(actual.source.includes('уровень источника: '+item.source.level),item.id);
             assert.match(actual.editorial,/редакцией приложения/,item.id);
+            if(item.source.adapted)assert.match(actual.editorial,/Вопрос адаптирован/,item.id);
           }else{
             assert.equal(actual.source,'Происхождение: редакционный кейс проекта',item.id);
             assert.equal(actual.sourceURL,null,item.id);
@@ -409,7 +411,7 @@ const server = http.createServer((request,response) => {
     await localPage.goto(pathToFileURL(path.join(webRoot,'index.html')).href);
     await localPage.waitForSelector('.material-card');
     assert.equal(await localPage.evaluate(()=>window.InterviewContent.materials.length),content.materials.length);
-    assert.match(await localPage.locator('#bank-revision').innerText(),/Редакция 4/);
+    assert.match(await localPage.locator('#bank-revision').innerText(),/Редакция 5/);
     assert.equal(await localPage.locator('.card-title > span:first-child').first().innerText(),content.materials.find(card=>card.topic==='javascript'&&card.tab==='junior'&&card.ordinal===1).title);
     await localPage.locator('a[href="#results"]').first().click();
     await localPage.locator('#results').waitFor({state:'visible'});

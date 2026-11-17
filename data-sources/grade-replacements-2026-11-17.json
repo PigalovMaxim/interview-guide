@@ -1,0 +1,2482 @@
+[
+  {
+    "retiredId": "easyoffer:junior:13086",
+    "reason": "Второй Event Loop у Junior дублирует сохранённый вопрос; заменён самостоятельным базовым сравнением ==/===.",
+    "card": {
+      "id": "curated:javascript:equality-coercion",
+      "topic": "javascript",
+      "tab": "junior",
+      "targetLevel": "junior",
+      "angles": [],
+      "kind": "question",
+      "title": "Строгое и нестрогое равенство",
+      "question": "Чему равны 0 == false, 0 === false и null == undefined? Объясните различие == и === и выберите сравнение для числового поля формы.",
+      "shortAnswer": "Получится true, false, true. == выполняет преобразования по алгоритму абстрактного равенства, === сравнивает без такого приведения. Значение поля формы сначала явно преобразуют и проверяют, затем сравнивают числом через ===.",
+      "explanation": "Строгое равенство не проверяет структуру объектов; две разные ссылки остаются разными. Явное преобразование требует политики для пустой строки и NaN.",
+      "assessment": {
+        "basic": "Правильно предсказывает хотя бы два результата.",
+        "confident": "Даёт все результаты, объясняет преобразование и проверку ввода.",
+        "deep": "Пустая строка преобразуется в 0; отсутствие ввода нужно проверить отдельно до преобразования."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Какой тип у значения input.value?",
+          "expected": "Строка, даже у input type=number."
+        },
+        {
+          "kind": "transfer",
+          "question": "Почему Number(\"\") === 0 не доказывает, что пользователь ввёл ноль?",
+          "expected": "Пустая строка преобразуется в 0; отсутствие ввода нужно проверить отдельно до преобразования."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: junior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:12",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L12",
+        "level": "junior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 12,
+        "originalQuestion": "Разница между `==` и `===` (нестрогое/строгое равенство)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:13086",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Каррирование и частичное применение» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:currying-partial",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Каррирование и частичное применение",
+      "question": "Для sum(a,b,c) покажите каррированную форму и частичное применение первого аргумента. Как сохранить контракт оставшихся аргументов?",
+      "shortAnswer": "Каррирование: a => b => c => a+b+c, вызов curried(1)(2)(3). Частичное применение: (b,c) => sum(1,b,c), вызов partial(2,3). Первая форма меняет структуру вызова, вторая фиксирует часть аргументов.",
+      "explanation": "Это независимые преобразования. Универсальный curry должен явно договориться об arity, this и аргументах по умолчанию; function.length не всегда выражает нужный контракт.",
+      "assessment": {
+        "basic": "Показывает фиксацию аргумента.",
+        "confident": "Различает обе формы и корректно вызывает их.",
+        "deep": "length останавливается перед первым default и не считает rest; нужную arity задают явно либо ограничивают поддерживаемые функции."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Сколько аргументов принимает partial после фиксации a?",
+          "expected": "Два аргумента в одном вызове."
+        },
+        {
+          "kind": "transfer",
+          "question": "Почему curry по fn.length может ошибиться для (a,b=1,...rest)?",
+          "expected": "length останавливается перед первым default и не считает rest; нужную arity задают явно либо ограничивают поддерживаемые функции."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:70",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L70",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 70,
+        "originalQuestion": "Что такое каррирование (Currying)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:309",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Ключ и срок жизни мемоизации» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:memoization-contract",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Ключ и срок жизни мемоизации",
+      "question": "Нужно мемоизировать чистую formatPrice(amount,currency). Почему кеш только по amount неверен? Предложите ключ, инвалидирование и ограничение памяти.",
+      "shortAnswer": "В ключ входят amount и currency, а также locale/версия правил, если они влияют на результат. Подойдут вложенные Map или однозначное кодирование кортежа. Кеш ограничивают LRU/размером; смена правил очищает его или меняет namespace.",
+      "explanation": "Мемоизация сохраняет результат только при стабильных зависимостях. Простое склеивание строк без границ даёт коллизии; JSON подходит лишь для согласованного набора сериализуемых аргументов.",
+      "assessment": {
+        "basic": "Замечает пропущенную currency.",
+        "confident": "Согласует ключ со всеми зависимостями и ограничивает кеш.",
+        "deep": "Передавать курс/версию явно и включать в ключ либо отказаться от кеширования; скрытая меняющаяся зависимость нарушает прежний контракт."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли вернуть один результат для 10 EUR и 10 USD?",
+          "expected": "Нет, валюта участвует в результате."
+        },
+        {
+          "kind": "transfer",
+          "question": "Функция начала читать текущий курс из глобального объекта. Что изменить?",
+          "expected": "Передавать курс/версию явно и включать в ключ либо отказаться от кеширования; скрытая меняющаяся зависимость нарушает прежний контракт."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:71",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L71",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 71,
+        "originalQuestion": "Что такое мемоизация? Реализуйте базовую логику функции для мемоизации?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:14135",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Границы debounce и throttle» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:debounce-throttle-contract",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Границы debounce и throttle",
+      "question": "Для поиска при вводе и индикатора прокрутки выберите debounce/throttle. Определите leading/trailing и поведение cancel при закрытии экрана.",
+      "shortAnswer": "Поиску обычно нужен debounce с trailing после паузы, прокрутке — throttle с ограничением частоты и при необходимости финальным trailing. Leading разрешает первый немедленный вызов; cancel отменяет таймер и отложенный вызов при закрытии.",
+      "explanation": "Нужно сохранять последние аргументы и this. Cancel таймера не отменяет уже запущенный сетевой запрос; устаревшие ответы требуют отдельного контроля.",
+      "assessment": {
+        "basic": "Различает паузу и ограничение частоты.",
+        "confident": "Выбирает режимы и объясняет финальный вызов и cleanup.",
+        "deep": "Нет; нужны отмена поддерживающего транспорта либо проверка поколения/параметров перед принятием ответа."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Что произойдёт с trailing debounce при непрерывном вводе?",
+          "expected": "Вызов откладывается до паузы, если не предусмотрен maxWait."
+        },
+        {
+          "kind": "transfer",
+          "question": "Поиск A завершился после поиска B. Решает ли debounce эту гонку?",
+          "expected": "Нет; нужны отмена поддерживающего транспорта либо проверка поколения/параметров перед принятием ответа."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:73",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L73",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 73,
+        "originalQuestion": "Что такое и как работает `debounce()` и `throttle()` в JavaScript?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:1255",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Словарь без цепочки прототипов» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:prototype-free-dictionary",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Словарь без цепочки прототипов",
+      "question": "Словарь принимает произвольные строковые ключи, включая toString и __proto__. Как создать его без унаследованных свойств и безопасно проверить наличие ключа?",
+      "shortAnswer": "Object.create(null) создаёт объект без прототипа; ключи проверяют Object.hasOwn(dict,key). У него нет собственного метода hasOwnProperty и унаследованного setter __proto__. Альтернатива — Map для явного словаря.",
+      "explanation": "Оператор in учитывает всю цепочку прототипов. Защита одного словаря не делает безопасным последующее слияние в обычные объекты; границу данных тоже проверяют.",
+      "assessment": {
+        "basic": "Называет Object.create(null).",
+        "confident": "Показывает безопасную проверку и объясняет опасные имена.",
+        "deep": "Object.assign выполняет присваивание и может вызвать унаследованный setter обычного target; сохранять null-prototype target или копировать как own data properties с проверкой дальнейшего использования."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Работает ли dict.hasOwnProperty(key) у null-prototype объекта?",
+          "expected": "Нет, этот метод не унаследован."
+        },
+        {
+          "kind": "transfer",
+          "question": "Словарь с собственным __proto__ копируют через Object.assign({},dict). Что проверить?",
+          "expected": "Object.assign выполняет присваивание и может вызвать унаследованный setter обычного target; сохранять null-prototype target или копировать как own data properties с проверкой дальнейшего использования."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:75",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L75",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 75,
+        "originalQuestion": "Что такое прототипное наследование? Как создать объект без прототипа?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:12253",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Идентичность ключа в Map» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:map-key-identity",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Идентичность ключа в Map",
+      "question": "В Map записали map.set({id:1},\"A\"), затем map.get({id:1}) вернул undefined. Почему? Сравните с Object и предложите ключ для повторной загрузки пользователя.",
+      "shortAnswer": "Это два разных объекта, а Map сравнивает объектные ключи по идентичности. Обычный Object использует строковые/symbol ключи, а не структурное сравнение. Для повторной загрузки подходит стабильный userId либо явная канонизация ключа.",
+      "explanation": "Map не является структурным хешем произвольных объектов. SameValueZero для примитивов считает NaN равным NaN и не различает +0/-0.",
+      "assessment": {
+        "basic": "Находит две разные ссылки.",
+        "confident": "Выбирает стабильный ключ и сравнивает семантику Object/Map.",
+        "deep": "Нет, SameValueZero объединяет их в один ключ; это отличается от NaN === NaN."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Поможет ли одинаковое значение поля id без смены ключа?",
+          "expected": "Нет: поля не участвуют в сравнении ссылок."
+        },
+        {
+          "kind": "transfer",
+          "question": "Сохраняются ли отдельные записи Map для NaN и ещё одного NaN?",
+          "expected": "Нет, SameValueZero объединяет их в один ключ; это отличается от NaN === NaN."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:78",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L78",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 78,
+        "originalQuestion": "Разница между `Object` и `Map`?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:1415",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Клонирование графа и передача буфера» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:structured-clone-transfer",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Клонирование графа и передача буфера",
+      "question": "Объект содержит циклическую ссылку на себя и ArrayBuffer. Как локально получить новый граф через structuredClone с transfer и что останется от исходного буфера?",
+      "shortAnswer": "structuredClone(obj,{transfer:[obj.buffer]}) клонирует граф с сохранением цикла в копии и переносит владение ArrayBuffer. Исходный буфер detaches и больше не доступен для обычного чтения данных; новый граф содержит переданный буфер.",
+      "explanation": "JSON не поддерживает такой цикл. Функции/DOM-узлы не становятся клонируемыми; пользовательский prototype и property descriptors не следует считать сохранёнными.",
+      "assessment": {
+        "basic": "Различает копию и transfer.",
+        "confident": "Учитывает цикл, detach и ограничения поддерживаемых значений.",
+        "deep": "Клонировать без transfer либо заранее сохранить отдельную копию; решение сравнить по памяти и стоимости копирования."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли после transfer продолжать использовать исходный буфер как прежде?",
+          "expected": "Нет, владение передано, исходный ArrayBuffer отсоединён."
+        },
+        {
+          "kind": "transfer",
+          "question": "Нужно сохранить исходные байты для повторной попытки. Как изменить контракт?",
+          "expected": "Клонировать без transfer либо заранее сохранить отдельную копию; решение сравнить по памяти и стоимости копирования."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://html.spec.whatwg.org/multipage/structured-data.html#structuredserialize"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/es.md:46",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/es.md#L46",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/es.md",
+        "line": 46,
+        "originalQuestion": "Что такое структурированное клонирование (`structuredClone()`)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:12863",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Тип ошибки и исходная причина» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:error-cause-contract",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Тип ошибки и исходная причина",
+      "question": "Сервис должен бросать DomainError с code и сохранять исходный сетевой сбой. Покажите реализацию через Error subclass/cause и безопасное чтение в catch.",
+      "shortAnswer": "class DomainError extends Error { constructor(code,cause){super(\"Операция отклонена\",{cause});this.name=\"DomainError\";this.code=code;} } Сбой оборачивают с исходным cause; в catch проверяют instanceof/контракт неизвестного значения, не предполагая, что всегда брошен Error.",
+      "explanation": "Cause сохраняет цепочку диагностики; публичное сообщение и внутренние детали разделяют. Поля Error не обязаны автоматически попадать в JSON.",
+      "assessment": {
+        "basic": "Расширяет Error и вызывает super.",
+        "confident": "Сохраняет cause/code и сужает пойманное значение.",
+        "deep": "Валидируемый сериализуемый протокол code/message с безопасными деталями; не полагаться на prototype после передачи."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Уничтожает ли new Error(message) без cause исходный stack как связанную причину?",
+          "expected": "Новая ошибка имеет свой stack; исходная причина не сохранится автоматически."
+        },
+        {
+          "kind": "transfer",
+          "question": "Ошибка пересекла worker/JSON границу, instanceof не работает. Что использовать?",
+          "expected": "Валидируемый сериализуемый протокол code/message с безопасными деталями; не полагаться на prototype после передачи."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:94",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L94",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 94,
+        "originalQuestion": "Можно ли в JavaScript создать собственный тип ошибки (Custom error type)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:14124",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Отражение атрибута и произвольное JS-свойство» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:dom-attribute-reflection",
+      "topic": "javascript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Отражение атрибута и произвольное JS-свойство",
+      "question": "Почему input.setAttribute(\"disabled\",\"false\") оставляет поле выключенным, а input.disabled=false включает его? Что произойдёт с input.customData={id:1}: появится ли атрибут и сохранится ли объект в outerHTML?",
+      "shortAnswer": "Disabled — boolean-атрибут: важен факт наличия, строка \"false\" его не выключает. Отражаемое property disabled=false удаляет атрибут. CustomData — произвольное JS-свойство, оно не создаёт HTML-атрибут и не сериализуется в outerHTML. SetAttribute хранит строковое значение, а не объектную ссылку.",
+      "explanation": "Отражение определяется контрактом конкретного DOM-интерфейса, а не совпадением имени. Для метаданных в разметке подходят data-* со строковым контрактом; для объектного состояния нужен отдельный владелец. Нельзя обобщать правила boolean-атрибутов на aria-disabled со строковыми значениями.",
+      "assessment": {
+        "basic": "Различает наличие boolean-атрибута и строку false.",
+        "confident": "Объясняет property reflection, отсутствие сериализации customData и строковый контракт setAttribute.",
+        "deep": "Для aria-disabled=\"false\" строковое значение имеет смысл false по ARIA; свойство disabled реального control и ARIA-семантика не взаимозаменяемы, поведение и доступность проверяют отдельно."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Удаляет ли setAttribute(\"disabled\",\"false\") сам атрибут?",
+          "expected": "Нет, атрибут остаётся присутствующим."
+        },
+        {
+          "kind": "transfer",
+          "question": "Можно ли по тому же правилу считать aria-disabled=\"false\" включённой ARIA-блокировкой?",
+          "expected": "Нет, ARIA использует строковые значения true/false; aria-disabled также не отключает обработчики или native control автоматически. Поведение и семантику задают согласованно."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: middle.",
+      "references": [
+        "https://html.spec.whatwg.org/multipage/input.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/browser-js.md:27",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/browser-js.md#L27",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/browser-js.md",
+        "line": 27,
+        "originalQuestion": "Разница между attribute и property у DOM-элементов?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:13086",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Окружение выполнения и потерянный receiver» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:execution-environment-receiver",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Окружение выполнения и потерянный receiver",
+      "question": "ES-модуль экспортирует obj.method, метод читает this.id и замкнутую переменную secret. После const f=obj.method; f() падает. Исправьте API с сохранением выбранного receiver и объясните независимость lexical environment, this и module top-level.",
+      "shortAnswer": "Обычная функция получает this из способа вызова: отделённый строгий вызов даёт undefined. Замкнутый secret остаётся доступен через lexical environment. Нужно bind(obj), обёртка с obj.method() или API без receiver. Top-level this ES-модуля тоже undefined, но это отдельное правило.",
+      "explanation": "Стрелка захватывает this из места создания и не переназначается bind. Выбор bind фиксирует объект, обёртка с lookup метода допускает его последующую замену; контракт выбирают явно и тестируют оба вызова.",
+      "assessment": {
+        "basic": "Находит потерю this.",
+        "confident": "Разделяет три механизма и обосновывает контракт исправления.",
+        "deep": "Bind продолжает вызывать прежнюю функцию с фиксированным receiver; обёртка читает актуальное свойство при каждом вызове."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Теряется ли secret вместе с this?",
+          "expected": "Нет, замыкание хранит доступ к окружению независимо от receiver."
+        },
+        {
+          "kind": "transfer",
+          "question": "Метод во время hot swap заменили. Чем различатся сохранённый bind и обёртка ()=>obj.method()?",
+          "expected": "Bind продолжает вызывать прежнюю функцию с фиксированным receiver; обёртка читает актуальное свойство при каждом вызове."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:105",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L105",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 105,
+        "originalQuestion": "Как работает контекст выполнения (Execution context) в JavaScript?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:1255",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Доказательство устранения утечки» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:heap-retention-proof",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Доказательство устранения утечки",
+      "question": "После 100 открытий/закрытий панели heap растёт; обработчик на window замыкает detached DOM и большой кеш. Составьте диагностику, исправление ownership и проверку результата, отделив утечку от высокого пика аллокаций.",
+      "shortAnswer": "Снять сравнимые heap snapshots после повторных циклов и GC, найти retaining path от window listener до панели/кеша. Устойчивый владелец должен снять listener, остановить ресурсы и разорвать лишние ссылки при закрытии. Повторить цикл: retained objects/память должны стабилизироваться, а не только упасть однажды.",
+      "explanation": "Detached DOM сам по себе не доказывает утечку: важна достижимость после ожидаемого конца жизни. DevTools и логирование тоже могут удерживать объекты; измерять сопоставимые условия.",
+      "assessment": {
+        "basic": "Находит долгоживущий listener.",
+        "confident": "Предлагает retaining-path диагностику, cleanup и повторяемое доказательство.",
+        "deep": "Нет; сборка недетерминирована, а активный ресурс требует явного lifecycle и остановки. Повторно проверить таймеры и удержание."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Какой корень удерживает замыкание после удаления DOM?",
+          "expected": "Зарегистрированный на window обработчик."
+        },
+        {
+          "kind": "transfer",
+          "question": "WeakRef спрятал рост, но таймер всё ещё выполняется. Исправлена ли модель?",
+          "expected": "Нет; сборка недетерминирована, а активный ресурс требует явного lifecycle и остановки. Повторно проверить таймеры и удержание."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:106",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L106",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 106,
+        "originalQuestion": "Назовите основные типы утечек памяти в JavaScript?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:14135",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Публикация данных между workers» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:shared-memory-publication",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Публикация данных между workers",
+      "question": "Два worker увеличивают Int32Array поверх SharedArrayBuffer через a[0]++. Почему теряются обновления? Спроектируйте счётчик и публикацию payload через флаг, учитывая ожидание, изоляцию страницы и main thread.",
+      "shortAnswer": "++ состоит из чтения и записи и допускает гонку; счётчик обновляют Atomics.add. Для публикации сначала записывают payload, затем атомарно выставляют флаг, читатель проверяет его Atomics.load и соблюдает протокол владения. Нужны cross-origin isolation и проверка поддержки; main thread нельзя блокировать Atomics.wait, используют сообщение/асинхронное ожидание с fallback.",
+      "explanation": "Один атомарный счётчик не делает произвольный многошаговый алгоритм атомарным. Notify сам не заменяет предикат ожидания; порядок и повторное использование буфера должны быть частью протокола.",
+      "assessment": {
+        "basic": "Распознаёт read-modify-write race.",
+        "confident": "Даёт атомарное обновление и протокол публикации с ограничениями среды.",
+        "deep": "Добавить подтверждение/состояния владения или буферы поколений; writer не перезаписывает область до завершения чтения."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Достаточно ли заменить только запись на Atomics.store после обычного чтения?",
+          "expected": "Нет, составной increment всё ещё гоняется; нужен Atomics.add или корректный CAS цикл."
+        },
+        {
+          "kind": "transfer",
+          "question": "Флаг сбрасывают, пока читатель ещё копирует payload. Как защитить следующую запись?",
+          "expected": "Добавить подтверждение/состояния владения или буферы поколений; writer не перезаписывает область до завершения чтения."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/js.md:109",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/js.md#L109",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/js.md",
+        "line": 109,
+        "originalQuestion": "Что такое `Atomics` и `SharedArrayBuffer`?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:12863",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Закрытие синхронного генератора» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:generator-resource-cleanup",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Закрытие синхронного генератора",
+      "question": "Генератор держит ресурс в try/finally и yield-ит строки. Сравните break из for...of, ручной next с брошенным итератором и явный return(). Спроектируйте безопасное досрочное завершение потребителя.",
+      "shortAnswer": "Break из for...of вызывает IteratorClose/return, поэтому finally генератора выполняется. Просто перестать вызывать next недостаточно. При ручном потреблении закрытие делают в finally через iterator.return?.(), а ресурс освобождают в finally генератора. Нужно оговорить, что cleanup сам не yield-ит и может бросить ошибку.",
+      "explanation": "Return может не завершить генератор немедленно, если finally содержит yield: вернётся done:false. Синхронное закрытие не ждёт асинхронный cleanup; контракт ресурса должен соответствовать модели.",
+      "assessment": {
+        "basic": "Связывает return с finally.",
+        "confident": "Различает способы потребления и гарантирует cleanup по контракту.",
+        "deep": "Одного return недостаточно для полного завершения; убрать yield из обязательного cleanup или явно спроектировать дальнейшее потребление, не обещая прежнюю гарантию."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Запускает ли сборщик мусора finally брошенного итератора по гарантии языка?",
+          "expected": "Нет, нельзя использовать GC как протокол закрытия."
+        },
+        {
+          "kind": "transfer",
+          "question": "В finally добавили yield для сообщения об очистке. Что сломалось?",
+          "expected": "Одного return недостаточно для полного завершения; убрать yield из обязательного cleanup или явно спроектировать дальнейшее потребление, не обещая прежнюю гарантию."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/es.md:53",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/es.md#L53",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/es.md",
+        "line": 53,
+        "originalQuestion": "Что такое генераторы? Когда стоит использовать генераторы?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:309",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Контракт Symbol.toPrimitive» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:symbol-primitive-contract",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Контракт Symbol.toPrimitive",
+      "question": "Объект Money реализует Symbol.toPrimitive. Требуется форматировать String(money), но запрещать неявную арифметику и конкатенацию. Спроектируйте обработку hint и объясните, почему valueOf/toString не подстрахуют неверный результат.",
+      "shortAnswer": "Для hint=\"string\" вернуть строку; для \"number\" и \"default\" бросить TypeError и предложить явный метод вычисления. String использует string, унарный + — number, оператор + обычно default. Если Symbol.toPrimitive существует и вернул объект, возникает TypeError, fallback к valueOf/toString не выполняется.",
+      "explanation": "Ветка default важна: запрет только number не блокирует money+1. Символ — протокол преобразования, а не средство обеспечения точности денежной арифметики.",
+      "assessment": {
+        "basic": "Называет три hint.",
+        "confident": "Проектирует все ветки и объясняет отсутствие fallback.",
+        "deep": "Это смешает валюты/точность и снова разрешит конкатенацию; лучше явный compare с проверкой валюты и точным представлением суммы."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Какой hint обычно приходит при money + \"\"?",
+          "expected": "default, а не string."
+        },
+        {
+          "kind": "transfer",
+          "question": "Нужно разрешить сравнение денежных величин. Стоит ли возвращать число для всех hint?",
+          "expected": "Это смешает валюты/точность и снова разрешит конкатенацию; лучше явный compare с проверкой валюты и точным представлением суммы."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/es.md:56",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/es.md#L56",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/es.md",
+        "line": 56,
+        "originalQuestion": "Что такое well-known symbols и зачем они нужны?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:12253",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Приоритет и отмена длинной работы» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:scheduler-cooperative-yield",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Приоритет и отмена длинной работы",
+      "question": "Обработка 200 тысяч записей блокирует ввод. Спроектируйте выполнение через scheduler.postTask/yield: приоритет, границы порций, отмена и fallback для браузера без API. Как проверить улучшение?",
+      "shortAnswer": "Делить работу на ограниченные порции с измеримым бюджетом, запускать подходящий postTask priority и уступать управление через yield; проверять AbortSignal между порциями и передавать поддерживаемый signal задаче. При отсутствии API использовать очереди задач/таймеры либо worker. Сравнить long tasks, задержку ввода и общее время на целевых устройствах.",
+      "explanation": "Приоритет не прерывает текущий синхронный цикл. Promise.resolve не является гарантированной уступкой браузерному input/render; отмена задачи не откатывает сделанные изменения, итог публикуют по явному контракту.",
+      "assessment": {
+        "basic": "Предлагает порционирование.",
+        "confident": "Учитывает cooperative execution, отмену, поддержку и метрики.",
+        "deep": "Собирать результат отдельно и коммитить только актуальное завершённое поколение; отменённое отбрасывать, не менять UI частями."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Прервёт ли высокий приоритет новую уже выполняющуюся длинную функцию?",
+          "expected": "Нет, JavaScript работа должна сама вернуть управление."
+        },
+        {
+          "kind": "transfer",
+          "question": "Частичный результат нельзя показывать. Как совместить отмену и публикацию?",
+          "expected": "Собирать результат отдельно и коммитить только актуальное завершённое поколение; отменённое отбрасывать, не менять UI частями."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://wicg.github.io/scheduling-apis/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/async-js.md:42",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/async-js.md#L42",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/async-js.md",
+        "line": 42,
+        "originalQuestion": "Что такое scheduler API в браузере?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:1415",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Событие на границе Shadow DOM» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:shadow-event-contract",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Событие на границе Shadow DOM",
+      "question": "Внутри custom element кнопка посылает CustomEvent, внешний делегированный обработчик его не видит. Спроектируйте публичное событие и объясните bubbles, composed, retargeting и composedPath без зависимости от внутренних узлов.",
+      "shortAnswer": "Публичное событие отправляют с bubbles:true и composed:true, помещая стабильные данные в detail. Composed разрешает переход границы shadow tree, bubbles — всплытие. Снаружи target может быть host из-за retargeting; composedPath зависит от открытости дерева. Контракт строят на событии/detail, а не поиске внутренней кнопки.",
+      "explanation": "Shadow DOM инкапсулирует структуру, но не является границей безопасности. В закрытом дереве внутренние узлы скрыты из внешнего path; не обещать универсальную DOM-инспекцию.",
+      "assessment": {
+        "basic": "Находит недостающие флаги.",
+        "confident": "Различает границу и всплытие и задаёт устойчивый публичный API.",
+        "deep": "Публичное событие и detail; потребитель не должен зависеть от видимости внутренних узлов composedPath."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Достаточно bubbles:true для выхода пользовательского события из shadow tree?",
+          "expected": "Нет, нужен composed:true."
+        },
+        {
+          "kind": "transfer",
+          "question": "Компонент перешёл с open на closed shadow root. Что должно сохраниться?",
+          "expected": "Публичное событие и detail; потребитель не должен зависеть от видимости внутренних узлов composedPath."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://dom.spec.whatwg.org/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/browser-js.md:46",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/browser-js.md#L46",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/browser-js.md",
+        "line": 46,
+        "originalQuestion": "Что такое Shadow DOM? Как он связан с веб-компонентами (Web components)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:14124",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Диагностика стоимости анимации» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:animation-pipeline-diagnosis",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Диагностика стоимости анимации",
+      "question": "Анимация top/left дёргается при тяжёлом JavaScript. Сравните transform/opacity, работу main thread и compositor, затем предложите измерение и ограничения will-change.",
+      "shortAnswer": "Top/left часто вызывают layout/paint, transform/opacity могут обходиться compositing при подходящих слоях. Проверить trace, layout/paint, dropped frames и память слоёв; перенести подходящее движение и уменьшить main-thread работу. Will-change применять адресно и временно: он не гарантирует ускорения и расходует память.",
+      "explanation": "Compositor не освобождает от расчёта JavaScript каждого кадра; для независимого прогресса подходят поддерживаемые CSS/Web Animations. Производительность проверяют на реальной странице, не по названию свойства.",
+      "assessment": {
+        "basic": "Разделяет layout и compositing.",
+        "confident": "Обосновывает изменение trace и учитывает стоимость слоёв.",
+        "deep": "Память и размеры composited layers, raster/cache footprint; сократить слои и will-change, сравнить на целевом устройстве."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Делает ли translateZ(0) любой код плавным?",
+          "expected": "Нет, это не устраняет JavaScript блокировки и может увеличить число слоёв."
+        },
+        {
+          "kind": "transfer",
+          "question": "Анимация плавная, но мобильный браузер выгружает вкладку. Что измерить?",
+          "expected": "Память и размеры composited layers, raster/cache footprint; сократить слои и will-change, сравнить на целевом устройстве."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://www.w3.org/TR/css-will-change/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/browser-js.md:48",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/browser-js.md#L48",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/browser-js.md",
+        "line": 48,
+        "originalQuestion": "Разница между compositor thread и main thread?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:24627",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Проверка возможностей вместо браузерных догадок» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:capability-detection",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Проверка возможностей вместо браузерных догадок",
+      "question": "Критичный редактор выбирает API по строке User-Agent и падает в WebView. Спроектируйте feature detection, проверку поведения и fallback, отделив это от feature inference.",
+      "shortAnswer": "Проверить наличие требуемого API и безопасным пробным вызовом — нужную семантику/разрешения; обработать отказ и предложить рабочий fallback. Feature inference выводит одну возможность из другой и ненадёжен; UA тоже не гарантирует возможностей конкретной среды. Собирать обезличенные ошибки capability path и тестировать реальные WebView.",
+      "explanation": "Наличие свойства не доказывает разрешение или отсутствие частичных реализаций. Проверка не должна портить данные; чувствительные возможности могут требовать user gesture/secure context.",
+      "assessment": {
+        "basic": "Отказывается от UA как гарантии API.",
+        "confident": "Проектирует обнаружение, пробу, обработку отказа и проверяемый fallback.",
+        "deep": "Проверить доступность заранее, а реальный вызов выполнять по действию с обработкой отказа и явной альтернативой; не обещать доступ только по наличию метода."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли наличие fetch считать доказательством поддержки другого нового API?",
+          "expected": "Нет, это inference, а не проверка требуемой возможности."
+        },
+        {
+          "kind": "transfer",
+          "question": "Проба записи требует жеста пользователя. Как сохранить корректный UX?",
+          "expected": "Проверить доступность заранее, а реальный вызов выполнять по действию с обработкой отказа и явной альтернативой; не обещать доступ только по наличию метода."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://html.spec.whatwg.org/multipage/system-state.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/browser-js.md:45",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/browser-js.md#L45",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/browser-js.md",
+        "line": 45,
+        "originalQuestion": "Разница между feature detection, feature inference и анализом строки user-agent?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:925",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Обновление Service Worker без смеси версий» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:javascript:service-worker-version-consistency",
+      "topic": "javascript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Обновление Service Worker без смеси версий",
+      "question": "Новый Service Worker активировался, пока вкладка исполняет старый bundle; lazy chunk пропал из кеша. Спроектируйте install/waiting/activate, версионирование кеша и согласованное обновление открытых вкладок.",
+      "shortAnswer": "Новые ресурсы готовят в versioned cache при install; по умолчанию новый worker ждёт ухода старых клиентов. SkipWaiting/clients.claim применяют только с протоколом совместимости и уведомлением/перезагрузкой клиентов. Старые hashed chunks сохраняют по политике поддержки активных версий; чистка в activate не должна ломать ещё работающие вкладки.",
+      "explanation": "Worker, страница и набор ресурсов обновляются не одной транзакцией. Нужны тесты двух вкладок, offline, прерванного install и смешанных версий; failed install должен оставлять рабочую предыдущую версию.",
+      "assessment": {
+        "basic": "Различает waiting и active.",
+        "confident": "Даёт согласованный протокол версий, retention и проверки отказов.",
+        "deep": "Только при доказанной совместимости/доступности ресурсов; иначе сохранить поддерживаемую версию или ввести явную границу срока и безопасное обновление."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Гарантирует ли clients.claim совместимость старого JavaScript с новым worker?",
+          "expected": "Нет, он меняет контроллер, а не bundle страницы."
+        },
+        {
+          "kind": "transfer",
+          "question": "Пользователь откладывает reload сутки. Можно удалить старый кеш сразу?",
+          "expected": "Только при доказанной совместимости/доступности ресурсов; иначе сохранить поддерживаемую версию или ввести явную границу срока и безопасное обновление."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современный браузер; ES modules/strict, если не указано иное. Средовые API требуют проверки поддержки. Ожидаемый уровень: senior.",
+      "references": [
+        "https://www.w3.org/TR/service-workers/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/web.md:66",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/web.md#L66",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/web.md",
+        "line": 66,
+        "originalQuestion": "Что такое Service Workers?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:8049",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Объявления типов и реальная библиотека» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:typescript:declarations-runtime",
+      "topic": "typescript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Объявления типов и реальная библиотека",
+      "question": "После добавления declare function load():Promise<string> компиляция прошла, но браузер сообщает load is not defined. Что даёт .d.ts и как связать объявление с runtime?",
+      "shortAnswer": ".d.ts описывает существующие значения для checker и не создаёт JavaScript реализацию. Нужно импортировать/подключить реальную библиотеку и согласовать exports, module resolution и типы; глобальное declare допустимо, только если среда действительно предоставляет значение.",
+      "explanation": "Ошибочное объявление может создать ложную уверенность. Типовой пакет и runtime пакет проверяют вместе, особенно exports и версии API.",
+      "assessment": {
+        "basic": "Отделяет типы от исполнения.",
+        "confident": "Объясняет загрузку реализации и соответствие declarations/exports.",
+        "deep": "В несогласованной версии/публикации/разрешении entry points; сверить установленный runtime export и declarations, добавить проверку реального импорта."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Появится ли тело load в bundle из-за declare?",
+          "expected": "Нет, объявление стирается."
+        },
+        {
+          "kind": "transfer",
+          "question": "Пакет публикует types для метода, которого нет в установленной версии JS. Где искать дефект?",
+          "expected": "В несогласованной версии/публикации/разрешении entry points; сверить установленный runtime export и declarations, добавить проверку реального импорта."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. TypeScript strict; runtime выполняет JavaScript. Возможности infer/satisfies и миксинов по указанной документации. Ожидаемый уровень: middle.",
+      "references": [
+        "https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/ts.md:41",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/ts.md#L41",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/ts.md",
+        "line": 41,
+        "originalQuestion": "Для чего нужны `d.ts` файлы?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:24393",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Связанный типизированный API событий» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:typescript:template-event-contract",
+      "topic": "typescript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Связанный типизированный API событий",
+      "question": "Для Model={name:string;age:number} задайте on(\"nameChanged\",callback), чтобы допустимы были только события полей, а callback получал тип выбранного поля.",
+      "shortAnswer": "Объявить on<K extends string & keyof Model>(event:`${K}Changed`, cb:(value:Model[K])=>void):void. Template literal связывает имя с K, indexed access — аргумент обработчика. Для nameChanged это string, ageChanged — number.",
+      "explanation": "Это конечный контракт полей, а не runtime маршрутизация: emit должен реально поставлять согласованные значения. Для symbol/number ключей нужны отдельные правила.",
+      "assessment": {
+        "basic": "Строит union имён событий.",
+        "confident": "Сохраняет связь имени события с типом payload.",
+        "deep": "Нет; на границе нужна runtime проверка имени и значения, поскольку типы не проверяют внешний протокол."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Достаточно ли cb:(value:string|number)=>void для точной связи?",
+          "expected": "Нет, это теряет зависимость от конкретного события."
+        },
+        {
+          "kind": "transfer",
+          "question": "Событие приходит из WebSocket как string. Можно привести его к keyof и доверять payload?",
+          "expected": "Нет; на границе нужна runtime проверка имени и значения, поскольку типы не проверяют внешний протокол."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. TypeScript strict; runtime выполняет JavaScript. Возможности infer/satisfies и миксинов по указанной документации. Ожидаемый уровень: middle.",
+      "references": [
+        "https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/ts.md:44",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/ts.md#L44",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/ts.md",
+        "line": 44,
+        "originalQuestion": "Что такое шаблонные литеральные типы (Template literal types)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:typescript:spread-overwrite",
+    "reason": "Повтор проверки порядка spread/перезаписи полей между темами; вместо него проверяется точный контракт satisfies.",
+    "card": {
+      "id": "curated:typescript:satisfies-config",
+      "topic": "typescript",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Проверка конфигурации с точным выводом",
+      "question": "Конфигурация palette содержит red:[255,0,0] и green:\"#00ff00\". Нужно проверить Record<\"red\"|\"green\",string|[number,number,number]>, сохранив возможность palette.green.toUpperCase(). Что выбрать?",
+      "shortAnswer": "const palette={red:[255,0,0],green:\"#00ff00\"} satisfies Record<\"red\"|\"green\",string|[number,number,number]> проверяет соответствие и сохраняет полезный вывод конкретных свойств. Аннотация всего объекта широким Record потеряла бы точный тип green.",
+      "explanation": "Satisfies не является assertion и не добавляет runtime проверки. Контекстная типизация может влиять на inference; это не обещание неизменности любого буквального типа.",
+      "assessment": {
+        "basic": "Выбирает satisfies.",
+        "confident": "Объясняет проверку ключей/значений и точность конкретного поля.",
+        "deep": "Нет, особенно any обходит статическую защиту; сначала runtime валидация неизвестных данных, затем типизированная модель."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Поймает ли satisfies опечатку gren в свежем объектном литерале?",
+          "expected": "Да, при указанном конечном наборе ключей."
+        },
+        {
+          "kind": "transfer",
+          "question": "Конфигурацию загрузили JSON.parse. Достаточно satisfies для проверки сервера?",
+          "expected": "Нет, особенно any обходит статическую защиту; сначала runtime валидация неизвестных данных, затем типизированная модель."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. TypeScript strict; runtime выполняет JavaScript. Возможности infer/satisfies и миксинов по указанной документации. Ожидаемый уровень: middle.",
+      "references": [
+        "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/ts.md:42",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/ts.md#L42",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/ts.md",
+        "line": 42,
+        "originalQuestion": "Что такое `satisfies` оператор в TypeScript?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:8049",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Структурное извлечение infer и перегрузки» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:typescript:infer-structural-extraction",
+      "topic": "typescript",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Структурное извлечение infer и перегрузки",
+      "question": "Создайте тип Payload<T>, извлекающий U из {data:Promise<U>} и возвращающий never иначе. Предскажите union валидного и невалидного входа и объясните ограничение ReturnType для перегруженной функции.",
+      "shortAnswer": "type Payload<T>=T extends {data:Promise<infer U>} ? U : never. Для {data:Promise<string>}|{error:Error} получится string: ветка невалидного участника даёт never. ReturnType перегрузки выводится из последней сигнатуры, обычно общей; он не выполняет overload resolution по воображаемому аргументу.",
+      "explanation": "Infer вводит переменную в структурном pattern условного типа; ограничения pattern определяют подходящие входы. Если нужен иной контракт PromiseLike, его надо указать явно; извлечение структуры не является выполнением функции.",
+      "assessment": {
+        "basic": "Пишет корректный infer pattern.",
+        "confident": "Предсказывает результат и ограничение overload inference.",
+        "deep": "Не через ReturnType общей перегрузки; использовать реально типизированный вызов/отдельный контракт соответствия аргументов и результатов."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Что вернётся для {data:string}?",
+          "expected": "never, потому что data не соответствует Promise<U>."
+        },
+        {
+          "kind": "transfer",
+          "question": "Перегрузки string→number и number→string завершает общая (string|number)→string|number. Как извлечь только результат вызова со string?",
+          "expected": "Не через ReturnType общей перегрузки; использовать реально типизированный вызов/отдельный контракт соответствия аргументов и результатов."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. TypeScript strict; runtime выполняет JavaScript. Возможности infer/satisfies и миксинов по указанной документации. Ожидаемый уровень: senior.",
+      "references": [
+        "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/ts.md:54",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/ts.md#L54",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/ts.md",
+        "line": 54,
+        "originalQuestion": "Как работает infer в условных типах?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:typescript:template-explosion",
+    "reason": "Шаблонные literal types уже проверяются на Middle; сложная вкладка получает другой механизм runtime-инициализации миксина.",
+    "card": {
+      "id": "curated:typescript:mixin-instance-initialization",
+      "topic": "typescript",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Миксин и инициализация экземпляра",
+      "question": "applyMixins скопировал descriptors методов с prototype класса, но метод читает поле, заданное в constructor, и #private. Почему вызов ломается? Сравните с class-expression mixin и выберите безопасную композицию.",
+      "shortAnswer": "Копирование prototype descriptors не вызывает constructor и не создаёт instance fields/private brand. Метод с #private требует экземпляр с соответствующим brand. Class-expression mixin class extends Base выполняет собственную инициализацию при new; для независимых ресурсов безопаснее явная композиция/делегирование с lifecycle.",
+      "explanation": "Типовое объединение интерфейсов не создаёт runtime состояние. Копирование через присваивание дополнительно теряет getters/setters и descriptors; даже корректные descriptors не решают приватную инициализацию.",
+      "assessment": {
+        "basic": "Находит отсутствие constructor.",
+        "confident": "Разделяет descriptors, instance fields и private brand и выбирает рабочую модель.",
+        "deep": "Явно определить порядок конструкторов и destroy либо использовать композицию с единым владельцем; тестировать частично неудачную инициализацию и повторную очистку."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Создаст ли Object.defineProperty(target,key,descriptor) private brand класса?",
+          "expected": "Нет, private slot не является обычным descriptor свойством."
+        },
+        {
+          "kind": "transfer",
+          "question": "Два миксина должны открывать и закрывать ресурсы. Как избежать скрытого порядка cleanup?",
+          "expected": "Явно определить порядок конструкторов и destroy либо использовать композицию с единым владельцем; тестировать частично неудачную инициализацию и повторную очистку."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. TypeScript strict; runtime выполняет JavaScript. Возможности infer/satisfies и миксинов по указанной документации. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://www.typescriptlang.org/docs/handbook/mixins.html",
+        "https://tc39.es/ecma262/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/ts.md:52",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/ts.md#L52",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/ts.md",
+        "line": 52,
+        "originalQuestion": "Для чего нужны миксины в TypeScript?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:junior:29648",
+    "reason": "Второй вопрос про Virtual DOM пересекается с сохранённым React-фундаментом; проверяем отдельный базовый механизм хуков.",
+    "card": {
+      "id": "curated:react:hooks-call-order",
+      "topic": "react",
+      "tab": "junior",
+      "targetLevel": "junior",
+      "angles": [],
+      "kind": "question",
+      "title": "Порядок вызова хуков",
+      "question": "Компонент вызывает useState внутри if(visible). Почему это нарушает Rules of Hooks и как исправить компонент?",
+      "shortAnswer": "Обычные хуки вызывают на верхнем уровне компонента или custom hook, в одинаковом порядке до условных return. Перенести useState выше условия либо выделить условно монтируемый дочерний компонент со своим хуком.",
+      "explanation": "React связывает состояние с порядком вызовов. Хуки не вызывают из обработчика/обычной функции; условие внутри эффекта допустимо. У use есть отдельные исключения, не распространяемые на useState.",
+      "assessment": {
+        "basic": "Замечает условный вызов.",
+        "confident": "Сохраняет порядок вызовов и предлагает корректное исправление.",
+        "deep": "Да: ранний return по-прежнему меняет последовательность; поднять хук выше return или вынести в дочерний компонент."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Меняется ли число вызовов при visible=false?",
+          "expected": "Да, условный хук исчезает из последовательности."
+        },
+        {
+          "kind": "transfer",
+          "question": "После исправления useState расположен ниже if(!visible)return null. Осталась ли ошибка?",
+          "expected": "Да: ранний return по-прежнему меняет последовательность; поднять хук выше return или вынести в дочерний компонент."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: junior.",
+      "references": [
+        "https://react.dev/reference/rules/rules-of-hooks"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:24",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L24",
+        "level": "junior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 24,
+        "originalQuestion": "Правила (ограничения) использования хуков?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:middle:12629",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Согласованный переход useReducer» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:react:reducer-coherent-transition",
+      "topic": "react",
+      "tab": "middle",
+      "targetLevel": "middle",
+      "angles": [],
+      "kind": "question",
+      "title": "Согласованный переход useReducer",
+      "question": "Форма хранит status, error и result отдельными useState; обработчики допускают status=\"success\" при старой error. Как задать согласованные переходы через useReducer?",
+      "shortAnswer": "Описать состояния idle/pending/success/error и события submitted/succeeded/failed; reducer одним переходом задаёт согласованный набор полей, например success с result и без error. Reducer чистый, запрос выполняется снаружи и отправляет событие результата.",
+      "explanation": "UseReducer централизует правила перехода, но не предотвращает устаревшие ответы автоматически: requestId/поколение проверяют по выбранному контракту.",
+      "assessment": {
+        "basic": "Выделяет reducer и action.",
+        "confident": "Задаёт целые состояния и допустимые переходы без эффектов в reducer.",
+        "deep": "Нет; связать результат с requestId/поколением и принимать только актуальное событие либо явно поддержать независимые операции."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Где должен выполняться fetch?",
+          "expected": "В обработчике/эффекте/сервисе, reducer только вычисляет state."
+        },
+        {
+          "kind": "transfer",
+          "question": "Ответ A пришёл после новой отправки B. Достаточен ли reducer сам по себе?",
+          "expected": "Нет; связать результат с requestId/поколением и принимать только актуальное событие либо явно поддержать независимые операции."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: middle.",
+      "references": [
+        "https://react.dev/reference/react/useReducer"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:47",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L47",
+        "level": "middle",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 47,
+        "originalQuestion": "Что такое `useReducer()`?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:12629",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Границы Server Components» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:react:server-component-boundaries",
+      "topic": "react",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Границы Server Components",
+      "question": "Страница читает БД и содержит интерактивный фильтр. Спроектируйте границы Server/Client Components, передачу данных и защиту секретов; объясните, чем Server Component отличается от обычного SSR клиентского компонента.",
+      "shortAnswer": "Чтение БД и секреты оставить в server-only модуле/Server Component, фильтр вынести за \"use client\". Через границу передавать поддерживаемые сериализуемые данные или серверные элементы по контракту framework, не соединение БД. Server Component исполняется на сервере/при сборке и не отправляет собственный код в клиентский bundle; Client Component может также SSR-рендериться, но затем исполняется на клиенте.",
+      "explanation": "RSC не означает доступ к браузерным API или useState на сервере. Сервер авторизует чтение независимо от размещения компонента; streaming и cache policy задаёт интеграция.",
+      "assessment": {
+        "basic": "Выделяет интерактивную клиентскую границу.",
+        "confident": "Разделяет RSC и SSR, защищает доступ и сериализуемый контракт.",
+        "deep": "Отметить модуль server-only средствами framework и проверять границы сборкой; секрет не помещать в передаваемые props/клиентские переменные окружения."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли передать в Client Component открытое соединение с БД?",
+          "expected": "Нет, это серверный ресурс и неподходящее значение для границы."
+        },
+        {
+          "kind": "transfer",
+          "question": "Общий модуль с ключом API случайно импортировал Client Component. Какая защита нужна?",
+          "expected": "Отметить модуль server-only средствами framework и проверять границы сборкой; секрет не помещать в передаваемые props/клиентские переменные окружения."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: senior.",
+      "references": [
+        "https://react.dev/reference/rsc/server-components"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:87",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L87",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 87,
+        "originalQuestion": "Что такое серверные компоненты в React?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "easyoffer:senior:12873",
+    "reason": "Межуровневой повтор EasyOffer: тот же базовый вопрос уже проверяется сохранённой карточкой; на этой позиции нужен самостоятельный механизм «Внедрение React Compiler» по исходному грейду GitHub.",
+    "card": {
+      "id": "curated:react:compiler-rollout",
+      "topic": "react",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Внедрение React Compiler",
+      "question": "Команда хочет включить React Compiler и удалить всю ручную мемоизацию. Предложите условия корректности, поэтапную миграцию и доказательство пользы на интерактивном экране.",
+      "shortAnswer": "Сначала обеспечить Rules of React, совместимую конфигурацию сборки/версий и разобрать диагностики compiler. Включать поэтапно, сохраняя поведенческие тесты; сравнивать commits, стоимость render, interaction latency и bundle. Ручную мемоизацию удалять по проверке конкретного контракта, не использовать memo как гарантию корректности.",
+      "explanation": "Compiler оптимизирует вычисления/мемоизацию там, где может доказать безопасность; он не исправляет скрытые мутации, неправильные эффекты или алгоритмическую сложность.",
+      "assessment": {
+        "basic": "Знает цель автоматической мемоизации.",
+        "confident": "Задаёт требования, rollout, метрики и критерий удаления ручного кода.",
+        "deep": "Сетевой/эффектный критический путь, long tasks, layout/paint и алгоритмы; оптимизация render не доказывает устранение всей задержки."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Исправляет ли compiler нарушение чистоты render?",
+          "expected": "Нет, такие нарушения нужно устранить."
+        },
+        {
+          "kind": "transfer",
+          "question": "CPU render упал, а задержка ввода осталась. Что исследовать дальше?",
+          "expected": "Сетевой/эффектный критический путь, long tasks, layout/paint и алгоритмы; оптимизация render не доказывает устранение всей задержки."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: senior.",
+      "references": [
+        "https://react.dev/learn/react-compiler/introduction"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:90",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L90",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 90,
+        "originalQuestion": "Как работает React Compiler (React Forget)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:react:usememo-resource",
+    "reason": "Повтор lifecycle ресурса и очистки с сохранёнными кейсами; заменён протоколом чтения Promise через use.",
+    "card": {
+      "id": "curated:react:use-promise-control-flow",
+      "topic": "react",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Чтение Promise через use",
+      "question": "Компонент читает Promise через use внутри условия. Опишите pending/rejected поведение, допустимое размещение и создание Promise так, чтобы render не запускал бесконечные новые запросы.",
+      "shortAnswer": "Pending приостанавливает render до Suspense, rejected передаёт ошибку Error Boundary. Use допускается в условии/цикле, но внутри компонента или custom hook и не в try/catch. Promise должен иметь стабильного владельца: framework/cache или серверная передача; новый Promise на каждом клиентском render непригоден.",
+      "explanation": "Исключение из порядка вызовов относится к use, а не всем хукам. Для восстановления после ошибки нужно согласовать повтор создания ресурса и reset boundary.",
+      "assessment": {
+        "basic": "Различает suspension и rejection.",
+        "confident": "Соблюдает исключения placement и стабильную идентичность Promise.",
+        "deep": "Ресурс/Promise связан с новым id и управляемым кешем; не переиспользовать Promise чужого ресурса и явно выбрать UI перехода/Suspense."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли перехватить suspension обычным try/catch вокруг use?",
+          "expected": "Нет, use не оборачивают в try/catch; используют Suspense/Error Boundary."
+        },
+        {
+          "kind": "transfer",
+          "question": "Пользователь меняет id во время ожидания. Какой контракт нужен?",
+          "expected": "Ресурс/Promise связан с новым id и управляемым кешем; не переиспользовать Promise чужого ресурса и явно выбрать UI перехода/Suspense."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://react.dev/reference/react/use"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:86",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L86",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 86,
+        "originalQuestion": "Что такое `use()` хук в React 19?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:react:key-scope",
+    "reason": "Область ключей повторяет базовый контракт React key; заменена выбором потокового API по runtime.",
+    "card": {
+      "id": "curated:react:ssr-runtime-stream-api",
+      "topic": "react",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "engineering"
+      ],
+      "kind": "question",
+      "title": "Потоковый SSR и среда выполнения",
+      "question": "Сервер переносится из Node в runtime с Web Streams. Как выбрать renderToPipeableStream/renderToReadableStream, управлять shell, ошибкой до отправки headers и отменой при disconnect?",
+      "shortAnswer": "Для Node streams — renderToPipeableStream, для Web Streams — renderToReadableStream при поддержке интеграцией. Shell отправлять в предусмотренной API фазе готовности; до отправки headers можно выбрать error status/fallback, после отправки статус уже не переписать. Disconnect связывают с abort/Signal и освобождением запросов; проверяют backpressure и таймаут.",
+      "explanation": "RenderToString не ждёт данные через Suspense как потоковый SSR и не заменяет streaming API. Server render требует адаптера framework/runtime; выбор API не сводится к будущей hydration.",
+      "assessment": {
+        "basic": "Выбирает stream по runtime.",
+        "confident": "Проектирует готовность shell, headers, abort и ограничения потока.",
+        "deep": "Использовать all-ready фазу/ожидание полного потока по API, сохранив timeout/abort; оценить увеличение TTFB."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли изменить HTTP status после передачи headers?",
+          "expected": "Нет, нужен заранее заданный протокол ошибок и клиентского восстановления."
+        },
+        {
+          "kind": "transfer",
+          "question": "Роботу нужен полностью готовый HTML. Как изменить стратегию?",
+          "expected": "Использовать all-ready фазу/ожидание полного потока по API, сохранив timeout/abort; оценить увеличение TTFB."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://react.dev/reference/react-dom/server"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:82",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L82",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 82,
+        "originalQuestion": "Что такое `ReactDOMServer`?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:react:modal-focus",
+    "reason": "Фокус/удалённый opener уже проверяется в доступности и композиции; заменён серверной командой и trust boundary.",
+    "card": {
+      "id": "curated:react:server-action-trust-boundary",
+      "topic": "react",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Server Actions как внешняя команда",
+      "question": "Форма передаёт userId и amount в Server Action перевода денег. Спроектируйте авторизацию, валидацию, повторную отправку и возврат ошибок; почему \"use server\" не делает аргументы доверенными?",
+      "shortAnswer": "Каждый вызов аутентифицируют и авторизуют на сервере, пользователя выводят из сессии, amount/получателя валидируют. Перевод выполняет транзакционный backend с idempotency key; ожидаемые ошибки возвращают безопасным сериализуемым результатом для формы, исключения логируют отдельно. Клиентские аргументы контролирует вызывающий, включая bound/hidden данные.",
+      "explanation": "Server Function может вызываться как сетевой endpoint. Pending UI и отключение кнопки полезны, но не гарантируют отсутствие повторной команды или подделки запроса.",
+      "assessment": {
+        "basic": "Требует серверной проверки доступа.",
+        "confident": "Проектирует полную команду с транзакцией, идемпотентностью и ошибками.",
+        "deep": "Повторить с тем же operation/idempotency key и получить сохранённый результат; новая команда без ключа рискует вторым переводом."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли доверять hidden userId, потому что форму отрендерил сервер?",
+          "expected": "Нет, клиент может изменить отправляемые данные."
+        },
+        {
+          "kind": "transfer",
+          "question": "Ответ потерялся после успешного перевода. Как безопасно повторить?",
+          "expected": "Повторить с тем же operation/idempotency key и получить сохранённый результат; новая команда без ключа рискует вторым переводом."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. React 19; Server Components/Functions и потоковая передача требуют поддерживающей framework/runtime интеграции. Ожидаемый уровень: senior.",
+      "references": [
+        "https://react.dev/reference/rsc/server-functions"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/react.md:93",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/react.md#L93",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/react.md",
+        "line": 93,
+        "originalQuestion": "Как работают Server Actions в React?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:css:contain-size",
+    "reason": "Containment пересекается с оставшимися CSS-кейсами; новый вопрос проверяет входы и ограничения Paint Worklet.",
+    "card": {
+      "id": "curated:css:houdini-paint-inputs",
+      "topic": "css",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Контракт CSS Paint Worklet",
+      "question": "Paint Worklet рисует фон по --progress. Спроектируйте типизацию свойства, объявление зависимостей inputProperties и fallback; какие ограничения отделяют worklet от обычного DOM-кода?",
+      "shortAnswer": "Зарегистрировать --progress с syntax:\"<number>\", корректными inherits/initialValue; объявить --progress в inputProperties painter и читать из properties. Paint использует предоставленные geometry/context и не управляет DOM как main-thread код. Проверять CSS.paintWorklet/paint и давать обычный фон при отсутствии поддержки; измерить стоимость перерисовки.",
+      "explanation": "Houdini объединяет несколько API; регистрация свойства не загружает painter и сама не гарантирует ускорения. Важно явно задать входы, а не полагаться на произвольное чтение окружения.",
+      "assessment": {
+        "basic": "Называет регистрацию и worklet.",
+        "confident": "Определяет входы, среду выполнения и проверяемый fallback.",
+        "deep": "Нет; измерить paint/raster и нагрузку на целевых браузерах, сравнить с transform/обычным градиентом и выбрать допустимый бюджет."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Достаточно @property, чтобы появился paint(progress)?",
+          "expected": "Нет, нужна регистрация paint worklet через соответствующий API и painter."
+        },
+        {
+          "kind": "transfer",
+          "question": "Прогресс меняется 60 раз в секунду. Гарантировано ли отсутствие main-thread/render затрат?",
+          "expected": "Нет; измерить paint/raster и нагрузку на целевых браузерах, сравнить с transform/обычным градиентом и выбрать допустимый бюджет."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современные CSS API; проверять поддержку целевых браузеров и предоставлять fallback. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://www.w3.org/TR/css-paint-api-1/",
+        "https://www.w3.org/TR/css-properties-values-api-1/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/css.md:84",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/css.md#L84",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/css.md",
+        "line": 84,
+        "originalQuestion": "Как работает CSS Houdini?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:html:rtl-shell",
+    "reason": "Направление раскладки повторяется в CSS; заменено самостоятельным контрактом немодального popover.",
+    "card": {
+      "id": "curated:html:popover-nonmodal-contract",
+      "topic": "html",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Немодальный popover в верхнем слое",
+      "question": "Меню открыли через popover, но фокус уходит за его пределы. Спроектируйте семантику, auto/manual, light dismiss и top layer; когда вместо этого нужен modal dialog?",
+      "shortAnswer": "Popover немодален: top layer решает перекрытие, но не блокирует фон и не создаёт автоматическую focus trap. Auto поддерживает light dismiss/типичное закрытие Escape и координацию auto popovers, manual требует явного управления. Для обязательного модального взаимодействия подходит dialog.showModal с доступным названием, возвратом фокуса и корректными действиями закрытия.",
+      "explanation": "Popover API не назначает автоматически нужную роль меню. Управление клавиатурой/фокусом выбирают по реальному паттерну; требование modality задаёт продукт, а не CSS z-index.",
+      "assessment": {
+        "basic": "Различает popover и модальность.",
+        "confident": "Обосновывает auto/manual, dismiss, семантику и выбор dialog.",
+        "deep": "Нет, manual управляет закрытием, а не модальностью; выбрать modal dialog и проверить доступность и восстановление фокуса."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Делает ли top layer остальную страницу inert сам по себе?",
+          "expected": "Нет, для немодального popover это не следует из top layer."
+        },
+        {
+          "kind": "transfer",
+          "question": "Пользователь должен выбрать подтверждение перед продолжением. Достаточно manual popover?",
+          "expected": "Нет, manual управляет закрытием, а не модальностью; выбрать modal dialog и проверить доступность и восстановление фокуса."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. HTML DOM в современном браузере; доступность, фокус и роль выбираются по контракту компонента. Ожидаемый уровень: senior.",
+      "references": [
+        "https://html.spec.whatwg.org/multipage/popover.html"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/html.md:86",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/html.md#L86",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/html.md",
+        "line": 86,
+        "originalQuestion": "Что такое `popover` API в HTML?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:css:css-budget",
+    "reason": "Бюджет CSS повторяет архитектурный анализ стоимости зависимостей; новый вопрос проверяет scoping proximity.",
+    "card": {
+      "id": "curated:css:scope-cascade-migration",
+      "topic": "css",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Граница и близость CSS scope",
+      "question": "Нужно ограничить стили .card, исключив вложенную .legacy. Предложите @scope root/limit и объясните выбор между двумя scoped правилами равной специфичности и риска миграции.",
+      "shortAnswer": "Использовать @scope (.card) to (.legacy) { ... }: root задаёт начало области, limit исключает граничное поддерево. При прочих равных до source order учитывается scoping proximity — число шагов до scope root. Сам селектор root не прибавляет специфичность вложенному selector. Миграцию проверить на вложенных cards, слоях и браузерной поддержке.",
+      "explanation": "Scope не является Shadow DOM изоляцией и не запрещает внешние правила. Specificity/importance/layers продолжают участвовать раньше близости; :scope внутри selector имеет собственную специфичность.",
+      "assessment": {
+        "basic": "Задаёт root и limit.",
+        "confident": "Правильно располагает proximity в каскаде и планирует проверку вложенности.",
+        "deep": "Scope ограничивает применимость собственных правил, не блокирует внешние; нужно согласовать importance/layers/архитектуру каскада."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Победит ли более близкая область более специфичное правило при остальных равных?",
+          "expected": "Нет, specificity сравнивается раньше scoping proximity."
+        },
+        {
+          "kind": "transfer",
+          "question": "Внешнее legacy правило !important всё ещё побеждает. Почему scope не помог?",
+          "expected": "Scope ограничивает применимость собственных правил, не блокирует внешние; нужно согласовать importance/layers/архитектуру каскада."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современные CSS API; проверять поддержку целевых браузеров и предоставлять fallback. Ожидаемый уровень: senior.",
+      "references": [
+        "https://www.w3.org/TR/css-cascade-6/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/css.md:81",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/css.md#L81",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/css.md",
+        "line": 81,
+        "originalQuestion": "Как работает `@scope` в CSS?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:css:user-spacing",
+    "reason": "Адаптация текста/spacing уже проверяется соседними accessibility кейсами; заменена якорным позиционированием.",
+    "card": {
+      "id": "curated:css:anchor-overflow-fallback",
+      "topic": "css",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Якорное позиционирование у границы экрана",
+      "question": "Подсказка привязана к кнопке через CSS anchor positioning и выходит за нижний край viewport. Спроектируйте anchor-name/position-anchor, fallback placement и проверку при scroll/zoom/отсутствии поддержки.",
+      "shortAnswer": "Назначить anchor-name кнопке и position-anchor позиционируемому элементу; задать размещение и position-try-fallbacks с альтернативами сверху/сбоку или flip-block. Ограничить размеры и разрешить прокрутку содержимого, проверить viewport/scroll containers и zoom. При отсутствии поддержки использовать обычное размещение или JS positioning с тем же доступным контрактом.",
+      "explanation": "Якорное позиционирование не обеспечивает автоматически закрытие, роль или фокус tooltip/popover. Выбор fallback зависит от доступного места и containing block; проверять спецификацию/реализацию целевых браузеров.",
+      "assessment": {
+        "basic": "Определяет связь с anchor.",
+        "confident": "Проектирует overflow fallback, ограничение размера и проверку среды.",
+        "deep": "Ограничить max block-size и дать доступную прокрутку либо сменить паттерн на панель; одного переворота позиции недостаточно."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Гарантирует ли позиция \"под кнопкой\" наличие места снизу?",
+          "expected": "Нет, нужно альтернативное размещение/ограничение размера."
+        },
+        {
+          "kind": "transfer",
+          "question": "Ни сверху, ни снизу не хватает места для длинного текста. Что делать?",
+          "expected": "Ограничить max block-size и дать доступную прокрутку либо сменить паттерн на панель; одного переворота позиции недостаточно."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Современные CSS API; проверять поддержку целевых браузеров и предоставлять fallback. Ожидаемый уровень: senior.",
+      "references": [
+        "https://www.w3.org/TR/css-anchor-position-1/"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/css.md:85",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/css.md#L85",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/css.md",
+        "line": 85,
+        "originalQuestion": "Что такое CSS Anchor Positioning?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:architecture-fsd:dependency-budget",
+    "reason": "Бюджет зависимостей повторяет scoped entrypoint и lazy-contract кейсы; заменён согласованием CQRS проекции.",
+    "card": {
+      "id": "curated:architecture-fsd:cqrs-read-your-writes",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "CQRS и чтение после команды",
+      "question": "Команда сохранения подтверждена, но CQRS read model ещё показывает старую цену. Спроектируйте read-your-writes UX, версионирование проекции, обработку сбоя и критерий выбора CQRS.",
+      "shortAnswer": "Подтверждение команды отделяют от обновления проекции. Вернуть operation/version, показывать pending projection/оптимистический результат по контракту и ждать read model не ниже нужной версии либо читать авторитетное write-side представление. Проекция должна идемпотентно догонять события с наблюдаемым lag/rebuild; CQRS оправдан разными требованиями чтения/записи, но добавляет согласование и эксплуатацию.",
+      "explanation": "Нельзя обещать немедленную консистентность только из-за успешного HTTP ответа. Повтор команды после timeout требует идемпотентности; бесконечное ожидание проекции — отдельная ошибка системы.",
+      "assessment": {
+        "basic": "Находит eventual consistency.",
+        "confident": "Даёт версии, UX, восстановление проекции и обоснование сложности.",
+        "deep": "Нет; нужны alert/метрики lag, repair/rebuild и честный статус; критические операции проверяют write-side авторитетом."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Доказывает ли ответ 200, что все read models обновлены?",
+          "expected": "Только если это явно гарантирует контракт; обычно нет."
+        },
+        {
+          "kind": "transfer",
+          "question": "Проекция отстаёт на час. Можно скрыть это оптимистическим UI?",
+          "expected": "Нет; нужны alert/метрики lag, repair/rebuild и честный статус; критические операции проверяют write-side авторитетом."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Проектирование прикладной системы при ограничениях задачи; гарантии хранения/доставки должны подтверждаться выбранной инфраструктурой. Ожидаемый уровень: senior.",
+      "references": [
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/architecture.md:34",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/architecture.md#L34",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/architecture.md",
+        "line": 34,
+        "originalQuestion": "Что такое CQRS (Command Query Responsibility Segregation) и как он применяется?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:architecture-fsd:critical-path",
+    "reason": "Критический путь загрузки повторяет анализ независимых запросов; заменён гарантией доставки и внешнего эффекта EDA.",
+    "card": {
+      "id": "curated:architecture-fsd:event-delivery-idempotency",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Доставка событий и повтор побочного эффекта",
+      "question": "EDA consumer списывает оплату по OrderCreated. Доставка at-least-once, события повторяются и меняют порядок. Спроектируйте идемпотентность, порядок в пределах заказа и проверку crash между эффектом и acknowledgement.",
+      "shortAnswer": "Использовать стабильный event/operation id и идемпотентный платёжный API/ledger; дедуп и изменение состояния связывать транзакционно где возможно. Порядок обеспечивать по aggregate key/version с обработкой gap, а не обещать глобальный порядок. Crash после списания до ack повторяет тот же ключ и получает прежний результат; проверить этот fault injection и восстановление DLQ.",
+      "explanation": "Дедуп только в памяти или запись processed до эффекта оставляют окна потери/повтора. Outbox помогает согласовать публикацию с локальной транзакцией, но не делает внешний платёж exactly-once автоматически.",
+      "assessment": {
+        "basic": "Распознаёт повторы и ordering.",
+        "confident": "Даёт целостный протокол эффекта, версий и crash проверки.",
+        "deep": "Exactly-once эффект обещать нельзя; нужен иной протокол/провайдер, сверка и ручное разрешение неопределённых исходов либо принятие риска по требованиям."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно ли считать ack гарантией, что consumer не упадёт после внешнего эффекта?",
+          "expected": "Нет, окно между эффектом и ack остаётся."
+        },
+        {
+          "kind": "transfer",
+          "question": "Платёжный API не поддерживает идемпотентность и статус операции. Как меняется гарантия?",
+          "expected": "Exactly-once эффект обещать нельзя; нужен иной протокол/провайдер, сверка и ручное разрешение неопределённых исходов либо принятие риска по требованиям."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Проектирование прикладной системы при ограничениях задачи; гарантии хранения/доставки должны подтверждаться выбранной инфраструктурой. Ожидаемый уровень: senior.",
+      "references": [
+        "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/architecture.md:33",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/architecture.md#L33",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/architecture.md",
+        "line": 33,
+        "originalQuestion": "Что такое EDA (Event-Driven Architecture)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "kavalchuk:architecture-fsd:27406354d200",
+    "reason": "Общий вопрос FSD на Senior недостаточен при сохранённых прикладных FSD кейсах; заменён границами DDD и интеграцией моделей.",
+    "card": {
+      "id": "curated:architecture-fsd:ddd-context-ownership",
+      "topic": "architecture-fsd",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Bounded context и разные модели клиента",
+      "question": "Продажи и поддержка используют общий User с несовместимыми статусами. Спроектируйте bounded contexts, владельца данных и интеграцию; почему общий пакет типов не решает доменную границу?",
+      "shortAnswer": "Выделить модели Customer в Sales и Support с собственным смыслом статусов/инвариантами и владельцами. Общую идентичность связывать ID; контракты обмена явно версионировать и переводить через adapter/anti-corruption layer. Пакет типов проверяет форму, но не согласует семантику и ответственность.",
+      "explanation": "Bounded context — граница языка и модели, не обязательный отдельный microservice. Выделение должно уменьшать конфликт изменений, сохраняя измеримые интеграционные гарантии.",
+      "assessment": {
+        "basic": "Находит различие доменных смыслов.",
+        "confident": "Определяет владельцев, перевод моделей и эволюцию контракта.",
+        "deep": "Возможно, инвариант принадлежит единой границе/владельцу; либо нужен явный координирующий протокол с согласованной допустимой задержкой и отказами."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Одинаковое имя status означает одинаковый бизнес-смысл?",
+          "expected": "Нет, смысл определяется контекстом и инвариантами."
+        },
+        {
+          "kind": "transfer",
+          "question": "Обе команды требуют немедленно согласованного изменения одного инварианта. Что пересмотреть?",
+          "expected": "Возможно, инвариант принадлежит единой границе/владельцу; либо нужен явный координирующий протокол с согласованной допустимой задержкой и отказами."
+        }
+      ],
+      "context": "Редакционная адаптация темы из источника. Проектирование прикладной системы при ограничениях задачи; гарантии хранения/доставки должны подтверждаться выбранной инфраструктурой. Ожидаемый уровень: senior.",
+      "references": [
+        "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "source": {
+        "provider": "YauhenKavalchuk/interview-questions",
+        "sourceId": "questions/architecture.md:30",
+        "url": "https://github.com/YauhenKavalchuk/interview-questions/blob/08922e3529a138e676de51b091dbd5a2e5aa1b90/questions/architecture.md#L30",
+        "level": "senior",
+        "retrievedAt": "2026-11-17",
+        "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+        "path": "questions/architecture.md",
+        "line": 30,
+        "originalQuestion": "Что такое DDD (Domain-Driven Design)?",
+        "adapted": true
+      }
+    }
+  },
+  {
+    "retiredId": "project:redux:immer-mutate-return",
+    "reason": "Мутация draft/возврат уже проверяются на базовых Immer кейсах; заменены lazy injection и selector proxy.",
+    "card": {
+      "id": "curated:redux:lazy-slice-selector-proxy",
+      "topic": "redux",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Инъекция slice до первого action",
+      "question": "После rootReducer.inject(slice) store.getState() ещё не содержит ключ slice, но rootReducer.selector возвращает начальное значение. Объясните proxy и момент materialization; как проверить реальный state?",
+      "shortAnswer": "CombineSlices injection меняет набор reducers без dispatch. Обёртка selector подставляет initial state для ещё отсутствующего injected slice через Proxy; это не запись в store. Реальное состояние появится после следующего action, обработанного root reducer. Проверять getState до/после dispatch, не считать selector доказательством materialization.",
+      "explanation": "Для просмотра исходного объекта внутри selector доступен selector.original; типовая withLazyLoadedSlices декларация тоже не инъецирует reducer в runtime. Это отдельные уровни API.",
+      "assessment": {
+        "basic": "Отделяет injection от dispatch.",
+        "confident": "Различает proxy/default, runtime materialization и декларацию типов.",
+        "deep": "Нет, миграция должна явно материализовать/нормализовать state по контракту и проверить форму сохранённых данных; proxy не изменил исходный объект."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Отправляет ли inject сам action в store?",
+          "expected": "Нет, reducer начинает участвовать в следующем dispatch."
+        },
+        {
+          "kind": "transfer",
+          "question": "Миграция persistence читает getState сразу после injection. Можно полагаться на default из selector?",
+          "expected": "Нет, миграция должна явно материализовать/нормализовать state по контракту и проверить форму сохранённых данных; proxy не изменил исходный объект."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://redux-toolkit.js.org/api/combineSlices"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:rtkq-no-subscribe",
+    "reason": "Повтор lifecycle императивной подписки с rtkq-unsubscribe; заменён кешем сериализации аргументов.",
+    "card": {
+      "id": "curated:redux:rtkq-argument-weakmap",
+      "topic": "redux",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Мутация аргумента и кеш сериализации",
+      "question": "RTK Query defaultSerializeQueryArgs получил plain object args, затем тот же объект изменили с page:1 на page:2. Почему возможен прежний cache key? Предложите исправление с учётом конкретной реализации.",
+      "shortAnswer": "В проверенной реализации serializer кеширует сериализованную строку plain object queryArgs в WeakMap по ссылке. Мутация той же ссылки может вернуть прежнюю строку. Создавать новый неизменяемый снимок args при изменении и согласованно использовать его в endpoint; custom serializer требует отдельного контракта и тестов.",
+      "explanation": "Источник реализации закреплён commit в references. Сортировка ключей JSON не спасает при возврате кешированной строки; поведение WeakMap — деталь версии, а неизменяемый контракт аргументов полезен независимо от неё.",
+      "assessment": {
+        "basic": "Находит повторное использование ссылки.",
+        "confident": "Объясняет WeakMap hit и исправляет контракт аргументов.",
+        "deep": "Он может пересериализоваться сейчас, но сохранённый аргумент всё ещё меняется извне; сделать стабильный неизменяемый снимок нужных вложенных параметров на границе."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Дойдёт ли serializer до нового JSON.stringify при попадании в WeakMap?",
+          "expected": "Нет, использует сохранённую строку."
+        },
+        {
+          "kind": "transfer",
+          "question": "Внешняя библиотека мутирует вложенный filter. Достаточно нового верхнего объекта с тем же filter?",
+          "expected": "Он может пересериализоваться сейчас, но сохранённый аргумент всё ещё меняется извне; сделать стабильный неизменяемый снимок нужных вложенных параметров на границе."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://github.com/reduxjs/redux-toolkit/blob/1a7d3b5251ceda61b77928e357a22086b45aaab1/packages/toolkit/src/query/defaultSerializeQueryArgs.ts"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:redux-reducer-dispatch",
+    "reason": "Чистота reducer и cross-slice action уже проверяются; заменены delayed invalidation при pending запросах.",
+    "card": {
+      "id": "curated:redux:rtkq-delayed-invalidation",
+      "topic": "redux",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Инвалидация при незавершённых запросах",
+      "question": "API использует invalidationBehavior:\"delayed\"; длинный запрос не заканчивается, мутация инвалидирует tag, но refetch не начинается. Объясните очередь и выбор политики для постоянно работающего polling.",
+      "shortAnswer": "Delayed накапливает tags и ждёт, пока запросы/мутации API slice завершатся; непрерывно pending работа может откладывать invalidation неограниченно. Выбрать ограниченные запросы/окна завершения либо immediately с пониманием, что query, инвалидированный во время исполнения, не обязательно автоматически перезапустится после него. Проверить timeline и требуемую свежесть.",
+      "explanation": "Это не отсутствие подписки или неправильный tag. Нужны наблюдение pending/invalidation и явный recovery/refetch по контракту, если выбранная политика допускает пропуск обновления.",
+      "assessment": {
+        "basic": "Находит pending барьер.",
+        "confident": "Различает delayed/immediately и задаёт политику без вечного ожидания.",
+        "deep": "Нет, измерить реальные окна pending; delayed может успешно группировать tags. Выбор основан на freshness SLA и нагрузке, а не названии polling."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Достаточно ли завершения только самой мутации для delayed?",
+          "expected": "Нет, учитывается незавершённая работа API slice."
+        },
+        {
+          "kind": "transfer",
+          "question": "Polling короткий, между запросами есть паузы. Нужно ли обязательно immediately?",
+          "expected": "Нет, измерить реальные окна pending; delayed может успешно группировать tags. Выбор основан на freshness SLA и нагрузке, а не названии polling."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://redux-toolkit.js.org/rtk-query/api/createApi#invalidationbehavior"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:hot-module-state",
+    "reason": "Default state/persisted migration пересекаются с preloaded-shape и offline-draft; заменены SSR изоляцией пользователей.",
+    "card": {
+      "id": "curated:redux:ssr-per-request-store",
+      "topic": "redux",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Изоляция Redux при SSR",
+      "question": "Node сервер использует singleton Redux store для SSR: запрос пользователя A пересекается с B, а state вставляется в HTML. Спроектируйте per-request store, безопасную сериализацию и согласованную hydration.",
+      "shortAnswer": "Создавать store на каждый SSR request, загружать только разрешённые данные текущего пользователя и не переиспользовать персональный state. В HTML сериализовать минимальный allowlisted state с escaping для контекста script, включая опасные < / </script>; токены исключить. Клиент создаёт store из соответствующего snapshot до hydration; тестировать два параллельных пользователя и инъекционную строку.",
+      "explanation": "JSON.stringify сам не обеспечивает безопасность вставки в HTML script. Изоляция store не отменяет проверку shared caches и серверной авторизации.",
+      "assessment": {
+        "basic": "Находит singleton как утечку между запросами.",
+        "confident": "Проектирует изоляцию, сериализацию и одинаковый initial snapshot.",
+        "deep": "Нет, настроить private/no-store либо безопасное разделение кеша и проверить полный путь доставки; store изолирует только память приложения."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Поможет ли очистка singleton после отправки ответа при параллельных запросах?",
+          "expected": "Нет, конкурентные запросы уже используют общую память."
+        },
+        {
+          "kind": "transfer",
+          "question": "State безопасно экранирован, но CDN кеширует персональный HTML публично. Достаточна ли per-request изоляция?",
+          "expected": "Нет, настроить private/no-store либо безопасное разделение кеша и проверить полный путь доставки; store изолирует только память приложения."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior.",
+      "references": [
+        "https://redux.js.org/usage/server-rendering"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:domain-adapter",
+    "reason": "Граница DTO→domain уже проверяется архитектурными кейсами; заменена consistency раздельных RTKQ document caches.",
+    "card": {
+      "id": "curated:redux:rtkq-document-cache-consistency",
+      "topic": "redux",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Одна сущность в detail и list кеше",
+      "question": "RTK Query хранит User и в getUser(id), и в двух getUsers(filters). Optimistic update изменил только detail. Спроектируйте согласование списков и авторитет сервера без предположения о глобально нормализованном кеше.",
+      "shortAnswer": "RTK Query по умолчанию хранит отдельные document caches endpoint/args, не один граф сущностей. Можно патчить известные затронутые записи с учётом фильтров/сортировки и затем согласовать с ответом сервера; либо показывать optimism локально и инвалидировать item/list tags. Сервер определяет финальные поля и членство списков; выбрать измеримую границу stale окна.",
+      "explanation": "Normalize через createEntityAdapter внутри одного ответа не объединяет все endpoint caches. Если набор затронутых списков неизвестен, точечный патч не доказывает консистентности.",
+      "assessment": {
+        "basic": "Замечает раздельные записи.",
+        "confident": "Обосновывает patch/invalidation, фильтры и серверный авторитет.",
+        "deep": "Не ограничиваться заменой поля в видимых items: инвалидировать агрегатные списки/перезапросить по контракту и принять серверный порядок, обозначив переходное состояние."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Обновит ли entity adapter в getUser автоматически все getUsers?",
+          "expected": "Нет, нормализация локальна конкретной cache entry."
+        },
+        {
+          "kind": "transfer",
+          "question": "Переименование меняет сортировку и membership нескольких страниц. Какой безопасный путь?",
+          "expected": "Не ограничиваться заменой поля в видимых items: инвалидировать агрегатные списки/перезапросить по контракту и принять серверный порядок, обозначив переходное состояние."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior.",
+      "references": [
+        "https://redux-toolkit.js.org/rtk-query/usage/cache-behavior",
+        "https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:selector-budget",
+    "reason": "Гранулярная подписка пересекается с selector-instance/equality кейсами; заменена временем уведомления autoBatchEnhancer.",
+    "card": {
+      "id": "curated:redux:auto-batch-notification-timing",
+      "topic": "redux",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Отложенное уведомление autoBatchEnhancer",
+      "question": "Два low-priority actions отправлены подряд с autoBatchEnhancer. Middleware читает промежуточный getState, subscriber вызывается позже один раз. Объясните синхронность reducer, очередь уведомлений и почему это не транзакция.",
+      "shortAnswer": "Каждый dispatch синхронно выполняет reducer и меняет getState; enhancer откладывает уведомления подписчиков для помеченных low-priority actions согласно настроенной очереди. Middleware между dispatch видит промежуточный state; обычный action может вызвать немедленное уведомление. Batching уведомлений не даёт rollback/атомарности доменного инварианта.",
+      "explanation": "RTK поддерживает разные scheduling варианты; тест должен контролировать выбранную очередь и отдельно проверять state/notification counts. Экономия render не меняет число reducer выполнений.",
+      "assessment": {
+        "basic": "Различает state update и notification.",
+        "confident": "Правильно описывает очередь, обычный action и видимость middleware.",
+        "deep": "Нет, обычный action вызывает уведомление с актуальным state; проверять документированную политику enhancer, не считать очередь транзакцией."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Будет ли getState ждать конца batch?",
+          "expected": "Нет, возвращает уже обновлённый state после каждого dispatch."
+        },
+        {
+          "kind": "transfer",
+          "question": "Между low-priority actions пришёл обычный action. Можно ожидать ровно один callback в конце?",
+          "expected": "Нет, обычный action вызывает уведомление с актуальным state; проверять документированную политику enhancer, не считать очередь транзакцией."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior.",
+      "references": [
+        "https://redux-toolkit.js.org/api/autoBatchEnhancer"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:redux:store-boundary-test",
+    "reason": "Общая интеграционная проверка повторяет тестовые границы других тем; заменена стартовой гонкой snapshot→stream.",
+    "card": {
+      "id": "curated:redux:rtkq-snapshot-stream-handoff",
+      "topic": "redux",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Гонка первой загрузки и потока",
+      "question": "В onCacheEntryAdded сокет прислал изменение до cacheDataLoaded, затем HTTP snapshot затёр его. Спроектируйте handoff первой загрузки к updateCachedData, учитывая replay и cacheEntryRemoved.",
+      "shortAnswer": "Регистрировать/открыть поток с протоколом буферизации или replay, дождаться cacheDataLoaded и применить только события новее revision snapshot через updateCachedData. Между snapshot и подпиской не должно быть непокрытого окна: нужен cursor/replay или серверный snapshot+stream handoff. При удалении cache entry закрыть ресурс; rejection cacheDataLoaded при раннем удалении обработать и очистить listener.",
+      "explanation": "Просто await cacheDataLoaded перед открытием сокета может потерять события между HTTP snapshot и connect. Здесь проверяется стартовый handoff, а не только последующее обнаружение gap в уже работающем потоке.",
+      "assessment": {
+        "basic": "Замечает гонку snapshot и раннего события.",
+        "confident": "Даёт безоконный handoff с буфером/replay и cleanup раннего удаления.",
+        "deep": "Отбросить покрытые snapshot события, применить 101 по порядку и продолжить от согласованного cursor; при отсутствии replay гарантии заново синхронизироваться."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Гарантирует ли updateCachedData, вызванный до начальных данных, накопление событий?",
+          "expected": "Нет, нельзя считать его журналом; нужен отдельный буфер/протокол."
+        },
+        {
+          "kind": "transfer",
+          "question": "Snapshot version=100, в буфере 99,100,101. Что применить?",
+          "expected": "Отбросить покрытые snapshot события, применить 101 по порядку и продолжить от согласованного cursor; при отсутствии replay гарантии заново синхронизироваться."
+        }
+      ],
+      "context": "Авторский редакционный кейс. Redux Toolkit 2.x и RTK Query; конкретная реализация serializer закреплена commit в references. Ожидаемый уровень: senior.",
+      "references": [
+        "https://redux-toolkit.js.org/rtk-query/usage/streaming-updates"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:query-meta",
+    "reason": "Query identity уже проверяется ключами/tenant; новый вопрос про tracked properties не повторяет retained select-observer.",
+    "card": {
+      "id": "curated:tanstack-query:tracked-observer-properties",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "Подписка на прочитанные свойства query",
+      "question": "Компонент показывает только data из useQuery, но после добавления const {data,...rest}=result стал обновляться при каждом isFetching. Объясните tracked properties и выбор notifyOnChangeProps.",
+      "shortAnswer": "По умолчанию observer отслеживает прочитанные свойства результата. Object rest destructuring обращается к остальным свойствам и расширяет подписку, включая isFetching. Читать только нужные поля; при осознанном notifyOnChangeProps указать весь используемый контракт или \"all\" для полной подписки. Проверять renders на фоне refetch.",
+      "explanation": "Это гранулярность уведомления observer, не преобразование кеша через select. Исключив используемое error/status из явного списка, можно получить устаревший UI.",
+      "assessment": {
+        "basic": "Связывает rest с чтением свойств.",
+        "confident": "Объясняет tracking и безопасную явную подписку.",
+        "deep": "Ошибка без изменения data может не вызвать нужное обновление; включить error и остальные используемые поля либо вернуть автоматический tracking."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Меняет ли ...rest данные query cache?",
+          "expected": "Нет, меняется набор наблюдаемых свойств результата."
+        },
+        {
+          "kind": "transfer",
+          "question": "Позже добавили отображение error, оставив notifyOnChangeProps:[\"data\"]. Какой риск?",
+          "expected": "Ошибка без изменения data может не вызвать нужное обновление; включить error и остальные используемые поля либо вернуть автоматический tracking."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/render-optimizations"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:refetch-params",
+    "reason": "Смена параметра через key повторяет query identity; новый вопрос проверяет точные JSON-коллизии hashKey.",
+    "card": {
+      "id": "curated:tanstack-query:default-key-hashing",
+      "topic": "tanstack-query",
+      "tab": "advanced",
+      "targetLevel": "senior",
+      "angles": [
+        "nuance"
+      ],
+      "kind": "question",
+      "title": "JSON семантика hashKey",
+      "question": "Сравните стандартные query keys [\"items\",{page:1,filter:undefined}] и [\"items\",{page:1}], затем [\"items\",undefined] и [\"items\",null]. Влияет ли порядок ключей объекта/элементов массива и какой контракт параметров выбрать?",
+      "shortAnswer": "Default hashKey использует JSON.stringify с сортировкой ключей plain objects: первые два ключа дают одинаковый hash, undefined поле объекта опускается. Undefined элемент массива сериализуется как null, поэтому вторая пара тоже совпадает. Порядок ключей plain object несущественен, порядок элементов массива существенен. Выбирать явный сериализуемый domain key, не различать ресурсы через неоднозначные значения.",
+      "explanation": "Закреплённая реализация указана в references. Это не обещание поддержки циклов/BigInt/произвольных классов и не равенство любых JavaScript значений; custom queryKeyHashFn меняет контракт.",
+      "assessment": {
+        "basic": "Знает нормализацию порядка object keys.",
+        "confident": "Правильно предсказывает обе коллизии и ограничивает допустимые данные.",
+        "deep": "Использовать объект с отсутствующим полем для отсутствия и filter:null для null либо явный tagged variant; проверить пары hash и согласовать queryFn с ключом."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Во что JSON превращает undefined внутри массива?",
+          "expected": "В null; в поле объекта оно пропускается."
+        },
+        {
+          "kind": "transfer",
+          "question": "API различает отсутствие filter и явный null. Как представить это без коллизии?",
+          "expected": "Использовать объект с отсутствующим полем для отсутствия и filter:null для null либо явный tagged variant; проверить пары hash и согласовать queryFn с ключом."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior; advanced обозначает дополнительную глубину/ракурс.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/query-keys",
+        "https://github.com/TanStack/query/blob/11312f9e979f783d206955f6eb1433b44f80dada/packages/query-core/src/utils.ts"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:route-loader",
+    "reason": "Общий cache/options loader пересекается с ensure-stale; заменён проектированием критического пути зависимых запросов.",
+    "card": {
+      "id": "curated:tanstack-query:dependent-waterfall-latency",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Критический путь зависимых запросов",
+      "question": "Экран сначала загружает user по email, затем projects по userId: каждый запрос 400 мс плюс RTT. Спроектируйте сокращение waterfall, сравнив enabled dependency, flattening backend, prefetch и серверную композицию; как измерить результат?",
+      "shortAnswer": "Enabled описывает зависимость, но оставляет последовательный критический путь около суммы задержек. Если возможно, backend принимает email для projects либо возвращает нужную композицию одним контрактом; известные параметры позволяют заранее prefetch/параллельную загрузку. Серверная композиция уменьшает клиентские RTT, но не устраняет внутреннюю зависимость автоматически. Измерять trace request start/end, time-to-usable-data, payload и backend cost.",
+      "explanation": "Нельзя просто сделать Promise.all, если второго аргумента ещё нет. Выбор API учитывает авторизацию, кешируемость, размер ответа и стоимость поддержки; ускорение должно подтверждаться end-to-end метрикой.",
+      "assessment": {
+        "basic": "Находит последовательную зависимость.",
+        "confident": "Сравнивает реализуемые альтернативы и проверяет полный latency путь.",
+        "deep": "Запустить независимые запросы параллельно по известному безопасному id, сохранив серверную авторизацию; сравнить latency и отсутствие лишнего ожидания user."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Устраняет ли enabled:false до появления userId сетевую последовательность?",
+          "expected": "Нет, только корректно запрещает преждевременный запрос."
+        },
+        {
+          "kind": "transfer",
+          "question": "UserId уже есть в сессии, но user всё равно нужен экрану. Что изменить?",
+          "expected": "Запустить независимые запросы параллельно по известному безопасному id, сохранив серверную авторизацию; сравнить latency и отсутствие лишнего ожидания user."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/request-waterfalls"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:test-isolation",
+    "reason": "Изоляция тестов повторяет общий тестовый материал; вместо уже существующего mutation-scope выбран networkMode и paused UX.",
+    "card": {
+      "id": "curated:tanstack-query:network-mode-paused-ux",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Network mode и офлайн кеш Service Worker",
+      "question": "Приложение с Service Worker может отвечать из кеша без сети, но query в стандартном online режиме при offline не запускается. Сравните online/always/offlineFirst, состояния paused/error и UX при восстановлении соединения.",
+      "shortAnswer": "Online учитывает onlineManager и может поставить первую попытку/повторы на паузу. Always игнорирует состояние сети и подходит функциям, которым сеть не нужна. OfflineFirst выполняет первую попытку, позволяя SW/cache ответить, а после сетевого отказа может приостановить повторы до online. Показывать paused отдельно от error: status pending может сочетаться с fetchStatus paused без выполняющегося запроса; задать восстановление/refetch и проверить реальные offline сценарии.",
+      "explanation": "Network mode не гарантирует свежесть или доменную успешность операции. OnlineManager отражает сигнал доступности, а не доказательство доступности конкретного сервера; defaults refetchOnReconnect отличаются по режиму.",
+      "assessment": {
+        "basic": "Находит паузу, а не выполняющийся запрос.",
+        "confident": "Выбирает режим для SW и описывает попытку, повторы и восстановление.",
+        "deep": "Always: не блокировать локальную функцию состоянием onlineManager; отдельно определить retry/error и обновление при событиях локальных данных."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Означает ли pending всегда fetchStatus=\"fetching\"?",
+          "expected": "Нет, запрос может быть paused и ожидать условий запуска."
+        },
+        {
+          "kind": "transfer",
+          "question": "QueryFn читает только IndexedDB и никогда не требует сети. Какой режим рассмотреть?",
+          "expected": "Always: не блокировать локальную функцию состоянием onlineManager; отдельно определить retry/error и обновление при событиях локальных данных."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/network-mode"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:schema-validation",
+    "reason": "Runtime валидация внешнего ответа повторяется в TypeScript/архитектуре; заменена восстановлением persisted offline mutationFn.",
+    "card": {
+      "id": "curated:tanstack-query:resume-persisted-mutations",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Возобновление persisted мутаций",
+      "question": "Офлайн мутация сохранена в storage; после reload resumePausedMutations сообщает, что mutationFn отсутствует. Спроектируйте восстановление функции, variables и доменную проверку повторной команды.",
+      "shortAnswer": "Функции/замыкания не сериализуются. До hydration/resume зарегистрировать default mutationFn через setMutationDefaults для соответствующего mutationKey, сохранить сериализуемые variables/operation id и дождаться восстановления состояния. Перед исполнением проверить актуальную сессию/доступ/доменную версию, сервер обеспечивает идемпотентность и возвращает конфликт при устаревшем намерении.",
+      "explanation": "Persistence восстанавливает намерение и состояние, но не прежнюю closure с токеном или объектом формы. Повтор не должен молча исполняться от другого пользователя; предусмотрены отмена очереди и понятный статус.",
+      "assessment": {
+        "basic": "Объясняет потерю функции при сериализации.",
+        "confident": "Регистрирует defaultFn в правильном порядке и задаёт безопасный доменный resume.",
+        "deep": "Нет, привязать операции к владельцу и проверить/изолировать/удалить чужую очередь; сервер повторно авторизует каждую команду."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Можно сохранить mutationFn строкой и считать прежнюю closure восстановленной?",
+          "expected": "Нет, нужен явный код новой версии и сериализуемые variables."
+        },
+        {
+          "kind": "transfer",
+          "question": "После reload вошёл другой пользователь. Можно сразу resume старую очередь?",
+          "expected": "Нет, привязать операции к владельцу и проверить/изолировать/удалить чужую очередь; сервер повторно авторизует каждую команду."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/mutations#persisting-offline-mutations"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  },
+  {
+    "retiredId": "project:tanstack-query:draft-reconcile",
+    "reason": "Прямой смысловой дубль project:react:draft-conflict: refetch затирает dirty draft, решение base revision/merge. Заменён pending-query SSR.",
+    "card": {
+      "id": "curated:tanstack-query:ssr-pending-dehydration",
+      "topic": "tanstack-query",
+      "tab": "senior",
+      "targetLevel": "senior",
+      "angles": [],
+      "kind": "question",
+      "title": "Потоковая передача pending query при SSR",
+      "question": "В TanStack Query v5.40+ сервер запустил prefetchQuery без await для нижнего блока, но клиент снова загружает данные. Спроектируйте dehydration pending query и streaming через поддерживающий framework; как проверить выигрыш и ошибки?",
+      "shortAnswer": "По умолчанию dehydration выбирает успешные query; добавить shouldDehydrateQuery: q => defaultShouldDehydrateQuery(q) || q.state.status === \"pending\". Использовать request-local QueryClient, согласованные key/options и framework transport, умеющий передавать pending Promise и разрешать Suspense boundaries. Проверить отсутствие повторного запроса, ранний shell/TTFB, время готовности блока и rejection/Error Boundary; не ждать весь prefetch перед shell.",
+      "explanation": "Это поддерживаемая интеграция начиная с v5.40, а не JSON.stringify произвольного Promise. Persistent storage требует другого контракта: pending Promise нельзя считать долговечными сериализованными данными. Ошибки/секреты сериализуются по правилам framework.",
+      "assessment": {
+        "basic": "Находит default фильтр dehydration.",
+        "confident": "Настраивает pending inclusion, request isolation, transport и измерение потока.",
+        "deep": "Сохранять только подходящие завершённые сериализуемые состояния по отдельной политике; pending Promise не переживает reload как исполняемая операция."
+      },
+      "followUps": [
+        {
+          "kind": "support",
+          "question": "Станет ли Promise передаваемым в HTML только от включения shouldDehydrateQuery?",
+          "expected": "Нет, нужен поддерживающий транспорт/framework и корректные boundaries."
+        },
+        {
+          "kind": "transfer",
+          "question": "Те же dehydrated данные хотят записать localStorage как офлайн snapshot. Что изменить?",
+          "expected": "Сохранять только подходящие завершённые сериализуемые состояния по отдельной политике; pending Promise не переживает reload как исполняемая операция."
+        }
+      ],
+      "context": "Авторский редакционный кейс. TanStack Query v5, React adapter; pending-query dehydration требует v5.40+ и поддерживающего framework транспорта. Ожидаемый уровень: senior.",
+      "references": [
+        "https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr"
+      ],
+      "verifiedAt": "2026-11-17",
+      "editorial": true,
+      "origin": "project-editorial"
+    }
+  }
+]

@@ -19,7 +19,7 @@ for (const allRated of [false, true]) test('Валидные пакеты Office
   assert.match(doc.get('[Content_Types].xml'), /wordprocessingml.document.main/);
   assert.match(doc.get('word/document.xml'), new RegExp('Оценено ' + report.rated + ' из 540'));
   assert.ok(doc.get('word/document.xml').includes(report.generatedAt));
-  assert.match(doc.get('word/document.xml'), /редакция банка: 4/);
+  assert.match(doc.get('word/document.xml'), new RegExp('редакция банка: ' + content.revision));
   assert.match(doc.get('word/styles.xml'), /<w:outlineLvl w:val="0"\/>/);
   if (allRated) {
     assert.match(doc.get('word/document.xml'), /<w:tblBorders>[\s\S]*?<\/w:tblBorders><w:tblLayout/);

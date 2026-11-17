@@ -20,6 +20,19 @@ function boot(localStorage) {
 }
 const plain = value => JSON.parse(JSON.stringify(value));
 
+test('Редакция 5: retired оценка не попадает новой карточке, retained восстанавливается', () => {
+  const { retiredId, card: replacement } = require('../data-sources/grade-replacements-2026-11-17.json')[0];
+  const retained = content.materials.find(card => card.id.startsWith('project:')).id;
+  const records = new Map([[currentKey, JSON.stringify({ schemaVersion: 1, ratingsById: { [retiredId]: 'deep', [retained]: 'basic' } })]]);
+  const store = boot(storageFor(records));
+  assert.deepEqual(plain(store.getState().ratingsById), { [retained]: 'basic' });
+  assert.equal(store.getState().ratingsById[replacement.id], undefined);
+  assert.match(store.getState().ratingsNotice, /частично/);
+  store.rate(replacement.id, 'confident');
+  assert.deepEqual(JSON.parse(records.get(currentKey)).ratingsById, { [retained]: 'basic', [replacement.id]: 'confident' });
+  assert.equal(boot(storageFor(records)).getState().ratingsById[replacement.id], 'confident');
+});
+
 test('Прежние 540 оценок не приписываются новому банку и остаются нетронутыми', () => {
   const records = new Map([[legacyKey,legacyRecord],['interview-guide.theme','light']]);
   const store = boot(storageFor(records));

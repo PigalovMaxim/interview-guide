@@ -1,0 +1,353 @@
+{
+  "repository": "https://github.com/YauhenKavalchuk/interview-questions",
+  "commit": "08922e3529a138e676de51b091dbd5a2e5aa1b90",
+  "retrievedAt": "2026-11-17",
+  "documents": [
+    {
+      "path": "questions/js.md",
+      "sha256": "a8c7c66f1ecce65ab9bafb77eebf7b998e33abd8e7a0c97796e500185cd8b35e"
+    },
+    {
+      "path": "questions/es.md",
+      "sha256": "27dca0bb5d74e524c426334e1e69c2f859ccf0bd6d81c2f9d3168baf93e9edfb"
+    },
+    {
+      "path": "questions/browser-js.md",
+      "sha256": "fd6e1d004b5c7b34ef02767f18dcc44ddca6c9f1bffa1bfc1ef763c60a280102"
+    },
+    {
+      "path": "questions/async-js.md",
+      "sha256": "8641ef856e59db53d481319450947ec881783aeb9bfc9d20575343e021897b3f"
+    },
+    {
+      "path": "questions/web.md",
+      "sha256": "e36dc105dada11de4b335c827005d5b8758cc762701e5a8ce3f668d6ec944412"
+    },
+    {
+      "path": "questions/ts.md",
+      "sha256": "eec106acc6a3e65e6136aa5509bd46689d50fbd4bf8a7098fe608a58aebbaa02"
+    },
+    {
+      "path": "questions/react.md",
+      "sha256": "8310ca015eea7dc0f3fb8f01d17a71f4a52ee1a08ea812ac092fc24a46a55666"
+    },
+    {
+      "path": "questions/css.md",
+      "sha256": "f21f2c436a89c4ba30ac45717d1390abbc8718ba75b1cdc3ea186c27bd6dad63"
+    },
+    {
+      "path": "questions/html.md",
+      "sha256": "58f2271c7899038248a752abd04df128421ec1bc6a9c80ab7c93f6f54b871b70"
+    },
+    {
+      "path": "questions/architecture.md",
+      "sha256": "d833776b32328656eaa7a0ee83181a0a2e70a7bdaa3ec5cb59f43cd3eb435f65"
+    }
+  ],
+  "records": [
+    {
+      "path": "questions/js.md",
+      "line": 12,
+      "sourceText": "- [Разница между `==` и `===` (нестрогое/строгое равенство)?](https://youtu.be/ycYp7CYOnO0?t=529)",
+      "level": "junior",
+      "headingLine": 5,
+      "heading": "#### 🟢 Junior"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 70,
+      "sourceText": "- [Что такое каррирование (Currying)?](https://youtu.be/nbWY5W-9OEo?t=295)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 71,
+      "sourceText": "- [Что такое мемоизация? Реализуйте базовую логику функции для мемоизации?](https://youtu.be/nvktMVFM0_M?t=30)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 73,
+      "sourceText": "- [Что такое и как работает `debounce()` и `throttle()` в JavaScript?](https://youtu.be/PI1X5oFHou8?t=104)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 75,
+      "sourceText": "- [Что такое прототипное наследование? Как создать объект без прототипа?](https://youtu.be/IooJ3P2VUYs?t=154)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 78,
+      "sourceText": "- [Разница между `Object` и `Map`?](https://youtu.be/nbWY5W-9OEo?t=214)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/es.md",
+      "line": 46,
+      "sourceText": "- [Что такое структурированное клонирование (`structuredClone()`)?](https://youtu.be/21-v1wNlTT4?t=413)",
+      "level": "middle",
+      "headingLine": 31,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 94,
+      "sourceText": "- [Можно ли в JavaScript создать собственный тип ошибки (Custom error type)?](https://youtu.be/Ezrd2uOq-44?t=302)",
+      "level": "middle",
+      "headingLine": 62,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/browser-js.md",
+      "line": 27,
+      "sourceText": "- [Разница между attribute и property у DOM-элементов?](https://youtu.be/IooJ3P2VUYs?t=659)",
+      "level": "middle",
+      "headingLine": 25,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 105,
+      "sourceText": "- [Как работает контекст выполнения (Execution context) в JavaScript?](https://youtu.be/nTE4qvSvxXY?t=704)",
+      "level": "senior",
+      "headingLine": 100,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 106,
+      "sourceText": "- [Назовите основные типы утечек памяти в JavaScript?](https://youtu.be/3NGkctg4lsE?t=874)",
+      "level": "senior",
+      "headingLine": 100,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/js.md",
+      "line": 109,
+      "sourceText": "- [Что такое `Atomics` и `SharedArrayBuffer`?](https://youtu.be/jOQEynkKgKA?t=759)",
+      "level": "senior",
+      "headingLine": 100,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/es.md",
+      "line": 53,
+      "sourceText": "- [Что такое генераторы? Когда стоит использовать генераторы?](https://youtu.be/nvktMVFM0_M?t=476)",
+      "level": "senior",
+      "headingLine": 51,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/es.md",
+      "line": 56,
+      "sourceText": "- [Что такое well-known symbols и зачем они нужны?](https://youtu.be/LEo0dFN87sY?t=101)",
+      "level": "senior",
+      "headingLine": 51,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/async-js.md",
+      "line": 42,
+      "sourceText": "- [Что такое scheduler API в браузере?](https://youtu.be/LEo0dFN87sY?t=701)",
+      "level": "senior",
+      "headingLine": 37,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/browser-js.md",
+      "line": 46,
+      "sourceText": "- [Что такое Shadow DOM? Как он связан с веб-компонентами (Web components)?](https://youtu.be/Uc378Fmc5vw?t=601)",
+      "level": "senior",
+      "headingLine": 42,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/browser-js.md",
+      "line": 48,
+      "sourceText": "- [Разница между compositor thread и main thread?](https://youtu.be/zvUhdDSaZxs?t=91)",
+      "level": "senior",
+      "headingLine": 42,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/browser-js.md",
+      "line": 45,
+      "sourceText": "- [Разница между feature detection, feature inference и анализом строки user-agent?](https://youtu.be/G4iYlbilozM?t=568)",
+      "level": "senior",
+      "headingLine": 42,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/web.md",
+      "line": 66,
+      "sourceText": "- [Что такое Service Workers?](https://youtu.be/V-m0sQ-hW58?t=727)",
+      "level": "senior",
+      "headingLine": 58,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/ts.md",
+      "line": 41,
+      "sourceText": "- [Для чего нужны `d.ts` файлы?](https://youtu.be/Ezrd2uOq-44?t=601)",
+      "level": "middle",
+      "headingLine": 27,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/ts.md",
+      "line": 44,
+      "sourceText": "- [Что такое шаблонные литеральные типы (Template literal types)?](https://youtu.be/Md9j72atmE4?t=26)",
+      "level": "middle",
+      "headingLine": 27,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/ts.md",
+      "line": 42,
+      "sourceText": "- [Что такое `satisfies` оператор в TypeScript?](https://youtu.be/zqTSZCbgUI4?t=440)",
+      "level": "middle",
+      "headingLine": 27,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/ts.md",
+      "line": 54,
+      "sourceText": "- [Как работает infer в условных типах?](https://youtu.be/zqTSZCbgUI4?t=531)",
+      "level": "senior",
+      "headingLine": 49,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/ts.md",
+      "line": 52,
+      "sourceText": "- [Для чего нужны миксины в TypeScript?](https://youtu.be/t36qUdDLaH4?t=476)",
+      "level": "senior",
+      "headingLine": 49,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 24,
+      "sourceText": "- [Правила (ограничения) использования хуков?](https://youtu.be/xZLxdts7ZW4?t=873)",
+      "level": "junior",
+      "headingLine": 5,
+      "heading": "#### 🟢 Junior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 47,
+      "sourceText": "- [Что такое `useReducer()`?](https://youtu.be/GZUy2i6QN7o?t=257)",
+      "level": "middle",
+      "headingLine": 37,
+      "heading": "#### 🟡 Middle"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 87,
+      "sourceText": "- [Что такое серверные компоненты в React?](https://youtu.be/21-v1wNlTT4?t=147)",
+      "level": "senior",
+      "headingLine": 73,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 90,
+      "sourceText": "- [Как работает React Compiler (React Forget)?](https://youtu.be/Md9j72atmE4?t=308)",
+      "level": "senior",
+      "headingLine": 73,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 86,
+      "sourceText": "- [Что такое `use()` хук в React 19?](https://youtu.be/21-v1wNlTT4?t=95)",
+      "level": "senior",
+      "headingLine": 73,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 82,
+      "sourceText": "- [Что такое `ReactDOMServer`?](https://youtu.be/81yRgVQ1ciM?t=763)",
+      "level": "senior",
+      "headingLine": 73,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/react.md",
+      "line": 93,
+      "sourceText": "- [Как работают Server Actions в React?](https://youtu.be/Md9j72atmE4?t=497)",
+      "level": "senior",
+      "headingLine": 73,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/css.md",
+      "line": 84,
+      "sourceText": "- [Как работает CSS Houdini?](https://youtu.be/V0RxOrWWOdE?t=128)",
+      "level": "senior",
+      "headingLine": 67,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/html.md",
+      "line": 86,
+      "sourceText": "- [Что такое `popover` API в HTML?](https://youtu.be/jOQEynkKgKA?t=77)",
+      "level": "senior",
+      "headingLine": 77,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/css.md",
+      "line": 81,
+      "sourceText": "- [Как работает `@scope` в CSS?](https://youtu.be/jOQEynkKgKA?t=313)",
+      "level": "senior",
+      "headingLine": 67,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/css.md",
+      "line": 85,
+      "sourceText": "- [Что такое CSS Anchor Positioning?](https://youtu.be/V0RxOrWWOdE?t=208)",
+      "level": "senior",
+      "headingLine": 67,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/architecture.md",
+      "line": 34,
+      "sourceText": "- [Что такое CQRS (Command Query Responsibility Segregation) и как он применяется?](https://youtu.be/x3ZAkbEd2SA?t=267)",
+      "level": "senior",
+      "headingLine": 25,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/architecture.md",
+      "line": 33,
+      "sourceText": "- [Что такое EDA (Event-Driven Architecture)?](https://youtu.be/x3ZAkbEd2SA?t=201)",
+      "level": "senior",
+      "headingLine": 25,
+      "heading": "#### 🟠 Senior"
+    },
+    {
+      "path": "questions/architecture.md",
+      "line": 30,
+      "sourceText": "- [Что такое DDD (Domain-Driven Design)?](https://youtu.be/9o_PsbrnOyI?t=237)",
+      "level": "senior",
+      "headingLine": 25,
+      "heading": "#### 🟠 Senior"
+    }
+  ]
+}

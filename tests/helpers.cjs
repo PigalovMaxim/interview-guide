@@ -7,6 +7,9 @@ const preservedFields = ['statement', 'examples', 'starterCode', 'solution', 'ed
 function digestTask(card) {
   return crypto.createHash('sha256').update(JSON.stringify(preservedFields.map(key => [key, card[key]]))).digest('hex');
 }
+function digestQuestion({ ordinal, ...card }) {
+  return crypto.createHash('sha256').update(JSON.stringify(card)).digest('hex');
+}
 function loadContent() {
   const scope = { window: {} };
   vm.createContext(scope);
@@ -15,4 +18,4 @@ function loadContent() {
   }
   return JSON.parse(JSON.stringify(scope.window.InterviewContent));
 }
-module.exports = { root, loadContent, digestTask };
+module.exports = { root, loadContent, digestTask, digestQuestion };

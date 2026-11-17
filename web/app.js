@@ -51,7 +51,7 @@
     const criteria = ['basic', 'confident', 'deep'].map((value, index) =>
       '<div><dt><span class="criterion-mark">' + '·'.repeat(index + 1) + '</span>' + ratingLabels[value] + '</dt><dd>' + escape(item.assessment[value]) + '</dd></div>').join('');
     return '<div class="analysis-content">' +
-      (item.source && item.editorial ? '<p class="editorial-note">Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.</p>' : '') +
+      (item.source && item.editorial ? '<p class="editorial-note">' + (item.source.adapted ? 'Вопрос адаптирован редакцией приложения по теме из источника; ответ, пояснения, критерии и уточнения — редакционные.' : 'Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.') + '</p>' : '') +
       '<div class="answer"><span class="section-label">Краткий ответ</span><p>' + escape(item.shortAnswer) + '</p></div>' +
       '<section><h3>Как это работает</h3><p>' + escape(item.explanation) + '</p></section>' +
       (item.solution ? '<section><h3>Решение</h3>' + codeBlock(item.solution.code) + '</section>' : '') +

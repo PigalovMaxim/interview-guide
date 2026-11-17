@@ -1,5 +1,5 @@
 window.InterviewContent = {
-  "revision": 4,
+  "revision": 5,
   "ratingsStorageKey": "interview-guide.ratings.v3",
   "tabs": [
     {

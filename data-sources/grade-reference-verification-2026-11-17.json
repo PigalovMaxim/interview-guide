@@ -1,0 +1,394 @@
+{
+  "checkedAt": "2026-11-17",
+  "timezone": "UTC",
+  "method": "HTTP GET и SHA-256 от UTF-8 текста фактически полученного документа; HTTP-доступность не заменяет предметную проверку ответа",
+  "references": [
+    {
+      "url": "https://dom.spec.whatwg.org/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2cc4900e8bfcb0954fb8f50c32dd41dc4d3fa309067aef638c7d30e2b5f2ff5a",
+      "finalUrl": "https://dom.spec.whatwg.org/",
+      "byteLength": 2720023,
+      "title": "DOM Standard"
+    },
+    {
+      "url": "https://github.com/reduxjs/redux-toolkit/blob/1a7d3b5251ceda61b77928e357a22086b45aaab1/packages/toolkit/src/query/defaultSerializeQueryArgs.ts",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "6b00c1a3739128c247554ca8fb5cf44878a56e79eca6d6363a706e5b16362bde",
+      "finalUrl": "https://github.com/reduxjs/redux-toolkit/blob/1a7d3b5251ceda61b77928e357a22086b45aaab1/packages/toolkit/src/query/defaultSerializeQueryArgs.ts",
+      "byteLength": 217181,
+      "title": "redux-toolkit/packages/toolkit/src/query/defaultSerializeQueryArgs.ts at 1a7d3b5251ceda61b77928e357a22086b45aaab1 · reduxjs/redux-toolkit · GitHub"
+    },
+    {
+      "url": "https://github.com/TanStack/query/blob/11312f9e979f783d206955f6eb1433b44f80dada/packages/query-core/src/utils.ts",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0973152e90d3fb2a83a106df4137e0392ce1e6d052c6e4f26ba1e88e1191001a",
+      "finalUrl": "https://github.com/TanStack/query/blob/11312f9e979f783d206955f6eb1433b44f80dada/packages/query-core/src/utils.ts",
+      "byteLength": 628489,
+      "title": "query/packages/query-core/src/utils.ts at 11312f9e979f783d206955f6eb1433b44f80dada · TanStack/query · GitHub"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/input.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "b2560f88ac2e06a521c08471f951d6a3a591e33d738f0e0de4079269f126083e",
+      "finalUrl": "https://html.spec.whatwg.org/multipage/input.html",
+      "byteLength": 696851,
+      "title": "HTML Standard"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/popover.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "598c01685cd1cddb0aeabcc4d29e4d3b4dcf9d49290e3047a64c267d418e63b1",
+      "finalUrl": "https://html.spec.whatwg.org/multipage/popover.html",
+      "byteLength": 120341,
+      "title": "HTML Standard"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/structured-data.html#structuredserialize",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "1c276fcd16418d710893977b36e1cfbc482cc1131f271c935dee2e8d5bf4d563",
+      "finalUrl": "https://html.spec.whatwg.org/multipage/structured-data.html#structuredserialize",
+      "byteLength": 115652,
+      "title": "HTML Standard"
+    },
+    {
+      "url": "https://html.spec.whatwg.org/multipage/system-state.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "a3856f723f61525235835261ff81c41dca857ba518d019527e4d6e8cc800792a",
+      "finalUrl": "https://html.spec.whatwg.org/multipage/system-state.html",
+      "byteLength": 110954,
+      "title": "HTML Standard"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "da7060147966e85e226911a9d2372e87d2c8ea8261e024cdd5b9611db5d9a3dc",
+      "finalUrl": "https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/event-driven",
+      "byteLength": 67702,
+      "title": "Event-Driven Architecture Style - Azure Architecture Center | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "574f69be2b6ec4f0d33ee73e2be65d2f76e844ce205038ed619052b477bb18d3",
+      "finalUrl": "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis",
+      "byteLength": 66786,
+      "title": "Use Domain Analysis to Model Microservices - Azure Architecture Center | Microsoft Learn"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "f34717a012b55b9fdc4c1884c70bc6eacc2d49de8b29595b97e66e10934c5945",
+      "finalUrl": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "byteLength": 69683,
+      "title": "CQRS Pattern - Azure Architecture Center | Microsoft Learn"
+    },
+    {
+      "url": "https://react.dev/learn/react-compiler/introduction",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "8e2753cb954587f7178242be914406687e06b1feccc9ebeef5fb31f53a9eb452",
+      "finalUrl": "https://react.dev/learn/react-compiler/introduction",
+      "byteLength": 166272,
+      "title": "Introduction – React"
+    },
+    {
+      "url": "https://react.dev/reference/react-dom/server",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "e9f4ac6130d54b071bc2598c212214986ff58078a066d3642097795210012f18",
+      "finalUrl": "https://react.dev/reference/react-dom/server",
+      "byteLength": 153671,
+      "title": "Server React DOM APIs – React"
+    },
+    {
+      "url": "https://react.dev/reference/react/use",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "4ffd3dde5d09b45b93f0b4ee37ac1e1179e91a6e6b361d6f04c97bf17e6f3b74",
+      "finalUrl": "https://react.dev/reference/react/use",
+      "byteLength": 521499,
+      "title": "use – React"
+    },
+    {
+      "url": "https://react.dev/reference/react/useReducer",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "a63b0fe6455ec089ea0538253f8429651a9f41e48f52ea60a3637a644585cc14",
+      "finalUrl": "https://react.dev/reference/react/useReducer",
+      "byteLength": 366817,
+      "title": "useReducer – React"
+    },
+    {
+      "url": "https://react.dev/reference/rsc/server-components",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "790c93633c97d60fc7d807ae95358f5284e7dc0e2497e5778de8999f1b855f43",
+      "finalUrl": "https://react.dev/reference/rsc/server-components",
+      "byteLength": 231878,
+      "title": "Server Components – React"
+    },
+    {
+      "url": "https://react.dev/reference/rsc/server-functions",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "170a11ce2ad9d53df65bd009530d3b38e291978eb096a03fbdc727d90649b0d8",
+      "finalUrl": "https://react.dev/reference/rsc/server-functions",
+      "byteLength": 221068,
+      "title": "Server Functions – React"
+    },
+    {
+      "url": "https://react.dev/reference/rules/rules-of-hooks",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "2c72313b676a3f04303449e53e4505e52f91aa9346a5149cdd1d829c01e8e5e5",
+      "finalUrl": "https://react.dev/reference/rules/rules-of-hooks",
+      "byteLength": 168550,
+      "title": "Rules of Hooks – React"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/api/autoBatchEnhancer",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "acc643094d71cda14518c99fa69bb29f09e267649da68cb957b5a3fcd74c8a7f",
+      "finalUrl": "https://redux.js.org/toolkit/api/autoBatchEnhancer",
+      "byteLength": 78181,
+      "title": "autoBatchEnhancer | Redux"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/api/combineSlices",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "d85f416479a1a9ba10fa11de5588e44d74337547961c349066624d3ade6aafed",
+      "finalUrl": "https://redux.js.org/toolkit/api/combineSlices",
+      "byteLength": 121995,
+      "title": "combineSlices | Redux"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/rtk-query/api/createApi#invalidationbehavior",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "d6c2df81dfe6e6cf57703279fbd995c35e30b40b11febe124b418880b0a1f0a1",
+      "finalUrl": "https://redux.js.org/toolkit/rtk-query/api/createApi#invalidationbehavior",
+      "byteLength": 616103,
+      "title": "createApi | Redux"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/rtk-query/usage/cache-behavior",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "4c0d36fb283a9053054772363f893dead9e25539d659a7e832daa43be0275a7e",
+      "finalUrl": "https://redux.js.org/toolkit/rtk-query/usage/cache-behavior",
+      "byteLength": 162787,
+      "title": "Cache Behavior | Redux"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/rtk-query/usage/manual-cache-updates",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "365fd731c3ad3518494b7889e36230bca2f58b64ce5cf0837fe32b9554bfb765",
+      "finalUrl": "https://redux.js.org/toolkit/rtk-query/usage/manual-cache-updates",
+      "byteLength": 229769,
+      "title": "Manual Cache Updates | Redux"
+    },
+    {
+      "url": "https://redux-toolkit.js.org/rtk-query/usage/streaming-updates",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "85fd1cb1c212a1dd6024ba885212d76f3dc2f349db8fc12d484758a23f06b517",
+      "finalUrl": "https://redux.js.org/toolkit/rtk-query/usage/streaming-updates",
+      "byteLength": 131117,
+      "title": "Streaming Updates | Redux"
+    },
+    {
+      "url": "https://redux.js.org/usage/server-rendering",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "98bdced5e8dcdee93ded7cc4eb31d75402ec7032c164276024a1ec11416f6ee3",
+      "finalUrl": "https://redux.js.org/usage/server-rendering",
+      "byteLength": 113823,
+      "title": "Server Rendering | Redux"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "f862b98ce06b615fe663100526dd8925d23b8b782399569ff8cc381c767c6bcc",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/advanced-ssr",
+      "byteLength": 644125,
+      "title": "Advanced Server Rendering | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/mutations#persisting-offline-mutations",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "28a539eeff0912a7441633b39b638043b2a1de043e619ab100ea95ea89f07de9",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/mutations#persisting-offline-mutations",
+      "byteLength": 588773,
+      "title": "Mutations | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/network-mode",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "413d0082fe76488d43f1ad7edc3d05b2f97974cb727e3d269c9f0f3b50de33c0",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/network-mode",
+      "byteLength": 540958,
+      "title": "Network Mode | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/query-keys",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "c853c61fcbd8a313d2f59dc36b86f19274ad30f7586503029795f578ca0c7fd6",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/query-keys",
+      "byteLength": 545830,
+      "title": "Query Keys | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/render-optimizations",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "16a08566dfc0e537a6d3dcc42aca7ccf62757c119f726f03666ab68b988b26b2",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/render-optimizations",
+      "byteLength": 546637,
+      "title": "Render Optimizations | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tanstack.com/query/latest/docs/framework/react/guides/request-waterfalls",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "b9166b7170f3e9484f74116239d9c8a6091a5dfc39619ea4173fe220654f1a39",
+      "finalUrl": "https://tanstack.com/query/latest/docs/framework/react/guides/request-waterfalls",
+      "byteLength": 588471,
+      "title": "Performance &amp; Request Waterfalls | TanStack Query React Docs"
+    },
+    {
+      "url": "https://tc39.es/ecma262/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "9fc68c17ddd9875d9e6e78f87454d38bbd8994d3e22da18cb61cb650660f428a",
+      "finalUrl": "https://tc39.es/ecma262/",
+      "byteLength": 7820167,
+      "title": "ECMAScript® 2027 Language Specification"
+    },
+    {
+      "url": "https://wicg.github.io/scheduling-apis/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "be7e46913e5b11ebe1b71504e6901b95e5fb468db23660c2e404700a0e99f948",
+      "finalUrl": "https://wicg.github.io/scheduling-apis/",
+      "byteLength": 390687,
+      "title": "Prioritized Task Scheduling"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "cc0eddb2295ef69b2710d9899c9b75866afe46db5df26f4cd363b2aef141da7b",
+      "finalUrl": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+      "byteLength": 245999,
+      "title": "TypeScript: Documentation - Conditional Types"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "c6736c9e01827ecc6a0e4f22a030cef79fc6dd3d79f82a6dc8dccdbbf68ab3d1",
+      "finalUrl": "https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html",
+      "byteLength": 250013,
+      "title": "TypeScript: Documentation - Template Literal Types"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "36979effeb2f2a92b3192d5835f055650a4fa0899f90f534b041a3a51148df32",
+      "finalUrl": "https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html",
+      "byteLength": 198697,
+      "title": "TypeScript: Documentation - Introduction"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/mixins.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "7e50db9b77e857f62dbd80b447ba9ab0018c993f1a2bef1311b4102ecf101c7c",
+      "finalUrl": "https://www.typescriptlang.org/docs/handbook/mixins.html",
+      "byteLength": 243175,
+      "title": "TypeScript: Documentation - Mixins"
+    },
+    {
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "a0327eb35aa46aa77c4834655d0811561cb6d69e513741efb83016c9512f7b28",
+      "finalUrl": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html",
+      "byteLength": 270188,
+      "title": "TypeScript: Documentation - TypeScript 4.9"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-anchor-position-1/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "e54b70bd8cd8a24f718ca6bb5151fbc16ff147af5ae9ba817f39464d7a0ea01c",
+      "finalUrl": "https://www.w3.org/TR/css-anchor-position-1/",
+      "byteLength": 646073,
+      "title": "CSS Anchor Positioning Module Level 1"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-cascade-6/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "0cc42c0d3579cacf79c4549bc3302d31a2c847a325693585c21cafd92632263d",
+      "finalUrl": "https://www.w3.org/TR/css-cascade-6/",
+      "byteLength": 194127,
+      "title": "CSS Cascading and Inheritance Level 6"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-paint-api-1/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "c16c8fae82a79bda2ae87f9c3382c8942bab426c1cdd6101acc1b9d3dcfd8e45",
+      "finalUrl": "https://www.w3.org/TR/css-paint-api-1/",
+      "byteLength": 211242,
+      "title": "CSS Painting API Level 1"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-properties-values-api-1/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "959d45c42d151096bbc21a074aff849f48c64f3f393dfc285c437eb326f066c7",
+      "finalUrl": "https://www.w3.org/TR/css-properties-values-api-1/",
+      "byteLength": 328245,
+      "title": "CSS Properties and Values API Level 1"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-will-change/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "66d3e479cd2b49c5998afa78cb8a571235c04fa42c3a47a053494d296b1bd9f4",
+      "finalUrl": "https://www.w3.org/TR/css-will-change/",
+      "byteLength": 67364,
+      "title": "CSS Will Change Module Level 1"
+    },
+    {
+      "url": "https://www.w3.org/TR/service-workers/",
+      "status": 200,
+      "checkedAt": "2026-11-17",
+      "documentSha256": "f521a306a3270f175f30ec1dd697d748367b794a5728a42794175568e44d5eff",
+      "finalUrl": "https://www.w3.org/TR/service-workers/",
+      "byteLength": 1799282,
+      "title": "Service Workers Nightly"
+    }
+  ]
+}

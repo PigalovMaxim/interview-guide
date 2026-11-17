@@ -7,6 +7,8 @@ const vm = require('node:vm');
 const { spawnSync } = require('node:child_process');
 const { root, loadContent } = require('./helpers.cjs');
 const shipped = loadContent();
+const replacements = require('../data-sources/grade-replacements-2026-11-17.json');
+const retired = new Set(replacements.map(row => row.retiredId));
 const themes = shipped.topics.filter(topic => topic.key !== 'coding').map(topic => topic.key + '.js');
 
 function fixture(t) {
@@ -54,15 +56,16 @@ test('Реальный генератор воспроизводит 480 воп�
   const easy = JSON.parse(fs.readFileSync(path.join(directory, 'data-sources/easyoffer-2026-11-16.json'), 'utf8'));
   const extra = JSON.parse(fs.readFileSync(path.join(directory, 'data-sources/kavalchuk-selection-2026-11-16.json'), 'utf8'));
   assert.equal(questions.length, 480);
-  assert.equal(questions.filter(card => card.source?.provider === easy.provider).length, 45);
-  assert.equal(questions.filter(card => card.source?.provider === extra.provider).length, 40);
-  assert.equal(questions.filter(card => card.origin === 'project-editorial').length, 395);
+  assert.equal(questions.filter(card => card.source?.provider === easy.provider).length, 19);
+  assert.equal(questions.filter(card => card.source?.commit).length, 77);
+  assert.equal(questions.filter(card => card.origin === 'project-editorial').length, 384);
   for (const topic of generated.topics) for (const tab of generated.tabs) {
     const ordinals = generated.materials.filter(card => card.topic === topic.key && card.tab === tab.key).map(card => card.ordinal);
     assert.deepEqual(ordinals.sort((a, b) => a - b), Array.from({ length: 15 }, (_, index) => index + 1), topic.key + '/' + tab.key);
   }
   for (const [level, list] of Object.entries(easy.levels)) for (const row of list.results.filter(row => row.accepted)) {
     const card = questions.find(card => card.id === `easyoffer:${level}:${row.id}`);
+    if (retired.has(`easyoffer:${level}:${row.id}`)) { assert.equal(card, undefined); continue; }
     assert.ok(card, 'Отсутствует EasyOffer ' + row.id + '/' + level);
     assert.equal(card.question, row.title);
     assert.deepEqual(card.source, {
@@ -72,6 +75,7 @@ test('Реальный генератор воспроизводит 480 воп�
   }
   for (const row of extra.records.filter(row => row.accepted)) {
     const card = questions.find(card => card.id === row.id);
+    if (retired.has(row.id)) { assert.equal(card, undefined); continue; }
     assert.ok(card, 'Отсутствует GitHub ' + row.id);
     assert.equal(card.question, row.title);
     assert.deepEqual(card.source, {
@@ -112,6 +116,63 @@ test('Неверная тема редакционного EasyOffer-разбо�
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Invalid topic for easyoffer:junior:13086: "unknown"/);
   assert.equal(result.stdout, '');
+  assert.deepEqual(readFiles(output), before);
+});
+
+for (const { name, change, error } of [
+  { name: 'неизвестный retiredId', change: rows => { rows[0].retiredId = 'missing:id'; }, error: /Неизвестный retiredId/ },
+  { name: 'повторная замена', change: rows => { rows.push(rows[0]); }, error: /Повторная замена retiredId/ },
+  { name: 'другой topic', change: rows => { rows[0].card.topic = 'css'; }, error: /Замена меняет topic\/tab/ },
+  { name: 'другой tab', change: rows => { rows[0].card.tab = 'middle'; }, error: /Замена меняет topic\/tab/ },
+  { name: 'прежний ID', change: rows => { rows[0].card.id = rows[0].retiredId; }, error: /Недопустимый новый ID/ },
+  { name: 'повтор нового ID', change: rows => { rows[1].card.id = rows[0].card.id; }, error: /Недопустимый новый ID/ },
+  { name: 'нет причины', change: rows => { rows[0].reason = ''; }, error: /Нет причины замены/ },
+  { name: 'нет ответа', change: rows => { delete rows[0].card.shortAnswer; }, error: /Некорректное поле shortAnswer/ },
+  { name: 'нет оценки', change: rows => { delete rows[0].card.assessment.deep; }, error: /Некорректная оценка/ },
+  { name: 'нет второй ветки', change: rows => { rows[0].card.followUps.pop(); }, error: /Некорректные followUps/ },
+  { name: 'не HTTPS', change: rows => { rows[0].card.references = ['http://example.com']; }, error: /Некорректные references/ },
+  { name: 'нет сверки первичной ссылки', change: rows => { rows[0].card.references = ['https://example.com/unverified']; }, error: /Нет сверки references/ },
+  { name: 'неподтверждённая дата', change: rows => { rows[0].card.verifiedAt = '2030-01-01'; }, error: /Нет сверки references/ },
+  { name: 'неизвестный origin', change: rows => { rows.find(row => !row.card.source).card.origin = 'external'; }, error: /Нет provenance/ },
+  ...['commit','path','line','originalQuestion','level','url','sourceId','retrievedAt','provider','adapted'].map(field => ({
+    name: 'неверный provenance ' + field,
+    change: rows => { rows[0].card.source[field] = field === 'line' ? 7 : 'wrong'; },
+    error: /Неверный provenance/
+  })),
+  { name: 'источник одновременно с origin', change: rows => { rows[0].card.origin = 'project-editorial'; }, error: /Неверный provenance/ },
+  ...['title','question'].map(field => ({
+    name: 'глобальный повтор ' + field + ' с другой пунктуацией',
+    change: rows => { rows[1].card[field] = rows[0].card[field].toUpperCase() + '?!'; },
+    error: /Глобальный повтор/
+  })),
+  { name: 'неверный targetLevel advanced', change: rows => { rows.find(row => row.card.tab === 'advanced' && row.card.source).card.targetLevel = 'middle'; }, error: /Неверный provenance/ },
+  { name: 'выдуманный source advanced', change: rows => { rows.find(row => row.card.tab === 'advanced' && row.card.source).card.source.level = 'advanced'; }, error: /Неверный provenance/ },
+]) test('Замены: ' + name + ' отклоняется до любых записей', t => {
+  const { directory, output } = fixture(t);
+  for (const name of themes) fs.writeFileSync(path.join(output, name), '// previous bank\n');
+  const before = readFiles(output);
+  const manifest = path.join(directory, 'data-sources/grade-replacements-2026-11-17.json');
+  const rows = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+  change(rows);
+  fs.writeFileSync(manifest, JSON.stringify(rows));
+  const result = generate(directory);
+  assert.ifError(result.error);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, error);
+  assert.equal(result.stdout, '');
+  assert.deepEqual(readFiles(output), before, 'Невалидные замены не должны менять предыдущую сборку');
+});
+
+test('Дубль нового вопроса с сохранённой карточкой другой темы отклоняется глобально', t => {
+  const { directory, output } = fixture(t);
+  const before = readFiles(output);
+  const manifest = path.join(directory, 'data-sources/grade-replacements-2026-11-17.json');
+  const rows = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+  rows[0].card.question = shipped.materials.find(card => card.topic === 'html' && card.id.startsWith('project:')).question + '!!!';
+  fs.writeFileSync(manifest, JSON.stringify(rows));
+  const result = generate(directory);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Глобальный повтор/);
   assert.deepEqual(readFiles(output), before);
 });
 
