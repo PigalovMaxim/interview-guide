@@ -1,1 +1,146 @@
-[]
+[
+  {
+    "id": "project:javascript:search-ampersand",
+    "expected": [
+      "\"R\"",
+      "\"R&D\""
+    ]
+  },
+  {
+    "id": "project:javascript:switch-fallthrough",
+    "expected": [
+      "15"
+    ]
+  },
+  {
+    "id": "project:javascript:regexp-state",
+    "expected": [
+      "true",
+      "false",
+      "true"
+    ]
+  },
+  {
+    "id": "project:javascript:repeated-query",
+    "expected": [
+      "{\"tag\":\"blue\"}",
+      "[\"red\",\"blue\"]"
+    ]
+  },
+  {
+    "id": "project:javascript:body-consumed",
+    "expected": [
+      "\"{\\\"ok\\\":true}\"",
+      "\"TypeError\""
+    ]
+  },
+  {
+    "id": "project:javascript:natural-order",
+    "expected": [
+      "[\"file10\",\"file2\"]",
+      "[\"file2\",\"file10\"]"
+    ]
+  },
+  {
+    "id": "project:javascript:freeze-depth",
+    "expected": [
+      "\"red\""
+    ]
+  },
+  {
+    "id": "project:javascript:replacer-depth",
+    "expected": [
+      "\"{\\\"name\\\":\\\"Ada\\\",\\\"address\\\":{}}\""
+    ]
+  },
+  {
+    "id": "project:javascript:computed-overwrite",
+    "expected": [
+      "\"key\"",
+      "1",
+      "2",
+      "2"
+    ]
+  },
+  {
+    "id": "project:javascript:spread-getter",
+    "expected": [
+      "1 | 1 | 1"
+    ]
+  },
+  {
+    "id": "project:javascript:parameter-scope",
+    "expected": [
+      "\"ReferenceError\""
+    ]
+  },
+  {
+    "id": "project:javascript:chain-grouping",
+    "expected": [
+      "undefined",
+      "\"TypeError\""
+    ]
+  },
+  {
+    "id": "project:javascript:from-source",
+    "expected": [
+      "[\"iterated\",\"second\"]"
+    ]
+  },
+  {
+    "id": "project:javascript:then-error-boundary",
+    "expected": [
+      "\"next\""
+    ]
+  },
+  {
+    "id": "project:javascript:return-await-catch",
+    "expected": [
+      "\"outer\"",
+      "\"caught-b\""
+    ]
+  },
+  {
+    "id": "project:javascript:proxy-receiver",
+    "expected": [
+      "\"base\"",
+      "\"child\""
+    ]
+  },
+  {
+    "id": "project:javascript:class-init-order",
+    "expected": [
+      "undefined",
+      "42"
+    ]
+  },
+  {
+    "id": "project:javascript:iterator-growth",
+    "expected": [
+      "\"a\"",
+      "\"b\"",
+      "\"c\""
+    ]
+  },
+  {
+    "id": "project:javascript:object-assign-setter",
+    "expected": [
+      "\"set\" | 3",
+      "4"
+    ]
+  },
+  {
+    "id": "project:javascript:length-partial",
+    "expected": [
+      "false",
+      "2 | [\"a\",\"b\"]"
+    ]
+  },
+  {
+    "id": "project:javascript:binary-endian",
+    "expected": [
+      "256",
+      "1"
+    ]
+  }
+]

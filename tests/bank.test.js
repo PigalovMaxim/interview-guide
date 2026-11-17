@@ -6,19 +6,29 @@ const crypto = require('node:crypto');
 const { root, loadContent, digestTask } = require('./helpers.cjs');
 const easy = require('../data-sources/easyoffer-2026-11-16.json');
 const extra = require('../data-sources/kavalchuk-selection-2026-11-16.json');
+const project = require('../data-sources/project-editorial-cases.json');
 const preserved = require('../data-sources/coding-preserved.json');
 const verification = require('../data-sources/technical-verification-2026-11-17.json');
 const content = loadContent();
 const questions = content.materials.filter(card => card.kind === 'question');
+const sourced = questions.filter(card => card.source);
+const imported = questions.filter(card => card.origin === 'project-editorial');
 const nonempty = value => typeof value === 'string' && value.trim().length > 0;
 const hash = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 
-test('Редакция 3: ровно 85 вопросов из двух подборок, уникальные ID, архивы отделены', () => {
-  assert.equal(content.revision, 3);
+test('Редакция 4: 480 вопросов, 60 задач, уникальные ID и прежний ключ интервью', () => {
+  assert.equal(content.revision, 4);
   assert.equal(content.ratingsStorageKey, 'interview-guide.ratings.v3');
-  assert.equal(content.materials.length, 145);
-  assert.equal(questions.length, 85);
-  assert.equal(new Set(content.materials.map(card => card.id)).size, 145);
+  assert.equal(content.materials.length, 540);
+  assert.equal(questions.length, 480);
+  assert.equal(sourced.length, 85);
+  assert.equal(imported.length, 395);
+  assert.equal(new Set(content.materials.map(card => card.id)).size, 540);
+  // SHA-256 сериализованных карточек из коммита 778cacd до дополнения банка.
+  assert.equal(hash(JSON.stringify(sourced)), '94f16d095f89e0d4f98cd2ae25edeb5b272faa70cedf51fd849e62fa48d9112b');
+});
+
+test('Вопросы из подборок точно соответствуют принятым записям источников', () => {
   const expected = [];
   for (const [level, list] of Object.entries(easy.levels)) for (const row of list.results) {
     const id = `easyoffer:${level}:${row.id}`;
@@ -54,12 +64,22 @@ test('Редакция 3: ровно 85 вопросов из двух подб�
     assert.equal(card.source.path, row.sourcePath);
     assert.equal(card.source.line, row.line);
   }
-  assert.deepEqual(questions.map(card => card.id).sort(), expected.sort());
-  const easyTitles = new Set(questions.filter(card => card.source.provider === easy.provider).map(card => card.title));
-  const extraCards = questions.filter(card => card.source.provider === extra.provider);
+  assert.deepEqual(sourced.map(card => card.id).sort(), expected.sort());
+  const easyTitles = new Set(sourced.filter(card => card.source.provider === easy.provider).map(card => card.title));
+  const extraCards = sourced.filter(card => card.source.provider === extra.provider);
   assert.ok(extraCards.every(card => !easyTitles.has(card.title)), 'Дубль названия между источниками');
   assert.equal(new Set(extraCards.map(card => card.title)).size, extraCards.length);
-  assert.deepEqual(['junior','middle','senior'].map(tab => questions.filter(card => card.tab === tab).length), [32,28,25]);
+  assert.deepEqual(['junior','middle','senior'].map(tab => sourced.filter(card => card.tab === tab).length), [32,28,25]);
+});
+
+test('Проектные кейсы имеют отдельные ID и сохраняют редакционные исходники целиком', () => {
+  const rows = new Map(project.map(card => [card.id, card]));
+  assert.equal(rows.size, 395);
+  for (const { ordinal, editorial, origin, ...card } of imported) {
+    assert.match(card.id, new RegExp('^project:' + card.topic + ':[a-z0-9-]+$'));
+    assert.ok(!Object.hasOwn(card, 'source'), card.id);
+    assert.deepEqual(card, rows.get(card.id), card.id);
+  }
 });
 
 test('Контрольные суммы 60 задач после согласованной коррекции calendar-date совпадают', () => {
@@ -74,14 +94,20 @@ test('Контрольные суммы 60 задач после согласо�
   assert.equal(hash(fs.readFileSync(path.join(root,'web/data/coding.js'),'utf8').replaceAll('\r\n','\n')), '30cf1f2be9b8574fb6809b474aa4748bf65a9f643cd3eea4278c7b568766de4c');
 });
 
-test('9 тем и 4 вкладки, последовательные ordinal, допустимые пустые группы', () => {
+test('Во всех 36 группах по 15 материалов; исходные вопросы первыми, глубина соответствует вкладке', () => {
   assert.equal(content.topics.length, 9);
   assert.equal(content.tabs.length, 4);
   for (const topic of content.topics) for (const tab of content.tabs) {
-    const rows = content.materials.filter(card => card.topic === topic.key && card.tab === tab.key);
-    assert.deepEqual(rows.map(card => card.ordinal).sort((a,b) => a-b), Array.from({length:rows.length},(_,i) => i+1), topic.key+'/'+tab.key);
-    if (topic.key === 'coding') assert.equal(rows.length,15);
-    else if (tab.key === 'advanced' || topic.key === 'tanstack-query') assert.equal(rows.length,0);
+    const rows = content.materials.filter(card => card.topic === topic.key && card.tab === tab.key).sort((a,b) => a.ordinal-b.ordinal);
+    const group = topic.key + '/' + tab.key;
+    assert.deepEqual(rows.map(card => card.ordinal), Array.from({length:15},(_,i) => i+1), group);
+    const providers = rows.map(card => card.source?.provider ?? null);
+    const expectedOrder = [...providers.filter(provider => provider === easy.provider), ...providers.filter(provider => provider === extra.provider), ...providers.filter(provider => provider === null)];
+    assert.deepEqual(providers, expectedOrder, group);
+    if (topic.key !== 'coding') for (const field of ['title', 'question']) {
+      const wording = rows.map(card => card[field].toLocaleLowerCase('ru').replace(/[^\p{L}\p{N}]+/gu, ' ').trim());
+      assert.equal(new Set(wording).size, rows.length, group + ': повтор ' + field);
+    }
     for (const card of rows) {
       assert.ok(['junior','middle','senior'].includes(card.targetLevel), card.id);
       if (tab.key !== 'advanced') assert.equal(card.targetLevel,tab.key,card.id);
@@ -93,6 +119,11 @@ test('9 тем и 4 вкладки, последовательные ordinal, д
 
 test('Разборы полны, редакционные, с первичными источниками и двумя ветками', () => {
   const auditedReferences = new Map(verification.references.map(reference => [reference.url, reference]));
+  const projectReferenceHosts = new Set([
+    'dom.spec.whatwg.org', 'encoding.spec.whatwg.org', 'feature-sliced.design', 'fetch.spec.whatwg.org',
+    'html.spec.whatwg.org', 'react-redux.js.org', 'react.dev', 'redux-toolkit.js.org', 'redux.js.org',
+    'tanstack.com', 'tc39.es', 'url.spec.whatwg.org', 'www.typescriptlang.org', 'www.w3.org'
+  ]);
   for (const card of content.materials) {
     for (const field of ['question','shortAnswer','explanation','context','verifiedAt']) assert.ok(nonempty(card[field]),card.id+': '+field);
     assert.ok(!Object.hasOwn(card,'questionPoints'),card.id);
@@ -107,6 +138,8 @@ test('Разборы полны, редакционные, с первичным
     for (const key of ['basic','confident','deep']) assert.ok(nonempty(card.assessment[key]), card.id+': '+key);
     if (card.kind === 'question') {
       assert.equal(card.editorial,true);
+    }
+    if (card.source) {
       assert.equal(card.verifiedAt,verification.checkedAt);
       for (const url of card.references) {
         const reference = auditedReferences.get(url);
@@ -116,6 +149,12 @@ test('Разборы полны, редакционные, с первичным
       }
       assert.ok(!card.references.includes(card.source.url),card.id + ': происхождение отдельно от проверки');
     }
+    if (card.origin === 'project-editorial') {
+      assert.equal(card.verifiedAt, '2026-11-16', card.id + ': дата технической сверки проектного банка');
+      for (const url of card.references) {
+        assert.ok(projectReferenceHosts.has(new URL(url).hostname), card.id + ': первичный документ ' + url);
+      }
+    }
     if (card.questionCode) assert.ok(nonempty(card.questionCodeLanguage),card.id);
     if (card.kind === 'task') {
       for (const field of ['statement','starterCode','language','complexity']) assert.ok(nonempty(card[field]),card.id+': '+field);
@@ -124,8 +163,8 @@ test('Разборы полны, редакционные, с первичным
       assert.ok(nonempty(card.solution.code) && nonempty(card.solution.explanation),card.id);
     }
   }
-  for (const id of new Set(questions.filter(card => card.source.provider === 'EasyOffer').map(card => card.source.sourceId))) {
-    const rows = questions.filter(card => card.source.provider === 'EasyOffer' && card.source.sourceId === id);
+  for (const id of new Set(sourced.filter(card => card.source.provider === 'EasyOffer').map(card => card.source.sourceId))) {
+    const rows = sourced.filter(card => card.source.provider === 'EasyOffer' && card.source.sourceId === id);
     for (const field of ['explanation','assessment','followUps']) assert.equal(new Set(rows.map(card => JSON.stringify(card[field]))).size, rows.length, id + ': одинаковые уровни ' + field);
   }
 });

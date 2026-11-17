@@ -41,7 +41,7 @@ function readFiles(output) {
   return new Map(fs.readdirSync(output).sort().map(name => [name, fs.readFileSync(path.join(output, name))]));
 }
 
-test('Реальный генератор воспроизводит поставляемый банк 45+40 и сохраняет coding.js побайтно', t => {
+test('Реальный генератор воспроизводит 480 вопросов и сохраняет coding.js побайтно', t => {
   const { directory, output } = fixture(t);
   const coding = fs.readFileSync(path.join(output, 'coding.js'));
   const result = generate(directory);
@@ -53,8 +53,14 @@ test('Реальный генератор воспроизводит поста�
   const questions = generated.materials.filter(card => card.kind === 'question');
   const easy = JSON.parse(fs.readFileSync(path.join(directory, 'data-sources/easyoffer-2026-11-16.json'), 'utf8'));
   const extra = JSON.parse(fs.readFileSync(path.join(directory, 'data-sources/kavalchuk-selection-2026-11-16.json'), 'utf8'));
-  assert.equal(questions.filter(card => card.source.provider === easy.provider).length, 45);
-  assert.equal(questions.filter(card => card.source.provider === extra.provider).length, 40);
+  assert.equal(questions.length, 480);
+  assert.equal(questions.filter(card => card.source?.provider === easy.provider).length, 45);
+  assert.equal(questions.filter(card => card.source?.provider === extra.provider).length, 40);
+  assert.equal(questions.filter(card => card.origin === 'project-editorial').length, 395);
+  for (const topic of generated.topics) for (const tab of generated.tabs) {
+    const ordinals = generated.materials.filter(card => card.topic === topic.key && card.tab === tab.key).map(card => card.ordinal);
+    assert.deepEqual(ordinals.sort((a, b) => a - b), Array.from({ length: 15 }, (_, index) => index + 1), topic.key + '/' + tab.key);
+  }
   for (const [level, list] of Object.entries(easy.levels)) for (const row of list.results.filter(row => row.accepted)) {
     const card = questions.find(card => card.id === `easyoffer:${level}:${row.id}`);
     assert.ok(card, 'Отсутствует EasyOffer ' + row.id + '/' + level);
@@ -90,7 +96,7 @@ for (const field of ['topic', 'level']) test('Неверный GitHub ' + field 
   const result = generate(directory);
   assert.ifError(result.error);
   assert.notEqual(result.status, 0);
-  assert.match(result.stderr, new RegExp('Invalid ' + field));
+  assert.match(result.stderr, field === 'level' ? /Invalid level/ : /Invalid topic/);
   assert.ok(result.stderr.includes(row.id));
   assert.match(result.stderr, /unknown/);
   assert.equal(result.stdout, '');
@@ -121,5 +127,41 @@ test('Неизвестный уровень списка EasyOffer не игно
   assert.notEqual(result.status, 0);
   assert.match(result.stderr, /Invalid EasyOffer level: "unknown"/);
   assert.equal(result.stdout, '');
+  assert.deepEqual(readFiles(output), before);
+});
+
+for (const { name, change, error } of [
+  {
+    name: 'Недостающий кейс',
+    change: rows => rows.shift(),
+    error: /Ожидалось 15 вопросов в группе html\/junior, получено 14/
+  },
+  {
+    name: 'Дублирующийся ID',
+    change: rows => { rows[1].id = rows[0].id; },
+    error: /Повтор или отсутствие ID: project:html:/
+  },
+  {
+    name: 'Сторонний источник у кейса проекта',
+    change: rows => { rows[0].source = { provider: 'EasyOffer', level: rows[0].tab, url: 'https://easyoffer.ru/' }; },
+    error: /Источник недопустим у кейса проекта: project:html:/
+  },
+  ...['references', 'assessment', 'followUps'].map(field => ({
+    name: 'Отсутствует обязательное поле ' + field,
+    change: rows => { delete rows[0][field]; },
+    error: new RegExp('Некорректное поле ' + field + ' у кейса проекта: project:html:')
+  })),
+]) test(name + ' отклоняется до записи тематических файлов', t => {
+  const { directory, output } = fixture(t);
+  for (const name of themes) fs.writeFileSync(path.join(output, name), '// Предыдущая сборка: ' + name + '\n');
+  const before = readFiles(output);
+  const manifest = path.join(directory, 'data-sources/project-editorial-cases.json');
+  const rows = JSON.parse(fs.readFileSync(manifest, 'utf8'));
+  change(rows);
+  fs.writeFileSync(manifest, JSON.stringify(rows));
+  const result = generate(directory);
+  assert.ifError(result.error);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, error);
   assert.deepEqual(readFiles(output), before);
 });

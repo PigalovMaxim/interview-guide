@@ -48,19 +48,31 @@ const server = http.createServer((request,response) => {
       await page.waitForFunction(({previous,expected})=>window.clipboardAttempts===previous+1&&(expected===null?window.copiedTask===undefined:window.copiedTask===expected),{previous,expected});
     }
     const errors=[];
+    const initialScripts=new Map();
+    page.on('request',request=>{
+      if(request.resourceType()!=='script')return;
+      const url=new URL(request.url());
+      initialScripts.set(url.pathname,url.searchParams.get('v'));
+    });
     page.on('pageerror',error=>errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}/`);
     await page.waitForSelector('.material-card');
+    for(const script of ['/app.js','/data/catalog.js',...content.topics.filter(topic=>topic.key!=='coding').map(topic=>`/data/${topic.key}.js`)]){
+      assert.equal(initialScripts.get(script),String(content.revision),script);
+    }
     const archivedRatings=Object.fromEntries(previous.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     const archive=JSON.stringify({schemaVersion:1,ratingsById:archivedRatings});
-    const archiveV2=JSON.stringify({schemaVersion:1,ratingsById:{'v2:javascript:former-question':'deep',[content.materials.find(card=>card.kind==='task').id]:'basic'}});
+    const firstProject=content.materials.find(card=>card.origin==='project-editorial'&&card.topic==='javascript'&&card.tab==='junior');
+    const archiveV2=JSON.stringify({schemaVersion:1,ratingsById:{[firstProject.id.replace(/^project:/,'v2:')]:'deep',[content.materials.find(card=>card.kind==='task').id]:'basic'}});
     await page.evaluate(({archive,archiveV2})=>{localStorage.setItem('interview-guide.ratings',archive);localStorage.setItem('interview-guide.ratings.v2',archiveV2);localStorage.setItem('interview-guide.theme','light');},{archive,archiveV2});
     await page.reload();
     await page.waitForSelector('.material-card');
     assert.deepEqual(await page.evaluate(()=>window.InterviewStore.getState().ratingsById),{});
-    assert.match(await page.locator('#bank-revision').innerText(),/Редакция 3/);
+    assert.match(await page.locator('#bank-revision').innerText(),/Редакция 4 · 480 вопросов \+ 60 практических задач/);
     assert.ok(await page.locator('#notices').innerText());
-    const currentRatings=Object.fromEntries(content.materials.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
+    const originalCards=content.materials.filter(card=>card.source||card.kind==='task');
+    assert.equal(originalCards.length,145);
+    const currentRatings=Object.fromEntries(originalCards.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     await page.evaluate(({key,ratings})=>localStorage.setItem(key,JSON.stringify({schemaVersion:1,ratingsById:ratings})),{key:content.ratingsStorageKey,ratings:currentRatings});
     await page.reload();
     await page.waitForSelector('.material-card');
@@ -73,29 +85,20 @@ const server = http.createServer((request,response) => {
       await page.locator(`[data-action="topic"][data-topic="${topic.key}"]`).click();
       await page.locator(`[data-action="tab"][data-tab="${tab.key}"]`).click();
       const items=content.materials.filter(card=>card.topic===topic.key&&card.tab===tab.key).sort((a,b)=>a.ordinal-b.ordinal);
-      assert.equal(await page.locator('.material-card').count(),items.length);
+      assert.equal(await page.locator('.material-card').count(),15,topic.key+'/'+tab.key);
       assert.equal(await page.locator('.follow-up-support').count(),items.length);
       assert.equal(await page.locator('.follow-up-transfer').count(),items.length);
       assert.equal(await page.locator('.follow-up-expected').count(),items.length*2);
       assert.equal(await page.locator('#level-guidance').innerText(),tab.guidance);
       assert.ok(!(await page.locator('#material-list').innerText()).includes('[object Object]'));
-      assert.equal(await page.locator('#list-count').innerText(),items.length+' материалов');
-      if(!items.length){
-        assert.equal(await page.locator('.empty-state').count(),1);
-        assert.match(await page.locator('.empty-state').innerText(),/выбранных источников/);
-        await page.locator('#theme-toggle').click();
-        await page.locator('#theme-toggle').click();
-        await page.locator('a[href="#results"]').first().click();
-        await page.locator('#results').waitFor({state:'visible'});
-        assert.equal(await page.locator('#results').isVisible(),true);
-        const emptyResult=page.locator(`[data-results-tab="${tab.key}"]`);
-        await emptyResult.locator(`.legend-button[data-results-topic="${topic.key}"]`).click();
-        assert.match(await emptyResult.locator('.topic-coverage').textContent(),/0\/0/);
-        await page.locator('a[href="#questions"]').first().click();
-        await page.locator('#questions').waitFor({state:'visible'});
-        continue;
-      }
+      assert.equal(await page.locator('#list-count').innerText(),'15 материалов');
       assert.equal(await page.locator('.empty-state').count(),0);
+      assert.deepEqual(await page.locator('.ordinal').allTextContents(),Array.from({length:15},(_,index)=>String(index+1).padStart(2,'0')));
+      assert.deepEqual(await page.locator('.rating-badge').allTextContents(),items.map(item=>content.ratingLabels[currentRatings[item.id]]||'Без оценки'));
+      if(tab.key==='advanced'){
+        const angleLabels={engineering:'инженерный кейс',nuance:'неочевидный нюанс'};
+        assert.deepEqual(await page.locator('.target-level').allTextContents(),items.map(item=>'Ожидаемый уровень: '+item.targetLevel+' · '+item.angles.map(angle=>angleLabels[angle]).join(' / ')));
+      }
       const first=page.locator('.material-card').first();
       await first.locator('[data-action="disclosure"]').click();
       await first.locator('.question-wording').waitFor({state:'visible'});
@@ -126,20 +129,45 @@ const server = http.createServer((request,response) => {
       }else{
         assert.equal(await first.locator('.follow-up-support h4').innerText(),'При затруднении');
         assert.match(await first.locator('.follow-up-transfer h4').innerText(),/перенос/);
-        for(const item of items){
-          const article=page.locator(`[data-material-id="${item.id}"]`);
-          await assertBranches(article,item);
-          assert.equal(await article.locator('.question-source a').getAttribute('href'),item.source.url);
-          assert.match(await article.locator('.question-source').textContent(),new RegExp(item.source.level));
-          assert.equal(await article.locator('.question-wording').textContent(),item.question);
-          assert.match(await article.locator('.editorial-note').textContent(),/редакцией приложения/);
+        const rendered=await page.locator('.material-card').evaluateAll(cards=>cards.map(card=>{
+          const value=selector=>card.querySelector(selector)?.textContent??null;
+          return {
+            id:card.dataset.materialId, question:value('.question-wording'), code:value('.question-code code'),
+            source:value('.question-source'), sourceURL:card.querySelector('.question-source a')?.getAttribute('href')??null,
+            editorial:value('.editorial-note'), criteria:[...card.querySelectorAll('.criteria dd')].map(node=>node.textContent),
+            references:[...card.querySelectorAll('.references a')].map(link=>link.getAttribute('href')),
+            followUps:['support','transfer'].map(kind=>[value('.follow-up-'+kind+' .follow-up-question'),value('.follow-up-'+kind+' .follow-up-expected')])
+          };
+        }));
+        for(const [index,item] of items.entries()){
+          const actual=rendered[index];
+          assert.equal(actual.id,item.id);
+          assert.equal(actual.question,item.question,item.id);
+          assert.equal(actual.code,item.questionCode??null,item.id);
+          assert.deepEqual(actual.references,item.references,item.id);
+          assert.deepEqual(actual.criteria,['basic','confident','deep'].map(key=>item.assessment[key]),item.id);
+          assert.deepEqual(actual.followUps,item.followUps.map(branch=>[branch.question,'Признак понимания: '+branch.expected]),item.id);
+          if(item.source){
+            assert.equal(actual.sourceURL,item.source.url,item.id);
+            assert.ok(actual.source.includes('уровень источника: '+item.source.level),item.id);
+            assert.match(actual.editorial,/редакцией приложения/,item.id);
+          }else{
+            assert.equal(actual.source,'Происхождение: редакционный кейс проекта',item.id);
+            assert.equal(actual.sourceURL,null,item.id);
+            assert.equal(actual.editorial,null,item.id);
+          }
         }
-        await first.locator('[data-action="rate"][data-rating="deep"]').click();
-        assert.equal(await first.locator('.rating-badge').innerText(),'Глубоко');
+        const project=items.find(item=>item.origin==='project-editorial');
+        const projectCard=page.locator(`[data-material-id="${project.id}"]`);
+        if(project!==items[0])await projectCard.locator('[data-action="disclosure"]').click();
+        await projectCard.locator('[data-action="rate"][data-rating="deep"]').click();
+        assert.equal(await projectCard.locator('.rating-badge').innerText(),'Глубоко');
+        currentRatings[project.id]='deep';
       }
     }
     assert.equal(copies,60);
     const rated=await page.evaluate(()=>window.InterviewStore.getState().ratingsById);
+    assert.deepEqual(rated,currentRatings);
     await page.reload();
     await page.waitForSelector('.material-card');
     assert.deepEqual(await page.evaluate(()=>window.InterviewStore.getState().ratingsById),rated);
@@ -148,16 +176,16 @@ const server = http.createServer((request,response) => {
     await page.locator('a[href="#results"]').first().click();
         await page.locator('#results').waitFor({state:'visible'});
     assert.equal(await page.locator('#results').isVisible(),true);
-    assert.ok((await page.locator('#results-progress').innerText()).includes(String(content.materials.length)));
-    assert.equal(await page.locator('#bank-count').innerText(),String(content.materials.length));
+    assert.ok((await page.locator('#results-progress').innerText()).includes('540'));
+    assert.equal(await page.locator('#bank-count').innerText(),'540');
     for(const tab of content.tabs){
       const result=page.locator(`[data-results-tab="${tab.key}"]`);
-      const total=content.materials.filter(card=>card.tab===tab.key).length;
-      assert.equal(await result.locator('.result-total').innerText(),total+'/'+total+' оценено');
+      const ratedInTab=content.materials.filter(card=>card.tab===tab.key&&rated[card.id]);
+      assert.equal(await result.locator('.result-total').innerText(),ratedInTab.length+'/135 оценено');
       for(const topic of content.topics){
-        const size=content.materials.filter(card=>card.tab===tab.key&&card.topic===topic.key).length;
+        const covered=ratedInTab.filter(card=>card.topic===topic.key).length;
         await result.locator(`.legend-button[data-results-topic="${topic.key}"]`).click();
-        assert.equal(await result.locator('.topic-coverage').innerText(),'Покрытие: '+size+'/'+size+' вопросов темы оценено.');
+        assert.equal(await result.locator('.topic-coverage').innerText(),'Покрытие: '+covered+'/15 вопросов темы оценено.');
       }
     }
     await page.locator('a[href="#questions"]').first().click();
@@ -173,17 +201,21 @@ const server = http.createServer((request,response) => {
     await page.locator('.material-card').first().screenshot({path:path.join(screenshotDirectory,'desktop-card.png'),animations:'disabled'});
     await page.setViewportSize({width:390,height:844});
     for(const tab of content.tabs){
-      await page.locator(`[data-action="topic"][data-topic="${tab.key==='advanced'?'coding':'javascript'}"]`).click();
       await page.locator(`[data-tab="${tab.key}"]`).click();
-      const card=page.locator('.material-card').first();
+      const card=page.locator('.material-card[data-material-id^="project:"]').first();
       if(await card.locator('[data-action="disclosure"]').getAttribute('aria-expanded')!=='true')await card.locator('[data-action="disclosure"]').click();
-      if(tab.key==='advanced')await card.locator('[data-action="analysis"]').click();
       await card.locator('.follow-up-transfer').waitFor({state:'visible'});
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile horizontal overflow: '+tab.key);
       assert.equal(await card.locator('.follow-up-transfer').isVisible(),true);
     }
-    await page.locator('.follow-up-transfer').first().scrollIntoViewIfNeeded();
+    await page.locator('.material-card[data-material-id^="project:"]').first().locator('.follow-up-transfer').scrollIntoViewIfNeeded();
     await page.screenshot({path:path.join(screenshotDirectory,'mobile-transfer.png'),animations:'disabled'});
+    await page.locator('[data-action="topic"][data-topic="coding"]').click();
+    const mobileTask=page.locator('.material-card').first();
+    await mobileTask.locator('[data-action="disclosure"]').click();
+    await mobileTask.locator('[data-action="analysis"]').click();
+    await mobileTask.locator('.follow-up-transfer').waitFor({state:'visible'});
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile horizontal overflow: advanced coding');
     await page.locator('#clear-ratings').click();
     await page.locator('#clear-dialog button[value="clear"]').click();
     await page.waitForFunction(()=>Object.keys(window.InterviewStore.getState().ratingsById).length===0);
@@ -197,11 +229,11 @@ const server = http.createServer((request,response) => {
     await localPage.goto(pathToFileURL(path.join(webRoot,'index.html')).href);
     await localPage.waitForSelector('.material-card');
     assert.equal(await localPage.evaluate(()=>window.InterviewContent.materials.length),content.materials.length);
-    assert.match(await localPage.locator('#bank-revision').innerText(),/Редакция 3/);
+    assert.match(await localPage.locator('#bank-revision').innerText(),/Редакция 4/);
     assert.equal(await localPage.locator('.card-title > span:first-child').first().innerText(),content.materials.find(card=>card.topic==='javascript'&&card.tab==='junior'&&card.ordinal===1).title);
     assert.deepEqual(errors,[]);
     await localPage.close();
-    console.log(`Браузерная проверка пройдена: прямое открытие локального файла, 36 групп, включая пустые, источники и редакционные разборы, копирование 60 сохранённых задач, изоляция и сохранность архивов v1/v2 при восстановлении/очистке новых оценок, итоги, клавиатура, четыре уровня на мобильной ширине. Снимки: ${screenshotDirectory}`);
+    console.log(`Браузерная проверка пройдена: 36 групп по 15, источники и редакционные кейсы, копирование 60 задач, восстановление v3, сохранность архивов v1/v2, итоги, клавиатура, четыре вкладки на мобильной ширине и локальное открытие. Снимки: ${screenshotDirectory}`);
   } finally {
     if(browser)await browser.close();
     await new Promise(resolve=>server.close(resolve));
