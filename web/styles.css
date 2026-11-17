@@ -83,3 +83,7 @@
 .empty-state { padding: 36px 28px; border: 1px dashed var(--border); border-radius: 12px; }
 .empty-state h3 { margin: 0 0 12px; }
 .empty-state p { max-width: 65ch; line-height: 1.7; margin: 0; }
+.material-card { scroll-margin-top: 16px; }
+.results-export { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 8px; }
+.results-export button { padding: 10px 16px; font-size: 14px; color: var(--accent); }
+.export-status { min-height: 24px; margin: 0 0 20px; font-size: 13px; color: var(--muted); }

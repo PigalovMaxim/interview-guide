@@ -115,6 +115,7 @@
     const snapshot = JSON.stringify(state.ratingsById);
     if (snapshot === ratingsSnapshot) return;
     ratingsSnapshot = snapshot;
+    document.getElementById('export-status').textContent = '';
     summary = aggregate(state.ratingsById);
     let rated = 0;
     for (const tab of tabs) {
@@ -132,6 +133,54 @@
     selectedTopics.set(tabKey, target.dataset.resultsTopic);
     renderSelection(tabKey);
   }
+
+  function exportReport(format) {
+    const status = document.getElementById('export-status');
+    status.textContent = '';
+    let url;
+    let link;
+    try {
+      const ratings = store.getState().ratingsById;
+      const values = aggregate(ratings);
+      const report = {
+        generatedAt: new Date().toISOString(),
+        revision: window.InterviewContent.revision,
+        total: materials.length,
+        rated: [...values.values()].reduce((count, level) => count + level.rated, 0),
+        ratingLabels: ratingKeys.map(key => ratingLabels[key]),
+        levels: tabs.map(tab => ({
+          label: tab.label, total: values.get(tab.key).total, rated: values.get(tab.key).rated,
+          topics: topics.map(topic => {
+            const data = values.get(tab.key).topics.get(topic.key);
+            return { label: topic.label, total: data.total, rated: data.rated, counts: ratingKeys.map(key => data.ratings[key]) };
+          })
+        })),
+        ratedItems: tabs.flatMap(tab => topics.flatMap(topic => materials
+          .filter(item => item.tab === tab.key && item.topic === topic.key && Object.hasOwn(ratings, item.id) && ratingKeys.includes(ratings[item.id]))
+          .sort((a, b) => a.ordinal - b.ordinal)
+          .map(item => ({ level: tab.label, topic: topic.label, title: item.title + ((item.statement || item.question) === item.title ? '' : ' — ' + (item.statement || item.question)), rating: ratingLabels[ratings[item.id]] }))))
+      };
+      const bytes = window.InterviewResultsExport.build(format, report);
+      const type = format === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+      url = URL.createObjectURL(new Blob([bytes], { type }));
+      link = document.createElement('a');
+      link.href = url;
+      link.download = 'interview-results-' + report.generatedAt.replace(/[:.]/g, '-') + '.' + format;
+      document.body.append(link);
+      link.click();
+      status.textContent = 'Подготовлен файл ' + (format === 'docx' ? 'Word' : 'Excel') + ' · оценено ' + report.rated + ' из ' + report.total + '.';
+    } catch (error) {
+      status.textContent = 'Не удалось подготовить файл. Попробуйте скачать ещё раз.';
+    } finally {
+      if (link) link.remove();
+      if (url) window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }
+  }
+
+  document.getElementById('results-export').addEventListener('click', event => {
+    const button = event.target.closest('[data-export]');
+    if (button) exportReport(button.dataset.export);
+  });
 
   grid.addEventListener('click', event => {
     const target = event.target.closest('[data-results-topic]');

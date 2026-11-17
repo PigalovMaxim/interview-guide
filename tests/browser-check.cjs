@@ -7,6 +7,7 @@ const os = require('node:os');
 const http = require('node:http');
 const { pathToFileURL } = require('node:url');
 const { root, loadContent } = require('./helpers.cjs');
+const { readOfficeZip, reportFor } = require('./export-helpers.cjs');
 const previous = require('./fixtures/previous-bank.json').cards;
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const content = loadContent();
@@ -26,8 +27,17 @@ const server = http.createServer((request,response) => {
   let browser;
   try {
     browser=await chromium.launch({headless:true,...(process.env.BROWSER_PATH?{executablePath:process.env.BROWSER_PATH}:{})});
-    const context=await browser.newContext({viewport:{width:1365,height:1000}});
+    const context=await browser.newContext({viewport:{width:1365,height:1000},reducedMotion:'reduce',acceptDownloads:true});
     await context.addInitScript(()=>{
+      const scroll=Element.prototype.scrollIntoView;
+      Element.prototype.scrollIntoView=function(options){
+        const result=scroll.call(this,options);
+        if(this.matches('.material-card')){
+          window.cardScrollCalls=(window.cardScrollCalls||0)+1;
+          window.lastCardScroll={behavior:options.behavior,topAfter:this.getBoundingClientRect().top};
+        }
+        return result;
+      };
       Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{
         window.clipboardAttempts=(window.clipboardAttempts||0)+1;
         if(window.rejectClipboard)throw Error('clipboard denied');
@@ -47,6 +57,51 @@ const server = http.createServer((request,response) => {
       await article.locator(`[data-action="${action}"]`).click();
       await page.waitForFunction(({previous,expected})=>window.clipboardAttempts===previous+1&&(expected===null?window.copiedTask===undefined:window.copiedTask===expected),{previous,expected});
     }
+    const downloadDirectory=process.env.QA_SCREENSHOT_DIR||path.join(os.tmpdir(),'interview-guide-browser-qa');
+    fs.mkdirSync(downloadDirectory,{recursive:true});
+    async function checkReportFiles(ratings, label, reportPage=page){
+      const report=reportFor(content,ratings);
+      for(const format of ['docx','xlsx']){
+        const pending=reportPage.waitForEvent('download');
+        await reportPage.locator(`[data-export="${format}"]`).click();
+        const download=await pending;
+        assert.match(download.suggestedFilename(),new RegExp('^interview-results-\\d{4}-\\d{2}-\\d{2}T[\\d-]+Z\\.'+format+'$'));
+        const destination=path.join(downloadDirectory,label+'.'+format);
+        await download.saveAs(destination);
+        assert.equal(await download.failure(),null);
+        const parts=readOfficeZip(fs.readFileSync(destination));
+        const parsed=await reportPage.evaluate(entries=>{
+          const result={};
+          for(const [name,text] of entries){
+            const doc=new DOMParser().parseFromString(text,'application/xml');
+            if(doc.querySelector('parsererror'))throw Error('Invalid XML: '+name);
+            if(name==='word/document.xml')result.word=[...doc.getElementsByTagNameNS('*','tbl')].map(table=>
+              [...table.getElementsByTagNameNS('*','tr')].map(row=>[...row.getElementsByTagNameNS('*','tc')].map(cell=>cell.textContent)));
+            if(name.startsWith('xl/worksheets/'))result[name]=[...doc.getElementsByTagNameNS('*','row')].map(row=>
+              [...row.children].map(cell=>cell.textContent));
+          }
+          return result;
+        },[...parts]);
+        if(format==='xlsx'){
+          assert.deepEqual(parsed['xl/worksheets/sheet1.xml'][0].slice(0,5),['Итоги интервью','Оценено',String(report.rated),'Всего','540']);
+          assert.equal(parsed['xl/worksheets/sheet1.xml'][0][5],'Дата выгрузки');
+          assert.ok(Number.isFinite(Date.parse(parsed['xl/worksheets/sheet1.xml'][0][6])));
+          assert.equal(parsed['xl/worksheets/sheet1.xml'][0][7],'Редакция 4');
+          assert.deepEqual(parsed['xl/worksheets/sheet1.xml'][1],['Уровень','Тема','Оценено','Всего',...report.ratingLabels]);
+          assert.deepEqual(parsed['xl/worksheets/sheet1.xml'].slice(2),report.levels.flatMap(level=>level.topics.map(topic=>
+            [level.label,topic.label,topic.rated,topic.total,...topic.counts].map(String))));
+          assert.deepEqual(parsed['xl/worksheets/sheet2.xml'].slice(1),report.ratedItems.map(item=>[item.level,item.topic,item.title,item.rating]));
+        }else{
+          assert.equal(parsed.word.length,report.rated?5:4);
+          for(const [index,level] of report.levels.entries()){
+            assert.deepEqual(parsed.word[index][0],['Тема','Оценено','Всего',...report.ratingLabels]);
+            assert.deepEqual(parsed.word[index].slice(1),level.topics.map(topic=>[topic.label,topic.rated,topic.total,...topic.counts].map(String)));
+          }
+          if(report.rated)assert.deepEqual(parsed.word[4].slice(1),report.ratedItems.map(item=>[item.level,item.topic,item.title,item.rating]));
+        }
+        assert.match(await reportPage.locator('#export-status').innerText(),new RegExp('оценено '+report.rated+' из 540'));
+      }
+    }
     const errors=[];
     const initialScripts=new Map();
     page.on('request',request=>{
@@ -57,9 +112,10 @@ const server = http.createServer((request,response) => {
     page.on('pageerror',error=>errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.address().port}/`);
     await page.waitForSelector('.material-card');
-    for(const script of ['/app.js','/data/catalog.js',...content.topics.filter(topic=>topic.key!=='coding').map(topic=>`/data/${topic.key}.js`)]){
+    for(const script of ['/data/catalog.js',...content.topics.filter(topic=>topic.key!=='coding').map(topic=>`/data/${topic.key}.js`)]){
       assert.equal(initialScripts.get(script),String(content.revision),script);
     }
+    for(const script of ['/app.js','/results.js','/results-export.js'])assert.equal(initialScripts.get(script),'4-ui2',script);
     const archivedRatings=Object.fromEntries(previous.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     const archive=JSON.stringify({schemaVersion:1,ratingsById:archivedRatings});
     const firstProject=content.materials.find(card=>card.origin==='project-editorial'&&card.topic==='javascript'&&card.tab==='junior');
@@ -144,7 +200,7 @@ const server = http.createServer((request,response) => {
           assert.equal(actual.id,item.id);
           assert.equal(actual.question,item.question,item.id);
           assert.equal(actual.code,item.questionCode??null,item.id);
-          assert.deepEqual(actual.references,item.references,item.id);
+          assert.deepEqual(actual.references,[],item.id);
           assert.deepEqual(actual.criteria,['basic','confident','deep'].map(key=>item.assessment[key]),item.id);
           assert.deepEqual(actual.followUps,item.followUps.map(branch=>[branch.question,'Признак понимания: '+branch.expected]),item.id);
           if(item.source){
@@ -166,6 +222,7 @@ const server = http.createServer((request,response) => {
       }
     }
     assert.equal(copies,60);
+    assert.equal(await page.locator('.assessment-guidance,.references').count(),0);
     const rated=await page.evaluate(()=>window.InterviewStore.getState().ratingsById);
     assert.deepEqual(rated,currentRatings);
     await page.reload();
@@ -188,6 +245,12 @@ const server = http.createServer((request,response) => {
         assert.equal(await result.locator('.topic-coverage').innerText(),'Покрытие: '+covered+'/15 вопросов темы оценено.');
       }
     }
+    await checkReportFiles(rated,'rated-results');
+    await page.evaluate(()=>{window.originalExport=window.InterviewResultsExport.build;window.InterviewResultsExport.build=()=>{throw Error('test export error');};});
+    await page.locator('[data-export="docx"]').click();
+    assert.match(await page.locator('#export-status').innerText(),/Не удалось подготовить/);
+    assert.deepEqual(await page.evaluate(()=>window.InterviewStore.getState().ratingsById),rated);
+    await page.evaluate(()=>{window.InterviewResultsExport.build=window.originalExport;delete window.originalExport;});
     await page.locator('a[href="#questions"]').first().click();
         await page.locator('#questions').waitFor({state:'visible'});
     await page.locator('[data-action="topic"][data-topic="javascript"]').click();
@@ -195,6 +258,27 @@ const server = http.createServer((request,response) => {
     await page.keyboard.press('ArrowRight');
     assert.equal(await page.locator('[data-tab="middle"]').getAttribute('aria-selected'),'true');
     await page.locator('[data-action="tab"][data-tab="junior"]').click();
+    for(const width of [1365,390])for(const motion of ['reduce','no-preference'])for(const index of [0,10,14]){
+      await page.setViewportSize({width,height:width===390?844:1000});
+      await page.emulateMedia({reducedMotion:motion});
+      const scrollCard=page.locator('.material-card').nth(index);
+      const trigger=scrollCard.locator('[data-action="disclosure"]');
+      await trigger.focus();
+      await page.evaluate(()=>window.scrollTo(0,0));
+      await page.keyboard.press('Enter');
+      await page.waitForFunction(id=>Math.abs(document.querySelector(`[data-material-id="${id}"]`).getBoundingClientRect().top-16)<3,await scrollCard.getAttribute('data-material-id'));
+      assert.equal(await trigger.getAttribute('aria-expanded'),'true');
+      assert.equal(await trigger.evaluate(node=>node===document.activeElement),true);
+      const observed=await page.evaluate(()=>window.lastCardScroll);
+      assert.equal(observed.behavior,motion==='reduce'?'instant':'smooth');
+      if(motion==='reduce')assert.ok(Math.abs(observed.topAfter-16)<3,'reduced-motion scroll was not immediate');
+      const calls=await page.evaluate(()=>window.cardScrollCalls);
+      await page.keyboard.press('Enter');
+      assert.equal(await trigger.getAttribute('aria-expanded'),'false');
+      assert.equal(await page.evaluate(()=>window.cardScrollCalls),calls);
+    }
+    await page.setViewportSize({width:1365,height:1000});
+    await page.emulateMedia({reducedMotion:'reduce'});
     await page.locator('.material-card').first().locator('[data-action="disclosure"]').click();
     const screenshotDirectory=process.env.QA_SCREENSHOT_DIR||path.join(os.tmpdir(),'interview-guide-browser-qa');
     fs.mkdirSync(screenshotDirectory,{recursive:true});
@@ -223,6 +307,11 @@ const server = http.createServer((request,response) => {
     assert.equal(await page.evaluate(key=>localStorage.getItem(key),content.ratingsStorageKey),null);
     assert.equal(await page.evaluate(()=>localStorage.getItem('interview-guide.ratings')),archive);
     assert.equal(await page.evaluate(()=>localStorage.getItem('interview-guide.ratings.v2')),archiveV2);
+    await page.locator('a[href="#results"]').first().click();
+    await page.locator('#results').waitFor({state:'visible'});
+    await checkReportFiles({},'empty-results');
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile export overflow');
+    await page.screenshot({path:path.join(downloadDirectory,'mobile-results-export.png'),animations:'disabled'});
     assert.deepEqual(errors,[]);
     const localPage=await context.newPage();
     localPage.on('pageerror',error=>errors.push(error.message));
@@ -231,9 +320,12 @@ const server = http.createServer((request,response) => {
     assert.equal(await localPage.evaluate(()=>window.InterviewContent.materials.length),content.materials.length);
     assert.match(await localPage.locator('#bank-revision').innerText(),/Редакция 4/);
     assert.equal(await localPage.locator('.card-title > span:first-child').first().innerText(),content.materials.find(card=>card.topic==='javascript'&&card.tab==='junior'&&card.ordinal===1).title);
+    await localPage.locator('a[href="#results"]').first().click();
+    await localPage.locator('#results').waitFor({state:'visible'});
+    await checkReportFiles(await localPage.evaluate(()=>window.InterviewStore.getState().ratingsById),'local-results',localPage);
     assert.deepEqual(errors,[]);
     await localPage.close();
-    console.log(`Браузерная проверка пройдена: 36 групп по 15, источники и редакционные кейсы, копирование 60 задач, восстановление v3, сохранность архивов v1/v2, итоги, клавиатура, четыре вкладки на мобильной ширине и локальное открытие. Снимки: ${screenshotDirectory}`);
+    console.log(`Браузерная проверка пройдена: 36 групп по 15, копирование 60 задач, восстановление v3, итоги, Word/Excel с оценками и без них, ошибка экспорта, прокрутка с reduced motion и без него, мобильный экран и file://. Снимки и файлы: ${screenshotDirectory}`);
   } finally {
     if(browser)await browser.close();
     await new Promise(resolve=>server.close(resolve));
