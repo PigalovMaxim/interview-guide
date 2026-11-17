@@ -63,8 +63,8 @@ function reportFor(content, ratings = {}) {
       }
       return { label: topic.label, total: cards.length, rated: counts.reduce((sum, value) => sum + value, 0), counts };
     });
-    return { label: tab.label, total: topics.reduce((sum,t) => sum+t.total, 0), rated: topics.reduce((sum,t) => sum+t.rated, 0), topics };
-  });
+    return { label: tab.label, total: topics.reduce((sum,t) => sum+t.total, 0), rated: topics.reduce((sum,t) => sum+t.rated, 0), topics: topics.filter(topic => topic.rated > 0) };
+  }).filter(level => level.rated > 0);
   return {generatedAt:'2026-11-17T12:00:00.000Z', revision:content.revision, total:content.materials.length, rated:ratedItems.length, ratingLabels:Object.values(content.ratingLabels), levels, ratedItems};
 }
 module.exports = { readOfficeZip, reportFor };

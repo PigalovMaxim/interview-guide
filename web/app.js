@@ -64,7 +64,7 @@
   function taskBody(item) {
     return '<div class="candidate-label"><span aria-hidden="true">↗</span> Для кандидата · внешний редактор</div>' + questionBody(item) + (item.statement === item.question ? '' : '<h3>Точные условия задачи</h3><p>' + escape(item.statement) + '</p>') +
       '<section><h3>Пример</h3>' + item.examples.map(example => '<p class="example">' + escape(example) + '</p>').join('') + '</section>' +
-      '<div class="code-heading"><h3>Стартовый код</h3><button class="text-button" data-action="copy-code">Скопировать код <span aria-hidden="true">⧉</span></button></div>' + codeBlock(item.starterCode) +
+      '<div class="code-heading"><h3>Стартовый код</h3><div class="code-actions" role="group" aria-label="Действия со стартовым кодом"><button class="text-button" data-action="copy-code">Скопировать код <span aria-hidden="true">⧉</span></button><a class="primary-button code-editor-link" href="https://codefile.io/" target="_blank" rel="noopener noreferrer" aria-label="Открыть Codefile в новой вкладке">Открыть Codefile <span aria-hidden="true">↗</span></a></div></div>' + codeBlock(item.starterCode) +
       '<button class="secondary-button" data-action="copy-task">Скопировать задачу <span aria-hidden="true">↗</span></button><p role="status" class="copy-status"></p><div class="copy-fallback"></div>' +
       '<div class="interviewer-divider"><span>Только для интервьюера</span></div><button class="analysis-toggle" data-action="analysis" aria-expanded="false" aria-controls="' + escape(item.id) + '-analysis">Показать разбор <span aria-hidden="true">+</span></button>' +
       '<div id="' + escape(item.id) + '-analysis" class="task-analysis" hidden>' + analysis(item) + '</div>';

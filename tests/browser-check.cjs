@@ -75,8 +75,11 @@ const server = http.createServer((request,response) => {
           for(const [name,text] of entries){
             const doc=new DOMParser().parseFromString(text,'application/xml');
             if(doc.querySelector('parsererror'))throw Error('Invalid XML: '+name);
-            if(name==='word/document.xml')result.word=[...doc.getElementsByTagNameNS('*','tbl')].map(table=>
-              [...table.getElementsByTagNameNS('*','tr')].map(row=>[...row.getElementsByTagNameNS('*','tc')].map(cell=>cell.textContent)));
+            if(name==='word/document.xml'){
+              result.wordText=doc.documentElement.textContent;
+              result.word=[...doc.getElementsByTagNameNS('*','tbl')].map(table=>
+                [...table.getElementsByTagNameNS('*','tr')].map(row=>[...row.getElementsByTagNameNS('*','tc')].map(cell=>cell.textContent)));
+            }
             if(name.startsWith('xl/worksheets/'))result[name]=[...doc.getElementsByTagNameNS('*','row')].map(row=>
               [...row.children].map(cell=>cell.textContent));
           }
@@ -92,12 +95,14 @@ const server = http.createServer((request,response) => {
             [level.label,topic.label,topic.rated,topic.total,...topic.counts].map(String))));
           assert.deepEqual(parsed['xl/worksheets/sheet2.xml'].slice(1),report.ratedItems.map(item=>[item.level,item.topic,item.title,item.rating]));
         }else{
-          assert.equal(parsed.word.length,report.rated?5:4);
+          assert.equal(parsed.word.length,report.levels.length+(report.rated?1:0));
           for(const [index,level] of report.levels.entries()){
+            assert.ok(parsed.wordText.includes(level.label+' · '+level.rated+'/135 оценено'));
             assert.deepEqual(parsed.word[index][0],['Тема','Оценено','Всего',...report.ratingLabels]);
             assert.deepEqual(parsed.word[index].slice(1),level.topics.map(topic=>[topic.label,topic.rated,topic.total,...topic.counts].map(String)));
           }
-          if(report.rated)assert.deepEqual(parsed.word[4].slice(1),report.ratedItems.map(item=>[item.level,item.topic,item.title,item.rating]));
+          if(report.rated)assert.deepEqual(parsed.word.at(-1).slice(1),report.ratedItems.map(item=>[item.level,item.topic,item.title,item.rating]));
+          else assert.ok(parsed.wordText.includes('Пока нет оценённых материалов.'));
         }
         assert.match(await reportPage.locator('#export-status').innerText(),new RegExp('оценено '+report.rated+' из 540'));
       }
@@ -115,7 +120,8 @@ const server = http.createServer((request,response) => {
     for(const script of ['/data/catalog.js',...content.topics.filter(topic=>topic.key!=='coding').map(topic=>`/data/${topic.key}.js`)]){
       assert.equal(initialScripts.get(script),String(content.revision),script);
     }
-    for(const script of ['/app.js','/results.js','/results-export.js'])assert.equal(initialScripts.get(script),'4-ui2',script);
+    for(const script of ['/app.js','/results.js','/results-export.js'])assert.equal(initialScripts.get(script),'4-ui3',script);
+    assert.equal(await page.locator('link[rel="stylesheet"]').getAttribute('href'),'styles.css?v=4-ui3');
     const archivedRatings=Object.fromEntries(previous.map((card,index)=>[card.id,['no_answer','basic','confident','deep'][index%4]]));
     const archive=JSON.stringify({schemaVersion:1,ratingsById:archivedRatings});
     const firstProject=content.materials.find(card=>card.origin==='project-editorial'&&card.topic==='javascript'&&card.tab==='junior');
@@ -166,6 +172,13 @@ const server = http.createServer((request,response) => {
           const article=page.locator(`[data-material-id="${item.id}"]`);
           if(await article.locator('[data-action="disclosure"]').getAttribute('aria-expanded')!=='true')await article.locator('[data-action="disclosure"]').click();
           assert.equal(await article.locator('.task-analysis').isVisible(),false);
+          const editor=article.getByRole('link',{name:'Открыть Codefile в новой вкладке'});
+          assert.equal(await editor.count(),1,item.id+': Codefile link');
+          assert.equal(await editor.getAttribute('href'),'https://codefile.io/');
+          assert.equal(await editor.getAttribute('target'),'_blank');
+          assert.deepEqual((await editor.getAttribute('rel')).split(/\s+/).sort(),['noopener','noreferrer']);
+          assert.equal(await article.locator('.code-actions [data-action="copy-code"]').count(),1);
+          assert.equal(await article.locator('.code-actions .code-editor-link').count(),1);
           const expected=[item.title,item.question,...(item.statement===item.question?[]:['Точные условия:',item.statement]),'Примеры:',...item.examples,'Стартовый код:',item.starterCode].filter(Boolean).join('\n\n');
           assert.equal((await article.locator('p').allTextContents()).filter(text=>text===item.question).length,1,item.id+': условие повторено');
           await copyFresh(article,'copy-task',expected);
@@ -300,6 +313,61 @@ const server = http.createServer((request,response) => {
     await mobileTask.locator('[data-action="analysis"]').click();
     await mobileTask.locator('.follow-up-transfer').waitFor({state:'visible'});
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile horizontal overflow: advanced coding');
+    for(const width of [320,390])for(const theme of ['dark','light']){
+      await page.setViewportSize({width,height:844});
+      await page.evaluate(value=>window.InterviewStore.setTheme(value),theme);
+      const editor=mobileTask.getByRole('link',{name:'Открыть Codefile в новой вкладке'});
+      const copy=mobileTask.locator('[data-action="copy-code"]');
+      assert.equal(await editor.isVisible(),true);
+      assert.equal(await copy.isVisible(),true);
+      await copy.focus();
+      await page.keyboard.press('Tab');
+      assert.equal(await editor.evaluate(link=>document.activeElement===link),true);
+      const style=await editor.evaluate(link=>{
+        const styles=getComputedStyle(link);
+        const luminance=color=>{
+          const rgb=color.match(/[\d.]+/g).slice(0,3).map(Number).map(value=>value/255).map(value=>value<=.04045?value/12.92:((value+.055)/1.055)**2.4);
+          return rgb[0]*.2126+rgb[1]*.7152+rgb[2]*.0722;
+        };
+        const a=luminance(styles.backgroundColor),b=luminance(styles.color);
+        const bounds=link.getBoundingClientRect();
+        return {contrast:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),background:styles.backgroundColor,outline:styles.outlineStyle,left:bounds.left,right:bounds.right};
+      });
+      assert.ok(style.contrast>=4.5,theme+': Codefile contrast '+style.contrast);
+      assert.notEqual(style.background,'rgba(0, 0, 0, 0)');
+      assert.notEqual(style.outline,'none');
+      assert.ok(style.left>=0&&style.right<=width,theme+': Codefile outside viewport');
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),theme+': mobile task overflow at '+width);
+    }
+    await page.emulateMedia({forcedColors:'active'});
+    await mobileTask.locator('[data-action="copy-code"]').focus();
+    await page.keyboard.press('Tab');
+    const forcedEditor=mobileTask.locator('.code-editor-link');
+    const forcedStyle=await forcedEditor.evaluate(link=>{
+      const style=getComputedStyle(link);
+      return {focused:document.activeElement===link,borderStyle:style.borderTopStyle,borderWidth:parseFloat(style.borderTopWidth),borderColor:style.borderTopColor,background:style.backgroundColor,outlineStyle:style.outlineStyle,outlineWidth:parseFloat(style.outlineWidth),outlineColor:style.outlineColor};
+    });
+    assert.equal(forcedStyle.focused,true);
+    assert.notEqual(forcedStyle.borderStyle,'none');
+    assert.ok(forcedStyle.borderWidth>0);
+    assert.notEqual(forcedStyle.borderColor,forcedStyle.background);
+    assert.notEqual(forcedStyle.outlineStyle,'none');
+    assert.ok(forcedStyle.outlineWidth>0);
+    assert.notEqual(forcedStyle.outlineColor,forcedStyle.background);
+    await page.emulateMedia({forcedColors:'none'});
+    await mobileTask.locator('.code-actions').screenshot({path:path.join(screenshotDirectory,'mobile-code-actions.png'),animations:'disabled'});
+    await context.route('https://codefile.io/',route=>route.fulfill({contentType:'text/html',body:'<title>Codefile test destination</title>'}));
+    const beforeLink=await page.evaluate(()=>window.InterviewStore.getState().ratingsById);
+    const popupPending=page.waitForEvent('popup');
+    assert.equal(await forcedEditor.evaluate(link=>document.activeElement===link),true);
+    await page.keyboard.press('Enter');
+    const popup=await popupPending;
+    await popup.waitForLoadState();
+    assert.equal(popup.url(),'https://codefile.io/');
+    assert.equal(await popup.evaluate(()=>window.opener===null),true);
+    await popup.close();
+    assert.deepEqual(await page.evaluate(()=>window.InterviewStore.getState().ratingsById),beforeLink);
+    assert.equal(await mobileTask.locator('.task-analysis').isVisible(),true);
     await page.locator('#clear-ratings').click();
     await page.locator('#clear-dialog button[value="clear"]').click();
     await page.waitForFunction(()=>Object.keys(window.InterviewStore.getState().ratingsById).length===0);
@@ -310,6 +378,29 @@ const server = http.createServer((request,response) => {
     await page.locator('a[href="#results"]').first().click();
     await page.locator('#results').waitFor({state:'visible'});
     await checkReportFiles({},'empty-results');
+    const reactCards=content.materials.filter(item=>item.tab==='senior'&&item.topic==='react');
+    const cssCard=content.materials.find(item=>item.tab==='middle'&&item.topic==='css');
+    const mixedRatings={[reactCards[0].id]:'no_answer',[reactCards[1].id]:'deep',[cssCard.id]:'basic'};
+    await page.evaluate(ratings=>{for(const [id,rating] of Object.entries(ratings))window.InterviewStore.rate(id,rating);},mixedRatings);
+    await page.locator('a[href="#questions"]').first().click();
+    await page.locator('#questions').waitFor({state:'visible'});
+    await page.locator('[data-action="topic"][data-topic="html"]').click();
+    await page.locator('[data-action="tab"][data-tab="junior"]').click();
+    assert.deepEqual(await page.locator('.rating-badge').allTextContents(),Array(15).fill('Без оценки'));
+    await page.locator('a[href="#results"]').first().click();
+    await page.locator('#results').waitFor({state:'visible'});
+    await page.locator('[data-results-tab="junior"] .legend-button[data-results-topic="html"]').click();
+    assert.equal(await page.locator('.result-card').count(),4);
+    assert.equal(await page.locator('.legend-button').count(),36);
+    await checkReportFiles(mixedRatings,'mixed-results');
+    await page.evaluate(id=>window.InterviewStore.rate(id,null),cssCard.id);
+    const seniorRatings={[reactCards[0].id]:'no_answer',[reactCards[1].id]:'deep'};
+    await checkReportFiles(seniorRatings,'removed-middle-results');
+    await page.evaluate(id=>window.InterviewStore.rate(id,null),reactCards[1].id);
+    const noAnswerRatings={[reactCards[0].id]:'no_answer'};
+    await checkReportFiles(noAnswerRatings,'no-answer-results');
+    await page.evaluate(id=>window.InterviewStore.rate(id,null),reactCards[0].id);
+    await checkReportFiles({},'removed-last-results');
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mobile export overflow');
     await page.screenshot({path:path.join(downloadDirectory,'mobile-results-export.png'),animations:'disabled'});
     assert.deepEqual(errors,[]);
@@ -323,9 +414,11 @@ const server = http.createServer((request,response) => {
     await localPage.locator('a[href="#results"]').first().click();
     await localPage.locator('#results').waitFor({state:'visible'});
     await checkReportFiles(await localPage.evaluate(()=>window.InterviewStore.getState().ratingsById),'local-results',localPage);
+    await localPage.evaluate(ratings=>{for(const [id,rating] of Object.entries(ratings))window.InterviewStore.rate(id,rating);},mixedRatings);
+    await checkReportFiles(mixedRatings,'local-mixed-results',localPage);
     assert.deepEqual(errors,[]);
     await localPage.close();
-    console.log(`Браузерная проверка пройдена: 36 групп по 15, копирование 60 задач, восстановление v3, итоги, Word/Excel с оценками и без них, ошибка экспорта, прокрутка с reduced motion и без него, мобильный экран и file://. Снимки и файлы: ${screenshotDirectory}`);
+    console.log(`Браузерная проверка пройдена: 36 групп по 15, копирование и ссылки Codefile всех 60 задач, контраст и клавиатура двух тем при 320/390px, восстановление v3, итоги, Word/Excel со всеми, смешанными, no_answer-only и пустыми оценками, ошибка экспорта, прокрутка с reduced motion и без него, мобильный экран и file://. Снимки и файлы: ${screenshotDirectory}`);
   } finally {
     if(browser)await browser.close();
     await new Promise(resolve=>server.close(resolve));

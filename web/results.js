@@ -153,8 +153,8 @@
           topics: topics.map(topic => {
             const data = values.get(tab.key).topics.get(topic.key);
             return { label: topic.label, total: data.total, rated: data.rated, counts: ratingKeys.map(key => data.ratings[key]) };
-          })
-        })),
+          }).filter(topic => topic.rated > 0)
+        })).filter(level => level.rated > 0),
         ratedItems: tabs.flatMap(tab => topics.flatMap(topic => materials
           .filter(item => item.tab === tab.key && item.topic === topic.key && Object.hasOwn(ratings, item.id) && ratingKeys.includes(ratings[item.id]))
           .sort((a, b) => a.ordinal - b.ordinal)
