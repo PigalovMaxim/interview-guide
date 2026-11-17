@@ -37,8 +37,12 @@
   }
 
   function questionBody(item) {
+    const source = item.source;
+    const origin = source
+      ? '<p class="question-source">Источник вопроса: <a href="' + escape(source.url) + '" target="_blank" rel="noreferrer">' + escape(source.provider) + ' ↗</a> · уровень источника: ' + escape(source.level) + ' · получен ' + escape(source.retrievedAt) + '</p>'
+      : item.origin === 'project-editorial' ? '<p class="question-source">Происхождение: редакционный кейс проекта</p>' : '';
     return '<section class="candidate-question"><h3>Спросите кандидата</h3><p class="question-guidance">Сначала дайте время на самостоятельный ответ.</p><p class="question-wording">' + escape(item.question || item.title) + '</p>' +
-      (item.source ? '<p class="question-source">Источник вопроса: <a href="' + escape(item.source.url) + '" target="_blank" rel="noreferrer">' + escape(item.source.provider) + ' ↗</a> · уровень источника: ' + escape(item.source.level) + ' · получен ' + escape(item.source.retrievedAt) + '</p>' : '') +
+      origin +
       (item.questionCode ? '<div class="question-code"><span class="section-label">Пример для обсуждения</span>' + codeBlock(item.questionCode, item.questionCodeLanguage) + '</div>' : '') +
       '</section>';
   }
@@ -49,7 +53,7 @@
     const sources = item.references.filter(url => /^https:\/\//.test(url)).map((url, index) =>
       '<li><a href="' + escape(url) + '" target="_blank" rel="noreferrer">' + escape(new URL(url).hostname) + ' · источник ' + (index + 1) + '<span aria-hidden="true"> ↗</span></a></li>').join('');
     return '<div class="analysis-content">' +
-      (item.editorial ? '<p class="editorial-note">Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.</p>' : '') +
+      (item.source && item.editorial ? '<p class="editorial-note">Ответ, пояснения, критерии и уточнения подготовлены редакцией приложения; это не ответы источника вопроса.</p>' : '') +
       '<div class="answer"><span class="section-label">Краткий ответ</span><p>' + escape(item.shortAnswer) + '</p></div>' +
       '<section><h3>Как это работает</h3><p>' + escape(item.explanation) + '</p></section>' +
       (item.solution ? '<section><h3>Решение</h3>' + codeBlock(item.solution.code) + '</section>' : '') +
@@ -130,7 +134,7 @@
     }
     current = materials.filter(item => item.tab === activeTab && item.topic === activeTopic).sort((a, b) => a.ordinal - b.ordinal);
     document.getElementById('list-count').textContent = current.length + ' материалов';
-    list.innerHTML = current.length ? current.map(card).join('') : '<div class="empty-state" role="status"><h3>Пока нет вопросов</h3><p>В доступной подборке выбранных источников нет вопросов для этой темы и уровня. Выберите другую тему или уровень.' + (activeTab === 'advanced' ? ' На вкладке «Сложные вопросы» доступны только практические задачи.' : '') + '</p></div>';
+    list.innerHTML = current.length ? current.map(card).join('') : '<div class="empty-state" role="status"><h3>Пока нет материалов</h3><p>Выберите другую тему или вкладку.</p></div>';
     renderState(store.getState());
   }
 
